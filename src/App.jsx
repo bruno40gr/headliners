@@ -187,7 +187,7 @@ export default function App() {
           <div className="fade-up delay-1 flex justify-center mb-7">
             <span className="tag-pill">
               <span className="tag-dot" />
-              Now Enrolling · Rocklin, CA
+              Full website coming soon · Rocklin, CA
             </span>
           </div>
 
@@ -227,6 +227,11 @@ export default function App() {
               <Mail size={13} /> admin@headlinermusicacademy.com
             </a>
           </div>
+
+          {/* Interim note */}
+          <p className="fade-up delay-5 dm text-xs text-slate-600 mt-8 tracking-wide">
+            Our full website is on its way — reach us by phone or email in the meantime.
+          </p>
         </div>
       </section>
 
