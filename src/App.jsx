@@ -193,7 +193,7 @@ export default function App() {
 
           <h1 className="fade-up delay-2 bebas text-white leading-none mb-3"
             style={{ fontSize: "clamp(58px, 10vw, 90px)", letterSpacing: "2px" }}>
-            Every kid<br />deserves a <span style={{ color: "#f59e0b" }}>stage.</span>
+            Every musician<br />deserves a <span style={{ color: "#f59e0b" }}>stage.</span>
           </h1>
 
           <p className="fade-up delay-3 dm text-slate-300 text-lg leading-relaxed max-w-xl mx-auto mb-10 font-light">
