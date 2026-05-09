@@ -46,7 +46,7 @@ function BookingModal({ instrument, onClose }) {
 
     const availability =
       form.days.length && form.times.length
-        ? `${form.days.join(", ")} — ${form.times.join(", ")}`
+        ? `${form.days.join(", ")} - ${form.times.join(", ")}`
         : form.days.length
         ? form.days.join(", ")
         : form.times.length
@@ -149,7 +149,7 @@ function BookingModal({ instrument, onClose }) {
               color: "#64748b", fontSize: 15,
               lineHeight: 1.7, maxWidth: 360, margin: "0 auto 8px",
             }}>
-              We'll get back to you within the next 24 hours or so — expect a call from us to get everything set up.
+              We'll get back to you within the next 24 hours or so - expect a call from us to get everything set up.
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -305,7 +305,7 @@ function BookingModal({ instrument, onClose }) {
                   padding: "10px 14px",
                   margin: 0,
                 }}>
-                  Something went wrong — please try again or reach us at (916) 435-1300.
+                  Something went wrong - please try again or reach us at (916) 435-1300.
                 </p>
               )}
 
@@ -544,7 +544,7 @@ export default function App() {
             Every musician<br />deserves a <span style={{ color: "#f59e0b" }}>stage.</span>
           </h1>
           <p className="fade-up delay-3 dm text-slate-300 text-lg leading-relaxed max-w-xl mx-auto mb-10 font-light">
-            Private, semi-private, and group lessons in music and performance —
+            Private, semi-private, and group lessons in music and performance -
             taught by passionate instructors in a welcoming atmosphere.
           </p>
           <div className="fade-up delay-4 flex flex-col sm:flex-row gap-3 justify-center">
@@ -577,13 +577,14 @@ export default function App() {
 
       {/* OFFERINGS */}
       <section className="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
-          <div style={{ width: 28, height: 2, background: "#f59e0b" }} />
-          <span className="dm text-xs font-bold tracking-[0.25em] text-slate-400 uppercase">What We Offer</span>
+        <div className="text-center md:text-left mb-10">
+          <h2 className="bebas text-[42px] sm:text-[54px] text-slate-950 tracking-wide mb-2 leading-none">
+            What We <span style={{ color: "#f59e0b" }}>Offer</span>
+          </h2>
+          <p className="dm text-base text-slate-500">
+            Click any tile to request lessons for that instrument.
+          </p>
         </div>
-        <p className="dm text-sm text-slate-500 mb-10 text-center md:text-left">
-          Click any tile to request lessons for that instrument.
-        </p>
         <div className="rounded-[24px] overflow-hidden shadow-sm" style={{ border: "1px solid #e2e8f0" }}>
           <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "1px", background: "#e2e8f0" }}>
             {offerings.map((item, i) => (
@@ -603,6 +604,40 @@ export default function App() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── TESTIMONIAL ── */}
+      <section className="py-16 px-4 sm:px-6 max-w-4xl mx-auto">
+        <a 
+          href="https://m.yelp.com/biz/headliner-music-academy-rocklin" 
+          target="_blank" 
+          rel="noreferrer"
+          className="block bg-white rounded-2xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-all border border-slate-200 text-center group"
+        >
+          <div className="flex justify-center mb-5">
+            {/* 5 Stars */}
+            <div className="flex gap-1 text-[#FF1A1A]">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <svg key={star} width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+          </div>
+          <p className="dm text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl mx-auto mb-6 italic">
+            "Love this place!! It's unique!!! Amicable and well organized. Amazing diverse and integrative for kids, young or adults ."
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <span className="dm text-sm font-bold text-slate-900">- Socorro Baez G.</span>
+            <span className="text-slate-300">|</span>
+            <span className="flex items-center gap-1.5 text-sm font-bold text-[#FF1A1A] group-hover:scale-105 transition-transform">
+              <svg className="w-5 h-5" viewBox="0 0 384 512" fill="currentColor">
+                <path d="M42.5 192.1c-19.4 0-38.6 15.6-41.9 34.6-3 17.5 7.1 36.3 23 44.3l85.8 43.2c10.3 5.2 23.3 1.1 28.5-9.1 5.2-10.2 1.3-22.9-8.9-28.1l-86.5-84.9zm294.6 63.8l-83-48.4c-9.9-5.8-22.8-2.6-28.7 7.2-5.9 9.8-2.7 22.5 7.2 28.3l82.8 48.6c16.3 9.6 36.8 5 43.6-11.4 6.7-16.1-3.6-33.8-21.9-24.3zm-131.6-9.5c-4.9-10.4-17.1-15-27.5-10.3L97.7 274.6c-16.1 7.2-22.7 26.6-14.7 41.8 7.8 14.8 26.2 19.8 41.6 11.2l83.6-46.7c10-5.6 14.4-18 9.3-28.5zm165 140.5l-85.1-44.5c-10.1-5.3-22.8-1.5-28.2 8.5-5.4 10-1.6 22.5 8.5 27.8l85.1 44.5c16.1 8.4 36.1 1.2 41.5-14.7 5.2-15.6-5.8-31.2-21.8-21.6zm-177.3 18.2c-5.5-10-18.2-13.9-28.3-8.8L37.1 442.2c-15.8 8-20.9 27.4-11.5 42.1 9.2 14.4 28.4 17.9 43.3 8L163.6 432c10.2-6.7 13.5-19.9 8.2-30.1z" />
+              </svg>
+              Yelp
+            </span>
+          </div>
+        </a>
       </section>
 
       {/* FOOTER */}
@@ -661,8 +696,14 @@ export default function App() {
               © {new Date().getFullYear()} Headliner Music Academy. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">Instagram</a>
-              <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">TikTok</a>
+              {/* <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">Instagram</a> */}
+              {/* <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">TikTok</a> */}
+              <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" className="dm flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#FF1A1A] transition-colors">
+                <svg className="w-4 h-4" viewBox="0 0 384 512" fill="currentColor">
+                  <path d="M42.5 192.1c-19.4 0-38.6 15.6-41.9 34.6-3 17.5 7.1 36.3 23 44.3l85.8 43.2c10.3 5.2 23.3 1.1 28.5-9.1 5.2-10.2 1.3-22.9-8.9-28.1l-86.5-84.9zm294.6 63.8l-83-48.4c-9.9-5.8-22.8-2.6-28.7 7.2-5.9 9.8-2.7 22.5 7.2 28.3l82.8 48.6c16.3 9.6 36.8 5 43.6-11.4 6.7-16.1-3.6-33.8-21.9-24.3zm-131.6-9.5c-4.9-10.4-17.1-15-27.5-10.3L97.7 274.6c-16.1 7.2-22.7 26.6-14.7 41.8 7.8 14.8 26.2 19.8 41.6 11.2l83.6-46.7c10-5.6 14.4-18 9.3-28.5zm165 140.5l-85.1-44.5c-10.1-5.3-22.8-1.5-28.2 8.5-5.4 10-1.6 22.5 8.5 27.8l85.1 44.5c16.1 8.4 36.1 1.2 41.5-14.7 5.2-15.6-5.8-31.2-21.8-21.6zm-177.3 18.2c-5.5-10-18.2-13.9-28.3-8.8L37.1 442.2c-15.8 8-20.9 27.4-11.5 42.1 9.2 14.4 28.4 17.9 43.3 8L163.6 432c10.2-6.7 13.5-19.9 8.2-30.1z" />
+                </svg>
+                Yelp
+              </a>
             </div>
           </div>
         </div>
