@@ -5,12 +5,14 @@ const offerings = [
   { icon: "🎸", name: "Guitar", desc: "Acoustic & electric" },
   { icon: "🎹", name: "Piano", desc: "Classical & contemporary" },
   { icon: "🥁", name: "Drums", desc: "Kit & percussion" },
+  { icon: "🎸", name: "Bass", desc: "Electric & upright" },
   { icon: "🎤", name: "Vocals", desc: "All styles" },
   { icon: "🎺", name: "Brass", desc: "Trumpet & more" },
   { icon: "🎻", name: "Strings", desc: "Violin & viola" },
   { icon: "🤘", name: "Band Performance", desc: "Live stage experience" },
   { icon: "🧸", name: "Piano for Kids", desc: "Fun early learning" },
   { icon: "🎉", name: "Private Parties", desc: "Birthdays & events" },
+  { icon: "🎙️", name: "Recording Studio", desc: "Record & produce music" },
 ];
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
