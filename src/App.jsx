@@ -64,14 +64,15 @@ function BookingModal({ instrument, onClose }) {
           template_id: EMAILJS_TEMPLATE_ID,
           user_id:     EMAILJS_PUBLIC_KEY,
           template_params: {
-            student_name: form.name,
-            age:          form.age || "Not provided",
-            email:        form.email,
-            instrument:   form.instrument,
-            level:        form.level,
-            availability,
-            notes:        form.notes || "None",
-          },
+  student_name:     form.name,
+  age:              form.age || "Not provided",
+  email:            form.email,
+  instrument:       form.instrument,
+  experience_level: form.level,                          // ✅ matches template
+  days:             form.days.join(", ") || "Not specified",   // ✅ matches template
+  time_of_day:      form.times.join(", ") || "Not specified",  // ✅ matches template
+  message:          form.notes || "None",                // ✅ matches template
+},
         }),
       });
 
