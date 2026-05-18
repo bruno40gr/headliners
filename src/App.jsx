@@ -17,9 +17,9 @@ const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 const TIMES = ["Morning (8am–12pm)", "Afternoon (12pm–4pm)", "Evening (4pm–8pm)"];
 const PORTAL_URL = "https://headlinerma.opus1.io/login";
 
-const EMAILJS_SERVICE_ID  = "service_734y6qg";
-const EMAILJS_TEMPLATE_ID = "template_kgqsxrd";
-const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
+const EMAILJS_SERVICE_ID  = "service_734y6og";
+const EMAILJS_TEMPLATE_ID = "template_czlclec";
+const EMAILJS_PUBLIC_KEY  = "d8KP1U_oQnPr_mN9xnfIV";
 
 function BookingModal({ instrument, onClose }) {
   const [form, setForm] = useState({
