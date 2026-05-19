@@ -401,9 +401,111 @@ function PillToggle({ label, active, onClick }) {
   );
 }
 
+function PrivacyPolicyPage() {
+  return (
+    <div className="pt-[120px] pb-20 px-6 max-w-3xl mx-auto min-h-screen">
+      <h1 className="bebas text-[42px] sm:text-[54px] text-slate-950 tracking-wide mb-2 leading-none">
+        Privacy Policy
+      </h1>
+      <p className="dm text-sm text-slate-500 mb-10">Last updated: May 18, 2026</p>
+      
+      <div className="dm text-slate-700 leading-relaxed space-y-6">
+        <p>Headliner Music Academy (a DBA of Marchena & Papadhima LLC) is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal information.</p>
+        
+        <div>
+          <strong className="text-slate-900 block mb-1">Information we collect:</strong>
+          We collect information you provide when enrolling a student or contacting us, including name, phone number, email address, and payment information. We also collect attendance and lesson history as part of our normal operations.
+        </div>
+        
+        <div>
+          <strong className="text-slate-900 block mb-1">How we use your information:</strong>
+          We use your information to manage enrollments, process payments, communicate about lessons and scheduling, and send you updates about Headliner Music Academy programs and events.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">SMS and email communications:</strong>
+          By providing your phone number or email address, you consent to receive SMS and email communications from Headliner Music Academy. You may opt out of SMS messages at any time by replying STOP. You may opt out of email communications by clicking unsubscribe in any email we send.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Information sharing:</strong>
+          We do not sell or share your personal information with third parties for marketing purposes. We may share information with service providers who help us operate our business (such as payment processors and messaging platforms) under strict confidentiality agreements.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Data security:</strong>
+          We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Contact us:</strong>
+          <a href="mailto:admin@headlinermusicacademy.com" className="text-amber-600 hover:text-amber-500">admin@headlinermusicacademy.com</a> or <a href="tel:916-435-1300" className="text-amber-600 hover:text-amber-500">(916) 435-1300</a>.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TermsAndConditionsPage() {
+  return (
+    <div className="pt-[120px] pb-20 px-6 max-w-3xl mx-auto min-h-screen">
+      <h1 className="bebas text-[42px] sm:text-[54px] text-slate-950 tracking-wide mb-2 leading-none">
+        Terms and Conditions
+      </h1>
+      <p className="dm text-sm text-slate-500 mb-10">Last updated: May 18, 2026</p>
+      
+      <div className="dm text-slate-700 leading-relaxed space-y-6">
+        <p>These terms govern your enrollment and participation at Headliner Music Academy (a DBA of Marchena & Papadhima LLC), located at 2311 Sunset Blvd, Rocklin, CA 95765.</p>
+        
+        <div>
+          <strong className="text-slate-900 block mb-1">Enrollment and billing:</strong>
+          Enrollment is on a monthly subscription basis. Billing occurs automatically each month on your billing date. You are responsible for keeping payment information current.
+        </div>
+        
+        <div>
+          <strong className="text-slate-900 block mb-1">Cancellations and holds:</strong>
+          You may cancel or place your account on hold by contacting us at <a href="tel:916-435-1300" className="text-amber-600 hover:text-amber-500">(916) 435-1300</a> or <a href="mailto:admin@headlinermusicacademy.com" className="text-amber-600 hover:text-amber-500">admin@headlinermusicacademy.com</a>. Cancellations require notice before your next billing date to avoid being charged for the following month.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">24-Hour Absence Notice:</strong>
+          If, for any reason, your student is unable to attend a lesson, please note that we have a strict 24-hour cancellation policy out of respect for our teachers’ schedules and how they are compensated. If you call, email, or leave a voicemail at least 24 hours before the reserved lesson, even if Headliner is closed at the time you contact us, we would be happy to reschedule it within 30 days.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Communications:</strong>
+          By enrolling, you agree to receive operational and promotional communications from Headliner Music Academy via SMS and email. You may opt out at any time by replying STOP to any SMS or contacting us directly.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Code of conduct:</strong>
+          We are committed to maintaining a respectful and safe environment for all students, families, and staff. Headliner Music Academy reserves the right to terminate enrollment for conduct that disrupts the learning environment.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Limitation of liability:</strong>
+          Headliner Music Academy is not responsible for lost, stolen, or damaged personal property on academy premises.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Changes to these terms:</strong>
+          We may update these terms from time to time. Continued enrollment constitutes acceptance of any updated terms.
+        </div>
+
+        <div>
+          <strong className="text-slate-900 block mb-1">Contact us:</strong>
+          <a href="mailto:admin@headlinermusicacademy.com" className="text-amber-600 hover:text-amber-500">admin@headlinermusicacademy.com</a> or <a href="tel:916-435-1300" className="text-amber-600 hover:text-amber-500">(916) 435-1300</a>.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookingFor, setBookingFor] = useState(null);
+
+  const path = typeof window !== "undefined" ? window.location.pathname : "/";
 
   return (
     <div
@@ -529,8 +631,14 @@ export default function App() {
         )}
       </nav>
 
-      {/* HERO */}
-      <section className="relative flex flex-col items-center justify-center text-center min-h-screen overflow-hidden bg-slate-950 pt-[68px]">
+      {path === "/privacy-policy" ? (
+        <PrivacyPolicyPage />
+      ) : path === "/terms-and-conditions" ? (
+        <TermsAndConditionsPage />
+      ) : (
+        <>
+          {/* HERO */}
+          <section className="relative flex flex-col items-center justify-center text-center min-h-screen overflow-hidden bg-slate-950 pt-[68px]">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/65 z-10" />
           <div className="noise-overlay absolute inset-0 z-20 opacity-40 mix-blend-overlay pointer-events-none" />
@@ -645,6 +753,8 @@ export default function App() {
           </div>
         </a>
       </section>
+        </>
+      )}
 
       {/* FOOTER */}
       <footer className="bg-slate-950 text-white px-5 sm:px-8 pt-16 pb-10">
@@ -701,7 +811,9 @@ export default function App() {
             <p className="dm text-xs text-slate-600">
               © {new Date().getFullYear()} Headliner Music Academy. All rights reserved.
             </p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap items-center gap-6">
+              <a href="/privacy-policy" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">Privacy Policy</a>
+              <a href="/terms-and-conditions" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">Terms & Conditions</a>
               {/* <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">Instagram</a> */}
               {/* <a href="#" className="dm text-xs text-slate-500 hover:text-amber-400 transition-colors">TikTok</a> */}
               <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" className="dm flex items-center gap-1.5 text-xs text-slate-500 hover:text-[#FF1A1A] transition-colors">
