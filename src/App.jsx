@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SummerCampPage from "./SummerCampPage";
 import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
 
@@ -27,7 +27,7 @@ const EMAILJS_TEMPLATE_ID = "template_czlclec";
 const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
 
 const LOGO_URL     = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
-const LOGO_URL_INV = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
+const LOGO_URL_INV = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
 
 // ── tokens ──────────────────────────────────────────────────────────────────
 const C = {
@@ -367,7 +367,13 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bookingFor, setBookingFor]  = useState(null);
 
-  const path = typeof window !== "undefined" ? window.location.pathname : "/";
+  const [path, setPath] = useState(typeof window !== "undefined" ? window.location.pathname : "/");
+
+  useEffect(() => {
+    const handlePop = () => setPath(window.location.pathname);
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, []);
 
   return (
     <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.cream,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
@@ -488,7 +494,7 @@ export default function App() {
         boxSizing:"border-box",overflow:"hidden",
       }}>
         <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:44,width:"auto",maxWidth:160,flexShrink:0}}/>
+          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:24}} className="desktop-nav">
           <a
@@ -544,8 +550,8 @@ export default function App() {
       )}
 
       {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
-       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> : 
-       path === "/summer-camp" ? <SummerCampPage/> :(
+       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> :
+       path==="/summer-camp" ? <SummerCampPage/> : (
         <>
           {/* ── HERO ── */}
           <section style={{
@@ -605,7 +611,8 @@ export default function App() {
                   Request Lessons <ArrowRight size={17}/>
                 </button>
                 <a
-                  href={CAMP_URL} target="_blank" rel="noreferrer"
+                  href="/summer-camp"
+                  onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
                   style={{
                     ...btnGhost,
                     borderColor:"rgba(255,209,102,0.5)",
@@ -735,6 +742,7 @@ export default function App() {
                   </a>
                   <a
                     href="/summer-camp"
+                    onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
                     style={{...btnGhost,borderColor:"rgba(255,255,255,0.2)",color:"rgba(255,255,255,0.7)"}}
                     onMouseEnter={e=>e.currentTarget.style.background="rgba(255,255,255,0.1)"}
                     onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.07)"}
@@ -811,8 +819,8 @@ export default function App() {
         <div style={{maxWidth:1100,margin:"0 auto"}}>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:64,paddingBottom:48,borderBottom:"1px solid rgba(255,255,255,0.08)",marginBottom:28}}>
             <div>
-              <a href="/" style={{display:"inline-block",marginBottom:20}}>
-                <img src={LOGO_URL_INV} alt="Headliner Music Academy" style={{height:48,width:"auto",filter:"brightness(0) invert(1)"}}/>
+              <a href="/" style={{display:"block",marginBottom:20,lineHeight:0}}>
+                <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" style={{display:"block",height:"auto",maxHeight:44,width:"auto",maxWidth:220,objectFit:"contain"}}/>
               </a>
               <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"rgba(255,255,255,0.38)",lineHeight:1.75,maxWidth:280,marginBottom:24}}>
                 Inspiring the next generation of musicians through premium, personalized education.
@@ -838,7 +846,7 @@ export default function App() {
                   <Phone size={16} color={C.crimson}/>
                   <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:600,color:"#fff",letterSpacing:-0.5}}>(916) 435-1300</span>
                 </a>
-                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:"rgba(255,255,255,0.38)",fontFamily:"'DM Sans',sans-serif",fontSize:13}}
+                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:"rgba(255,255,255,0.38)",fontFamily:"'DM Sans',sans-serif",fontSize:13,wordBreak:"break-all",overflowWrap:"break-word",minWidth:0}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                   onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.38)"}
                 >
@@ -883,4 +891,4 @@ export default function App() {
       </footer>
     </div>
   );
-} 
+}

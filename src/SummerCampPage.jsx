@@ -2,7 +2,8 @@ import { ArrowRight } from "lucide-react";
 
 const CAMP_URL   = "https://headlinerma.opus1.io/w/summercamp2026";
 const PORTAL_URL = "https://headlinerma.opus1.io/login";
-const LOGO_URL   = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
+const LOGO_URL       = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
+const LOGO_URL_WHITE = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
 
 const C = {
   espresso: "#1e130e",
@@ -52,7 +53,7 @@ const faqs = [
 
 export default function SummerCampPage() {
   return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",background:C.cream,color:C.espresso,minHeight:"100vh",overflowX:"hidden",maxWidth:"100vw"}}>
+    <div style={{fontFamily:"'DM Sans',sans-serif",background:C.cream,color:C.espresso,minHeight:"100vh",overflowX:"hidden",maxWidth:"100vw",paddingTop:68}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing:border-box; }
@@ -95,17 +96,22 @@ export default function SummerCampPage() {
           .sc-hero-grid  { grid-template-columns:1fr !important; }
           .sc-split      { grid-template-columns:1fr !important; gap:48px !important; }
           .sc-details    { grid-template-columns:1fr 1fr !important; }
-          section, header, nav { padding-left:20px !important; padding-right:20px !important; }
+          section, header { padding-left:20px !important; padding-right:20px !important; }
           .sc-marquee-wrap { overflow:hidden !important; max-width:100vw !important; }
+          .sc-desktop-nav { display:none !important; }
+          .sc-mobile-nav  { display:flex !important; }
         }
-        /* Prevent any horizontal overflow globally */
+        @media (min-width:769px) {
+          .sc-mobile-nav  { display:none !important; }
+          .sc-desktop-nav { display:flex !important; }
+        }
         html, body { overflow-x:hidden !important; max-width:100vw !important; }
         * { min-width:0; }
       `}</style>
 
       {/* NAV */}
       <nav style={{
-        position:"sticky",top:0,zIndex:100,
+        position:"fixed",top:0,zIndex:100,
         background:"rgba(253,251,247,0.95)",backdropFilter:"blur(12px)",
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
@@ -116,14 +122,23 @@ export default function SummerCampPage() {
         overflow:"hidden",
       }}>
         <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none",flexShrink:0}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:36,width:"auto",maxWidth:160}}/>
+          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:"auto",maxHeight:36,width:"auto",maxWidth:180,objectFit:"contain",display:"block"}}/>
         </a>
-        <div style={{display:"flex",alignItems:"center",gap:16,flexShrink:0}}>
+
+        {/* Desktop nav */}
+        <div className="sc-desktop-nav" style={{display:"flex",alignItems:"center",gap:16,flexShrink:0}}>
           <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="sc-nav-link" style={{whiteSpace:"nowrap"}}>
             Parent Portal
           </a>
           <a href={CAMP_URL} target="_blank" rel="noreferrer" className="sc-enroll" style={{...btnRed,padding:"9px 18px",fontSize:11,whiteSpace:"nowrap"}}>
             Enroll Now <ArrowRight size={12}/>
+          </a>
+        </div>
+
+        {/* Mobile — just the enroll button, no extra links */}
+        <div className="sc-mobile-nav" style={{display:"none",alignItems:"center",flexShrink:0}}>
+          <a href={CAMP_URL} target="_blank" rel="noreferrer" className="sc-enroll" style={{...btnRed,padding:"8px 16px",fontSize:11,whiteSpace:"nowrap"}}>
+            Enroll Now <ArrowRight size={11}/>
           </a>
         </div>
       </nav>
@@ -286,10 +301,7 @@ export default function SummerCampPage() {
                 <div key={label} style={{
                   padding:"20px 24px",
                   borderBottom: i < arr.length-1 ? `1px solid ${C.border}` : "none",
-                  background: accent==="yellow" ? "rgba(255,209,102,0.08)"
-                            : accent==="teal"   ? "rgba(0,196,181,0.06)"
-                            : accent==="crimson" ? "rgba(255,0,68,0.04)"
-                            : C.white,
+                  background: C.white,
                 }}>
                   <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:700,letterSpacing:"0.16em",textTransform:"uppercase",color:C.muted,margin:"0 0 6px"}}>{label}</p>
                   <p style={{
@@ -407,7 +419,7 @@ export default function SummerCampPage() {
             </p>
           </div>
 
-          <div style={{display:"flex",flexDirection:"column",gap:1,background:C.border,border:`1px solid ${C.border}`}}>
+          <div style={{display:"flex",flexDirection:"column",gap:0,background:C.white,border:`1px solid ${C.border}`}}>
             {[
               {label:"Camp Dates",    value:"June 22–26, 2026",  highlight:null},
               {label:"Daily Hours",   value:"9:00 AM – 12:30 PM",highlight:null},
@@ -416,9 +428,7 @@ export default function SummerCampPage() {
               {label:"Band Capacity", value:"Maximum 7 kids",    highlight:"yellow"},
             ].map(({label,value,highlight})=>(
               <div key={label} style={{
-                background: highlight==="yellow" ? "rgba(255,209,102,0.12)"
-                          : highlight==="teal"   ? "rgba(0,196,181,0.08)"
-                          : C.white,
+                background: C.white,
                 padding:"22px 28px",
               }}>
                 <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:700,letterSpacing:"0.18em",textTransform:"uppercase",color:C.muted,margin:"0 0 6px"}}>{label}</p>
