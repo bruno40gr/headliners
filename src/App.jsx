@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SummerCampPage from "./SummerCampPage";
 import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
 
 const offerings = [
@@ -543,7 +544,8 @@ export default function App() {
       )}
 
       {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
-       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> : (
+       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> : 
+       path === "/summer-camp" ? <SummerCampPage/> :(
         <>
           {/* ── HERO ── */}
           <section style={{
