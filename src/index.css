@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .bebas {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+  }
+  .dm {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
