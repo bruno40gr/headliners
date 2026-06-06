@@ -107,12 +107,12 @@ export default function SummerCampPage() {
         }
         .hero-img-wrapper::after {
           content: ''; position: absolute; inset: 0;
-          background: linear-gradient(to right, #1e130e 0%, transparent 40%),
-                      linear-gradient(to top, #1e130e 0%, transparent 30%);
+          background: linear-gradient(to right, #1e130e 0%, rgba(30,19,14,0.7) 35%, transparent 65%),
+                      linear-gradient(to top, #1e130e 0%, transparent 35%);
         }
         .hero-img {
           width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
-          opacity: 0.7;
+          opacity: 0.55;
         }
 
         .story-img-wrapper {
@@ -160,15 +160,16 @@ export default function SummerCampPage() {
 
       {/* NAV */}
       <nav style={{
-        position: "fixed", top: 0, zIndex: 100,
-        background: "rgba(253,251,247,0.95)", backdropFilter: "blur(12px)",
-        borderBottom: `1px solid ${C.border}`,
-        height: 68, display: "flex", alignItems: "center",
-        justifyContent: "space-between", padding: "0 24px",
-        width: "100%"
+        position:"fixed",top:0,width:"100%",zIndex:100,
+        background:`rgba(253,251,247,0.95)`,
+        backdropFilter:"blur(12px)",
+        borderBottom:`1px solid ${C.border}`,
+        height:68,display:"flex",alignItems:"center",
+        padding:"0 40px",justifyContent:"space-between",
+        boxSizing:"border-box",overflow:"hidden",
       }}>
-        <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 36, width: "auto", maxWidth: 180, objectFit: "contain", display: "block" }} />
+        <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
+          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
         </a>
         <div className="sc-desktop-nav" style={{ alignItems: "center", gap: 24, flexShrink: 0 }}>
           <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="sc-nav-link">Parent Portal</a>
@@ -199,8 +200,8 @@ export default function SummerCampPage() {
         </div>
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-          backgroundImage: `radial-gradient(at 0% 0%, rgba(255,0,68,0.12) 0px, transparent 55%),
-                            radial-gradient(at 100% 100%, rgba(0,196,181,0.06) 0px, transparent 55%)`
+          backgroundImage: `radial-gradient(at 0% 0%, rgba(255,0,68,0.06) 0px, transparent 50%),
+                            radial-gradient(at 100% 100%, rgba(0,196,181,0.05) 0px, transparent 50%)`
         }} />
         <div style={{
           position: "absolute", left: "-2vw", top: "50%", transform: "translateY(-50%)",

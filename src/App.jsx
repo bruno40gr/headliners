@@ -11,7 +11,6 @@ const offerings = [
   { icon: "🎺", name: "Brass", desc: "Trumpet & more" },
   { icon: "🎻", name: "Strings", desc: "Violin & viola" },
   { icon: "🤘", name: "Band Performance", desc: "Live stage experience" },
-  { icon: "🧸", name: "Piano for Kids", desc: "Fun early learning" },
   { icon: "🎉", name: "Private Parties", desc: "Birthdays & events" },
   { icon: "🎙️", name: "Recording Studio", desc: "Record & produce music" },
 ];
@@ -675,7 +674,7 @@ export default function App() {
               borderRadius:20,overflow:"hidden",
               border:`1px solid ${C.border}`,
               display:"grid",gap:1,background:C.border,
-              gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))",
+              gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",
               width:"100%",
             }}>
               {offerings.map((item,i)=>(
@@ -721,12 +720,19 @@ export default function App() {
                   <span style={{display:"block",width:24,height:2,background:C.teal,borderRadius:2}}/>
                   Summer 2026
                 </p>
-                <h2 style={{
+                <h1 style={{
                   fontFamily:"'Raleway',sans-serif",fontWeight:900,
                   fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
-                  color:"#fff",lineHeight:0.95,margin:"0 0 24px",
+                  color:"#fff",lineHeight:0.95,margin:"0 0 16px",
                 }}>
-                  Your kid will be in a<br/>real band by <em style={{fontStyle:"italic",color:C.crimson}}>Friday.</em>
+                  Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
+                </h1>
+                <h2 style={{
+                  fontFamily:"'Raleway',sans-serif",fontWeight:700,
+                  fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
+                  color:C.yellow,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
+                }}>
+                  Your kid will be in a real band by Friday.
                 </h2>
                 <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:"rgba(255,255,255,0.55)",lineHeight:1.8,marginBottom:36,maxWidth:420}}>
                   One week. No experience needed. Every kid gets an instrument, joins a band, and performs a real song on the last day.
@@ -771,7 +777,7 @@ export default function App() {
           </section>
 
           {/* ── TESTIMONIAL ── */}
-          <section style={{padding:"0 20px 72px",maxWidth:900,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
+          <section style={{padding:"72px 20px 88px",maxWidth:900,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
             <a
               href="https://m.yelp.com/biz/headliner-music-academy-rocklin"
               target="_blank" rel="noreferrer"
