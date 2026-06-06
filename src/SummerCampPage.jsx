@@ -52,7 +52,7 @@ const faqs = [
 
 export default function SummerCampPage() {
   return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",background:C.cream,color:C.espresso,minHeight:"100vh"}}>
+    <div style={{fontFamily:"'DM Sans',sans-serif",background:C.cream,color:C.espresso,minHeight:"100vh",overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing:border-box; }
@@ -91,12 +91,16 @@ export default function SummerCampPage() {
         }
         .sc-nav-link:hover { color:#1e130e; }
         .sc-nav-link:hover::after { transform:scaleX(1); }
-        @media (max-width:900px) {
-          .sc-hero-grid { grid-template-columns:1fr !important; }
+        @media (max-width:768px) {
+          .sc-hero-grid  { grid-template-columns:1fr !important; }
           .sc-split      { grid-template-columns:1fr !important; gap:48px !important; }
           .sc-details    { grid-template-columns:1fr 1fr !important; }
-          section, header { padding-left:24px !important; padding-right:24px !important; }
+          section, header, nav { padding-left:20px !important; padding-right:20px !important; }
+          .sc-marquee-wrap { overflow:hidden !important; max-width:100vw !important; }
         }
+        /* Prevent any horizontal overflow globally */
+        html, body { overflow-x:hidden !important; max-width:100vw !important; }
+        * { min-width:0; }
       `}</style>
 
       {/* NAV */}
@@ -105,26 +109,31 @@ export default function SummerCampPage() {
         background:"rgba(253,251,247,0.95)",backdropFilter:"blur(12px)",
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
-        justifyContent:"space-between",padding:"0 40px",
+        justifyContent:"space-between",
+        padding:"0 20px",
+        boxSizing:"border-box",
+        width:"100%",
+        overflow:"hidden",
       }}>
-        <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:42,width:"auto"}}/>
+        <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none",flexShrink:0}}>
+          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:36,width:"auto",maxWidth:160}}/>
         </a>
-        <div style={{display:"flex",alignItems:"center",gap:24}}>
-          <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="sc-nav-link">
+        <div style={{display:"flex",alignItems:"center",gap:16,flexShrink:0}}>
+          <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="sc-nav-link" style={{whiteSpace:"nowrap"}}>
             Parent Portal
           </a>
-          <a href={CAMP_URL} target="_blank" rel="noreferrer" className="sc-enroll" style={{...btnRed,padding:"10px 22px",fontSize:12}}>
-            Enroll Now <ArrowRight size={13}/>
+          <a href={CAMP_URL} target="_blank" rel="noreferrer" className="sc-enroll" style={{...btnRed,padding:"9px 18px",fontSize:11,whiteSpace:"nowrap"}}>
+            Enroll Now <ArrowRight size={12}/>
           </a>
         </div>
       </nav>
 
       {/* HERO */}
       <header style={{
-        background:C.espresso, padding:"88px 48px 80px",
+        background:C.espresso, padding:"72px 20px 64px",
         position:"relative", overflow:"hidden",
         borderBottom:`3px solid ${C.crimson}`,
+        boxSizing:"border-box", width:"100%",
       }}>
         <div style={{
           position:"absolute",inset:0,pointerEvents:"none",
@@ -140,7 +149,8 @@ export default function SummerCampPage() {
 
         <div className="sc-hero-grid" style={{
           maxWidth:1160,margin:"0 auto",position:"relative",zIndex:1,
-          display:"grid",gridTemplateColumns:"1.1fr 0.9fr",gap:64,alignItems:"center",
+          display:"grid",gridTemplateColumns:"1.1fr 0.9fr",gap:48,alignItems:"center",
+          width:"100%",boxSizing:"border-box",
         }}>
           {/* Text */}
           <div>
@@ -203,7 +213,7 @@ export default function SummerCampPage() {
       </header>
 
       {/* MARQUEE */}
-      <div style={{background:C.crimson,padding:"13px 0",overflow:"hidden"}}>
+      <div className="sc-marquee-wrap" style={{background:C.crimson,padding:"13px 0",overflow:"hidden",width:"100%",boxSizing:"border-box"}}>
         <div className="sc-marquee">
           {[
             "Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•",
@@ -222,7 +232,7 @@ export default function SummerCampPage() {
       </div>
 
       {/* THE CAMP */}
-      <section style={{background:C.white,padding:"96px 48px",borderBottom:`1px solid ${C.border}`}}>
+      <section style={{background:C.white,padding:"72px 20px",borderBottom:`1px solid ${C.border}`,boxSizing:"border-box",width:"100%"}}>
         <div className="sc-split" style={{maxWidth:1100,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:96,alignItems:"start"}}>
           <div>
             <p style={{fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",color:C.teal,marginBottom:16,display:"flex",alignItems:"center",gap:8}}>
@@ -297,7 +307,7 @@ export default function SummerCampPage() {
       </section>
 
       {/* OUR STORY */}
-      <section style={{background:C.espresso,padding:"96px 48px",borderBottom:"1px solid rgba(255,255,255,0.07)",position:"relative",overflow:"hidden"}}>
+      <section style={{background:C.espresso,padding:"72px 20px",borderBottom:"1px solid rgba(255,255,255,0.07)",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
         <div style={{
           position:"absolute",inset:0,pointerEvents:"none",
           backgroundImage:`radial-gradient(at 0% 100%, rgba(0,196,181,0.1) 0px, transparent 55%), radial-gradient(at 100% 0%, rgba(255,209,102,0.06) 0px, transparent 55%)`,
@@ -340,7 +350,7 @@ export default function SummerCampPage() {
       </section>
 
       {/* FAQ */}
-      <section style={{background:C.white,padding:"96px 48px",borderBottom:`1px solid ${C.border}`}}>
+      <section style={{background:C.white,padding:"72px 20px",borderBottom:`1px solid ${C.border}`,boxSizing:"border-box",width:"100%"}}>
         <div style={{maxWidth:800,margin:"0 auto"}}>
           <p style={{fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",color:C.crimson,marginBottom:16,textAlign:"center",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
             <span style={{display:"block",width:24,height:2,background:C.crimson,borderRadius:2}}/>
@@ -366,7 +376,7 @@ export default function SummerCampPage() {
       </section>
 
       {/* REGISTRATION */}
-      <section style={{background:C.cream,padding:"96px 48px"}}>
+      <section style={{background:C.cream,padding:"72px 20px",boxSizing:"border-box",width:"100%"}}>
         <div className="sc-split" style={{maxWidth:1000,margin:"0 auto",display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
           <div>
             <p style={{fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",color:C.crimson,marginBottom:16,display:"flex",alignItems:"center",gap:8}}>

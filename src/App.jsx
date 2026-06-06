@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
-import SummerCampPage from "./SummerCampPage";
 
 const offerings = [
   { icon: "🎸", name: "Guitar", desc: "Acoustic & electric" },
@@ -370,7 +369,7 @@ export default function App() {
   const path = typeof window !== "undefined" ? window.location.pathname : "/";
 
   return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.cream,color:C.espresso}}>
+    <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.cream,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
 
@@ -453,6 +452,24 @@ export default function App() {
         .btn-red-hover:hover { background: #CC0036 !important; }
         .portal-btn:hover { background: #CC0036 !important; transform:translateY(-1px); }
         .mobile-cta:hover { background: #CC0036 !important; }
+
+        /* ── Global mobile fixes ── */
+        html, body { overflow-x:hidden !important; max-width:100vw !important; }
+        * { min-width:0; box-sizing:border-box; }
+
+        @media (max-width:768px) {
+          nav { padding:0 16px !important; }
+          .desktop-nav { display:none !important; }
+          .mobile-menu-btn { display:flex !important; }
+          section { padding-left:20px !important; padding-right:20px !important; }
+          header  { padding-left:20px !important; padding-right:20px !important; }
+          .camp-grid    { grid-template-columns:1fr !important; gap:40px !important; }
+          .camp-details { grid-template-columns:1fr 1fr !important; }
+          .offerings-grid { grid-template-columns:1fr 1fr !important; }
+        }
+        @media (min-width:769px) {
+          .mobile-menu-btn { display:none !important; }
+        }
       `}</style>
 
       {bookingFor !== null && (
@@ -467,9 +484,10 @@ export default function App() {
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
         padding:"0 40px",justifyContent:"space-between",
+        boxSizing:"border-box",overflow:"hidden",
       }}>
         <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:44,width:"auto"}}/>
+          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:44,width:"auto",maxWidth:160,flexShrink:0}}/>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:24}} className="desktop-nav">
           <a
@@ -524,9 +542,8 @@ export default function App() {
         </div>
       )}
 
-      {path === "/privacy-policy" ? <PrivacyPolicyPage /> :
-       path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
-       path === CAMP_PAGE ? <SummerCampPage /> : (
+      {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
+       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> : (
         <>
           {/* ── HERO ── */}
           <section style={{
@@ -534,6 +551,7 @@ export default function App() {
             alignItems:"center",justifyContent:"center",textAlign:"center",
             minHeight:"100vh",overflow:"hidden",
             background:C.espresso,paddingTop:68,
+            width:"100%",boxSizing:"border-box",
           }}>
             <div style={{position:"absolute",inset:0,zIndex:0}}>
               <div style={{position:"absolute",inset:0,background:"rgba(10,5,3,0.6)",zIndex:10}}/>
@@ -623,7 +641,7 @@ export default function App() {
           </section>
 
           {/* ── OFFERINGS ── */}
-          <section style={{padding:"88px 40px",maxWidth:1200,margin:"0 auto"}}>
+          <section style={{padding:"72px 20px",maxWidth:1200,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
             <div style={{marginBottom:40}}>
               <p style={{
                 fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",
@@ -644,11 +662,12 @@ export default function App() {
               </p>
             </div>
 
-            <div style={{
+            <div className="offerings-grid" style={{
               borderRadius:20,overflow:"hidden",
               border:`1px solid ${C.border}`,
               display:"grid",gap:1,background:C.border,
-              gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",
+              gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))",
+              width:"100%",
             }}>
               {offerings.map((item,i)=>(
                 <div
@@ -677,14 +696,14 @@ export default function App() {
 
 
           {/* ── SUMMER CAMP ── */}
-          <section style={{background:C.espresso,padding:"88px 40px",position:"relative",overflow:"hidden"}}>
+          <section style={{background:C.espresso,padding:"72px 20px",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
             <div style={{
               position:"absolute",inset:0,
               backgroundImage:`radial-gradient(at 0% 100%, rgba(0,196,181,0.12) 0px, transparent 55%),
                                radial-gradient(at 100% 0%, rgba(255,209,102,0.08) 0px, transparent 55%)`,
               pointerEvents:"none",
             }}/>
-            <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
+            <div className="camp-grid" style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center",width:"100%"}}>
               <div>
                 <p style={{
                   fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",
@@ -742,7 +761,7 @@ export default function App() {
           </section>
 
           {/* ── TESTIMONIAL ── */}
-          <section style={{padding:"0 40px 88px",maxWidth:900,margin:"0 auto"}}>
+          <section style={{padding:"0 20px 72px",maxWidth:900,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
             <a
               href="https://m.yelp.com/biz/headliner-music-academy-rocklin"
               target="_blank" rel="noreferrer"
@@ -862,4 +881,4 @@ export default function App() {
       </footer>
     </div>
   );
-}
+} 
