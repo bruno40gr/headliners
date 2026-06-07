@@ -30,12 +30,12 @@ const LOGO_URL_INV = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714
 
 // ── tokens ──────────────────────────────────────────────────────────────────
 const C = {
-  espresso: "#1e130e",
+  espresso: "#2f2c2c",
   crimson:  "#FF0044",
-  cream:    "#FDFBF7",
+  cream:    "#f1eeeb",
   white:    "#FFFFFF",
   teal:     "#00C4B5",
-  yellow:   "#FFD166",
+  yellow:   "#f1ef17",
   muted:    "#7A6A5A",
   border:   "#F0EBE1",
 };
@@ -109,7 +109,7 @@ function BookingModal({ instrument, onClose }) {
       onClick={e=>e.target===e.currentTarget&&status!=="sending"&&onClose()}
       style={{
         position:"fixed",inset:0,zIndex:200,
-        background:"rgba(10,5,3,0.75)", backdropFilter:"blur(8px)",
+        background:"rgba(47,44,44,0.75)", backdropFilter:"blur(8px)",
         display:"flex",alignItems:"center",justifyContent:"center",
         padding:16, overflowY:"auto",
       }}
@@ -485,7 +485,7 @@ export default function App() {
       {/* ── NAV ── */}
       <nav style={{
         position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(253,251,247,0.95)`,
+        background:`rgba(242,237,230,0.95)`,
         backdropFilter:"blur(12px)",
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
@@ -561,7 +561,7 @@ export default function App() {
             width:"100%",boxSizing:"border-box",
           }}>
             <div style={{position:"absolute",inset:0,zIndex:0}}>
-              <div style={{position:"absolute",inset:0,background:"rgba(10,5,3,0.6)",zIndex:10}}/>
+              <div style={{position:"absolute",inset:0,background:"rgba(47,44,44,0.6)",zIndex:10}}/>
               <div className="crimson-spot" style={{zIndex:20}}/>
               <div className="vignette" style={{position:"absolute",inset:0,zIndex:25,pointerEvents:"none"}}/>
               <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.45,filter:"grayscale(0.3)"}}>
@@ -614,12 +614,12 @@ export default function App() {
                   onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
                   style={{
                     ...btnGhost,
-                    borderColor:"rgba(255,209,102,0.5)",
+                    borderColor:"rgba(241,239,23,0.5)",
                     color:C.yellow,
                     fontSize:14, padding:"15px 36px",
                   }}
-                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,209,102,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.07)";e.currentTarget.style.borderColor="rgba(255,209,102,0.5)";}}
+                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(241,239,23,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
+                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.07)";e.currentTarget.style.borderColor="rgba(241,239,23,0.5)";}}
                 >
                   Summer Camp 2026 <ArrowRight size={17}/>
                 </a>
@@ -707,8 +707,7 @@ export default function App() {
           <section style={{background:C.espresso,padding:"72px 20px",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
             <div style={{
               position:"absolute",inset:0,
-              backgroundImage:`radial-gradient(at 0% 100%, rgba(0,196,181,0.12) 0px, transparent 55%),
-                               radial-gradient(at 100% 0%, rgba(255,209,102,0.08) 0px, transparent 55%)`,
+              backgroundImage:`radial-gradient(at 100% 0%, rgba(241,239,23,0.05) 0px, transparent 55%)`,
               pointerEvents:"none",
             }}/>
             <div className="camp-grid" style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center",width:"100%"}}>
@@ -730,7 +729,7 @@ export default function App() {
                 <h2 style={{
                   fontFamily:"'Raleway',sans-serif",fontWeight:700,
                   fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
-                  color:C.yellow,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
+                  color:"rgba(255,255,255,0.7)",lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
                 }}>
                   Your kid will be in a real band by Friday.
                 </h2>
@@ -763,7 +762,7 @@ export default function App() {
                   {label:"Dates",     value:"June 22–26, 2026",  color:"#fff"},
                   {label:"Ages",      value:"8–12 years old",    color:"#fff"},
                   {label:"Schedule",  value:"9 AM – 12:30 PM",   color:"#fff"},
-                  {label:"Band Size", value:"Max 7 kids",        color:C.yellow},
+                  {label:"Band Size", value:"Max 7 kids",        color:"#fff"},
                   {label:"Experience",value:"None required",     color:C.teal},
                   {label:"Final Day", value:"Live performance + recording", color:C.crimson},
                 ].map(({label,value,color})=>(
