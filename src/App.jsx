@@ -30,14 +30,14 @@ const LOGO_URL_INV = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714
 
 // ── tokens ──────────────────────────────────────────────────────────────────
 const C = {
-  espresso: "#2f2c2c",
+  espresso: "#1a130f",
   crimson:  "#FF0044",
-  cream:    "#f1eeeb",
+  cream:    "#F6F3EE",
   white:    "#FFFFFF",
-  teal:     "#00C4B5",
-  yellow:   "#f1ef17",
+  teal:     "#00A8C8",
+  yellow:   "#FFDA00",
   muted:    "#7A6A5A",
-  border:   "#F0EBE1",
+  border:   "#E8E2DA",
 };
 
 // ── shared styles ────────────────────────────────────────────────────────────
@@ -109,7 +109,7 @@ function BookingModal({ instrument, onClose }) {
       onClick={e=>e.target===e.currentTarget&&status!=="sending"&&onClose()}
       style={{
         position:"fixed",inset:0,zIndex:200,
-        background:"rgba(47,44,44,0.75)", backdropFilter:"blur(8px)",
+        background:"rgba(26,19,15,0.75)", backdropFilter:"blur(8px)",
         display:"flex",alignItems:"center",justifyContent:"center",
         padding:16, overflowY:"auto",
       }}
@@ -133,7 +133,7 @@ function BookingModal({ instrument, onClose }) {
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:52,marginBottom:16}}>🎶</div>
             <h2 style={{
-              fontFamily:"'Raleway',sans-serif",fontWeight:900,
+              fontFamily:"'Archivo',sans-serif",fontWeight:900,
               fontSize:36,color:C.espresso,letterSpacing:-1,
               margin:"0 0 12px",lineHeight:1.1,
             }}>
@@ -151,7 +151,7 @@ function BookingModal({ instrument, onClose }) {
           <>
             <div style={{marginBottom:28}}>
               <h2 style={{
-                fontFamily:"'Raleway',sans-serif",fontWeight:900,
+                fontFamily:"'Archivo',sans-serif",fontWeight:900,
                 fontSize:34,letterSpacing:-1,color:C.espresso,
                 margin:"0 0 6px",lineHeight:1.1,
               }}>
@@ -235,7 +235,7 @@ function BookingModal({ instrument, onClose }) {
                   display:"flex",alignItems:"center",justifyContent:"center",
                   gap:8,transition:"all 0.2s",width:"100%",
                 }}
-                onMouseEnter={e=>valid&&(e.currentTarget.style.background=C.teal)}
+                onMouseEnter={e=>valid&&(e.currentTarget.style.background="#CC0036")}
                 onMouseLeave={e=>valid&&(e.currentTarget.style.background=C.crimson)}
               >
                 {status==="sending" ? "Sending…" : <>Let's make music <ArrowRight size={16}/></>}
@@ -302,7 +302,7 @@ function PillToggle({ label, active, onClick }) {
 function PrivacyPolicyPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Raleway',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:"'Archivo',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Privacy Policy
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
@@ -332,7 +332,7 @@ function PrivacyPolicyPage() {
 function TermsAndConditionsPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Raleway',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:"'Archivo',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Terms and Conditions
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
@@ -375,9 +375,9 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.cream,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
+    <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; }
 
@@ -433,7 +433,7 @@ export default function App() {
           transition: background 0.2s, transform 0.15s;
           position:relative;
         }
-        .offering-card:hover { background: rgba(255,0,68,0.04) !important; transform:translateY(-2px); z-index:1; }
+        .offering-card:hover { background: #F4F4F4 !important; transform:translateY(-2px); z-index:1; }
         .offering-card:hover .card-hint { opacity:1; }
         .card-hint {
           opacity:0; transition:opacity 0.2s;
@@ -485,7 +485,7 @@ export default function App() {
       {/* ── NAV ── */}
       <nav style={{
         position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(242,237,230,0.95)`,
+        background:`rgba(255,255,255,0.95)`,
         backdropFilter:"blur(12px)",
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
@@ -523,7 +523,7 @@ export default function App() {
       {mobileOpen && (
         <div style={{
           position:"fixed",top:68,left:0,right:0,zIndex:99,
-          background:C.cream,borderBottom:`1px solid ${C.border}`,
+          background:C.white,borderBottom:`1px solid ${C.border}`,
           padding:"20px 24px",display:"flex",flexDirection:"column",gap:12,
           boxShadow:"0 8px 24px rgba(0,0,0,0.08)",
         }}>
@@ -561,7 +561,7 @@ export default function App() {
             width:"100%",boxSizing:"border-box",
           }}>
             <div style={{position:"absolute",inset:0,zIndex:0}}>
-              <div style={{position:"absolute",inset:0,background:"rgba(47,44,44,0.6)",zIndex:10}}/>
+              <div style={{position:"absolute",inset:0,background:"rgba(26,19,15,0.6)",zIndex:10}}/>
               <div className="crimson-spot" style={{zIndex:20}}/>
               <div className="vignette" style={{position:"absolute",inset:0,zIndex:25,pointerEvents:"none"}}/>
               <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.45,filter:"grayscale(0.3)"}}>
@@ -576,7 +576,7 @@ export default function App() {
                   display:"inline-flex",alignItems:"center",gap:8,
                   padding:"6px 16px",border:"1px solid rgba(255,255,255,0.15)",
                   borderRadius:999,
-                  fontSize:10,fontWeight:700,letterSpacing:"0.2em",textTransform:"uppercase",
+                  fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
                   color:"rgba(255,255,255,0.65)",
                 }}>
                   <span className="tag-dot"/>
@@ -585,7 +585,7 @@ export default function App() {
               </div>
 
               <h1 className="fade-up delay-2" style={{
-                fontFamily:"'Raleway',sans-serif",fontWeight:900,
+                fontFamily:"'Archivo',sans-serif",fontWeight:900,
                 fontSize:"clamp(56px,10vw,90px)",lineHeight:0.93,
                 letterSpacing:-2,color:"#fff",margin:"0 0 16px",
               }}>
@@ -614,12 +614,12 @@ export default function App() {
                   onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
                   style={{
                     ...btnGhost,
-                    borderColor:"rgba(241,239,23,0.5)",
+                    borderColor:"rgba(255,218,0,0.5)",
                     color:C.yellow,
                     fontSize:14, padding:"15px 36px",
                   }}
-                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(241,239,23,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.07)";e.currentTarget.style.borderColor="rgba(241,239,23,0.5)";}}
+                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,218,0,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
+                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.07)";e.currentTarget.style.borderColor="rgba(255,218,0,0.5)";}}
                 >
                   Summer Camp 2026 <ArrowRight size={17}/>
                 </a>
@@ -652,14 +652,14 @@ export default function App() {
           <section style={{padding:"72px 20px",maxWidth:1200,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
             <div style={{marginBottom:40}}>
               <p style={{
-                fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",
+                fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
                 color:C.teal,marginBottom:12,display:"flex",alignItems:"center",gap:8,
               }}>
-                <span style={{display:"block",width:24,height:2,background:C.teal,borderRadius:2}}/>
+                <span style={{display:"block",width:28,height:3,background:C.teal,borderRadius:2}}/>
                 What we offer
               </p>
               <h2 style={{
-                fontFamily:"'Raleway',sans-serif",fontWeight:900,
+                fontFamily:"'Archivo',sans-serif",fontWeight:900,
                 fontSize:"clamp(2.4rem,5vw,3.6rem)",letterSpacing:-1,
                 color:C.espresso,lineHeight:0.95,margin:0,
               }}>
@@ -691,7 +691,7 @@ export default function App() {
                 >
                   <span style={{fontSize:36,marginBottom:16}}>{item.icon}</span>
                   <h3 style={{
-                    fontFamily:"'Raleway',sans-serif",fontWeight:800,
+                    fontFamily:"'Archivo',sans-serif",fontWeight:800,
                     fontSize:14,letterSpacing:"0.1em",textTransform:"uppercase",
                     color:C.espresso,margin:"0 0 4px",
                   }}>{item.name}</h3>
@@ -707,27 +707,27 @@ export default function App() {
           <section style={{background:C.espresso,padding:"72px 20px",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
             <div style={{
               position:"absolute",inset:0,
-              backgroundImage:`radial-gradient(at 100% 0%, rgba(241,239,23,0.05) 0px, transparent 55%)`,
+              backgroundImage:`radial-gradient(at 100% 0%, rgba(255,218,0,0.05) 0px, transparent 55%)`,
               pointerEvents:"none",
             }}/>
             <div className="camp-grid" style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center",width:"100%"}}>
               <div>
                 <p style={{
-                  fontSize:10,fontWeight:700,letterSpacing:"0.22em",textTransform:"uppercase",
+                  fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
                   color:C.teal,marginBottom:16,display:"flex",alignItems:"center",gap:8,
                 }}>
-                  <span style={{display:"block",width:24,height:2,background:C.teal,borderRadius:2}}/>
+                  <span style={{display:"block",width:28,height:3,background:C.teal,borderRadius:2}}/>
                   Summer 2026
                 </p>
                 <h1 style={{
-                  fontFamily:"'Raleway',sans-serif",fontWeight:900,
+                  fontFamily:"'Archivo',sans-serif",fontWeight:900,
                   fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
                   color:"#fff",lineHeight:0.95,margin:"0 0 16px",
                 }}>
                   Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
                 </h1>
                 <h2 style={{
-                  fontFamily:"'Raleway',sans-serif",fontWeight:700,
+                  fontFamily:"'Archivo',sans-serif",fontWeight:700,
                   fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
                   color:"rgba(255,255,255,0.7)",lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
                 }}>
@@ -768,7 +768,7 @@ export default function App() {
                 ].map(({label,value,color})=>(
                   <div key={label} style={{background:C.espresso,padding:"28px 24px"}}>
                     <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:700,letterSpacing:"0.18em",textTransform:"uppercase",color:"rgba(255,255,255,0.3)",marginBottom:8}}>{label}</p>
-                    <p style={{fontFamily:"'Raleway',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
+                    <p style={{fontFamily:"'Archivo',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
                   </div>
                 ))}
               </div>
@@ -784,11 +784,11 @@ export default function App() {
                 display:"block",background:C.white,
                 borderRadius:20,padding:"48px 56px",
                 border:`1px solid ${C.border}`,textDecoration:"none",textAlign:"center",
-                boxShadow:"0 4px 24px rgba(30,19,14,0.06)",
+                boxShadow:"0 4px 24px rgba(26,19,15,0.06)",
                 transition:"box-shadow 0.2s, transform 0.2s",
               }}
-              onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 8px 32px rgba(30,19,14,0.1)";e.currentTarget.style.transform="translateY(-2px)";}}
-              onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 4px 24px rgba(30,19,14,0.06)";e.currentTarget.style.transform="translateY(0)";}}
+              onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 8px 32px rgba(26,19,15,0.1)";e.currentTarget.style.transform="translateY(-2px)";}}
+              onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 4px 24px rgba(26,19,15,0.06)";e.currentTarget.style.transform="translateY(0)";}}
             >
               <div style={{display:"flex",justifyContent:"center",gap:4,marginBottom:24}}>
                 {[1,2,3,4,5].map(s=>(
@@ -798,7 +798,7 @@ export default function App() {
                 ))}
               </div>
               <p style={{
-                fontFamily:"'Raleway',sans-serif",fontWeight:700,fontStyle:"italic",
+                fontFamily:"'Archivo',sans-serif",fontWeight:700,fontStyle:"italic",
                 fontSize:"clamp(1.1rem,2.5vw,1.5rem)",color:C.espresso,
                 lineHeight:1.55,maxWidth:640,margin:"0 auto 24px",
               }}>
@@ -832,8 +832,9 @@ export default function App() {
               </p>
               <button
                 onClick={()=>setBookingFor("")}
-                className="btn-red-hover"
-                style={{...btnOutlineRed,fontSize:12}}
+                style={{...btnOutlineRed,fontSize:12,transition:"all 0.2s"}}
+                onMouseEnter={e=>{e.currentTarget.style.background=C.crimson;e.currentTarget.style.color="#fff";}}
+                onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=C.crimson;}}
               >
                 Request Lessons <ArrowRight size={13}/>
               </button>

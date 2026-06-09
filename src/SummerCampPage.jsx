@@ -6,14 +6,14 @@ const PORTAL_URL = "https://headlinerma.opus1.io/login";
 const LOGO_URL   = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
 
 const C = {
-  espresso: "#2f2c2c",
+  espresso: "#1a130f",
   crimson:  "#FF0044",
-  cream:    "#F2EDE6",
+  cream:    "#F6F3EE",
   white:    "#FFFFFF",
-  teal:     "#00C4B5",
-  yellow:   "#f1ef17",
+  teal:     "#00A8C8",
+  yellow:   "#FFDA00",
   muted:    "#7A6A5A",
-  border:   "#F0EBE1",
+  border:   "#E8E2DA",
 };
 
 const faqs = [
@@ -45,13 +45,13 @@ const faqs = [
 
 export default function SummerCampPage() {
   return (
-    <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.cream, color: C.espresso, minHeight: "100vh", overflowX: "hidden", maxWidth: "100vw", paddingTop: 68 }}>
+    <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.white, color: C.espresso, minHeight: "100vh", overflowX: "hidden", maxWidth: "100vw", paddingTop: 68 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         
         *, *::before, *::after { box-sizing: border-box; }
         html, body { overflow-x: hidden !important; max-width: 100vw !important; margin: 0; padding: 0; }
-        ::selection { background: rgba(255,0,68,0.15); color: #2f2c2c; }
+        ::selection { background: rgba(255,0,68,0.15); color: #1a130f; }
         
         @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -74,16 +74,16 @@ export default function SummerCampPage() {
           text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
         }
         .btn-red:hover { background: #CC0036; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,0,68,0.4); }
-        .btn-teal:hover { background: #00A99B !important; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,196,181,0.4) !important; }
+        .btn-teal:hover { background: #0096B4 !important; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,168,200,0.4) !important; }
 
         .sc-pill {
           display: inline-flex; align-items: center; gap: 8px;
           padding: 10px 20px; border-radius: 999px;
-          font-size: 14px; font-weight: 600; color: #2f2c2c; background: #fff;
-          border: 1px solid #F0EBE1;
+          font-size: 14px; font-weight: 600; color: #1a130f; background: #fff;
+          border: 1px solid #E8E2DA;
           transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
-        .sc-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(47,44,44,0.06); border-color: #00C4B5; }
+        .sc-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26,19,15,0.06); border-color: #00A8C8; }
         
         .sc-nav-link {
           font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
@@ -94,11 +94,11 @@ export default function SummerCampPage() {
           height: 1px; background: #FF0044;
           transform: scaleX(0); transform-origin: left; transition: transform 0.2s;
         }
-        .sc-nav-link:hover { color: #2f2c2c; }
+        .sc-nav-link:hover { color: #1a130f; }
         .sc-nav-link:hover::after { transform: scaleX(1); }
 
-        .sc-faq-item { border-bottom: 1px solid #F0EBE1; padding: 28px 0; }
-        .sc-faq-item:first-child { border-top: 1px solid #F0EBE1; }
+        .sc-faq-item { border-bottom: 1px solid #E8E2DA; padding: 28px 0; }
+        .sc-faq-item:first-child { border-top: 1px solid #E8E2DA; }
 
         .hero-img-wrapper {
           position: absolute; right: 0; top: 0;
@@ -107,8 +107,8 @@ export default function SummerCampPage() {
         }
         .hero-img-wrapper::after {
           content: ''; position: absolute; inset: 0;
-          background: linear-gradient(to right, #2f2c2c 0%, rgba(47,44,44,0.7) 35%, transparent 65%),
-                      linear-gradient(to top, #2f2c2c 0%, transparent 35%);
+          background: linear-gradient(to right, #1a130f 0%, rgba(26,19,15,0.7) 35%, transparent 65%),
+                      linear-gradient(to top, #1a130f 0%, transparent 35%);
         }
         .hero-img {
           width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
@@ -122,8 +122,8 @@ export default function SummerCampPage() {
         }
         .story-img-wrapper::after {
           content: ''; position: absolute; inset: 0;
-          background: linear-gradient(to right, transparent 0%, #2f2c2c 60%),
-                      linear-gradient(to bottom, #2f2c2c 0%, transparent 20%);
+          background: linear-gradient(to right, transparent 0%, #1a130f 60%),
+                      linear-gradient(to bottom, #1a130f 0%, transparent 20%);
         }
         .story-img {
           width: 100%; height: 100%; object-fit: cover; object-position: center;
@@ -143,11 +143,11 @@ export default function SummerCampPage() {
             width: 100%; height: 65%; top: 0; right: 0;
           }
           .hero-img-wrapper::after {
-            background: linear-gradient(to top, #2f2c2c 0%, transparent 80%),
-                        linear-gradient(to right, #2f2c2c 0%, transparent 80%);
+            background: linear-gradient(to top, #1a130f 0%, transparent 80%),
+                        linear-gradient(to right, #1a130f 0%, transparent 80%);
           }
           .story-img-wrapper::after {
-            background: linear-gradient(to bottom, transparent 0%, #2f2c2c 60%);
+            background: linear-gradient(to bottom, transparent 0%, #1a130f 60%);
           }
           .hero-content { margin-top: 20px; }
           .btn-red { width: 100%; }
@@ -161,7 +161,7 @@ export default function SummerCampPage() {
       {/* NAV */}
       <nav style={{
         position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(242,237,230,0.95)`,
+        background:`rgba(255,255,255,0.95)`,
         backdropFilter:"blur(12px)",
         borderBottom:`1px solid ${C.border}`,
         height:68,display:"flex",alignItems:"center",
@@ -201,11 +201,11 @@ export default function SummerCampPage() {
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
           backgroundImage: `radial-gradient(at 0% 0%, rgba(255,0,68,0.06) 0px, transparent 50%),
-                            radial-gradient(at 100% 100%, rgba(0,196,181,0.05) 0px, transparent 50%)`
+                            radial-gradient(at 100% 100%, rgba(0,168,200,0.05) 0px, transparent 50%)`
         }} />
         <div style={{
           position: "absolute", left: "-2vw", top: "50%", transform: "translateY(-50%)",
-          fontFamily: "'Raleway', sans-serif", fontWeight: 900, fontSize: "40vw",
+          fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "40vw",
           lineHeight: 1, color: C.crimson, opacity: 0.02, pointerEvents: "none", zIndex: 1
         }}>H</div>
 
@@ -214,15 +214,15 @@ export default function SummerCampPage() {
           display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"
         }}>
           <h1 className="sc-fu sc-d1" style={{
-            fontFamily: "'Raleway', sans-serif", fontWeight: 900,
+            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
             fontSize: "clamp(3.5rem, 8vw, 6.5rem)", lineHeight: 0.93,
             letterSpacing: -2, color: "#fff", margin: "0 0 20px"
           }}>
             Summer<br />Band <em style={{ fontStyle: "italic", color: C.crimson }}>Camp.</em>
           </h1>
           <p className="sc-fu sc-d2" style={{
-            fontFamily: "'Raleway', sans-serif", fontWeight: 700,
-            fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", color: C.white, margin: "0 0 48px",
+            fontFamily: "'Archivo', sans-serif", fontWeight: 700,
+            fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", color: C.yellow, margin: "0 0 48px",
             maxWidth: 500, lineHeight: 1.3
           }}>
             Your kid will be in a real band by Friday.
@@ -248,11 +248,11 @@ export default function SummerCampPage() {
       </header>
 
       {/* MARQUEE */}
-      <div style={{ background: C.crimson, padding: "14px 0", overflow: "hidden", width: "100%" }}>
+      <div style={{ background: C.espresso, padding: "14px 0", overflow: "hidden", width: "100%", borderTop: `1px solid rgba(255,255,255,0.08)`, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
         <div className="sc-marquee">
           {[...Array(2)].fill(["Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•","No Experience Needed","•","Max 7 Kids Per Band","•","June 22–26","•"]).flat().map((item, i) => (
             <span key={i} style={{
-              fontFamily: "'Raleway', sans-serif", fontWeight: 900, fontSize: 11,
+              fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 11,
               letterSpacing: "0.2em", textTransform: "uppercase",
               color: item === "•" ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.9)",
               padding: item === "•" ? "0 8px" : "0 24px",
@@ -266,11 +266,11 @@ export default function SummerCampPage() {
         <div className="sc-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "start" }}>
           <div>
             <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.teal, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
-              <span style={{ display: "block", width: 24, height: 2, background: C.teal, borderRadius: 2 }} />
+              <span style={{ display: "block", width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
               The Camp
             </p>
             <h2 style={{
-              fontFamily: "'Raleway', sans-serif", fontWeight: 900,
+              fontFamily: "'Archivo', sans-serif", fontWeight: 900,
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", letterSpacing: -1,
               color: C.espresso, margin: "0 0 32px", lineHeight: 0.95,
             }}>
@@ -287,7 +287,7 @@ export default function SummerCampPage() {
             </p>
             <div style={{ marginTop: 56 }}>
               <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
-                <span style={{ display: "block", width: 24, height: 2, background: C.crimson, borderRadius: 2 }} />
+                <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
                 Instruments Available
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
@@ -320,7 +320,7 @@ export default function SummerCampPage() {
                 }}>
                   <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{label}</p>
                   <p style={{
-                    fontFamily: "'Raleway', sans-serif", fontWeight: 800, fontSize: 22,
+                    fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 22,
                     color: highlight === "teal" ? C.teal : highlight === "crimson" ? C.crimson : C.espresso,
                     margin: 0,
                   }}>{value}</p>
@@ -342,7 +342,7 @@ export default function SummerCampPage() {
         </div>
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-          backgroundImage: `radial-gradient(at 0% 100%, rgba(0,196,181,0.0) 0px, transparent 55%), radial-gradient(at 100% 0%, rgba(255,209,102,0.05) 0px, transparent 55%)`,
+          backgroundImage: `radial-gradient(at 0% 100%, rgba(0,168,200,0.0) 0px, transparent 55%), radial-gradient(at 100% 0%, rgba(255,218,0,0.05) 0px, transparent 55%)`,
         }} />
         <div className="sc-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center", position: "relative", zIndex: 2 }}>
           <div>
@@ -363,7 +363,7 @@ export default function SummerCampPage() {
               { value: "0",    label: "Experience Needed", color: "#fff" },
             ].map(({ value, label, color }) => (
               <div key={label} style={{ background: C.espresso, padding: "48px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 900, fontSize: "clamp(2.5rem, 4vw, 3.5rem)", color, lineHeight: 1, margin: "0 0 12px" }}>{value}</p>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.5rem, 4vw, 3.5rem)", color, lineHeight: 1, margin: "0 0 12px" }}>{value}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
               </div>
             ))}
@@ -375,12 +375,12 @@ export default function SummerCampPage() {
       <section style={{ background: C.white, padding: "96px 24px", borderBottom: `1px solid ${C.border}`, width: "100%" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
-            <span style={{ display: "block", width: 24, height: 2, background: C.crimson, borderRadius: 2 }} />
+            <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
             FAQ
-            <span style={{ display: "block", width: 24, height: 2, background: C.crimson, borderRadius: 2 }} />
+            <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
           </p>
           <h2 style={{
-            fontFamily: "'Raleway', sans-serif", fontWeight: 900,
+            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
             fontSize: "clamp(2.4rem, 4vw, 3.5rem)", letterSpacing: -1,
             color: C.espresso, margin: "0 0 64px", textAlign: "center", lineHeight: 0.95,
           }}>
@@ -389,7 +389,7 @@ export default function SummerCampPage() {
           <div>
             {faqs.map(({ q, a }) => (
               <div key={q} className="sc-faq-item">
-                <p style={{ fontFamily: "'Raleway', sans-serif", fontWeight: 800, fontSize: 20, color: C.espresso, margin: "0 0 16px", lineHeight: 1.3 }}>{q}</p>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 20, color: C.espresso, margin: "0 0 16px", lineHeight: 1.3 }}>{q}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: C.muted, lineHeight: 1.8, margin: 0, maxWidth: 700 }}>{a}</p>
               </div>
             ))}
@@ -398,14 +398,14 @@ export default function SummerCampPage() {
       </section>
 
       {/* REGISTRATION */}
-      <section style={{ background: C.cream, padding: "96px 24px", width: "100%" }}>
+      <section style={{ background: C.white, padding: "96px 24px", width: "100%" }}>
         <div style={{ maxWidth: 640, margin: "0 auto" }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ display: "block", width: 24, height: 2, background: C.crimson, borderRadius: 2 }} />
+            <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
             Registration
           </p>
           <h2 style={{
-            fontFamily: "'Raleway', sans-serif", fontWeight: 900,
+            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
             fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", letterSpacing: -1,
             color: C.espresso, margin: "0 0 24px", lineHeight: 0.95,
           }}>
@@ -418,13 +418,13 @@ export default function SummerCampPage() {
             A confirmation email will be sent within a few minutes of completing your registration.
           </p>
           <div style={{ width: "100%", maxWidth: 320 }}>
-            <a href={CAMP_URL} target="_blank" rel="noreferrer" className="btn-red btn-teal" style={{ background: C.teal, padding: "18px 40px", fontSize: 15, boxShadow: `0 4px 20px rgba(0,196,181,0.25)`, width: "100%" }}>
+            <a href={CAMP_URL} target="_blank" rel="noreferrer" className="btn-red btn-teal" style={{ background: C.teal, padding: "18px 40px", fontSize: 15, boxShadow: `0 4px 20px rgba(0,168,200,0.25)`, width: "100%" }}>
               Enroll Now <ArrowRight size={18} />
             </a>
           </div>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: C.muted, marginTop: 32 }}>
             Questions?{" "}
-            <a href="mailto:camp@headlinermusicacademy.com" style={{ color: C.crimson, textDecoration: "none", fontWeight: 700 }}>
+            <a href="mailto:admin@headlinermusicacademy.com" style={{ color: C.crimson, textDecoration: "none", fontWeight: 700 }}>
               admin@headlinermusicacademy.com
             </a>
           </p>
