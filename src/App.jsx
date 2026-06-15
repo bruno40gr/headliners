@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SummerCampPage from "./SummerCampPage";
+import BandProgramPage from "./BandProgramPage";
 import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
 
 const offerings = [
@@ -140,7 +141,7 @@ function BookingModal({ instrument, onClose }) {
               We'll be in touch <span style={{color:C.crimson}}>soon!</span>
             </h2>
             <p style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,fontSize:15,lineHeight:1.7,maxWidth:360,margin:"0 auto 8px"}}>
-              We'll get back to you within the next 24 hours — expect a call from us to get everything set up.
+              We'll get back to you within the next 24 hours. Expect a call from us to get everything set up.
             </p>
             <p style={{fontFamily:"'DM Sans',sans-serif",color:"#aaa",fontSize:13,margin:"0 auto 28px"}}>
               Keep an eye on your phone. 📞
@@ -217,7 +218,7 @@ function BookingModal({ instrument, onClose }) {
                   background:"#fef2f2",border:"1px solid #fecaca",
                   borderRadius:10,padding:"10px 14px",margin:0,
                 }}>
-                  Something went wrong — please try again or reach us at (916) 435-1300.
+                  Something went wrong. Please try again or reach us at (916) 435-1300.
                 </p>
               )}
 
@@ -409,12 +410,12 @@ export default function App() {
         .crimson-spot {
           position:absolute; top:50%; left:50%;
           width:700px; height:500px; border-radius:50%;
-          background: radial-gradient(ellipse at center, rgba(255,0,68,0.45) 0%, transparent 70%);
+          background: radial-gradient(ellipse at center, rgba(255,0,68,0.08) 0%, transparent 70%);
           animation: driftSpot 9s ease-in-out infinite;
           pointer-events:none; mix-blend-mode:screen; filter:blur(40px);
         }
         .vignette {
-          background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.75) 100%);
+          background: radial-gradient(ellipse at center, transparent 35%, rgba(26,19,15,0.06) 100%);
         }
         .stage-line {
           position:absolute; bottom:0; left:0; right:0; height:3px;
@@ -445,7 +446,7 @@ export default function App() {
         .nav-link {
           font-size:12px; font-weight:600;
           letter-spacing:0.1em; text-transform:uppercase;
-          color:${C.muted}; text-decoration:none;
+          color:rgba(255,255,255,0.45); text-decoration:none;
           transition:color 0.2s; position:relative; padding-bottom:2px;
         }
         .nav-link::after {
@@ -453,7 +454,7 @@ export default function App() {
           height:1px; background:${C.crimson};
           transform:scaleX(0); transform-origin:left; transition:transform 0.2s;
         }
-        .nav-link:hover { color:${C.espresso}; }
+        .nav-link:hover { color:#fff; }
         .nav-link:hover::after { transform:scaleX(1); }
         .btn-red-hover:hover { background: #CC0036 !important; }
         .portal-btn:hover { background: #CC0036 !important; transform:translateY(-1px); }
@@ -485,21 +486,29 @@ export default function App() {
       {/* ── NAV ── */}
       <nav style={{
         position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(255,255,255,0.95)`,
+        background:`rgba(26,19,15,0.98)`,
         backdropFilter:"blur(12px)",
-        borderBottom:`1px solid ${C.border}`,
+        borderBottom:`1px solid rgba(255,255,255,0.07)`,
         height:68,display:"flex",alignItems:"center",
         padding:"0 40px",justifyContent:"space-between",
         boxSizing:"border-box",overflow:"hidden",
       }}>
         <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
+          <img src={LOGO_URL_INV} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
         </a>
         <div style={{display:"flex",alignItems:"center",gap:24}} className="desktop-nav">
           <a
+            href="/programs/band"
+            onClick={e=>{e.preventDefault();window.history.pushState({},"","/programs/band");setPath("/programs/band");}}
+            className="nav-link"
+            style={{fontFamily:"'DM Sans',sans-serif",textDecoration:"none",color:"rgba(255,255,255,0.45)"}}
+          >
+            Programs
+          </a>
+          <a
             href={PORTAL_URL} target="_blank" rel="noreferrer"
             className="nav-link"
-            style={{fontFamily:"'DM Sans',sans-serif",textDecoration:"none"}}
+            style={{fontFamily:"'DM Sans',sans-serif",textDecoration:"none",color:"rgba(255,255,255,0.45)"}}
           >
             Parent Portal
           </a>
@@ -528,11 +537,22 @@ export default function App() {
           boxShadow:"0 8px 24px rgba(0,0,0,0.08)",
         }}>
           <a
+            href="/programs/band"
+            onClick={e=>{e.preventDefault();window.history.pushState({},"","/programs/band");setPath("/programs/band");setMobileOpen(false);}}
+            style={{
+              fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,
+              color:"rgba(255,255,255,0.55)",textDecoration:"none",
+              padding:"8px 0",borderBottom:`1px solid rgba(255,255,255,0.08)`,display:"block",
+            }}
+          >
+            Programs
+          </a>
+          <a
             href={PORTAL_URL} target="_blank" rel="noreferrer"
             style={{
               fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,
-              color:C.muted,textDecoration:"none",
-              padding:"8px 0",borderBottom:`1px solid ${C.border}`,display:"block",
+              color:"rgba(255,255,255,0.55)",textDecoration:"none",
+              padding:"8px 0",borderBottom:`1px solid rgba(255,255,255,0.08)`,display:"block",
             }}
             onClick={()=>setMobileOpen(false)}
           >
@@ -550,23 +570,32 @@ export default function App() {
 
       {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
        path==="/terms-and-conditions" ? <TermsAndConditionsPage/> :
-       path==="/summer-camp" ? <SummerCampPage/> : (
+       path==="/summer-camp" ? <SummerCampPage/> :
+       path==="/programs/band" ? <BandProgramPage onRequestLessons={(instrument)=>setBookingFor(instrument||"")} setPath={setPath}/> : (
         <>
           {/* ── HERO ── */}
           <section style={{
             position:"relative",display:"flex",flexDirection:"column",
             alignItems:"center",justifyContent:"center",textAlign:"center",
             minHeight:"100vh",overflow:"hidden",
-            background:C.espresso,paddingTop:68,
+            background:"#FAF9F7",paddingTop:68,
             width:"100%",boxSizing:"border-box",
           }}>
             <div style={{position:"absolute",inset:0,zIndex:0}}>
-              <div style={{position:"absolute",inset:0,background:"rgba(26,19,15,0.6)",zIndex:10}}/>
-              <div className="crimson-spot" style={{zIndex:20}}/>
-              <div className="vignette" style={{position:"absolute",inset:0,zIndex:25,pointerEvents:"none"}}/>
-              <video autoPlay loop muted playsInline style={{width:"100%",height:"100%",objectFit:"cover",opacity:0.45,filter:"grayscale(0.3)"}}>
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-band-playing-on-a-stage-in-front-of-a-crowd-32771-large.mp4" type="video/mp4"/>
-              </video>
+              <div style={{
+                position:"absolute",inset:0,
+                backgroundImage:`radial-gradient(${C.espresso} 1px, transparent 1px)`,
+                backgroundSize:"28px 28px",
+                opacity:0.04,
+              }}/>
+              <div style={{
+                position:"absolute",inset:0,
+                background:`radial-gradient(ellipse at 70% 50%, rgba(255,0,68,0.06) 0%, transparent 60%)`,
+              }}/>
+              
+              
+              
+              
               <div className="stage-line" style={{zIndex:30}}/>
             </div>
 
@@ -574,12 +603,12 @@ export default function App() {
               <div className="fade-up delay-1" style={{display:"flex",justifyContent:"center",marginBottom:28}}>
                 <span style={{
                   display:"inline-flex",alignItems:"center",gap:8,
-                  padding:"6px 16px",border:"1px solid rgba(255,255,255,0.15)",
+                  padding:"6px 16px",border:`1px solid rgba(0,168,200,0.3)`,background:"rgba(0,168,200,0.06)",
                   borderRadius:999,
                   fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
-                  color:"rgba(255,255,255,0.65)",
+                  color:C.teal,
                 }}>
-                  <span className="tag-dot"/>
+                  <span className="tag-dot" style={{background:C.teal}}/>
                   Summer Camp 2026 · Enrolling Now
                 </span>
               </div>
@@ -587,14 +616,14 @@ export default function App() {
               <h1 className="fade-up delay-2" style={{
                 fontFamily:"'Archivo',sans-serif",fontWeight:900,
                 fontSize:"clamp(56px,10vw,90px)",lineHeight:0.93,
-                letterSpacing:-2,color:"#fff",margin:"0 0 16px",
+                letterSpacing:-2,color:C.espresso,margin:"0 0 16px",
               }}>
                 Every musician<br/>deserves a <span style={{color:C.crimson,fontStyle:"italic"}}>stage.</span>
               </h1>
 
               <p className="fade-up delay-3" style={{
                 fontFamily:"'DM Sans',sans-serif",
-                color:"rgba(255,255,255,0.65)",fontSize:18,
+                color:C.muted,fontSize:18,
                 lineHeight:1.75,maxWidth:520,margin:"0 auto 40px",fontWeight:300,
               }}>
                 Private, semi-private, and group lessons in music and performance, taught by passionate instructors in a welcoming atmosphere.
@@ -615,7 +644,7 @@ export default function App() {
                   style={{
                     ...btnGhost,
                     borderColor:"rgba(255,218,0,0.5)",
-                    color:C.yellow,
+                    color:C.espresso,
                     fontSize:14, padding:"15px 36px",
                   }}
                   onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,218,0,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
@@ -634,12 +663,12 @@ export default function App() {
                   <a key={label} href={href} target={external?"_blank":undefined} rel={external?"noreferrer":undefined}
                     style={{
                       display:"flex",alignItems:"center",gap:6,
-                      fontSize:13,color:"rgba(255,255,255,0.45)",
+                      fontSize:13,color:C.muted,
                       textDecoration:"none",fontFamily:"'DM Sans',sans-serif",
                       transition:"color 0.2s",
                     }}
                     onMouseEnter={e=>e.currentTarget.style.color=C.teal}
-                    onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.45)"}
+                    onMouseLeave={e=>e.currentTarget.style.color=C.muted}
                   >
                     <Icon size={13}/>{label}
                   </a>
@@ -685,7 +714,14 @@ export default function App() {
                     background:C.white,padding:"36px 24px",
                     display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center",
                   }}
-                  onClick={()=>setBookingFor(item.name)}
+                  onClick={()=>{
+                    if(item.name==="Band Performance"){
+                      window.history.pushState({},"","/programs/band");
+                      setPath("/programs/band");
+                    } else {
+                      setBookingFor(item.name);
+                    }
+                  }}
                   role="button" tabIndex={0}
                   onKeyDown={e=>e.key==="Enter"&&setBookingFor(item.name)}
                 >

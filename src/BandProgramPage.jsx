@@ -1,0 +1,381 @@
+import { ArrowRight } from "lucide-react";
+
+const PORTAL_URL = "https://headlinerma.opus1.io/login";
+const LOGO_WHITE = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
+
+const C = {
+  espresso: "#1a130f",
+  crimson:  "#FF0044",
+  yellow:   "#FFDA00",
+  teal:     "#00A8C8",
+  white:    "#FFFFFF",
+  cream:    "#F6F3EE",
+  offwhite: "#FAF9F7",
+  muted:    "#7A6A5A",
+  border:   "#E8E2DA",
+};
+
+const BtnRed = ({ children, onClick, large }) => (
+  <button
+    onClick={onClick}
+    style={{
+      background: C.crimson, color: "#fff", border: "none",
+      borderRadius: 999, cursor: "pointer",
+      padding: large ? "16px 40px" : "13px 28px",
+      fontSize: large ? 15 : 13,
+      fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+      display: "inline-flex", alignItems: "center", gap: 8,
+      boxShadow: "0 4px 20px rgba(255,0,68,0.25)",
+      transition: "background 0.2s, transform 0.15s",
+      fontFamily: "'DM Sans', sans-serif",
+    }}
+    onMouseEnter={e => { e.currentTarget.style.background = "#CC0036"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+    onMouseLeave={e => { e.currentTarget.style.background = C.crimson; e.currentTarget.style.transform = "translateY(0)"; }}
+  >
+    {children}
+  </button>
+);
+
+const Eyebrow = ({ children, color = C.teal }) => (
+  <p style={{
+    fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+    color, marginBottom: 20, display: "flex", alignItems: "center", gap: 10,
+  }}>
+    <span style={{ display: "block", width: 28, height: 3, background: color, borderRadius: 2, flexShrink: 0 }} />
+    {children}
+  </p>
+);
+
+const bands = [
+  {
+    name: "Sunkast",
+    quote: "Been together about a year. Getting tighter every month.",
+    genre: "Rock / Indie",
+  },
+  {
+    name: "The Myphs",
+    quote: "Joined with two songs. Currently arguing about a third.",
+    genre: "Alternative",
+  },
+  {
+    name: "La Paz",
+    quote: "First show was three months ago. Already booking the next one.",
+    genre: "Latin Rock",
+  },
+];
+
+const venues = [
+  { name: "Denio's Market", location: "Roseville, CA" },
+  { name: "High Hand Brewery", location: "Loomis, CA" },
+  { name: "Pistol Pete's", location: "Auburn, CA" },
+  { name: "Crossroads Pizza", location: "Rocklin, CA" },
+  { name: "Placer County Fair", location: "Roseville, CA" },
+];
+
+
+const faqs = [
+  {
+    q: "When will my band be ready to perform?",
+    a: "That depends on the band. Some bands are ready for their first gig in a few months. Others take longer. There's no fixed timeline. Your director will let you know when they think you're ready.",
+  },
+  {
+    q: "What happens if my band or a bandmate can't make it to a session?",
+    a: "Rehearsal happens with whoever shows up. If someone is missing, the band learns to work around it. Consistency matters, but life happens. Show up when you can.",
+  },
+  {
+    q: "Are performances mandatory?",
+    a: "No. Gig opportunities get offered to you, and you decide whether to take them. Playing live is what makes this program different, but the choice is yours.",
+  },
+  {
+    q: "Does Headliner manage the band?",
+    a: "No. The band is independent. Your director coaches and advises. The band makes the decisions.",
+  },
+  {
+    q: "What if we become famous? Do we owe Headliner anything?",
+    a: "We haven't figured this out yet, to be honest. If it happens, we'll figure it out together.",
+  },
+  {
+    q: "Are recording sessions free?",
+    a: "No, but they're included in the program. You don't pay separately for them. They're part of what you get.",
+  },
+  {
+    q: "What do you expect from a band?",
+    a: "Show up and communicate. Be someone people want to play with. Respect the space you're in, but beyond that you're running your own thing.",
+  },
+  {
+    q: "What's included in the program?",
+    a: "A director who actually knows what they're doing. Access to backline and recording. We produce your shows. Gigs we find for you to say yes or no to. Everything you need to actually become a functioning band.",
+  },
+];
+
+export default function BandProgramPage({ onRequestLessons, setPath }) {
+  const navigate = (path) => {
+    window.history.pushState({}, "", path);
+    if (setPath) setPath(path);
+  };
+
+  return (
+    <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.offwhite, color: C.espresso, minHeight: "100vh", overflowX: "hidden" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { overflow-x: hidden !important; max-width: 100vw !important; margin: 0; padding: 0; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fu { animation: fadeUp 0.65s ease both; }
+        .d1 { animation-delay: 0.06s; }
+        .d2 { animation-delay: 0.18s; }
+        .d3 { animation-delay: 0.30s; }
+        .d4 { animation-delay: 0.42s; }
+
+        .bp-nav-link {
+          font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+          color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
+        }
+        .bp-nav-link:hover { color: #fff; }
+
+        .bp-img-wrap { overflow: hidden; }
+        .bp-img-wrap img { transition: transform 0.6s ease; width: 100%; height: 100%; object-fit: cover; }
+        .bp-img-wrap:hover img { transform: scale(1.03); }
+
+        .bp-venue-row {
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 16px 0; border-bottom: 1px solid ${C.border};
+          transition: background 0.15s;
+        }
+        .bp-venue-row:last-child { border-bottom: none; }
+
+        .bp-band-card {
+          background: ${C.white}; border: 1px solid ${C.border};
+          border-radius: 16px; padding: 32px 28px;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .bp-band-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,19,15,0.08); }
+
+        @media (max-width: 768px) {
+          .bp-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .bp-3col  { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .bp-2col  { grid-template-columns: 1fr !important; }
+          section, header { padding-left: 20px !important; padding-right: 20px !important; }
+          nav { padding: 0 16px !important; }
+          .bp-img-wrap { height: 260px !important; }
+          .bp-hero-stats { gap: 24px !important; flex-wrap: wrap; }
+        }
+
+      `}</style>
+
+      {/* NAV */}
+      <nav style={{
+        position: "fixed", top: 0, width: "100%", zIndex: 100,
+        background: "rgba(26,19,15,0.97)", backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        height: 68, display: "flex", alignItems: "center",
+        justifyContent: "space-between", padding: "0 40px", boxSizing: "border-box",
+      }}>
+        <a href="/" onClick={e => { e.preventDefault(); navigate("/"); }} style={{ textDecoration: "none" }}>
+          <img src={LOGO_WHITE} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 44, width: "auto", maxWidth: 180, objectFit: "contain", display: "block" }} />
+        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          
+          <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="bp-nav-link">Parent Portal</a>
+          <BtnRed onClick={() => onRequestLessons("Band Performance")}>Join the Program <ArrowRight size={13}/></BtnRed>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <header style={{ background: C.espresso, paddingTop: 68, position: "relative", overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center" }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <img
+            src="https://res.cloudinary.com/diy08lj9x/image/upload/v1781500022/Gemini_Generated_Image_i895u1i895u1i895_elyhqa.png"
+            alt="Empty stage ready to perform"
+            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: `rgba(26,19,15,0.55)` }} />
+        </div>
+
+        <div style={{ maxWidth: 1160, margin: "0 auto", padding: "80px 40px", position: "relative", zIndex: 1, width: "100%" }}>
+          <Eyebrow color={C.teal}>Band Program</Eyebrow>
+
+          <h1 className="fu d1" style={{
+            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 0.95,
+            letterSpacing: -2, color: "#fff", margin: "0 0 20px", maxWidth: 700,
+          }}>
+            This is where bands<br/>become <em style={{ color: C.crimson, fontStyle: "italic" }}>Headliners.</em>
+          </h1>
+
+          <p className="fu d2" style={{
+            fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontStyle: "italic",
+            fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", color: "rgba(255,255,255,0.6)",
+            margin: "0 0 32px",
+          }}>
+            Don't wait to be discovered. Go find the stage.
+          </p>
+
+          <p className="fu d3" style={{
+            fontSize: 17, color: "rgba(255,255,255,0.45)", lineHeight: 1.85,
+            maxWidth: 500, marginBottom: 44, fontWeight: 300,
+          }}>
+            Headliner works with you at every point, whether you're just forming, already rehearsing, or ready to perform. Weekly sessions, a dedicated director, and real gigs.
+          </p>
+
+          <div className="fu d4" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+            <BtnRed onClick={() => onRequestLessons("Band Performance")} large>Join the Program <ArrowRight size={16}/></BtnRed>
+          </div>
+
+
+        </div>
+      </header>
+
+      {/* THE IDEA */}
+      <section style={{ background: C.white, padding: "80px 40px", borderBottom: `1px solid ${C.border}` }}>
+        <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center" }}>
+          <div>
+            <Eyebrow color={C.crimson}>The approach</Eyebrow>
+            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
+              There is nothing<br/>like being in a <em style={{ fontStyle: "italic", color: C.crimson }}>band.</em>
+            </h2>
+            <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9, marginBottom: 24 }}>
+              As you rehearse and start playing real gigs, your director coaches you through setlist choices, how to command a stage, what makes your sound yours. You are steering the ship. The director just makes sure it doesn't sink.
+            </p>
+            <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
+              Every band starts somewhere different and moves at its own pace. Some come in with two songs and a name. Some come in with six months of rehearsals and no idea what to do next. The program meets you where you are, and your director stays with you through all of it.
+            </p>
+          </div>
+          <div style={{ position: "relative" }}>
+            <div className="bp-img-wrap" style={{ borderRadius: 16, height: 440 }}>
+              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Band in rehearsal" />
+            </div>
+            <div style={{
+              position: "absolute", bottom: -20, right: -20,
+              background: C.crimson, borderRadius: 12, padding: "20px 24px",
+              boxShadow: "0 16px 40px rgba(255,0,68,0.3)",
+            }}>
+              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 28, color: "#fff", margin: "0 0 4px", lineHeight: 1 }}>Live.</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", margin: 0 }}>Performance from day one</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* THE JOURNEY */}
+      <section style={{ background: C.offwhite, padding: "80px 40px", borderBottom: `1px solid ${C.border}` }}>
+        <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center" }}>
+          <div className="bp-img-wrap" style={{ borderRadius: 16, height: 460 }}>
+            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80" alt="Band developing" />
+          </div>
+          <div>
+            <Eyebrow color={C.teal}>How it goes</Eyebrow>
+            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
+              You play.<br/><em style={{ fontStyle: "italic", color: C.crimson }}>We get you there.</em>
+            </h2>
+            <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
+              You get access to backline at the academy so gear is not a barrier to entry. Recording sessions are there when you are ready to document what you have built. We run the logistics and production side of your shows so you can actually enjoy performing instead of stressing about the details.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* VENUES */}
+      <section style={{ background: C.espresso, padding: "80px 40px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "start" }}>
+          <div>
+            <Eyebrow color={C.yellow}>Community reach</Eyebrow>
+            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 28px", lineHeight: 0.93 }}>
+              Some of the real stages<br/>we've <em style={{ fontStyle: "italic", color: C.crimson }}>performed at.</em>
+            </h2>
+            <p style={{ fontSize: 17, color: "rgba(255,255,255,0.5)", lineHeight: 1.9, marginBottom: 28 }}>
+              We have relationships with venue owners across Placer County who know the bands we work with and trust us to bring them in.
+            </p>
+            <p style={{ fontSize: 17, color: "rgba(255,255,255,0.5)", lineHeight: 1.9 }}>
+              For family showcases and smaller performances, the academy has its own performance room on site. A real stage, full production, and an audience that's as intimate or crowded as you want. This is your home room.
+            </p>
+          </div>
+          <div style={{ paddingTop: 8 }}>
+            {venues.map(({ name, location }) => (
+              <div key={name} className="bp-venue-row" style={{ borderBottomColor: "rgba(255,255,255,0.07)" }}>
+                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", margin: 0 }}>{name}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", margin: 0 }}>{location}</p>
+              </div>
+            ))}
+
+          </div>
+        </div>
+      </section>
+
+      {/* BANDS */}
+      <section style={{ background: C.white, padding: "80px 40px", borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: 1160, margin: "0 auto" }}>
+          <div style={{ marginBottom: 56 }}>
+            <Eyebrow color={C.teal}>In the program</Eyebrow>
+            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
+              Our home <em style={{ fontStyle: "italic", color: C.crimson }}>bands.</em>
+            </h2>
+          </div>
+
+          <div className="bp-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            {bands.map(({ name, quote, genre }) => (
+              <div key={name} className="bp-band-card">
+                {/* Placeholder logo */}
+                <div style={{
+                  height: 80, background: C.offwhite, borderRadius: 10,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: 24, border: `1px solid ${C.border}`,
+                }}>
+                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 20, color: C.espresso, margin: 0, letterSpacing: -0.5 }}>{name}</p>
+                </div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 12px" }}>{genre}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.75, margin: 0, fontStyle: "italic" }}>"{quote}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
+      {/* FAQ */}
+      <section style={{ background: C.white, padding: "80px 40px", borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: 1160, margin: "0 auto" }}>
+          <div style={{ marginBottom: 56 }}>
+            <Eyebrow color={C.teal}>FAQ</Eyebrow>
+            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
+              Questions we get <em style={{ fontStyle: "italic", color: C.crimson }}>asked.</em>
+            </h2>
+          </div>
+
+          <div style={{ maxWidth: 800 }}>
+            {faqs.map(({ q, a }, i) => (
+              <div key={i} style={{
+                paddingBottom: 32, borderBottom: i < faqs.length - 1 ? `1px solid ${C.border}` : "none", marginBottom: 32,
+              }}>
+                <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 18, color: C.espresso, margin: "0 0 12px", lineHeight: 1.2 }}>
+                  {q}
+                </h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: C.muted, lineHeight: 1.85, margin: 0 }}>
+                  {a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ background: C.espresso, padding: "80px 40px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: `radial-gradient(at 0% 0%, rgba(255,0,68,0.08) 0px, transparent 50%)` }} />
+        <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+          <img src={LOGO_WHITE} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 52, width: "auto", maxWidth: 240, objectFit: "contain", display: "block", margin: "0 auto 48px" }} />
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 24px", lineHeight: 0.93 }}>
+            Every musician deserves<br/>a <em style={{ fontStyle: "italic", color: C.crimson }}>stage.</em>
+          </h2>
+<div style={{ marginBottom: 44 }} />
+          <BtnRed onClick={() => onRequestLessons("Band Performance")} large>Join the Program <ArrowRight size={16}/></BtnRed>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.25)", marginTop: 28 }}>
+            Questions? <a href="mailto:admin@headlinermusicacademy.com" style={{ color: C.crimson, textDecoration: "none", fontWeight: 700 }}>admin@headlinermusicacademy.com</a>
+          </p>
+        </div>
+      </section>
+
+    </div>
+  );
+}
