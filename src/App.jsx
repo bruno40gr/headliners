@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import { MapPin, Mail, Phone, X, ChevronDown } from "lucide-react";
+import ProgramsNav from "./ProgramsNav";
 import SummerCampPage from "./SummerCampPage";
 import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
-import ProgramsNav from "./ProgramsNav";
-import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
 
 const offerings = [
   { icon: "🎸", name: "Guitar", desc: "Acoustic & electric" },
@@ -22,50 +22,119 @@ const DAYS  = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Su
 const TIMES = ["Morning (8am–12pm)","Afternoon (12pm–4pm)","Evening (4pm–8pm)"];
 const PORTAL_URL  = "https://headlinerma.opus1.io/login";
 const CAMP_URL    = "https://headlinerma.opus1.io/w/summercamp2026";
-const CAMP_PAGE   = "/summer-camp";
 
 const EMAILJS_SERVICE_ID  = "service_734y6qg";
 const EMAILJS_TEMPLATE_ID = "template_czlclec";
 const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
 
-const LOGO_URL     = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png";
-const LOGO_URL_INV = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
-
-// ── tokens ──────────────────────────────────────────────────────────────────
 const C = {
-  espresso: "#1a130f",
-  crimson:  "#FF0044",
-  cream:    "#F6F3EE",
-  white:    "#FFFFFF",
-  teal:     "#00A8C8",
-  yellow:   "#FFDA00",
-  muted:    "#7A6A5A",
-  border:   "#E8E2DA",
+  espresso:     "#1a130f",
+  crimson:      "#FF0044",
+  crimsonHover: "#CC0036",
+  cream:        "#F6F3EE",
+  lightCream:   "#faf6eb",
+  white:        "#FFFFFF",
+  teal:         "#00A8C8",
+  yellow:       "#FFDA00",
+  yellowHover:  "#FFC800",
+  muted:        "#7A6A5A",
+  border:       "#E8E2DA",
+  inputBg:      "#fafaf8",
+  placeholder:  "#bbb",
+  subtext:      "#aaa",
+  cardHover:    "#F4F4F4",
+  errorText:    "#dc2626",
+  errorBg:      "#fef2f2",
+  errorBorder:  "#fecaca",
+  white07: "rgba(255,255,255,0.07)",
+  white08: "rgba(255,255,255,0.08)",
+  white10: "rgba(255,255,255,0.1)",
+  white15: "rgba(255,255,255,0.15)",
+  white18: "rgba(255,255,255,0.18)",
+  white20: "rgba(255,255,255,0.2)",
+  white25: "rgba(255,255,255,0.25)",
+  white28: "rgba(255,255,255,0.28)",
+  white30: "rgba(255,255,255,0.3)",
+  white38: "rgba(255,255,255,0.38)",
+  white45: "rgba(255,255,255,0.45)",
+  white55: "rgba(255,255,255,0.55)",
+  white70: "rgba(255,255,255,0.7)",
+  white80: "rgba(255,255,255,0.8)",
+  black20:    "rgba(0,0,0,0.2)",
+  espresso06: "rgba(26,19,15,0.06)",
+  espresso10: "rgba(26,19,15,0.1)",
+  espresso75: "rgba(26,19,15,0.75)",
+  crimson06:  "rgba(255,0,68,0.06)",
+  crimson08:  "rgba(255,0,68,0.08)",
+  crimson15:  "rgba(255,0,68,0.15)",
+  crimson30:  "rgba(255,0,68,0.3)",
+  teal06:     "rgba(0,168,200,0.06)",
+  teal30:     "rgba(0,168,200,0.3)",
+  yellow05:   "rgba(255,218,0,0.05)",
+  yellow12:   "rgba(255,218,0,0.12)",
+  yellow50:   "rgba(255,218,0,0.5)",
 };
 
-// ── shared styles ────────────────────────────────────────────────────────────
-const btnRed = {
-  display:"inline-flex", alignItems:"center", justifyContent:"center", gap:8,
-  background: C.crimson, color:"#fff",
-  fontSize:13, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase",
-  padding:"13px 32px", borderRadius:999, border:"none", cursor:"pointer",
-  textDecoration:"none", transition:"all 0.2s",
-};
-const btnGhost = {
-  display:"inline-flex", alignItems:"center", justifyContent:"center", gap:8,
-  background:"rgba(255,255,255,0.07)", color:"rgba(255,255,255,0.8)",
-  fontSize:13, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase",
-  padding:"13px 32px", borderRadius:999,
-  border:"1px solid rgba(255,255,255,0.15)", cursor:"pointer",
-  textDecoration:"none", transition:"background 0.2s",
-};
-const btnOutlineRed = {
-  display:"inline-flex", alignItems:"center", gap:8,
-  border:`1.5px solid ${C.crimson}`, color:C.crimson,
-  fontSize:12, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase",
-  padding:"10px 22px", borderRadius:999, background:"transparent",
-  cursor:"pointer", textDecoration:"none", transition:"all 0.2s",
-};
+// ── Reusable Button Component ────────────────────────────────────────────────
+function Button({ children, variant = "primary", href, disabled, style, className, onClick, ...rest }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  let bg, color, border, hoverBg, hoverColor;
+
+  if (variant === "primary") {
+    bg = disabled ? C.border : C.crimson;
+    color = disabled ? C.muted : C.white;
+    border = "none";
+    hoverBg = disabled ? C.border : C.crimsonHover;
+    hoverColor = disabled ? C.muted : C.white;
+  } else if (variant === "ghost") {
+    bg = C.white07;
+    color = C.white80;
+    border = `1px solid ${C.white15}`;
+    hoverBg = C.white10;
+    hoverColor = C.white;
+  } else if (variant === "yellow") {
+    bg = C.yellow;
+    color = C.espresso;
+    border = "none";
+    hoverBg = C.yellowHover;
+    hoverColor = C.espresso;
+  } else if (variant === "outlineRed") {
+    bg = "transparent";
+    color = C.crimson;
+    border = `1.5px solid ${C.crimson}`;
+    hoverBg = C.crimson;
+    hoverColor = C.white;
+  }
+
+  const baseStyle = {
+    display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+    fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+    padding: "13px 32px", borderRadius: 999, border: border,
+    cursor: disabled ? "not-allowed" : "pointer",
+    textDecoration: "none", transition: "all 0.2s",
+    background: isHovered ? hoverBg : bg,
+    color: isHovered ? hoverColor : color,
+    ...style
+  };
+
+  const Element = href ? "a" : "button";
+
+  return (
+    <Element
+      href={href}
+      onClick={onClick}
+      disabled={disabled}
+      className={className}
+      style={baseStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      {...rest}
+    >
+      {children}
+    </Element>
+  );
+}
 
 // ── BookingModal ─────────────────────────────────────────────────────────────
 function BookingModal({ instrument, onClose }) {
@@ -112,7 +181,7 @@ function BookingModal({ instrument, onClose }) {
       onClick={e=>e.target===e.currentTarget&&status!=="sending"&&onClose()}
       style={{
         position:"fixed",inset:0,zIndex:200,
-        background:"rgba(26,19,15,0.75)", backdropFilter:"blur(8px)",
+        background: C.espresso75, backdropFilter:"blur(8px)",
         display:"flex",alignItems:"center",justifyContent:"center",
         padding:16, overflowY:"auto",
       }}
@@ -120,7 +189,7 @@ function BookingModal({ instrument, onClose }) {
       <div style={{
         background:C.white, borderRadius:24, width:"100%", maxWidth:520,
         padding:"40px 36px", position:"relative", boxSizing:"border-box",
-        margin:"auto", boxShadow:"0 24px 64px rgba(0,0,0,0.2)",
+        margin:"auto", boxShadow:`0 24px 64px ${C.black20}`,
         border:`1px solid ${C.border}`,
       }}>
         {status!=="sending"&&(
@@ -145,10 +214,10 @@ function BookingModal({ instrument, onClose }) {
             <p style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,fontSize:15,lineHeight:1.7,maxWidth:360,margin:"0 auto 8px"}}>
               We'll get back to you within the next 24 hours. Expect a call from us to get everything set up.
             </p>
-            <p style={{fontFamily:"'DM Sans',sans-serif",color:"#aaa",fontSize:13,margin:"0 auto 28px"}}>
+            <p style={{fontFamily:"'DM Sans',sans-serif",color:C.subtext,fontSize:13,margin:"0 auto 28px"}}>
               Keep an eye on your phone. 📞
             </p>
-            <button onClick={onClose} style={{...btnRed,padding:"13px 32px"}}>Back to site</button>
+            <Button onClick={onClose}>Back to site</Button>
           </div>
         ):(
           <>
@@ -171,7 +240,7 @@ function BookingModal({ instrument, onClose }) {
               </Field>
               <Field label="Your email *">
                 <input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={e=>set("email",e.target.value)}/>
-                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#aaa",margin:"4px 0 0"}}>
+                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.subtext,margin:"4px 0 0"}}>
                   We'll only use this to confirm your inquiry. No spam, ever.
                 </p>
               </Field>
@@ -186,7 +255,7 @@ function BookingModal({ instrument, onClose }) {
                       <option key={o.name} value={o.name}>{o.icon} {o.name}</option>
                     ))}
                   </select>
-                  <ChevronDown size={14} style={{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",pointerEvents:"none",color:"#aaa"}}/>
+                  <ChevronDown size={14} style={{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",pointerEvents:"none",color:C.subtext}}/>
                 </div>
               </Field>
               <Field label="Experience level *">
@@ -216,33 +285,21 @@ function BookingModal({ instrument, onClose }) {
 
               {status==="error"&&(
                 <p style={{
-                  fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"#dc2626",
-                  background:"#fef2f2",border:"1px solid #fecaca",
+                  fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.errorText,
+                  background:C.errorBg,border:`1px solid ${C.errorBorder}`,
                   borderRadius:10,padding:"10px 14px",margin:0,
                 }}>
                   Something went wrong. Please try again or reach us at (916) 435-1300.
                 </p>
               )}
 
-              <button
-                onClick={handleSubmit} disabled={!valid}
-                style={{
-                  marginTop:4,
-                  background: valid ? C.crimson : C.border,
-                  border:"none",borderRadius:999,
-                  padding:"15px 28px",
-                  fontFamily:"'DM Sans',sans-serif",
-                  fontWeight:700,fontSize:15,
-                  cursor: valid?"pointer":"not-allowed",
-                  color: valid?"#fff":C.muted,
-                  display:"flex",alignItems:"center",justifyContent:"center",
-                  gap:8,transition:"all 0.2s",width:"100%",
-                }}
-                onMouseEnter={e=>valid&&(e.currentTarget.style.background="#CC0036")}
-                onMouseLeave={e=>valid&&(e.currentTarget.style.background=C.crimson)}
+              <Button
+                onClick={handleSubmit}
+                disabled={!valid}
+                style={{ width: "100%", marginTop: 4, fontSize: 15 }}
               >
-                {status==="sending" ? "Sending…" : <>Let's make music <ArrowRight size={16}/></>}
-              </button>
+                {status === "sending" ? "Sending…" : "Let's make music"}
+              </Button>
             </div>
           </>
         )}
@@ -251,7 +308,7 @@ function BookingModal({ instrument, onClose }) {
       <style>{`
         select { appearance:none !important; -webkit-appearance:none !important; }
         input, select, textarea {
-          background: #fafaf8 !important;
+          background: ${C.inputBg} !important;
           border: 1px solid ${C.border} !important;
           border-radius: 10px !important;
           color: ${C.espresso} !important;
@@ -265,9 +322,9 @@ function BookingModal({ instrument, onClose }) {
         }
         input:focus, select:focus, textarea:focus {
           border-color: ${C.crimson} !important;
-          background: #fff !important;
+          background: ${C.white} !important;
         }
-        input::placeholder, textarea::placeholder { color: #bbb !important; }
+        input::placeholder, textarea::placeholder { color: ${C.placeholder} !important; }
         textarea { resize: vertical; }
         input[type="number"] { max-width:120px !important; width:120px !important; }
       `}</style>
@@ -293,7 +350,7 @@ function PillToggle({ label, active, onClick }) {
     <button onClick={onClick} style={{
       padding:"7px 14px",borderRadius:999,
       border: active ? `1.5px solid ${C.crimson}` : `1px solid ${C.border}`,
-      background: active ? "rgba(255,0,68,0.06)" : "#fafaf8",
+      background: active ? C.crimson06 : C.inputBg,
       color: active ? C.crimson : C.muted,
       fontFamily:"'DM Sans',sans-serif",
       fontSize:13,fontWeight: active?700:400,
@@ -310,7 +367,7 @@ function PrivacyPolicyPage() {
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
       <div style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
-        <p>Headliner Music Academy (a DBA of Marchena &amp; Papadhima LLC) is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal information.</p>
+        <p>Headliner Music Academy (a DBA of Marchena & Papadhima LLC) is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal information.</p>
         {[
           ["Information we collect","We collect information you provide when enrolling a student or contacting us, including name, phone number, email address, and payment information. We also collect attendance and lesson history as part of our normal operations."],
           ["How we use your information","We use your information to manage enrollments, process payments, communicate about lessons and scheduling, and send you updates about Headliner Music Academy programs and events."],
@@ -340,10 +397,10 @@ function TermsAndConditionsPage() {
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
       <div style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
-        <p>These terms govern your enrollment and participation at Headliner Music Academy (a DBA of Marchena &amp; Papadhima LLC), located at 2311 Sunset Blvd, Rocklin, CA 95765.</p>
+        <p>These terms govern your enrollment and participation at Headliner Music Academy (a DBA of Marchena & Papadhima LLC), located at 2311 Sunset Blvd, Rocklin, CA 95765.</p>
         {[
           ["Enrollment and billing","Enrollment is on a monthly subscription basis. Billing occurs automatically each month on your billing date. You are responsible for keeping payment information current."],
-          ["Cancellations and holds",`You may cancel or place your account on hold by contacting us at (916) 435-1300 or admin@headlinermusicacademy.com. Cancellations require notice before your next billing date to avoid being charged for the following month.`],
+          ["Cancellations and holds","You may cancel or place your account on hold by contacting us at (916) 435-1300 or admin@headlinermusicacademy.com. Cancellations require notice before your next billing date to avoid being charged for the following month."],
           ["24-Hour Absence Notice","If, for any reason, your student is unable to attend a lesson, please note that we have a strict 24-hour cancellation policy out of respect for our teachers' schedules and how they are compensated. If you call, email, or leave a voicemail at least 24 hours before the reserved lesson, even if Headliner is closed at the time you contact us, we would be happy to reschedule it within 30 days."],
           ["Communications","By enrolling, you agree to receive operational and promotional communications from Headliner Music Academy via SMS and email. You may opt out at any time by replying STOP to any SMS or contacting us directly."],
           ["Code of conduct","We are committed to maintaining a respectful and safe environment for all students, families, and staff. Headliner Music Academy reserves the right to terminate enrollment for conduct that disrupts the learning environment."],
@@ -366,8 +423,7 @@ function TermsAndConditionsPage() {
 
 // ── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [bookingFor, setBookingFor]  = useState(null);
-
+  const [bookingFor, setBookingFor] = useState(null);
   const [path, setPath] = useState(typeof window !== "undefined" ? window.location.pathname : "/");
 
   useEffect(() => {
@@ -376,66 +432,40 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePop);
   }, []);
 
+  const navigate = (p) => { window.history.pushState({}, "", p); setPath(p); };
+
   return (
     <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
-
         *, *::before, *::after { box-sizing: border-box; }
-
-        ::selection { background: rgba(255,0,68,0.15); color: ${C.espresso}; }
-
+        ::selection { background: ${C.crimson15}; color: ${C.espresso}; }
         @keyframes fadeUp {
           from { opacity:0; transform:translateY(18px); }
           to   { opacity:1; transform:translateY(0); }
         }
-        .fade-up   { animation: fadeUp 0.65s ease both; }
-        .delay-1   { animation-delay: 0.08s; }
-        .delay-2   { animation-delay: 0.18s; }
-        .delay-3   { animation-delay: 0.28s; }
-        .delay-4   { animation-delay: 0.38s; }
-        .delay-5   { animation-delay: 0.48s; }
-
+        .fade-up  { animation: fadeUp 0.65s ease both; }
+        .delay-1  { animation-delay: 0.08s; }
+        .delay-2  { animation-delay: 0.18s; }
+        .delay-3  { animation-delay: 0.28s; }
+        .delay-4  { animation-delay: 0.38s; }
+        .delay-5  { animation-delay: 0.48s; }
         @keyframes marquee {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
         }
         .marquee-track { animation: marquee 24s linear infinite; display:flex; width:max-content; }
-
-        @keyframes driftSpot {
-          0%   { transform:translate(-50%,-50%) scale(1);    opacity:0.10; }
-          33%  { transform:translate(-48%,-53%) scale(1.06); opacity:0.14; }
-          66%  { transform:translate(-52%,-47%) scale(0.96); opacity:0.09; }
-          100% { transform:translate(-50%,-50%) scale(1);    opacity:0.10; }
-        }
-        .crimson-spot {
-          position:absolute; top:50%; left:50%;
-          width:700px; height:500px; border-radius:50%;
-          background: radial-gradient(ellipse at center, rgba(255,0,68,0.08) 0%, transparent 70%);
-          animation: driftSpot 9s ease-in-out infinite;
-          pointer-events:none; mix-blend-mode:screen; filter:blur(40px);
-        }
-        .vignette {
-          background: radial-gradient(ellipse at center, transparent 35%, rgba(26,19,15,0.06) 100%);
-        }
         .stage-line {
           position:absolute; bottom:0; left:0; right:0; height:3px;
           background: linear-gradient(90deg, transparent, ${C.crimson} 30%, ${C.crimson} 70%, transparent);
           opacity:0.85;
-        }
-        @keyframes pulse {
-          0%,100% { opacity:1; } 50% { opacity:0.3; }
-        }
-        .tag-dot {
-          width:6px; height:6px; border-radius:50%; background:${C.crimson};
-          animation: pulse 2s ease-in-out infinite;
         }
         .offering-card {
           cursor:pointer;
           transition: background 0.2s, transform 0.15s;
           position:relative;
         }
-        .offering-card:hover { background: #F4F4F4 !important; transform:translateY(-2px); z-index:1; }
+        .offering-card:hover { background: ${C.cardHover} !important; transform:translateY(-2px); z-index:1; }
         .offering-card:hover .card-hint { opacity:1; }
         .card-hint {
           opacity:0; transition:opacity 0.2s;
@@ -444,66 +474,41 @@ export default function App() {
           color:${C.crimson}; margin-top:8px;
           font-family:'DM Sans',sans-serif;
         }
-        .nav-link {
-          font-size:12px; font-weight:600;
-          letter-spacing:0.1em; text-transform:uppercase;
-          color:rgba(255,255,255,0.45); text-decoration:none;
-          transition:color 0.2s; position:relative; padding-bottom:2px;
-        }
-        .nav-link::after {
-          content:''; position:absolute; bottom:0; left:0; right:0;
-          height:1px; background:${C.crimson};
-          transform:scaleX(0); transform-origin:left; transition:transform 0.2s;
-        }
-        .nav-link:hover { color:#fff; }
-        .nav-link:hover::after { transform:scaleX(1); }
-        .btn-red-hover:hover { background: #CC0036 !important; }
-        .portal-btn:hover { background: #CC0036 !important; transform:translateY(-1px); }
-        .mobile-cta:hover { background: #CC0036 !important; }
-
-        /* ── Global mobile fixes ── */
         html, body { overflow-x:hidden !important; max-width:100vw !important; }
         * { min-width:0; box-sizing:border-box; }
-
         @media (max-width:768px) {
-          nav { padding:0 16px !important; }
-          .desktop-nav { display:none !important; }
-          .mobile-menu-btn { display:flex !important; }
           section { padding-left:20px !important; padding-right:20px !important; }
           header  { padding-left:20px !important; padding-right:20px !important; }
           .camp-grid    { grid-template-columns:1fr !important; gap:40px !important; }
           .camp-details { grid-template-columns:1fr 1fr !important; }
           .offerings-grid { grid-template-columns:1fr 1fr !important; }
         }
-        @media (min-width:769px) {
-          .mobile-menu-btn { display:none !important; }
-        }
       `}</style>
 
       {bookingFor !== null && (
-        <BookingModal instrument={bookingFor} onClose={()=>setBookingFor(null)}/>
+        <BookingModal instrument={bookingFor} onClose={() => setBookingFor(null)} />
       )}
 
-      {/* ── NAV ── */}
       <ProgramsNav
         variant="dark"
-        navigate={(p) => { window.history.pushState({}, "", p); setPath(p); }}
+        navigate={navigate}
         ctaLabel="Request Lessons"
         onCtaClick={() => setBookingFor("")}
       />
 
-      {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
-       path==="/terms-and-conditions" ? <TermsAndConditionsPage/> :
-       path==="/summer-camp" ? <SummerCampPage setPath={setPath}/> :
-       path==="/teachers"    ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor}/> :
-       path==="/programs/band" ? <BandProgramPage onRequestLessons={(instrument)=>setBookingFor(instrument||"")} setPath={setPath}/> : (
+      {path === "/privacy-policy"       ? <PrivacyPolicyPage /> :
+       path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
+       path === "/summer-camp"          ? <SummerCampPage setPath={setPath} /> :
+       path === "/teachers"             ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/programs/band"        ? <BandProgramPage onRequestLessons={(i) => setBookingFor(i || "")} setPath={setPath} /> : (
         <>
           {/* ── HERO ── */}
           <section style={{
             position:"relative",display:"flex",flexDirection:"column",
             alignItems:"center",justifyContent:"center",textAlign:"center",
             minHeight:"100vh",overflow:"hidden",
-            background:"#FAF9F7",paddingTop:68,
+            background:C.lightCream55,
+            paddingTop:68,
             width:"100%",boxSizing:"border-box",
           }}>
             <div style={{position:"absolute",inset:0,zIndex:0}}>
@@ -515,30 +520,13 @@ export default function App() {
               }}/>
               <div style={{
                 position:"absolute",inset:0,
-                background:`radial-gradient(ellipse at 70% 50%, rgba(255,0,68,0.06) 0%, transparent 60%)`,
+                background:`radial-gradient(ellipse at 70% 50%, ${C.crimson06} 0%, transparent 60%)`,
               }}/>
-              
-              
-              
-              
               <div className="stage-line" style={{zIndex:30}}/>
             </div>
 
             <div style={{position:"relative",zIndex:30,maxWidth:780,padding:"64px 24px"}}>
-              <div className="fade-up delay-1" style={{display:"flex",justifyContent:"center",marginBottom:28}}>
-                <span style={{
-                  display:"inline-flex",alignItems:"center",gap:8,
-                  padding:"6px 16px",border:`1px solid rgba(0,168,200,0.3)`,background:"rgba(0,168,200,0.06)",
-                  borderRadius:999,
-                  fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
-                  color:C.teal,
-                }}>
-                  <span className="tag-dot" style={{background:C.teal}}/>
-                  Summer Camp 2026 · Enrolling Now
-                </span>
-              </div>
-
-              <h1 className="fade-up delay-2" style={{
+              <h1 className="fade-up delay-1" style={{
                 fontFamily:"'Archivo',sans-serif",fontWeight:900,
                 fontSize:"clamp(56px,10vw,90px)",lineHeight:0.93,
                 letterSpacing:-2,color:C.espresso,margin:"0 0 16px",
@@ -546,7 +534,7 @@ export default function App() {
                 Every musician<br/>deserves a <span style={{color:C.crimson,fontStyle:"italic"}}>stage.</span>
               </h1>
 
-              <p className="fade-up delay-3" style={{
+              <p className="fade-up delay-2" style={{
                 fontFamily:"'DM Sans',sans-serif",
                 color:C.muted,fontSize:18,
                 lineHeight:1.75,maxWidth:520,margin:"0 auto 40px",fontWeight:300,
@@ -554,32 +542,24 @@ export default function App() {
                 Private, semi-private, and group lessons in music and performance, taught by passionate instructors in a welcoming atmosphere.
               </p>
 
-              <div className="fade-up delay-4" style={{display:"flex",flexWrap:"wrap",gap:12,justifyContent:"center",marginBottom:48}}>
-                <button
-                  onClick={()=>setBookingFor("")}
-                  style={{...btnRed,fontSize:14,padding:"15px 36px",boxShadow:`0 4px 20px rgba(255,0,68,0.3)`}}
-                  onMouseEnter={e=>e.currentTarget.style.background="#CC0036"}
-                  onMouseLeave={e=>e.currentTarget.style.background=C.crimson}
+              <div className="fade-up delay-3" style={{display:"flex",flexWrap:"wrap",gap:12,justifyContent:"center",marginBottom:48}}>
+                <Button
+                  onClick={() => setBookingFor("")}
+                  style={{fontSize:14,padding:"15px 36px",boxShadow:`0 4px 20px ${C.crimson30}`}}
                 >
-                  Request Lessons <ArrowRight size={17}/>
-                </button>
-                <a
+                  Request Lessons
+                </Button>
+                <Button
+                  variant="yellow"
                   href="/summer-camp"
-                  onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
-                  style={{
-                    ...btnGhost,
-                    borderColor:"rgba(255,218,0,0.5)",
-                    color:C.espresso,
-                    fontSize:14, padding:"15px 36px",
-                  }}
-                  onMouseEnter={e=>{e.currentTarget.style.background="rgba(255,218,0,0.12)";e.currentTarget.style.borderColor=C.yellow;}}
-                  onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.07)";e.currentTarget.style.borderColor="rgba(255,218,0,0.5)";}}
+                  onClick={e => { e.preventDefault(); navigate("/summer-camp"); }}
+                  style={{fontSize:14, padding:"15px 36px"}}
                 >
-                  Summer Camp 2026 <ArrowRight size={17}/>
-                </a>
+                  Summer Camp 2026
+                </Button>
               </div>
 
-              <div className="fade-up delay-5" style={{display:"flex",flexWrap:"wrap",justifyContent:"center",gap:"8px 24px"}}>
+              <div className="fade-up delay-4" style={{display:"flex",flexWrap:"wrap",justifyContent:"center",gap:"8px 24px"}}>
                 {[
                   {href:"tel:916-435-1300",Icon:Phone,label:"(916) 435-1300"},
                   {href:"mailto:admin@headlinermusicacademy.com",Icon:Mail,label:"admin@headlinermusicacademy.com"},
@@ -588,14 +568,14 @@ export default function App() {
                   <a key={label} href={href} target={external?"_blank":undefined} rel={external?"noreferrer":undefined}
                     style={{
                       display:"flex",alignItems:"center",gap:6,
-                      fontSize:13,color:C.muted,
+                      fontSize:16,color:C.muted,
                       textDecoration:"none",fontFamily:"'DM Sans',sans-serif",
                       transition:"color 0.2s",
                     }}
                     onMouseEnter={e=>e.currentTarget.style.color=C.teal}
                     onMouseLeave={e=>e.currentTarget.style.color=C.muted}
                   >
-                    <Icon size={13}/>{label}
+                    <Icon size={16}/>{label}
                   </a>
                 ))}
               </div>
@@ -636,13 +616,13 @@ export default function App() {
                   key={i}
                   className="offering-card"
                   style={{
-                    background:C.white,padding:"36px 24px",
+                    background:C.white,
+                    padding:"36px 24px",
                     display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center",
                   }}
                   onClick={()=>{
                     if(item.name==="Band Performance"){
-                      window.history.pushState({},"","/programs/band");
-                      setPath("/programs/band");
+                      navigate("/programs/band");
                     } else {
                       setBookingFor(item.name);
                     }
@@ -653,22 +633,21 @@ export default function App() {
                   <span style={{fontSize:36,marginBottom:16}}>{item.icon}</span>
                   <h3 style={{
                     fontFamily:"'Archivo',sans-serif",fontWeight:800,
-                    fontSize:14,letterSpacing:"0.1em",textTransform:"uppercase",
+                    fontSize:16,letterSpacing:"0.1em",textTransform:"uppercase",
                     color:C.espresso,margin:"0 0 4px",
                   }}>{item.name}</h3>
-                  <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:C.muted,margin:0}}>{item.desc}</p>
+                  <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.muted,margin:0}}>{item.desc}</p>
                   <span className="card-hint">Request lessons →</span>
                 </div>
               ))}
             </div>
           </section>
 
-
           {/* ── SUMMER CAMP ── */}
           <section style={{background:C.espresso,padding:"72px 20px",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
             <div style={{
               position:"absolute",inset:0,
-              backgroundImage:`radial-gradient(at 100% 0%, rgba(255,218,0,0.05) 0px, transparent 55%)`,
+              backgroundImage:`radial-gradient(at 100% 0%, ${C.yellow05} 0px, transparent 55%)`,
               pointerEvents:"none",
             }}/>
             <div className="camp-grid" style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center",width:"100%"}}>
@@ -683,52 +662,48 @@ export default function App() {
                 <h1 style={{
                   fontFamily:"'Archivo',sans-serif",fontWeight:900,
                   fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
-                  color:"#fff",lineHeight:0.95,margin:"0 0 16px",
+                  color:C.white,lineHeight:0.95,margin:"0 0 16px",
                 }}>
                   Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
                 </h1>
                 <h2 style={{
                   fontFamily:"'Archivo',sans-serif",fontWeight:700,
                   fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
-                  color:"rgba(255,255,255,0.7)",lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
+                  color:C.white70,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
                 }}>
                   Your kid will be in a real band by Friday.
                 </h2>
-                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:"rgba(255,255,255,0.55)",lineHeight:1.8,marginBottom:36,maxWidth:420}}>
+                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.white80,lineHeight:1.8,marginBottom:36,maxWidth:420}}>
                   One week. No experience needed. Every kid gets an instrument, joins a band, and performs a real song on the last day.
                 </p>
                 <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
-                  <a
+                  <Button
                     href={CAMP_URL} target="_blank" rel="noreferrer"
-                    style={{...btnRed,boxShadow:`0 4px 20px rgba(255,0,68,0.3)`}}
-                    onMouseEnter={e=>e.currentTarget.style.background=C.teal}
-                    onMouseLeave={e=>e.currentTarget.style.background=C.crimson}
+                    style={{boxShadow:`0 4px 20px ${C.crimson30}`}}
                   >
-                    Enroll Now <ArrowRight size={15}/>
-                  </a>
-                  <a
+                    Enroll Now
+                  </Button>
+                  <Button
+                    variant="ghost"
                     href="/summer-camp"
-                    onClick={e=>{e.preventDefault();window.history.pushState({},"","/summer-camp");setPath("/summer-camp");}}
-                    style={{...btnGhost,borderColor:"rgba(255,255,255,0.2)",color:"rgba(255,255,255,0.7)"}}
-                    onMouseEnter={e=>e.currentTarget.style.background="rgba(255,255,255,0.1)"}
-                    onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.07)"}
+                    onClick={e=>{ e.preventDefault(); navigate("/summer-camp"); }}
                   >
                     Learn More
-                  </a>
+                  </Button>
                 </div>
               </div>
 
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:1,background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.07)"}}>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:1,background:C.white07,border:`1px solid ${C.white07}`}}>
                 {[
-                  {label:"Dates",     value:"June 22–26, 2026",  color:"#fff"},
-                  {label:"Ages",      value:"8–12 years old",    color:"#fff"},
-                  {label:"Schedule",  value:"9 AM – 12:30 PM",   color:"#fff"},
-                  {label:"Band Size", value:"Max 7 kids",        color:"#fff"},
+                  {label:"Dates",     value:"June 22–26, 2026",  color:C.white},
+                  {label:"Ages",      value:"8–12 years old",    color:C.white},
+                  {label:"Schedule",  value:"9 AM – 12:30 PM",   color:C.white},
+                  {label:"Band Size", value:"Max 7 kids",        color:C.white},
                   {label:"Experience",value:"None required",     color:C.teal},
                   {label:"Final Day", value:"Live performance + recording", color:C.crimson},
                 ].map(({label,value,color})=>(
                   <div key={label} style={{background:C.espresso,padding:"28px 24px"}}>
-                    <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:700,letterSpacing:"0.18em",textTransform:"uppercase",color:"rgba(255,255,255,0.3)",marginBottom:8}}>{label}</p>
+                    <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:C.lightCream,marginBottom:8}}>{label}</p>
                     <p style={{fontFamily:"'Archivo',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
                   </div>
                 ))}
@@ -745,11 +720,11 @@ export default function App() {
                 display:"block",background:C.white,
                 borderRadius:20,padding:"48px 56px",
                 border:`1px solid ${C.border}`,textDecoration:"none",textAlign:"center",
-                boxShadow:"0 4px 24px rgba(26,19,15,0.06)",
+                boxShadow:`0 4px 24px ${C.espresso06}`,
                 transition:"box-shadow 0.2s, transform 0.2s",
               }}
-              onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 8px 32px rgba(26,19,15,0.1)";e.currentTarget.style.transform="translateY(-2px)";}}
-              onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 4px 24px rgba(26,19,15,0.06)";e.currentTarget.style.transform="translateY(0)";}}
+              onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 8px 32px ${C.espresso10}`;e.currentTarget.style.transform="translateY(-2px)";}}
+              onMouseLeave={e=>{e.currentTarget.style.boxShadow=`0 4px 24px ${C.espresso06}`;e.currentTarget.style.transform="translateY(0)";}}
             >
               <div style={{display:"flex",justifyContent:"center",gap:4,marginBottom:24}}>
                 {[1,2,3,4,5].map(s=>(
@@ -765,7 +740,7 @@ export default function App() {
               }}>
                 "Love this place!! It's unique!!! Amicable and well organized. Amazing diverse and integrative for kids, young or adults."
               </p>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,fontFamily:"'DM Sans',sans-serif",fontSize:13}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,fontFamily:"'DM Sans',sans-serif",fontSize:16}}>
                 <span style={{fontWeight:700,color:C.espresso}}>Socorro Baez G.</span>
                 <span style={{color:C.border}}>|</span>
                 <span style={{display:"flex",alignItems:"center",gap:6,fontWeight:700,color:C.crimson}}>
@@ -781,55 +756,45 @@ export default function App() {
       )}
 
       {/* ── FOOTER ── */}
-      <footer style={{background:C.espresso,color:"#fff",padding:"64px 40px 40px"}}>
+      <footer style={{background:C.espresso,color:C.white,padding:"64px 40px 40px"}}>
         <div style={{maxWidth:1100,margin:"0 auto"}}>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:64,paddingBottom:48,borderBottom:"1px solid rgba(255,255,255,0.08)",marginBottom:28}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:64,paddingBottom:48,borderBottom:`1px solid ${C.white08}`,marginBottom:28}}>
             <div>
               <a href="/" style={{display:"block",marginBottom:20,lineHeight:0}}>
                 <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" style={{display:"block",height:"auto",maxHeight:44,width:"auto",maxWidth:220,objectFit:"contain"}}/>
               </a>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"rgba(255,255,255,0.38)",lineHeight:1.75,maxWidth:280,marginBottom:24}}>
+              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.white70,lineHeight:1.75,maxWidth:480,marginBottom:24}}>
                 Inspiring the next generation of musicians through premium, personalized education.
               </p>
-              <button
-                onClick={()=>setBookingFor("")}
-                style={{...btnOutlineRed,fontSize:12,transition:"all 0.2s"}}
-                onMouseEnter={e=>{e.currentTarget.style.background=C.crimson;e.currentTarget.style.color="#fff";}}
-                onMouseLeave={e=>{e.currentTarget.style.background="transparent";e.currentTarget.style.color=C.crimson;}}
-              >
-                Request Lessons <ArrowRight size={13}/>
-              </button>
+              <Button variant="outlineRed" onClick={() => setBookingFor("")} style={{fontSize:12}}>
+                Request Lessons
+              </Button>
             </div>
-
             <div>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:700,letterSpacing:"0.2em",textTransform:"uppercase",color:"rgba(255,255,255,0.25)",marginBottom:20}}>
-                Contact &amp; Location
-              </p>
               <div style={{display:"flex",flexDirection:"column",gap:16}}>
                 <a href="tel:916-435-1300" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none"}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
-                  onMouseLeave={e=>e.currentTarget.style.color="#fff"}
+                  onMouseLeave={e=>e.currentTarget.style.color=C.white}
                 >
                   <Phone size={16} color={C.crimson}/>
-                  <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:600,color:"#fff",letterSpacing:-0.5}}>(916) 435-1300</span>
+                  <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:600,color:C.white,letterSpacing:-0.5}}>(916) 435-1300</span>
                 </a>
-                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:"rgba(255,255,255,0.38)",fontFamily:"'DM Sans',sans-serif",fontSize:13,wordBreak:"break-all",overflowWrap:"break-word",minWidth:0}}
+                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:C.white70,fontFamily:"'DM Sans',sans-serif",fontSize:14,wordBreak:"break-all",overflowWrap:"break-word",minWidth:0}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
-                  onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.38)"}
+                  onMouseLeave={e=>e.currentTarget.style.color=C.white38}
                 >
                   <Mail size={15} color={C.crimson}/>
                   admin@headlinermusicacademy.com
                 </a>
-                <div style={{display:"flex",alignItems:"flex-start",gap:10,color:"rgba(255,255,255,0.25)",fontFamily:"'DM Sans',sans-serif",fontSize:13,lineHeight:1.6}}>
-                  <MapPin size={15} color="rgba(255,255,255,0.2)" style={{marginTop:2,flexShrink:0}}/>
+                <div style={{display:"flex",alignItems:"flex-start",gap:10,color:C.white70,fontFamily:"'DM Sans',sans-serif",fontSize:14,lineHeight:1.6}}>
+                  <MapPin size={15} color={C.crimson} style={{marginTop:2,flexShrink:0}}/>
                   2311 Sunset Blvd<br/>Rocklin, CA 95765
                 </div>
               </div>
             </div>
           </div>
-
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16}}>
-            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:"rgba(255,255,255,0.18)"}}>
+            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:C.white18}}>
               © {new Date().getFullYear()} Headliner Music Academy. All rights reserved.
             </p>
             <div style={{display:"flex",flexWrap:"wrap",gap:20}}>
@@ -837,15 +802,15 @@ export default function App() {
                 {href:"/privacy-policy",label:"Privacy Policy"},
                 {href:"/terms-and-conditions",label:"Terms & Conditions"},
               ].map(({href,label})=>(
-                <a key={label} href={href} style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:"rgba(255,255,255,0.28)",textDecoration:"none",textTransform:"uppercase"}}
+                <a key={label} href={href} style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform:"uppercase"}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
-                  onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.28)"}
+                  onMouseLeave={e=>e.currentTarget.style.color=C.white28}
                 >{label}</a>
               ))}
               <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer"
-                style={{display:"flex",alignItems:"center",gap:6,fontFamily:"'DM Sans',sans-serif",fontSize:10,color:"rgba(255,255,255,0.28)",textDecoration:"none",textTransform:"uppercase",letterSpacing:"0.1em"}}
+                style={{display:"flex",alignItems:"center",gap:6,fontFamily:"'DM Sans',sans-serif",fontSize:10,color:C.white28,textDecoration:"none",textTransform:"uppercase",letterSpacing:"0.1em"}}
                 onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
-                onMouseLeave={e=>e.currentTarget.style.color="rgba(255,255,255,0.28)"}
+                onMouseLeave={e=>e.currentTarget.style.color=C.white28}
               >
                 <svg width={14} height={14} viewBox="0 0 384 512" fill="currentColor">
                   <path d="M42.5 192.1c-19.4 0-38.6 15.6-41.9 34.6-3 17.5 7.1 36.3 23 44.3l85.8 43.2c10.3 5.2 23.3 1.1 28.5-9.1 5.2-10.2 1.3-22.9-8.9-28.1l-86.5-84.9zm294.6 63.8l-83-48.4c-9.9-5.8-22.8-2.6-28.7 7.2-5.9 9.8-2.7 22.5 7.2 28.3l82.8 48.6c16.3 9.6 36.8 5 43.6-11.4 6.7-16.1-3.6-33.8-21.9-24.3zm-131.6-9.5c-4.9-10.4-17.1-15-27.5-10.3L97.7 274.6c-16.1 7.2-22.7 26.6-14.7 41.8 7.8 14.8 26.2 19.8 41.6 11.2l83.6-46.7c10-5.6 14.4-18 9.3-28.5zm165 140.5l-85.1-44.5c-10.1-5.3-22.8-1.5-28.2 8.5-5.4 10-1.6 22.5 8.5 27.8l85.1 44.5c16.1 8.4 36.1 1.2 41.5-14.7 5.2-15.6-5.8-31.2-21.8-21.6zm-177.3 18.2c-5.5-10-18.2-13.9-28.3-8.8L37.1 442.2c-15.8 8-20.9 27.4-11.5 42.1 9.2 14.4 28.4 17.9 43.3 8L163.6 432c10.2-6.7 13.5-19.9 8.2-30.1z"/>

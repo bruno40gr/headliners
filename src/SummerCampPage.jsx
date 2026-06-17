@@ -294,10 +294,10 @@ export default function SummerCampPage({ setPath }) {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 0, background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, overflow: "hidden" }}>
               {[
-                { label: "Dates",       value: "June 22–26, 2026",                      highlight: null },
+                { label: "Dates",       value: "July 27–31, 2026",                      highlight: null },
                 { label: "Daily Hours", value: "9:00 AM – 12:30 PM",                    highlight: null },
                 { label: "Ages",        value: "8–12 years old",                        highlight: null },
-                { label: "Experience",  value: "None required at all",                  highlight: "teal" },
+                { label: "Experience",  value: "None required",                  highlight: "teal" },
                 { label: "Band Size",   value: "Max 7 kids — co-ed",                   highlight: null },
                 { label: "Lunch",       value: "Not included — bring a snack",          highlight: null },
                 { label: "Final Day",   value: "Performance recorded for every family", highlight: "crimson" },
