@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import SummerCampPage from "./SummerCampPage";
 import BandProgramPage from "./BandProgramPage";
+import TeachersPage from "./TeachersPage";
+import ProgramsNav from "./ProgramsNav";
 import { ArrowRight, MapPin, Mail, Phone, Menu, X, ChevronDown } from "lucide-react";
 
 const offerings = [
@@ -364,7 +366,6 @@ function TermsAndConditionsPage() {
 
 // ── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [bookingFor, setBookingFor]  = useState(null);
 
   const [path, setPath] = useState(typeof window !== "undefined" ? window.location.pathname : "/");
@@ -484,93 +485,17 @@ export default function App() {
       )}
 
       {/* ── NAV ── */}
-      <nav style={{
-        position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(26,19,15,0.98)`,
-        backdropFilter:"blur(12px)",
-        borderBottom:`1px solid rgba(255,255,255,0.07)`,
-        height:68,display:"flex",alignItems:"center",
-        padding:"0 40px",justifyContent:"space-between",
-        boxSizing:"border-box",overflow:"hidden",
-      }}>
-        <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL_INV} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
-        </a>
-        <div style={{display:"flex",alignItems:"center",gap:24}} className="desktop-nav">
-          <a
-            href="/programs/band"
-            onClick={e=>{e.preventDefault();window.history.pushState({},"","/programs/band");setPath("/programs/band");}}
-            className="nav-link"
-            style={{fontFamily:"'DM Sans',sans-serif",textDecoration:"none",color:"rgba(255,255,255,0.45)"}}
-          >
-            Programs
-          </a>
-          <a
-            href={PORTAL_URL} target="_blank" rel="noreferrer"
-            className="nav-link"
-            style={{fontFamily:"'DM Sans',sans-serif",textDecoration:"none",color:"rgba(255,255,255,0.45)"}}
-          >
-            Parent Portal
-          </a>
-          <button
-            onClick={()=>setBookingFor("")}
-            className="btn-red-hover"
-            style={{...btnRed,padding:"10px 22px",fontSize:12}}
-          >
-            Request Lessons <ArrowRight size={13}/>
-          </button>
-        </div>
-        <button
-          style={{display:"none",background:"none",border:"none",cursor:"pointer",color:C.muted,padding:8}}
-          className="mobile-menu-btn"
-          onClick={()=>setMobileOpen(v=>!v)}
-        >
-          {mobileOpen ? <X size={22}/> : <Menu size={22}/>}
-        </button>
-      </nav>
-
-      {mobileOpen && (
-        <div style={{
-          position:"fixed",top:68,left:0,right:0,zIndex:99,
-          background:C.white,borderBottom:`1px solid ${C.border}`,
-          padding:"20px 24px",display:"flex",flexDirection:"column",gap:12,
-          boxShadow:"0 8px 24px rgba(0,0,0,0.08)",
-        }}>
-          <a
-            href="/programs/band"
-            onClick={e=>{e.preventDefault();window.history.pushState({},"","/programs/band");setPath("/programs/band");setMobileOpen(false);}}
-            style={{
-              fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,
-              color:"rgba(255,255,255,0.55)",textDecoration:"none",
-              padding:"8px 0",borderBottom:`1px solid rgba(255,255,255,0.08)`,display:"block",
-            }}
-          >
-            Programs
-          </a>
-          <a
-            href={PORTAL_URL} target="_blank" rel="noreferrer"
-            style={{
-              fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,
-              color:"rgba(255,255,255,0.55)",textDecoration:"none",
-              padding:"8px 0",borderBottom:`1px solid rgba(255,255,255,0.08)`,display:"block",
-            }}
-            onClick={()=>setMobileOpen(false)}
-          >
-            Parent Portal
-          </a>
-          <button
-            onClick={()=>{setBookingFor("");setMobileOpen(false);}}
-            className="mobile-cta"
-            style={{...btnRed,justifyContent:"center",padding:"13px 24px",border:"none"}}
-          >
-            Request Lessons <ArrowRight size={14}/>
-          </button>
-        </div>
-      )}
+      <ProgramsNav
+        variant="dark"
+        navigate={(p) => { window.history.pushState({}, "", p); setPath(p); }}
+        ctaLabel="Request Lessons"
+        onCtaClick={() => setBookingFor("")}
+      />
 
       {path==="/privacy-policy" ? <PrivacyPolicyPage/> :
        path==="/terms-and-conditions" ? <TermsAndConditionsPage/> :
-       path==="/summer-camp" ? <SummerCampPage/> :
+       path==="/summer-camp" ? <SummerCampPage setPath={setPath}/> :
+       path==="/teachers"    ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor}/> :
        path==="/programs/band" ? <BandProgramPage onRequestLessons={(instrument)=>setBookingFor(instrument||"")} setPath={setPath}/> : (
         <>
           {/* ── HERO ── */}

@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import ProgramsNav from "./ProgramsNav";
 
 const PORTAL_URL = "https://headlinerma.opus1.io/login";
 const LOGO_WHITE = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
@@ -48,17 +49,20 @@ const Eyebrow = ({ children, color = C.teal }) => (
 
 const bands = [
   {
-    name: "Sunkast",
+    name:  "Sunkast",
+    logo:  "https://res.cloudinary.com/diy08lj9x/image/upload/v1781535114/sunkast_vy8zyv.png",
     quote: "Been together about a year. Getting tighter every month.",
     genre: "Rock / Indie",
   },
   {
-    name: "The Myphs",
+    name:  "The Myphs",
+    logo:  "https://res.cloudinary.com/diy08lj9x/image/upload/v1781535130/Miphs_dfyjjd.png",
     quote: "Joined with two songs. Currently arguing about a third.",
     genre: "Alternative",
   },
   {
-    name: "La Paz",
+    name:  "La Paz",
+    logo:  "https://res.cloudinary.com/diy08lj9x/image/upload/v1781535121/Lapaz_ipqtzy.png",
     quote: "First show was three months ago. Already booking the next one.",
     genre: "Latin Rock",
   },
@@ -75,36 +79,36 @@ const venues = [
 
 const faqs = [
   {
-    q: "When will my band be ready to perform?",
-    a: "That depends on the band. Some bands are ready for their first gig in a few months. Others take longer. There's no fixed timeline. Your director will let you know when they think you're ready.",
-  },
-  {
-    q: "What happens if my band or a bandmate can't make it to a session?",
-    a: "Rehearsal happens with whoever shows up. If someone is missing, the band learns to work around it. Consistency matters, but life happens. Show up when you can.",
-  },
-  {
-    q: "Are performances mandatory?",
-    a: "No. Gig opportunities get offered to you, and you decide whether to take them. Playing live is what makes this program different, but the choice is yours.",
-  },
-  {
-    q: "Does Headliner manage the band?",
-    a: "No. The band is independent. Your director coaches and advises. The band makes the decisions.",
-  },
-  {
-    q: "What if we become famous? Do we owe Headliner anything?",
-    a: "We haven't figured this out yet, to be honest. If it happens, we'll figure it out together.",
-  },
-  {
-    q: "Are recording sessions free?",
-    a: "No, but they're included in the program. You don't pay separately for them. They're part of what you get.",
+    q: "What's included in the program?",
+    a: "A dedicated director who guides your band through every stage of development. Access to backline and our on-site recording studio. We handle the logistics and production for your shows so you can focus on performing. We also connect you with real gig opportunities across Placer County — you decide which ones to take. Everything you need to go from rehearsing to actually playing live.",
   },
   {
     q: "What do you expect from a band?",
-    a: "Show up and communicate. Be someone people want to play with. Respect the space you're in, but beyond that you're running your own thing.",
+    a: "Show up consistently and communicate openly with your bandmates and director. Be someone people enjoy making music with. Respect the space, the instruments, and each other. Beyond that, this is your band — you're in the driver's seat.",
   },
   {
-    q: "What's included in the program?",
-    a: "A director who actually knows what they're doing. Access to backline and recording. We produce your shows. Gigs we find for you to say yes or no to. Everything you need to actually become a functioning band.",
+    q: "I don't have a band. Can I still join?",
+    a: "Absolutely — reach out and let us know. Every musician deserves a stage, and you shouldn't have to wait until you have a full band to get started. We'll connect you with other musicians who share your passion and help put something together. It happens more often than you'd think.",
+  },
+  {
+    q: "When will my band be ready to perform?",
+    a: "It depends on the band, and that's a good thing — every group moves at its own pace. Some are ready for their first gig within a few months. Others take a little longer to find their footing. Your director will give you an honest read on where you stand and help you get there.",
+  },
+  {
+    q: "What happens if my band or a bandmate can't make it to a session?",
+    a: "Rehearsal continues with whoever is there. Learning to work around an absent member is actually a valuable part of being in a real band. That said, consistency makes a huge difference — the more you show up, the faster you grow together.",
+  },
+  {
+    q: "Are performances mandatory?",
+    a: "Not at all. When a gig opportunity comes up, we'll bring it to you and let you decide if it's the right fit. Playing live is one of the most rewarding parts of this program, but we never pressure a band onto a stage before they're ready.",
+  },
+  {
+    q: "Does Headliner manage the band?",
+    a: "No — the band belongs to you. Your director is there to coach, advise, and support, but the creative and logistical decisions are yours to make. We help you become a functioning band; we don't run it for you.",
+  },
+  {
+    q: "Are recording sessions free?",
+    a: "Recording is included in the program — there's no separate fee. When your band is ready to document what you've built, the studio is there for you.",
   },
 ];
 
@@ -165,22 +169,12 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
       `}</style>
 
       {/* NAV */}
-      <nav style={{
-        position: "fixed", top: 0, width: "100%", zIndex: 100,
-        background: "rgba(26,19,15,0.97)", backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
-        height: 68, display: "flex", alignItems: "center",
-        justifyContent: "space-between", padding: "0 40px", boxSizing: "border-box",
-      }}>
-        <a href="/" onClick={e => { e.preventDefault(); navigate("/"); }} style={{ textDecoration: "none" }}>
-          <img src={LOGO_WHITE} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 44, width: "auto", maxWidth: 180, objectFit: "contain", display: "block" }} />
-        </a>
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          
-          <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="bp-nav-link">Parent Portal</a>
-          <BtnRed onClick={() => onRequestLessons("Band Performance")}>Join the Program <ArrowRight size={13}/></BtnRed>
-        </div>
-      </nav>
+      <ProgramsNav
+        variant="dark"
+        navigate={navigate}
+        ctaLabel="Join the Program"
+        onCtaClick={() => onRequestLessons("Band Performance")}
+      />
 
       {/* HERO */}
       <header style={{ background: C.espresso, paddingTop: 68, position: "relative", overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center" }}>
@@ -201,7 +195,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 0.95,
             letterSpacing: -2, color: "#fff", margin: "0 0 20px", maxWidth: 700,
           }}>
-            This is where bands<br/>become <em style={{ color: C.crimson, fontStyle: "italic" }}>Headliners.</em>
+            This is where bands<br/>become <span style={{ color: C.crimson }}>Headliners.</span>
           </h1>
 
           <p className="fu d2" style={{
@@ -233,10 +227,10 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div>
             <Eyebrow color={C.crimson}>The approach</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
-              There is nothing<br/>like being in a <em style={{ fontStyle: "italic", color: C.crimson }}>band.</em>
+              There is nothing<br/>like being in a <span style={{ color: C.crimson }}>band.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9, marginBottom: 24 }}>
-              As you rehearse and start playing real gigs, your director coaches you through setlist choices, how to command a stage, what makes your sound yours. You are steering the ship. The director just makes sure it doesn't sink.
+              As you rehearse and start playing live, your director guides you through setlist choices, stage presence, and finding your unique sound. You lead the creative vision while your director helps you bring it to life.
             </p>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
               Every band starts somewhere different and moves at its own pace. Some come in with two songs and a name. Some come in with six months of rehearsals and no idea what to do next. The program meets you where you are, and your director stays with you through all of it.
@@ -267,7 +261,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div>
             <Eyebrow color={C.teal}>How it goes</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
-              You play.<br/><em style={{ fontStyle: "italic", color: C.crimson }}>We get you there.</em>
+              You play.<br/><span style={{ color: C.crimson }}>We get you there.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
               You get access to backline at the academy so gear is not a barrier to entry. Recording sessions are there when you are ready to document what you have built. We run the logistics and production side of your shows so you can actually enjoy performing instead of stressing about the details.
@@ -282,7 +276,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div>
             <Eyebrow color={C.yellow}>Community reach</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 28px", lineHeight: 0.93 }}>
-              Some of the real stages<br/>we've <em style={{ fontStyle: "italic", color: C.crimson }}>performed at.</em>
+              Some of the real stages<br/>we've <span style={{ color: C.crimson }}>performed at.</span>
             </h2>
             <p style={{ fontSize: 17, color: "rgba(255,255,255,0.5)", lineHeight: 1.9, marginBottom: 28 }}>
               We have relationships with venue owners across Placer County who know the bands we work with and trust us to bring them in.
@@ -309,23 +303,42 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div style={{ marginBottom: 56 }}>
             <Eyebrow color={C.teal}>In the program</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
-              Our home <em style={{ fontStyle: "italic", color: C.crimson }}>bands.</em>
+              Our home <span style={{ color: C.crimson }}>bands.</span>
             </h2>
           </div>
 
           <div className="bp-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-            {bands.map(({ name, quote, genre }) => (
-              <div key={name} className="bp-band-card">
-                {/* Placeholder logo */}
+            {bands.map(({ name, logo }) => (
+              <div key={name} className="bp-band-card" style={{ padding: 0, overflow: "hidden" }}>
+                {/* Photo */}
                 <div style={{
-                  height: 80, background: C.offwhite, borderRadius: 10,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  marginBottom: 24, border: `1px solid ${C.border}`,
+                  position: "relative",
+                  height: 220,
+                  overflow: "hidden",
+                  borderRadius: "16px 16px 0 0",
                 }}>
-                  <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 20, color: C.espresso, margin: 0, letterSpacing: -0.5 }}>{name}</p>
+                  <img
+                    src={logo}
+                    alt={name}
+                    style={{
+                      width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center top",
+                      display: "block",
+                      transition: "transform 0.5s ease",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.transform = "scale(1.04)"}
+                    onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                  />
                 </div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.teal, margin: "0 0 12px" }}>{genre}</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.75, margin: 0, fontStyle: "italic" }}>"{quote}"</p>
+                {/* Text */}
+                <div style={{ padding: "16px 24px 20px" }}>
+                  <p style={{
+                    fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+                    fontSize: 18, color: C.espresso, margin: 0, lineHeight: 1.1,
+                  }}>
+                    {name}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -339,7 +352,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div style={{ marginBottom: 56 }}>
             <Eyebrow color={C.teal}>FAQ</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
-              Questions we get <em style={{ fontStyle: "italic", color: C.crimson }}>asked.</em>
+              Questions we get <span style={{ color: C.crimson }}>asked.</span>
             </h2>
           </div>
 
@@ -366,7 +379,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <img src={LOGO_WHITE} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 52, width: "auto", maxWidth: 240, objectFit: "contain", display: "block", margin: "0 auto 48px" }} />
           <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 24px", lineHeight: 0.93 }}>
-            Every musician deserves<br/>a <em style={{ fontStyle: "italic", color: C.crimson }}>stage.</em>
+            Every musician deserves<br/>a <span style={{ color: C.crimson }}>stage.</span>
           </h2>
 <div style={{ marginBottom: 44 }} />
           <BtnRed onClick={() => onRequestLessons("Band Performance")} large>Join the Program <ArrowRight size={16}/></BtnRed>

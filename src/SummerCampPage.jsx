@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import ProgramsNav from "./ProgramsNav";
 
 const CAMP_URL   = "https://headlinerma.opus1.io/w/summercamp2026";
 const PORTAL_URL = "https://headlinerma.opus1.io/login";
@@ -43,7 +44,12 @@ const faqs = [
   },
 ];
 
-export default function SummerCampPage() {
+export default function SummerCampPage({ setPath }) {
+  const navigate = (path) => {
+    window.history.pushState({}, "", path);
+    if (setPath) setPath(path);
+  };
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.white, color: C.espresso, minHeight: "100vh", overflowX: "hidden", maxWidth: "100vw", paddingTop: 68 }}>
       <style>{`
@@ -159,30 +165,13 @@ export default function SummerCampPage() {
       `}</style>
 
       {/* NAV */}
-      <nav style={{
-        position:"fixed",top:0,width:"100%",zIndex:100,
-        background:`rgba(255,255,255,0.95)`,
-        backdropFilter:"blur(12px)",
-        borderBottom:`1px solid ${C.border}`,
-        height:68,display:"flex",alignItems:"center",
-        padding:"0 40px",justifyContent:"space-between",
-        boxSizing:"border-box",overflow:"hidden",
-      }}>
-        <a href="/" style={{display:"flex",alignItems:"center",textDecoration:"none"}}>
-          <img src={LOGO_URL} alt="Headliner Music Academy" style={{height:"auto",maxHeight:44,width:"auto",maxWidth:180,objectFit:"contain",flexShrink:0}}/>
-        </a>
-        <div className="sc-desktop-nav" style={{ alignItems: "center", gap: 24, flexShrink: 0 }}>
-          <a href={PORTAL_URL} target="_blank" rel="noreferrer" className="sc-nav-link">Parent Portal</a>
-          <a href={CAMP_URL} target="_blank" rel="noreferrer" className="btn-red" style={{ padding: "10px 20px", fontSize: 11 }}>
-            Enroll Now <ArrowRight size={14} />
-          </a>
-        </div>
-        <div className="sc-mobile-nav" style={{ alignItems: "center", flexShrink: 0 }}>
-          <a href={CAMP_URL} target="_blank" rel="noreferrer" className="btn-red" style={{ padding: "8px 16px", fontSize: 11 }}>
-            Enroll Now
-          </a>
-        </div>
-      </nav>
+      <ProgramsNav
+        variant="light"
+        navigate={navigate}
+        ctaLabel="Enroll Now"
+        ctaHref={CAMP_URL}
+        ctaHrefTarget="_blank"
+      />
 
       {/* HERO */}
       <header style={{
@@ -229,7 +218,7 @@ export default function SummerCampPage() {
           </p>
           <div className="sc-fu sc-d3" style={{ display: "flex", gap: "24px 40px", flexWrap: "wrap", marginBottom: 56 }}>
             {[
-              { label: "Dates",    value: "June 22–26, 2026" },
+              { label: "Dates",    value: "July 27–31, 2026" },
               { label: "Schedule", value: "9 AM – 12:30 PM" },
               { label: "Ages",     value: "8–12 years old" },
             ].map(({ label, value }) => (
@@ -250,7 +239,7 @@ export default function SummerCampPage() {
       {/* MARQUEE */}
       <div style={{ background: C.espresso, padding: "14px 0", overflow: "hidden", width: "100%", borderTop: `1px solid rgba(255,255,255,0.08)`, borderBottom: `1px solid rgba(255,255,255,0.08)` }}>
         <div className="sc-marquee">
-          {[...Array(2)].fill(["Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•","No Experience Needed","•","Max 7 Kids Per Band","•","June 22–26","•"]).flat().map((item, i) => (
+          {[...Array(2)].fill(["Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•","No Experience Needed","•","Max 7 Kids Per Band","•","July 27–31","•"]).flat().map((item, i) => (
             <span key={i} style={{
               fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 11,
               letterSpacing: "0.2em", textTransform: "uppercase",
