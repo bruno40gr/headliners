@@ -421,6 +421,273 @@ function TermsAndConditionsPage() {
   );
 }
 
+// ── Hero media — the real student journey, first lesson to live stage ────────
+const HERO_SLIDES = [
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250115_171316_apoono.jpg", caption: "First lesson", focal: "center 30%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg", caption: "Learning the keys", focal: "center 35%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260616_002552898.PORTRAIT_anjebq.jpg", caption: "Behind the kit", focal: "center 35%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781716115/PXL_20260524_010310811_tzpycp.jpg", caption: "Songwriting", focal: "center 28%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781716216/PXL_20260524_011455107_slssdi.jpg", caption: "Finding the sound", focal: "center 30%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232322116.MP_zhbrns.jpg", caption: "Building a band", focal: "center 30%" },
+  { type: "video", src: "https://res.cloudinary.com/diy08lj9x/video/upload/v1781715526/PXL_20260615_232512279_erwjfj.mp4", poster: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260616_021959694.PORTRAIT.ORIGINAL_b7nfj5.jpg", caption: "Rehearsing together", focal: "center 30%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781716216/PXL_20260524_013313165.PORTRAIT.ORIGINAL_bpckwf.jpg", caption: "Taking the mic", focal: "center 25%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250726_102536_w42awv.jpg", caption: "Performing live", focal: "center 25%" },
+  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250628_153338_srnhk2.jpg", caption: "On the big stage", focal: "center 30%" },
+];
+
+// Unifies mixed photo/video sources (different cameras, lighting, days) into
+// one cohesive, sober palette — warm, slightly desaturated, contrast-lifted.
+const HERO_PHOTO_FILTER = "saturate(0.7) contrast(1.18) brightness(0.8) sepia(0.04)";
+
+function HeroSection({ navigate, setBookingFor }) {
+  const [active, setActive] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => { setLoaded(true); }, []);
+
+  useEffect(() => {
+    const current = HERO_SLIDES[active];
+    const duration = current.type === "video" ? 9200 : 3800;
+    const t = setTimeout(() => {
+      setActive(a => (a + 1) % HERO_SLIDES.length);
+    }, duration);
+    return () => clearTimeout(t);
+  }, [active]);
+
+  return (
+    <section style={{
+      position: "relative",
+      paddingTop: 68,
+      width: "100%",
+      boxSizing: "border-box",
+      background: C.espresso,
+      overflow: "hidden",
+    }}>
+      <div className="hero-split" style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        minHeight: "calc(100vh - 68px)",
+        width: "100%",
+      }}>
+        {/* ── Left: copy ── */}
+        <div style={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "64px clamp(28px, 6vw, 80px)",
+          zIndex: 2,
+        }}>
+          <div style={{
+            position: "absolute", inset: 0,
+            backgroundImage: `radial-gradient(${C.white} 1px, transparent 1px)`,
+            backgroundSize: "26px 26px",
+            opacity: 0.025,
+            pointerEvents: "none",
+          }} />
+
+          <p className={loaded ? "fade-up delay-1" : ""} style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 12, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
+            color: C.teal, margin: "0 0 22px",
+            display: "flex", alignItems: "center", gap: 10,
+            position: "relative", zIndex: 1,
+          }}>
+            <span className="tag-dot" />
+            Rocklin, CA · Est. 2026
+          </p>
+
+          <h1 className={loaded ? "fade-up delay-2" : ""} style={{
+            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontSize: "clamp(42px, 6.4vw, 72px)", lineHeight: 0.96,
+            letterSpacing: -2, color: C.white, margin: "0 0 22px",
+            position: "relative", zIndex: 1,
+          }}>
+            From first lesson<br/>to <span style={{ color: C.crimson, fontStyle: "italic" }}>real stage.</span>
+          </h1>
+
+          <p className={loaded ? "fade-up delay-3" : ""} style={{
+            fontFamily: "'DM Sans', sans-serif",
+            color: C.white70, fontSize: 17, lineHeight: 1.75,
+            maxWidth: 460, margin: "0 0 36px", fontWeight: 300,
+            position: "relative", zIndex: 1,
+          }}>
+            Private, semi-private, and group lessons taught by passionate instructors — building toward something every student gets to do: perform live.
+          </p>
+
+          <div className={loaded ? "fade-up delay-4" : ""} style={{
+            display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 40,
+            position: "relative", zIndex: 1,
+          }}>
+            <Button
+              onClick={() => setBookingFor("")}
+              style={{ fontSize: 14, padding: "16px 38px", boxShadow: `0 4px 24px ${C.crimson30}` }}
+            >
+              Request Lessons
+            </Button>
+            <Button
+              variant="ghost"
+              href="/summer-camp"
+              onClick={e => { e.preventDefault(); navigate("/summer-camp"); }}
+              style={{ fontSize: 14, padding: "16px 32px" }}
+            >
+              Summer Camp 2026
+            </Button>
+          </div>
+
+          <div className={loaded ? "fade-up delay-5" : ""} style={{
+            display: "flex", flexWrap: "wrap", gap: "10px 22px",
+            position: "relative", zIndex: 1,
+          }}>
+            {[
+              { href: "tel:916-435-1300", Icon: Phone, label: "(916) 435-1300" },
+              { href: "mailto:admin@headlinermusicacademy.com", Icon: Mail, label: "admin@headlinermusicacademy.com" },
+              { href: "https://maps.google.com/?q=2311+Sunset+Blvd,+Rocklin,+CA+95765", Icon: MapPin, label: "2311 Sunset Blvd, Rocklin, CA", external: true },
+            ].map(({ href, Icon, label, external }) => (
+              <a key={label} href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}
+                style={{
+                  display: "flex", alignItems: "center", gap: 6,
+                  fontSize: 14, color: C.white45,
+                  textDecoration: "none", fontFamily: "'DM Sans', sans-serif",
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = C.teal}
+                onMouseLeave={e => e.currentTarget.style.color = C.white45}
+              >
+                <Icon size={14} />{label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Right: media ── */}
+        <div className="hero-media" style={{
+          position: "relative",
+          overflow: "hidden",
+          minHeight: 360,
+          background: C.espresso,
+        }}>
+          {/* Photo stack — masked on the left edge so it fades into the espresso
+              panel with a soft edge instead of a hard seam. This only affects
+              opacity at the edge; it never distorts the image itself. */}
+          <div style={{
+            position: "absolute", inset: 0,
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 18%)",
+            maskImage: "linear-gradient(to right, transparent 0%, black 18%)",
+          }}>
+            {HERO_SLIDES.map((slide, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute", inset: 0,
+                  opacity: i === active ? 1 : 0,
+                  transition: "opacity 1.1s ease",
+                  pointerEvents: "none",
+                }}
+              >
+                {slide.type === "video" ? (
+                  <video
+                    src={slide.src}
+                    poster={slide.poster}
+                    autoPlay={i === active}
+                    muted
+                    loop={false}
+                    playsInline
+                    style={{
+                      width: "100%", height: "100%", objectFit: "cover",
+                      objectPosition: slide.focal, display: "block",
+                      filter: HERO_PHOTO_FILTER,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={slide.src}
+                    alt={slide.caption}
+                    style={{
+                      width: "100%", height: "100%", objectFit: "cover",
+                      objectPosition: slide.focal, display: "block",
+                      filter: HERO_PHOTO_FILTER,
+                    }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Extra darkening right at the seam for a smoother blend with the mask above */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: `linear-gradient(100deg, ${C.espresso} 0%, rgba(26,19,15,0.65) 6%, rgba(26,19,15,0.18) 14%, transparent 26%)`,
+            pointerEvents: "none",
+          }} />
+
+          {/* Darkened aura — radial vignette pulling edges/corners darker so every
+              photo, regardless of source lighting, reads with the same moody depth */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "radial-gradient(ellipse at center, transparent 30%, rgba(13,10,8,0.95) 100%)",
+            pointerEvents: "none",
+          }} />
+
+          {/* Film grain for cohesion with the rest of the photo treatment on-site */}
+          <div className="grain-overlay" style={{
+            position: "absolute", inset: 0,
+            opacity: 0.12,
+            pointerEvents: "none",
+          }} />
+
+          {/* Bottom readability gradient for caption legibility */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to top, rgba(26,19,15,0.6) 0%, transparent 30%)",
+            pointerEvents: "none",
+          }} />
+
+          {/* Caption + progress dots */}
+          <div style={{
+            position: "absolute", bottom: 28, left: 32, right: 32,
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            zIndex: 2,
+          }}>
+            <p key={active} style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+              fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+              color: C.white, margin: 0,
+              animation: "fadeUp 0.5s ease both",
+            }}>
+              {HERO_SLIDES[active].caption}
+            </p>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", maxWidth: 220, justifyContent: "flex-end" }}>
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  aria-label={`Show slide ${i + 1}`}
+                  style={{
+                    width: i === active ? 20 : 6, height: 6, borderRadius: 999,
+                    background: i === active ? C.crimson : "rgba(255,255,255,0.35)",
+                    border: "none", cursor: "pointer", padding: 0,
+                    transition: "width 0.3s ease, background 0.3s ease",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="stage-line" style={{ zIndex: 30 }} />
+
+      <style>{`
+        @media (max-width: 860px) {
+          .hero-split { grid-template-columns: 1fr !important; }
+          .hero-media { min-height: 360px !important; order: -1; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
 // ── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
   const [bookingFor, setBookingFor] = useState(null);
@@ -460,6 +727,14 @@ export default function App() {
           background: linear-gradient(90deg, transparent, ${C.crimson} 30%, ${C.crimson} 70%, transparent);
           opacity:0.85;
         }
+        @keyframes pulse {
+          0%,100% { opacity:1; } 50% { opacity:0.3; }
+        }
+        .tag-dot {
+          width:6px; height:6px; border-radius:50%; background:${C.crimson};
+          animation: pulse 2s ease-in-out infinite;
+          display:inline-block; flex-shrink:0;
+        }
         .offering-card {
           cursor:pointer;
           transition: background 0.2s, transform 0.15s;
@@ -473,6 +748,11 @@ export default function App() {
           letter-spacing:0.12em; text-transform:uppercase;
           color:${C.crimson}; margin-top:8px;
           font-family:'DM Sans',sans-serif;
+        }
+        .grain-overlay {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+          background-size: 180px 180px;
+          background-repeat: repeat;
         }
         html, body { overflow-x:hidden !important; max-width:100vw !important; }
         * { min-width:0; box-sizing:border-box; }
@@ -503,84 +783,10 @@ export default function App() {
        path === "/programs/band"        ? <BandProgramPage onRequestLessons={(i) => setBookingFor(i || "")} setPath={setPath} /> : (
         <>
           {/* ── HERO ── */}
-          <section style={{
-            position:"relative",display:"flex",flexDirection:"column",
-            alignItems:"center",justifyContent:"center",textAlign:"center",
-            minHeight:"100vh",overflow:"hidden",
-            background:C.lightCream55,
-            paddingTop:68,
-            width:"100%",boxSizing:"border-box",
-          }}>
-            <div style={{position:"absolute",inset:0,zIndex:0}}>
-              <div style={{
-                position:"absolute",inset:0,
-                backgroundImage:`radial-gradient(${C.espresso} 1px, transparent 1px)`,
-                backgroundSize:"28px 28px",
-                opacity:0.04,
-              }}/>
-              <div style={{
-                position:"absolute",inset:0,
-                background:`radial-gradient(ellipse at 70% 50%, ${C.crimson06} 0%, transparent 60%)`,
-              }}/>
-              <div className="stage-line" style={{zIndex:30}}/>
-            </div>
-
-            <div style={{position:"relative",zIndex:30,maxWidth:780,padding:"64px 24px"}}>
-              <h1 className="fade-up delay-1" style={{
-                fontFamily:"'Archivo',sans-serif",fontWeight:900,
-                fontSize:"clamp(56px,10vw,90px)",lineHeight:0.93,
-                letterSpacing:-2,color:C.espresso,margin:"0 0 16px",
-              }}>
-                Every musician<br/>deserves a <span style={{color:C.crimson,fontStyle:"italic"}}>stage.</span>
-              </h1>
-
-              <p className="fade-up delay-2" style={{
-                fontFamily:"'DM Sans',sans-serif",
-                color:C.muted,fontSize:18,
-                lineHeight:1.75,maxWidth:520,margin:"0 auto 40px",fontWeight:300,
-              }}>
-                Private, semi-private, and group lessons in music and performance, taught by passionate instructors in a welcoming atmosphere.
-              </p>
-
-              <div className="fade-up delay-3" style={{display:"flex",flexWrap:"wrap",gap:12,justifyContent:"center",marginBottom:48}}>
-                <Button
-                  onClick={() => setBookingFor("")}
-                  style={{fontSize:14,padding:"15px 36px",boxShadow:`0 4px 20px ${C.crimson30}`}}
-                >
-                  Request Lessons
-                </Button>
-                <Button
-                  variant="yellow"
-                  href="/summer-camp"
-                  onClick={e => { e.preventDefault(); navigate("/summer-camp"); }}
-                  style={{fontSize:14, padding:"15px 36px"}}
-                >
-                  Summer Camp 2026
-                </Button>
-              </div>
-
-              <div className="fade-up delay-4" style={{display:"flex",flexWrap:"wrap",justifyContent:"center",gap:"8px 24px"}}>
-                {[
-                  {href:"tel:916-435-1300",Icon:Phone,label:"(916) 435-1300"},
-                  {href:"mailto:admin@headlinermusicacademy.com",Icon:Mail,label:"admin@headlinermusicacademy.com"},
-                  {href:"https://maps.google.com/?q=2311+Sunset+Blvd,+Rocklin,+CA+95765",Icon:MapPin,label:"2311 Sunset Blvd, Rocklin, CA 95765",external:true},
-                ].map(({href,Icon,label,external})=>(
-                  <a key={label} href={href} target={external?"_blank":undefined} rel={external?"noreferrer":undefined}
-                    style={{
-                      display:"flex",alignItems:"center",gap:6,
-                      fontSize:16,color:C.muted,
-                      textDecoration:"none",fontFamily:"'DM Sans',sans-serif",
-                      transition:"color 0.2s",
-                    }}
-                    onMouseEnter={e=>e.currentTarget.style.color=C.teal}
-                    onMouseLeave={e=>e.currentTarget.style.color=C.muted}
-                  >
-                    <Icon size={16}/>{label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
+          <HeroSection
+            navigate={navigate}
+            setBookingFor={setBookingFor}
+          />
 
           {/* ── OFFERINGS ── */}
           <section style={{padding:"72px 20px",maxWidth:1200,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
@@ -616,7 +822,7 @@ export default function App() {
                   key={i}
                   className="offering-card"
                   style={{
-                    background:C.white,
+                    background:C.lightCream,
                     padding:"36px 24px",
                     display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center",
                   }}
