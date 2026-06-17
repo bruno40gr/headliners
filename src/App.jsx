@@ -423,7 +423,7 @@ function TermsAndConditionsPage() {
 
 // ── Hero media — the real student journey, first lesson to live stage ────────
 const HERO_SLIDES = [
-  { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250115_171316_apoono.jpg", caption: "First lesson", focal: "center 30%" },
+  
   { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg", caption: "Learning the keys", focal: "center 35%" },
   { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260616_002552898.PORTRAIT_anjebq.jpg", caption: "Behind the kit", focal: "center 35%" },
   { type: "image", src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781716115/PXL_20260524_010310811_tzpycp.jpg", caption: "Songwriting", focal: "center 28%" },
