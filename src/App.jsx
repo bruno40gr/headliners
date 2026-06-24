@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapPin, Mail, Phone, X, ChevronDown } from "lucide-react";
+import { MapPin, Mail, Phone, X, ChevronDown, ArrowRight } from "lucide-react";
 import ProgramsNav from "./ProgramsNav";
 import SummerCampPage from "./SummerCampPage";
 import BandProgramPage from "./BandProgramPage";
@@ -42,7 +42,6 @@ const C = {
   inputBg:      "#fafaf8",
   placeholder:  "#bbb",
   subtext:      "#aaa",
-  cardHover:    "#F4F4F4",
   errorText:    "#dc2626",
   errorBg:      "#fef2f2",
   errorBorder:  "#fecaca",
@@ -437,7 +436,7 @@ const HERO_SLIDES = [
 
 // Unifies mixed photo/video sources (different cameras, lighting, days) into
 // one cohesive, sober palette — warm, slightly desaturated, contrast-lifted.
-const HERO_PHOTO_FILTER = "saturate(0.7) contrast(1.18) brightness(0.8) sepia(0.04)";
+const HERO_PHOTO_FILTER = "sepia(0.18) saturate(0.85) contrast(1.08) brightness(0.97)";
 
 function HeroSection({ navigate, setBookingFor }) {
   const [active, setActive] = useState(0);
@@ -512,7 +511,7 @@ function HeroSection({ navigate, setBookingFor }) {
             maxWidth: 460, margin: "0 0 36px", fontWeight: 300,
             position: "relative", zIndex: 1,
           }}>
-            Private, semi-private, and group lessons taught by passionate instructors — building toward something every student gets to do: perform live.
+            Private, semi-private, and group lessons taught by passionate instructors.
           </p>
 
           <div className={loaded ? "fade-up delay-4" : ""} style={{
@@ -621,21 +620,6 @@ function HeroSection({ navigate, setBookingFor }) {
             pointerEvents: "none",
           }} />
 
-          {/* Darkened aura — radial vignette pulling edges/corners darker so every
-              photo, regardless of source lighting, reads with the same moody depth */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "radial-gradient(ellipse at center, transparent 30%, rgba(13,10,8,0.95) 100%)",
-            pointerEvents: "none",
-          }} />
-
-          {/* Film grain for cohesion with the rest of the photo treatment on-site */}
-          <div className="grain-overlay" style={{
-            position: "absolute", inset: 0,
-            opacity: 0.12,
-            pointerEvents: "none",
-          }} />
-
           {/* Bottom readability gradient for caption legibility */}
           <div style={{
             position: "absolute", inset: 0,
@@ -687,7 +671,6 @@ function HeroSection({ navigate, setBookingFor }) {
     </section>
   );
 }
-
 // ── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
   const [bookingFor, setBookingFor] = useState(null);
@@ -736,11 +719,12 @@ export default function App() {
           display:inline-block; flex-shrink:0;
         }
         .offering-card {
+          background: ${C.white};
           cursor:pointer;
           transition: background 0.2s, transform 0.15s;
           position:relative;
         }
-        .offering-card:hover { background: ${C.cardHover} !important; transform:translateY(-2px); z-index:1; }
+        .offering-card:hover { background: ${C.lightCream}; transform:translateY(-2px); z-index:1; }
         .offering-card:hover .card-hint { opacity:1; }
         .card-hint {
           opacity:0; transition:opacity 0.2s;
@@ -822,7 +806,6 @@ export default function App() {
                   key={i}
                   className="offering-card"
                   style={{
-                    background:C.lightCream,
                     padding:"36px 24px",
                     display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center",
                   }}

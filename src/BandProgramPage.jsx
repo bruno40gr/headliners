@@ -80,35 +80,35 @@ const venues = [
 const faqs = [
   {
     q: "What's included in the program?",
-    a: "A dedicated director who guides your band through every stage of development. Access to backline and our on-site recording studio. We handle the logistics and production for your shows so you can focus on performing. We also connect you with real gig opportunities across Placer County — you decide which ones to take. Everything you need to go from rehearsing to actually playing live.",
+    a: "A dedicated director who guides your band through every stage of development. Access to backline and our on-site recording studio. We handle the logistics and production for your shows so you can focus on performing. We also connect you with real gig opportunities across Placer County. We'll talk through each one together and find what fits. Everything you need to go from rehearsing to actually playing live.",
   },
   {
     q: "What do you expect from a band?",
-    a: "Show up consistently and communicate openly with your bandmates and director. Be someone people enjoy making music with. Respect the space, the instruments, and each other. Beyond that, this is your band — you're in the driver's seat.",
+    a: "Show up consistently and communicate openly with your bandmates and director. Be someone people enjoy making music with. Respect the space, the instruments, and each other. Beyond that, we're here to support the band you're building, every step of the way.",
   },
   {
     q: "I don't have a band. Can I still join?",
-    a: "Absolutely — reach out and let us know. Every musician deserves a stage, and you shouldn't have to wait until you have a full band to get started. We'll connect you with other musicians who share your passion and help put something together. It happens more often than you'd think.",
+    a: "Absolutely. Reach out and let us know. Every musician deserves a stage, and you shouldn't have to wait until you have a full band to get started. We'll connect you with other musicians who share your passion and help put something together. It happens more often than you'd think.",
   },
   {
     q: "When will my band be ready to perform?",
-    a: "It depends on the band, and that's a good thing — every group moves at its own pace. Some are ready for their first gig within a few months. Others take a little longer to find their footing. Your director will give you an honest read on where you stand and help you get there.",
+    a: "It depends on the band, and that's a good thing. Every group moves at its own pace. Some are ready for their first gig within a few months. Others take a little longer to find their footing. Your director will give you an honest read on where you stand and help you get there.",
   },
   {
     q: "What happens if my band or a bandmate can't make it to a session?",
-    a: "Rehearsal continues with whoever is there. Learning to work around an absent member is actually a valuable part of being in a real band. That said, consistency makes a huge difference — the more you show up, the faster you grow together.",
+    a: "Rehearsal continues with whoever is there. Learning to work around an absent member is actually a valuable part of being in a real band. That said, consistency makes a huge difference. The more you show up, the faster you grow together.",
   },
   {
     q: "Are performances mandatory?",
-    a: "Not at all. When a gig opportunity comes up, we'll bring it to you and let you decide if it's the right fit. Playing live is one of the most rewarding parts of this program, but we never pressure a band onto a stage before they're ready.",
+    a: "Not at all. When a gig opportunity comes up, we'll bring it to you and let you decide if it's the right fit. Playing live is one of the most rewarding parts of this program, and we'll help you get there when you're ready to perform.",
   },
   {
     q: "Does Headliner manage the band?",
-    a: "No — the band belongs to you. Your director is there to coach, advise, and support, but the creative and logistical decisions are yours to make. We help you become a functioning band; we don't run it for you.",
+    a: "Your director is there to coach, advise, and support, every step of the way. We'll talk through the creative and logistical decisions together. Our job is to help you grow into a band that can stand on its own, not to run it for you.",
   },
   {
     q: "Are recording sessions free?",
-    a: "Recording is included in the program — there's no separate fee. When your band is ready to document what you've built, the studio is there for you.",
+    a: "Recording is included in the program. There's no separate fee. When your band is ready to document what you've built, the studio is there for you.",
   },
 ];
 
@@ -203,7 +203,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", color: "rgba(255,255,255,0.6)",
             margin: "0 0 32px",
           }}>
-            Don't wait to be discovered. Go find the stage.
+            Wherever your band is right now, we're here to help you find the stage.
           </p>
 
           <p className="fu d3" style={{
@@ -230,7 +230,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               There is nothing<br/>like being in a <span style={{ color: C.crimson }}>band.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9, marginBottom: 24 }}>
-              As you rehearse and start playing live, your director guides you through setlist choices, stage presence, and finding your unique sound. You lead the creative vision while your director helps you bring it to life.
+              As you rehearse and start playing live, your director works alongside you on setlist choices, stage presence, and finding your sound. We'll talk through the big decisions together, every step of the way.
             </p>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
               Every band starts somewhere different and moves at its own pace. Some come in with two songs and a name. Some come in with six months of rehearsals and no idea what to do next. The program meets you where you are, and your director stays with you through all of it.
@@ -261,7 +261,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div>
             <Eyebrow color={C.teal}>How it goes</Eyebrow>
             <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
-              You play.<br/><span style={{ color: C.crimson }}>We get you there.</span>
+              We're with you,<br/><span style={{ color: C.crimson }}>all the way to the stage.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
               You get access to backline at the academy so gear is not a barrier to entry. Recording sessions are there when you are ready to document what you have built. We run the logistics and production side of your shows so you can actually enjoy performing instead of stressing about the details.

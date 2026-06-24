@@ -20,7 +20,7 @@ const C = {
 const faqs = [
   {
     q: "My child has never touched an instrument. Is that okay?",
-    a: "Absolutely. This camp is built for kids who have never picked up an instrument. Our instructors meet every child where they are and go from there. First-timers are the norm, not the exception."
+    a: "Absolutely. This camp is built for kids who have never picked up an instrument. Our instructors meet every child where they are and go from there. No prior experience is required, and every camper gets placed in a band regardless of where they're starting from."
   },
   {
     q: "How are instruments assigned?",
@@ -214,7 +214,7 @@ export default function SummerCampPage({ setPath }) {
             fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", color: C.yellow, margin: "0 0 48px",
             maxWidth: 500, lineHeight: 1.3
           }}>
-            Your kid will be in a real band by Friday.
+            Your child will learn a song and perform it with a real band, by Friday.
           </p>
           <div className="sc-fu sc-d3" style={{ display: "flex", gap: "24px 40px", flexWrap: "wrap", marginBottom: 56 }}>
             {[
@@ -263,10 +263,10 @@ export default function SummerCampPage({ setPath }) {
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", letterSpacing: -1,
               color: C.espresso, margin: "0 0 32px", lineHeight: 0.95,
             }}>
-              Show up curious.<br />Leave as a <em style={{ fontStyle: "italic", color: C.crimson }}>band.</em>
+              From first rehearsal to real <em style={{ fontStyle: "italic", color: C.crimson }}>performance,</em> in one week.
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.8, marginBottom: 24 }}>
-              Your child walks in on Monday and walks out on Friday as a member of a real band — one that has rehearsed together all week and will perform an actual song at the end of it.
+              Your child walks in on Monday and walks out on Friday as a member of a real band, one that has rehearsed together all week and will perform an actual song at the end of it.
             </p>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.8, marginBottom: 24 }}>
               Each small group of up to 7 kids is assigned instruments, learns the basics from our instructors, and spends the week rehearsing together.
@@ -298,8 +298,8 @@ export default function SummerCampPage({ setPath }) {
                 { label: "Daily Hours", value: "9:00 AM – 12:30 PM",                    highlight: null },
                 { label: "Ages",        value: "8–12 years old",                        highlight: null },
                 { label: "Experience",  value: "None required",                  highlight: "teal" },
-                { label: "Band Size",   value: "Max 7 kids — co-ed",                   highlight: null },
-                { label: "Lunch",       value: "Not included — bring a snack",          highlight: null },
+                { label: "Band Size",   value: "Max 7 kids, co-ed",                   highlight: null },
+                { label: "Lunch",       value: "Not included, bring a snack",          highlight: null },
                 { label: "Final Day",   value: "Performance recorded for every family", highlight: "crimson" },
               ].map(({ label, value, highlight }, i, arr) => (
                 <div key={label} style={{
@@ -341,7 +341,7 @@ export default function SummerCampPage({ setPath }) {
               style={{ height: "auto", maxHeight: 72, width: "auto", maxWidth: 360, objectFit: "contain", display: "block", marginBottom: 40 }}
             />
             <p style={{ fontSize: 18, color: "rgba(255,255,255,0.75)", lineHeight: 1.9, fontWeight: 400, maxWidth: 480 }}>
-              We have been teaching music in Rocklin for over a decade, and what we have learned is simple: kids thrive when they perform. Headliner is built around that idea. Same dedicated staff, same community, but now with more focus on bands, creativity, and getting your child on a real stage. Summer Band Camp is where that journey starts, and we are building more programs around the same belief that every musician deserves an audience.
+              We have been teaching music in Rocklin for over a decade, and what we have learned is simple: kids thrive when they perform. Headliner is built around that idea. Same dedicated staff, same community, but now with more focus on bands, creativity, and getting your child on a real stage. Summer Band Camp is where that journey starts, and we are building more programs around the same belief that every musician deserves a stage.
             </p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, overflow: "hidden" }}>
@@ -373,7 +373,7 @@ export default function SummerCampPage({ setPath }) {
             fontSize: "clamp(2.4rem, 4vw, 3.5rem)", letterSpacing: -1,
             color: C.espresso, margin: "0 0 64px", textAlign: "center", lineHeight: 0.95,
           }}>
-            Good questions.<br /><em style={{ fontStyle: "italic", color: C.crimson }}>Real answers.</em>
+            Questions parents <em style={{ fontStyle: "italic", color: C.crimson }}>ask.</em>
           </h2>
           <div>
             {faqs.map(({ q, a }) => (
@@ -401,7 +401,7 @@ export default function SummerCampPage({ setPath }) {
             Reserve your <em style={{ fontStyle: "italic", color: C.crimson }}>spot.</em>
           </h2>
           <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.8, marginBottom: 16 }}>
-            Payment holds the spot. Each band is limited to 7 kids — when a band is full, it closes. Spots go quickly.
+            Payment holds the spot. Each band is limited to 7 kids, and when a band is full, it closes. Spots go quickly.
           </p>
           <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.8, marginBottom: 48 }}>
             A confirmation email will be sent within a few minutes of completing your registration.
