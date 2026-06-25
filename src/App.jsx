@@ -4,6 +4,7 @@ import ProgramsNav from "./ProgramsNav";
 import SummerCampPage from "./SummerCampPage";
 import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
+import CareersPage from "./CareersPage";  
 
 const offerings = [
   { icon: "🎸", name: "Guitar", desc: "Acoustic & electric" },
@@ -764,6 +765,7 @@ export default function App() {
        path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
        path === "/summer-camp"          ? <SummerCampPage setPath={setPath} /> :
        path === "/teachers"             ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/careers"              ? <CareersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/programs/band"        ? <BandProgramPage onRequestLessons={(i) => setBookingFor(i || "")} setPath={setPath} /> : (
         <>
           {/* ── HERO ── */}
