@@ -6,6 +6,7 @@ import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
 import CareersPage from "./CareersPage";  
 
+
 const offerings = [
   { icon: "🎸", name: "Guitar", desc: "Acoustic & electric" },
   { icon: "🎹", name: "Piano", desc: "Classical & contemporary" },
