@@ -83,3 +83,57 @@ export const fonts = {
   display: "'Baloo 2', sans-serif",
   body:    "'DM Sans', sans-serif",
 };
+
+// Program-level color rules
+// When building any program page, reference programPalettes[programName] to decide
+// which colors should dominate the layout, which are accents, and what percentage
+// of the page each color should occupy. Crimson is always reserved for CTAs —
+// never use it as a background or decorative color on early childhood pages.
+export const programPalettes = {
+  band: {
+    dominant:   { token: "espresso",  pct: 55, note: "Hero and dark panel backgrounds" },
+    secondary:  { token: "cream",     pct: 25, note: "Text panels, light sections" },
+    accent:     { token: "crimson",   pct: 12, note: "CTAs only" },
+    accent2:    { token: "teal",      pct: 8,  note: "Labels and wayfinding" },
+  },
+  privateLesson: {
+    dominant:   { token: "cream",     pct: 50, note: "Page base, most panels" },
+    secondary:  { token: "espresso",  pct: 25, note: "One or two hero panels" },
+    accent:     { token: "teal",      pct: 15, note: "Primary accent, instrument labels" },
+    accent2:    { token: "crimson",   pct: 10, note: "Booking CTAs only" },
+  },
+  summerCamp: {
+    dominant:   { token: "yellow",    pct: 45, note: "Hero and section fills" },
+    secondary:  { token: "cream",     pct: 30, note: "Content panels" },
+    accent:     { token: "crimson",   pct: 15, note: "CTAs and energy pops" },
+    accent2:    { token: "espresso",  pct: 10, note: "Headlines on yellow" },
+  },
+  tinyKeys: {
+    dominant:   { token: "cream",     pct: 40, note: "Page base and cards" },
+    secondary:  { token: "yellow",    pct: 25, note: "Primary tier accents" },
+    secondary2: { token: "teal",      pct: 20, note: "Secondary tier accents" },
+    accent:     { token: "crimson",   pct: 10, note: "CTAs only" },
+    accent2:    { token: "blush",     pct: 5,  note: "Fourth feature card only" },
+  },
+  miniBeats: {
+    dominant:   { token: "crimson",   pct: 40, note: "Hero and age tier cards" },
+    secondary:  { token: "cream",     pct: 30, note: "Page base and content panels" },
+    secondary2: { token: "espresso",  pct: 15, note: "Headlines on cream" },
+    accent:     { token: "yellow",    pct: 10, note: "Playful pops and activity moments" },
+    accent2:    { token: "teal",      pct: 5,  note: "CTAs and wayfinding only" },
+  },
+  littleRockers: {
+    dominant:   { token: "crimson",  pct: 40, note: "Hero accents, stickers, card borders" },
+    secondary:  { token: "cream",    pct: 30, note: "Page base and content panels" },
+    secondary2: { token: "blush",    pct: 15, note: "Section fills, modal callout" },
+    accent:     { token: "yellow",   pct: 10, note: "Playful pops and instrument badges" },
+    accent2:    { token: "teal",     pct: 5,  note: "Wayfinding and secondary labels" },
+  },
+  musicAndMe: {
+    dominant:   { token: "blush",     pct: 45, note: "Hero and section fills" },
+    secondary:  { token: "cream",     pct: 30, note: "Cards and content panels" },
+    secondary2: { token: "yellow",    pct: 12, note: "Warmth accents and highlights" },
+    accent:     { token: "crimson",   pct: 8,  note: "CTAs only" },
+    accent2:    { token: "teal",      pct: 5,  note: "Labels and wayfinding only" },
+  },
+};
