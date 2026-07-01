@@ -20,7 +20,7 @@ const PROGRAMS = [
   { label: "Band Program", sub: "All ages · Band & performance", href: "/programs/band", active: true },
   { label: "Summer Band Camp 2026", sub: "Ages 8–12 · July 27–31", href: "/summer-camp", active: true, badge: "Enrolling Now" },
   { label: "Music & Me", sub: "Ages 0–4 · Mommy & Me", href: null, active: false },
-  { label: "Tiny Keys", sub: "Ages 3–5 · Early piano", href: null, active: false },
+  { label: "Tiny Keys", sub: "Ages 3–5 · Early piano", href: "/tiny-keys", active: true },
   { label: "Mini Beats", sub: "Ages 5–7 · Rhythm & basics", href: null, active: false },
   { label: "Little Rockers", sub: "Ages 6–9 · Intro to bands", href: null, active: false },
 ];
