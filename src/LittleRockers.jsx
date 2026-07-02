@@ -119,11 +119,11 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
         <Bubble top={120} left={-80} size={240} color={C.blush} />
         <Bubble bottom={80} right="30%" size={100} color={C.yellowPastel} />
 
-        <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
           <div className="lr-split" style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 48,
+            gridTemplateColumns: "0.9fr 1.15fr",
+            gap: 56,
             alignItems: "center",
           }}>
 
@@ -132,8 +132,8 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
               {/* Eyebrow pill */}
               <div style={{
                 display: "inline-block",
-                background: C.blush,
-                color: C.crimson,
+                background: C.tealPastel,
+                color: C.tealDark,
                 fontFamily: fonts.body,
                 fontWeight: 700,
                 fontSize: 13,
@@ -142,7 +142,7 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 padding: "7px 16px",
                 borderRadius: 50,
                 marginBottom: 20,
-              }}>Ages 3 to 5 · First instruments</div>
+              }}>Ages 3 to 5 · MUSIC & DEVELOPMENT</div>
 
               {/* Program title */}
               <h1 style={{
@@ -159,10 +159,7 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 fontSize: 17, lineHeight: 1.75, color: C.muted,
                 margin: "0 0 32px", maxWidth: 400,
               }}>
-                Little Rockers is where young kids meet real instruments for the
-                first time. Guitar, drums, keys, and bass. Hands on, every class.
-                Play-based and designed for the 3 to 5 set.
-              </p>
+An engaging, play-based music program that helps preschoolers build confidence, coordination, communication, and a lifelong love of music.             </p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                 <Button onClick={openModal}>Reserve a spot</Button>
@@ -189,7 +186,7 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                   { value: "3 to 5",  label: "Ages"        },
                   { value: "Group",    label: "Format"      },
                   { value: "45 min",   label: "Per class"   },
-                  { value: "4",        label: "Instruments" },
+                  { value: "Interactive",        label: "Every Lesson" },
                 ].map(({ value, label }) => (
                   <div key={label}>
                     <div style={{
@@ -213,17 +210,17 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 position: "absolute", top: -8, right: 8, zIndex: 2,
                 background: C.yellow, color: C.espresso, borderRadius: 50,
                 padding: "9px 18px", fontFamily: fonts.display,
-                fontWeight: 800, fontSize: 13, transform: "rotate(5deg)",
+                fontWeight: 800, fontSize: 13, transform: "none",
                 border: `2px solid ${C.espresso}18`,
-              }}>Real instruments!</div>
+              }}>Learning Through Music</div>
 
               {/* Sticker: crimson */}
               <div className="lr-sticker-left" style={{
                 position: "absolute", bottom: 30, left: -10, zIndex: 2,
-                background: C.crimson, color: "#fff", borderRadius: 50,
+                background: C.teal, color: "#fff", borderRadius: 50,
                 padding: "9px 18px", fontFamily: fonts.display,
-                fontWeight: 800, fontSize: 13, transform: "rotate(-4deg)",
-              }}>Ages 3 to 5</div>
+                fontWeight: 800, fontSize: 13, transform: "none",
+              }}>AGES 3–5 • PRESCHOOL MUSIC</div>
 
               {/* Photo card */}
               <div style={{
@@ -233,9 +230,10 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
               }}>
                 <img
                   className="lr-hero-img"
-                  src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80"
+                  src="https://res.cloudinary.com/gozdpo8j/image/upload/v1782939927/ChatGPT_Image_Jul_1_2026_02_04_46_PM_fuwgb6.png
+                "
                   alt="Young kids playing instruments"
-                  style={{ width: "100%", height: 380, objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: 430, objectFit: "cover", display: "block" }}
                   onError={e => {
                     e.target.src = "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80";
                   }}
