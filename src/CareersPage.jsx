@@ -145,7 +145,7 @@ function ListBlock({ title, items }) {
   return (
     <div>
       <h2 style={{
-        fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: "clamp(1.6rem,3vw,2.1rem)",
+        fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem,3vw,2.1rem)",
         letterSpacing: -0.5, color: C.white, margin: "0 0 8px", lineHeight: 1.1,
       }}>{title}</h2>
       <div style={{ width: 40, height: 3, background: C.teal, borderRadius: 2, marginBottom: 26 }} />
@@ -240,7 +240,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
       minHeight: "100vh", overflowX: "hidden", paddingTop: 68, color: C.espresso,
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(18px);} to { opacity:1; transform:translateY(0);} }
         .cf-fade { animation: fadeUp 0.6s ease both; }
@@ -283,7 +283,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
             Careers
           </p>
           <h1 style={{
-            fontFamily: "'Archivo',sans-serif", fontWeight: 900, letterSpacing: -1,
+            fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, letterSpacing: -1,
             fontSize: "clamp(2.6rem,6vw,4.4rem)", color: C.white, lineHeight: 1, margin: "0 0 20px",
           }}>
             Teach the music you love.
@@ -299,7 +299,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
       {/* ── What it's like to teach here ── */}
       <section style={{ padding: "72px 40px 16px", maxWidth: 1100, margin: "0 auto" }}>
         <h2 style={{
-          fontFamily: "'Archivo',sans-serif", fontWeight: 900, letterSpacing: -1,
+          fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, letterSpacing: -1,
           fontSize: "clamp(1.9rem,4vw,2.8rem)", color: C.espresso, lineHeight: 1.05, margin: "0 0 40px",
         }}>
           What it's like to teach here
@@ -314,7 +314,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
                 <Icon size={22} color={C.teal} />
               </div>
               <h3 style={{
-                fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 18,
+                fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, fontSize: 18,
                 color: C.espresso, margin: "0 0 8px",
               }}>{title}</h3>
               <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.7, margin: 0 }}>
@@ -357,7 +357,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
             <div style={{ textAlign: "center", padding: "16px 0" }}>
               <div style={{ fontSize: 52, marginBottom: 16 }}>🎶</div>
               <h2 style={{
-                fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: 32,
+                fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, fontSize: 32,
                 color: C.espresso, letterSpacing: -1, margin: "0 0 12px", lineHeight: 1.1,
               }}>
                 Thanks, we got your application
@@ -372,7 +372,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
             <>
               <div style={{ marginBottom: 28 }}>
                 <h2 style={{
-                  fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: 28,
+                  fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, fontSize: 28,
                   letterSpacing: -1, color: C.espresso, margin: "0 0 6px", lineHeight: 1.1,
                 }}>
                   Tell us about yourself
@@ -480,7 +480,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
           Questions first?
         </p>
         <h2 style={{
-          fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: "clamp(1.9rem,4vw,2.8rem)",
+          fontFamily: "'Baloo 2',sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem,4vw,2.8rem)",
           color: C.white, margin: "0 0 32px", lineHeight: 1.05, letterSpacing: -1,
         }}>
           Reach out anytime.

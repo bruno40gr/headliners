@@ -53,7 +53,7 @@ export default function SummerCampPage({ setPath }) {
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.white, color: C.espresso, minHeight: "100vh", overflowX: "hidden", maxWidth: "100vw", paddingTop: 68 }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         
         *, *::before, *::after { box-sizing: border-box; }
         html, body { overflow-x: hidden !important; max-width: 100vw !important; margin: 0; padding: 0; }
@@ -194,7 +194,7 @@ export default function SummerCampPage({ setPath }) {
         }} />
         <div style={{
           position: "absolute", left: "-2vw", top: "50%", transform: "translateY(-50%)",
-          fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "40vw",
+          fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "40vw",
           lineHeight: 1, color: C.crimson, opacity: 0.02, pointerEvents: "none", zIndex: 1
         }}>H</div>
 
@@ -203,14 +203,14 @@ export default function SummerCampPage({ setPath }) {
           display: "flex", flexDirection: "column", alignItems: "flex-start", width: "100%"
         }}>
           <h1 className="sc-fu sc-d1" style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(3.5rem, 8vw, 6.5rem)", lineHeight: 0.93,
             letterSpacing: -2, color: "#fff", margin: "0 0 20px"
           }}>
             Summer<br />Band <em style={{ fontStyle: "italic", color: C.crimson }}>Camp.</em>
           </h1>
           <p className="sc-fu sc-d2" style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 700,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 700,
             fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)", color: C.yellow, margin: "0 0 48px",
             maxWidth: 500, lineHeight: 1.3
           }}>
@@ -241,7 +241,7 @@ export default function SummerCampPage({ setPath }) {
         <div className="sc-marquee">
           {[...Array(2)].fill(["Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•","No Experience Needed","•","Max 7 Kids Per Band","•","July 27–31","•"]).flat().map((item, i) => (
             <span key={i} style={{
-              fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 11,
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 11,
               letterSpacing: "0.2em", textTransform: "uppercase",
               color: item === "•" ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.9)",
               padding: item === "•" ? "0 8px" : "0 24px",
@@ -259,7 +259,7 @@ export default function SummerCampPage({ setPath }) {
               The Camp
             </p>
             <h2 style={{
-              fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", letterSpacing: -1,
               color: C.espresso, margin: "0 0 32px", lineHeight: 0.95,
             }}>
@@ -309,7 +309,7 @@ export default function SummerCampPage({ setPath }) {
                 }}>
                   <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{label}</p>
                   <p style={{
-                    fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 22,
+                    fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 22,
                     color: highlight === "teal" ? C.teal : highlight === "crimson" ? C.crimson : C.espresso,
                     margin: 0,
                   }}>{value}</p>
@@ -352,7 +352,7 @@ export default function SummerCampPage({ setPath }) {
               { value: "0",    label: "Experience Needed", color: "#fff" },
             ].map(({ value, label, color }) => (
               <div key={label} style={{ background: C.espresso, padding: "48px 24px", textAlign: "center" }}>
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.5rem, 4vw, 3.5rem)", color, lineHeight: 1, margin: "0 0 12px" }}>{value}</p>
+                <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.5rem, 4vw, 3.5rem)", color, lineHeight: 1, margin: "0 0 12px" }}>{value}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
               </div>
             ))}
@@ -369,7 +369,7 @@ export default function SummerCampPage({ setPath }) {
             <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
           </p>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(2.4rem, 4vw, 3.5rem)", letterSpacing: -1,
             color: C.espresso, margin: "0 0 64px", textAlign: "center", lineHeight: 0.95,
           }}>
@@ -378,7 +378,7 @@ export default function SummerCampPage({ setPath }) {
           <div>
             {faqs.map(({ q, a }) => (
               <div key={q} className="sc-faq-item">
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 20, color: C.espresso, margin: "0 0 16px", lineHeight: 1.3 }}>{q}</p>
+                <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 20, color: C.espresso, margin: "0 0 16px", lineHeight: 1.3 }}>{q}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: C.muted, lineHeight: 1.8, margin: 0, maxWidth: 700 }}>{a}</p>
               </div>
             ))}
@@ -394,7 +394,7 @@ export default function SummerCampPage({ setPath }) {
             Registration
           </p>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", letterSpacing: -1,
             color: C.espresso, margin: "0 0 24px", lineHeight: 0.95,
           }}>

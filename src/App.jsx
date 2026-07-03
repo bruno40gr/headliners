@@ -369,7 +369,7 @@ function PillToggle({ label, active, onClick }) {
 function PrivacyPolicyPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Archivo',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Privacy Policy
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
@@ -399,7 +399,7 @@ function PrivacyPolicyPage() {
 function TermsAndConditionsPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Archivo',sans-serif",fontWeight:900,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Terms and Conditions
       </h1>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
@@ -505,7 +505,7 @@ function HeroSection({ navigate, setBookingFor }) {
           </p>
 
           <h1 className={loaded ? "fade-up delay-2" : ""} style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(42px, 6.4vw, 72px)", lineHeight: 0.96,
             letterSpacing: -2, color: C.white, margin: "0 0 22px",
             position: "relative", zIndex: 1,
@@ -699,7 +699,7 @@ export default function App() {
   return (
     <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         ::selection { background: ${C.crimson15}; color: ${C.espresso}; }
         @keyframes fadeUp {
@@ -798,7 +798,7 @@ export default function App() {
                 What we offer
               </p>
               <h2 style={{
-                fontFamily:"'Archivo',sans-serif",fontWeight:900,
+                fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
                 fontSize:"clamp(2.4rem,5vw,3.6rem)",letterSpacing:-1,
                 color:C.espresso,lineHeight:0.95,margin:0,
               }}>
@@ -836,7 +836,7 @@ export default function App() {
                 >
                   <span style={{fontSize:36,marginBottom:16}}>{item.icon}</span>
                   <h3 style={{
-                    fontFamily:"'Archivo',sans-serif",fontWeight:800,
+                    fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
                     fontSize:16,letterSpacing:"0.1em",textTransform:"uppercase",
                     color:C.espresso,margin:"0 0 4px",
                   }}>{item.name}</h3>
@@ -864,14 +864,14 @@ export default function App() {
                   Summer 2026
                 </p>
                 <h1 style={{
-                  fontFamily:"'Archivo',sans-serif",fontWeight:900,
+                  fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
                   fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
                   color:C.white,lineHeight:0.95,margin:"0 0 16px",
                 }}>
                   Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
                 </h1>
                 <h2 style={{
-                  fontFamily:"'Archivo',sans-serif",fontWeight:700,
+                  fontFamily:"'Baloo 2',sans-serif",fontWeight:700,
                   fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
                   color:C.white70,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
                 }}>
@@ -908,7 +908,7 @@ export default function App() {
                 ].map(({label,value,color})=>(
                   <div key={label} style={{background:C.espresso,padding:"28px 24px"}}>
                     <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:C.lightCream,marginBottom:8}}>{label}</p>
-                    <p style={{fontFamily:"'Archivo',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
+                    <p style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
                   </div>
                 ))}
               </div>
@@ -938,7 +938,7 @@ export default function App() {
                 ))}
               </div>
               <p style={{
-                fontFamily:"'Archivo',sans-serif",fontWeight:700,fontStyle:"italic",
+                fontFamily:"'Baloo 2',sans-serif",fontWeight:700,fontStyle:"italic",
                 fontSize:"clamp(1.1rem,2.5vw,1.5rem)",color:C.espresso,
                 lineHeight:1.55,maxWidth:640,margin:"0 auto 24px",
               }}>

@@ -235,7 +235,7 @@ function TeacherModal({ teacher, onClose }) {
             overflowY: "auto", display: "flex", flexDirection: "column",
           }}>
             <h2 style={{
-              fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
               fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
               color: C.espresso, margin: "0 0 24px", lineHeight: 1,
               letterSpacing: -1,
@@ -387,7 +387,7 @@ function TeacherCard({ teacher, onClick }) {
 
       {/* Name + instruments */}
       <h3 style={{
-        fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+        fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
         fontSize: 20, color: hovered ? C.crimson : C.espresso,
         margin: "0 0 5px", lineHeight: 1.1,
         transition: "color 0.2s",
@@ -422,7 +422,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
       paddingTop: 68,
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
         .tp-grid {
           display: grid;
@@ -473,7 +473,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
         <div style={{ maxWidth: 760, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <Eyebrow color={C.teal}>Our Faculty</Eyebrow>
           <h1 style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(2.6rem, 6vw, 4.8rem)",
             color: C.white, margin: "0 0 28px", lineHeight: 0.92, letterSpacing: -2,
           }}>
@@ -513,7 +513,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
           Ready to start?
         </p>
         <h2 style={{
-          fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+          fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
           fontSize: "clamp(2rem, 4vw, 3rem)",
           color: C.white, margin: "0 0 32px", lineHeight: 1,
           letterSpacing: -1,

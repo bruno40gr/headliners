@@ -257,7 +257,7 @@ function DropdownItem({ item, onClick }) {
     >
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <span style={{
-          fontFamily:   "'Archivo', sans-serif",
+          fontFamily:   "'Baloo 2', sans-serif",
           fontWeight:   800,
           fontSize:     14,
           color:        isActive ? C.espresso : "#A89D93",
@@ -380,7 +380,7 @@ function MobileAccordion({ title, items, navigate, onClose, itemStyle }) {
             >
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{
-                  fontFamily:   "'Archivo', sans-serif",
+                  fontFamily:   "'Baloo 2', sans-serif",
                   fontWeight:   700,
                   fontSize:     14,
                   color:        item.active ? C.espresso : "#A89D93",

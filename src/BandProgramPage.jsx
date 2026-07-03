@@ -121,7 +121,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.offwhite, color: C.espresso, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         html, body { overflow-x: hidden !important; max-width: 100vw !important; margin: 0; padding: 0; }
 
@@ -191,7 +191,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <Eyebrow color={C.teal}>Band Program</Eyebrow>
 
           <h1 className="fu d1" style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
             fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 0.95,
             letterSpacing: -2, color: "#fff", margin: "0 0 20px", maxWidth: 700,
           }}>
@@ -199,7 +199,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           </h1>
 
           <p className="fu d2" style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 700, fontStyle: "italic",
+            fontFamily: "'Baloo 2', sans-serif", fontWeight: 700, fontStyle: "italic",
             fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", color: "rgba(255,255,255,0.6)",
             margin: "0 0 32px",
           }}>
@@ -226,7 +226,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center" }}>
           <div>
             <Eyebrow color={C.crimson}>The approach</Eyebrow>
-            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
+            <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
               There is nothing<br/>like being in a <span style={{ color: C.crimson }}>band.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9, marginBottom: 24 }}>
@@ -245,7 +245,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               background: C.crimson, borderRadius: 12, padding: "20px 24px",
               boxShadow: "0 16px 40px rgba(255,0,68,0.3)",
             }}>
-              <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: 28, color: "#fff", margin: "0 0 4px", lineHeight: 1 }}>Live.</p>
+              <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 28, color: "#fff", margin: "0 0 4px", lineHeight: 1 }}>Live.</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", margin: 0 }}>Performance from day one</p>
             </div>
           </div>
@@ -260,7 +260,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           </div>
           <div>
             <Eyebrow color={C.teal}>How it goes</Eyebrow>
-            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
+            <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 28px", lineHeight: 0.93 }}>
               We're with you,<br/><span style={{ color: C.crimson }}>all the way to the stage.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
@@ -275,7 +275,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "start" }}>
           <div>
             <Eyebrow color={C.yellow}>Community reach</Eyebrow>
-            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 28px", lineHeight: 0.93 }}>
+            <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 28px", lineHeight: 0.93 }}>
               Some of the real stages<br/>we've <span style={{ color: C.crimson }}>performed at.</span>
             </h2>
             <p style={{ fontSize: 17, color: "rgba(255,255,255,0.5)", lineHeight: 1.9, marginBottom: 28 }}>
@@ -288,7 +288,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           <div style={{ paddingTop: 8 }}>
             {venues.map(({ name, location }) => (
               <div key={name} className="bp-venue-row" style={{ borderBottomColor: "rgba(255,255,255,0.07)" }}>
-                <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", margin: 0 }}>{name}</p>
+                <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", margin: 0 }}>{name}</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", margin: 0 }}>{location}</p>
               </div>
             ))}
@@ -302,7 +302,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
           <div style={{ marginBottom: 56 }}>
             <Eyebrow color={C.teal}>In the program</Eyebrow>
-            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
+            <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
               Our home <span style={{ color: C.crimson }}>bands.</span>
             </h2>
           </div>
@@ -333,7 +333,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
                 {/* Text */}
                 <div style={{ padding: "16px 24px 20px" }}>
                   <p style={{
-                    fontFamily: "'Archivo', sans-serif", fontWeight: 900,
+                    fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
                     fontSize: 18, color: C.espresso, margin: 0, lineHeight: 1.1,
                   }}>
                     {name}
@@ -351,7 +351,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
           <div style={{ marginBottom: 56 }}>
             <Eyebrow color={C.teal}>FAQ</Eyebrow>
-            <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
+            <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 4vw, 3.4rem)", letterSpacing: -1.5, color: C.espresso, margin: "0 0 16px", lineHeight: 0.93 }}>
               Questions we get <span style={{ color: C.crimson }}>asked.</span>
             </h2>
           </div>
@@ -361,7 +361,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               <div key={i} style={{
                 paddingBottom: 32, borderBottom: i < faqs.length - 1 ? `1px solid ${C.border}` : "none", marginBottom: 32,
               }}>
-                <h3 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 800, fontSize: 18, color: C.espresso, margin: "0 0 12px", lineHeight: 1.2 }}>
+                <h3 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 18, color: C.espresso, margin: "0 0 12px", lineHeight: 1.2 }}>
                   {q}
                 </h3>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: C.muted, lineHeight: 1.85, margin: 0 }}>
@@ -378,7 +378,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: `radial-gradient(at 0% 0%, rgba(255,0,68,0.08) 0px, transparent 50%)` }} />
         <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <img src={LOGO_WHITE} alt="Headliner Music Academy" style={{ height: "auto", maxHeight: 52, width: "auto", maxWidth: 240, objectFit: "contain", display: "block", margin: "0 auto 48px" }} />
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900, fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 24px", lineHeight: 0.93 }}>
+          <h2 style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: -1.5, color: "#fff", margin: "0 0 24px", lineHeight: 0.93 }}>
             Every musician deserves<br/>a <span style={{ color: C.crimson }}>stage.</span>
           </h2>
 <div style={{ marginBottom: 44 }} />
