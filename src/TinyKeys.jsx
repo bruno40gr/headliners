@@ -2,7 +2,6 @@ import { useState } from "react";
 import { C, fonts } from "./tokens";
 import {
   Button,
-  Modal,
   Bubble,
   Chip,
   WaveDivider,
@@ -11,6 +10,7 @@ import {
   globalStyles,
 } from "./ui";
 import ProgramsNav from "./ProgramsNav";
+import BookingInterstitial from "./BookingInterstitial";
 
 /* ─── Playful piano SVG ──────────────────────────────────────────────────── */
 const PianoKeys = () => {
@@ -52,16 +52,11 @@ const LevelBadge = ({ number, color, bg }) => (
    PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [interstitialOpen, setInterstitialOpen] = useState(false);
 
   const openModal = () => {
-    if (onRequestLessons) {
-      onRequestLessons("Tiny Keys");
-    } else {
-      setModalOpen(true);
-    }
+    setInterstitialOpen(true);
   };
-  const closeModal = () => setModalOpen(false);
 
   return (
     <div style={{ fontFamily: fonts.body, background: C.cream, color: C.text }}>
@@ -131,6 +126,9 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                 <Button onClick={openModal}>Reserve a spot</Button>
+                <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: "6px 0 0", textAlign: "center" }}>
+                  Takes about 2 minutes.
+                </p>
                 <button
                   onClick={() => document.getElementById("tk-curriculum")?.scrollIntoView({ behavior: "smooth" })}
                   style={{
@@ -422,6 +420,9 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         body="Reach out when your child is ready and we'll find the right class together."
       >
         <Button onClick={openModal}>Reserve a spot</Button>
+        <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: "6px 0 0", textAlign: "center" }}>
+          Takes about 2 minutes.
+        </p>
         <Button variant="secondary" accent={C.teal} onClick={() => navigate("/programs")}>
           See all programs
         </Button>
@@ -440,53 +441,19 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         </p>
       </CTASection>
 
-      {/* Fallback modal */}
-      {modalOpen && !onRequestLessons && (
-        <Modal onClose={closeModal} maxWidth={440}>
-          <div style={{ textAlign: "center", marginBottom: 22 }}>
-            <div style={{ fontSize: 40, marginBottom: 12 }}>🎹</div>
-            <h2 style={{
-              fontFamily: fonts.display, fontWeight: 800,
-              fontSize: 22, color: C.espresso, margin: "0 0 8px",
-            }}>Ready to get started?</h2>
-            <p style={{
-              fontFamily: fonts.body, fontSize: 14,
-              color: C.muted, lineHeight: 1.65, margin: 0,
-            }}>
-              We use Opus to manage enrollment. Clicking below takes you to
-              our scheduling page to pick a class and reserve a spot.
-            </p>
-          </div>
-
-          <div style={{
-            background: C.tealPastel, borderRadius: 10, padding: "13px 16px",
-            marginBottom: 22, borderLeft: `4px solid ${C.teal}`,
-          }}>
-            <p style={{
-              fontFamily: fonts.body, fontSize: 13,
-              color: C.tealDark, margin: 0, lineHeight: 1.6,
-            }}>
-              Questions first? Call us at{" "}
-              <a href="tel:9164351300" style={{ color: C.tealDark, fontWeight: 700 }}>
-                (916) 435-1300
-              </a>. We're happy to chat before you book.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <Button
-              onClick={() => window.open("https://headlinermusicacademy.com", "_blank")}
-              style={{ textAlign: "center" }}
-            >
-              Reserve a spot in Opus
-            </Button>
-            <button onClick={closeModal} style={{
-              background: "none", border: "none", cursor: "pointer",
-              fontFamily: fonts.body, fontSize: 13,
-              color: C.muted, padding: "8px", textAlign: "center",
-            }}>Maybe later</button>
-          </div>
-        </Modal>
+      {/* Booking interstitial */}
+      {interstitialOpen && (
+        <BookingInterstitial
+          programName="Tiny Keys"
+          programColor={C.yellow}
+          opusL1="https://headlinerma.opus1.io/w/tinykeys"
+          opusL2="https://headlinerma.opus1.io/w/tinykeys"
+          opusL3="https://headlinerma.opus1.io/w/tinykeys"
+          onClose={() => setInterstitialOpen(false)}
+          emailjsServiceId="service_734y6qg"
+          emailjsTemplateId="template_526w74g"
+          emailjsPublicKey="FdW-lGbAyQuJZFy-y"
+        />
       )}
     </div>
   );

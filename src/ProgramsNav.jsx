@@ -16,7 +16,7 @@ const C = {
   border:   "#E8E2DA",
 };
 
-const PROGRAMS = [
+export const PROGRAMS = [
   { label: "Band Program", sub: "All ages · Band & performance", href: "/programs/band", active: true },
   { label: "Summer Band Camp 2026", sub: "Ages 8–12 · July 27–31", href: "/summer-camp", active: true, badge: "Enrolling Now" },
   { label: "Music & Me", sub: "Ages 0–4 · Mommy & Me", href: null, active: false },

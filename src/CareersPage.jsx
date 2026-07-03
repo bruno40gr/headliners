@@ -37,7 +37,7 @@ const EMAILJS_SERVICE_ID  = "service_734y6qg";
 // For a cleaner email, create a dedicated "Careers" template in EmailJS and paste
 // its ID here. Either way, every field is also bundled into {{message}} below,
 // so nothing is ever lost.
-const EMAILJS_TEMPLATE_ID = "template_czlclec";
+const EMAILJS_TEMPLATE_ID = "template_526w74g";
 const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
 
 // ── Editable content ──────────────────────────────────────────────────────────
@@ -214,23 +214,15 @@ export default function CareersPage({ setPath, onRequestLessons }) {
           template_id: EMAILJS_TEMPLATE_ID,
           user_id: EMAILJS_PUBLIC_KEY,
           template_params: {
-            // Dedicated careers fields (use these if you build a careers template)
-            applicant_name: form.name,
+            name: form.name,
             email: form.email,
             phone: form.phone || "Not provided",
-            position,
+            position: form.position.join(", ") || "Not specified",
             experience: form.experience || "Not specified",
-            sight_reading: form.sightRead || "Not specified",
-            availability,
-            resume_link: form.resume || "Not provided",
-            subject: `Job application, ${position}`,
-            // Full readable block, works with any template that prints {{message}}
-            message: summary,
-            // Aliases so the existing booking template still fills in gracefully
-            student_name: form.name,
-            instrument: position,
-            experience_level: form.experience || "Not specified",
-            time_of_day: availability,
+            sight_read: form.sightRead || "Not specified",
+            availability: form.availability.join(", ") || "Not specified",
+            resume: form.resume || "Not provided",
+            message: form.message || "None",
           },
         }),
       });

@@ -147,6 +147,11 @@ function BookingModal({ instrument, onClose }) {
   });
   const [status, setStatus] = useState("idle");
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
   const set = (k,v) => setForm(f=>({...f,[k]:v}));
   const toggleArr = (k,v) => setForm(f=>({
     ...f,[k]: f[k].includes(v) ? f[k].filter(x=>x!==v) : [...f[k],v],
@@ -162,12 +167,15 @@ function BookingModal({ instrument, onClose }) {
           service_id: EMAILJS_SERVICE_ID, template_id: EMAILJS_TEMPLATE_ID,
           user_id: EMAILJS_PUBLIC_KEY,
           template_params:{
-            student_name: form.name, age: form.age||"Not provided",
+            form_type: "Lesson Inquiry",
+            name: form.name, age: form.age||"Not provided",
             email: form.email, instrument: form.instrument,
             experience_level: form.level,
             days: form.days.join(", ")||"Not specified",
             time_of_day: form.times.join(", ")||"Not specified",
             message: form.notes||"None",
+            preferred_date: "N/A",
+            time_window: "N/A",
           },
         }),
       });
@@ -181,7 +189,6 @@ function BookingModal({ instrument, onClose }) {
 
   return (
     <div
-      onClick={e=>e.target===e.currentTarget&&status!=="sending"&&onClose()}
       style={{
         position:"fixed",inset:0,zIndex:200,
         background: C.espresso75, backdropFilter:"blur(8px)",
@@ -208,31 +215,28 @@ function BookingModal({ instrument, onClose }) {
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:52,marginBottom:16}}>🎶</div>
             <h2 style={{
-              fontFamily:"'Archivo',sans-serif",fontWeight:900,
-              fontSize:36,color:C.espresso,letterSpacing:-1,
-              margin:"0 0 12px",lineHeight:1.1,
+              fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+              fontSize:28,color:C.crimson,
+              margin:"0 0 6px",lineHeight:1.1,
             }}>
-              We'll be in touch <span style={{color:C.crimson}}>soon!</span>
+              We'll be in touch soon!
             </h2>
-            <p style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,fontSize:15,lineHeight:1.7,maxWidth:360,margin:"0 auto 8px"}}>
+            <p style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,fontSize:14,lineHeight:1.5,maxWidth:360,margin:"0 auto 24px"}}>
               We'll get back to you within the next 24 hours. Expect a call from us to get everything set up.
-            </p>
-            <p style={{fontFamily:"'DM Sans',sans-serif",color:C.subtext,fontSize:13,margin:"0 auto 28px"}}>
-              Keep an eye on your phone. 📞
             </p>
             <Button onClick={onClose}>Back to site</Button>
           </div>
         ):(
           <>
-            <div style={{marginBottom:28}}>
+            <div style={{marginBottom:20}}>
               <h2 style={{
-                fontFamily:"'Archivo',sans-serif",fontWeight:900,
-                fontSize:34,letterSpacing:-1,color:C.espresso,
-                margin:"0 0 6px",lineHeight:1.1,
+                fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+                fontSize:28,color:C.crimson,
+                margin:"0 0 4px",lineHeight:1.1,
               }}>
-                Let's find your <span style={{color:C.crimson}}>sound.</span>
+                Let's find your sound.
               </h2>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.muted,margin:0,lineHeight:1.6}}>
+              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.muted,margin:0,lineHeight:1.5}}>
                 Tell us a little about your musician and we'll call you to set things up.
               </p>
             </div>
@@ -686,12 +690,16 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePop);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
+
   const navigate = (p) => { window.history.pushState({}, "", p); setPath(p); };
 
   return (
     <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,800;0,900;1,700;1,900&family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
         ::selection { background: ${C.crimson15}; color: ${C.espresso}; }
         @keyframes fadeUp {
