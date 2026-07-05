@@ -7,6 +7,7 @@ import TeachersPage from "./TeachersPage";
 import CareersPage from "./CareersPage";  
 import TinyKeys from "./TinyKeys";
 import LittleRockers from "./LittleRockers";
+import { C, fonts } from "./tokens";
 
 
 const offerings = [
@@ -30,53 +31,6 @@ const CAMP_URL    = "https://headlinerma.opus1.io/w/summercamp2026";
 const EMAILJS_SERVICE_ID  = "service_734y6qg";
 const EMAILJS_TEMPLATE_ID = "template_czlclec";
 const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
-
-const C = {
-  espresso:     "#1a130f",
-  crimson:      "#FF0044",
-  crimsonHover: "#CC0036",
-  cream:        "#F6F3EE",
-  lightCream:   "#faf6eb",
-  white:        "#FFFFFF",
-  teal:         "#00A8C8",
-  yellow:       "#FFDA00",
-  yellowHover:  "#FFC800",
-  muted:        "#7A6A5A",
-  border:       "#E8E2DA",
-  inputBg:      "#fafaf8",
-  placeholder:  "#bbb",
-  subtext:      "#aaa",
-  errorText:    "#dc2626",
-  errorBg:      "#fef2f2",
-  errorBorder:  "#fecaca",
-  white07: "rgba(255,255,255,0.07)",
-  white08: "rgba(255,255,255,0.08)",
-  white10: "rgba(255,255,255,0.1)",
-  white15: "rgba(255,255,255,0.15)",
-  white18: "rgba(255,255,255,0.18)",
-  white20: "rgba(255,255,255,0.2)",
-  white25: "rgba(255,255,255,0.25)",
-  white28: "rgba(255,255,255,0.28)",
-  white30: "rgba(255,255,255,0.3)",
-  white38: "rgba(255,255,255,0.38)",
-  white45: "rgba(255,255,255,0.45)",
-  white55: "rgba(255,255,255,0.55)",
-  white70: "rgba(255,255,255,0.7)",
-  white80: "rgba(255,255,255,0.8)",
-  black20:    "rgba(0,0,0,0.2)",
-  espresso06: "rgba(26,19,15,0.06)",
-  espresso10: "rgba(26,19,15,0.1)",
-  espresso75: "rgba(26,19,15,0.75)",
-  crimson06:  "rgba(255,0,68,0.06)",
-  crimson08:  "rgba(255,0,68,0.08)",
-  crimson15:  "rgba(255,0,68,0.15)",
-  crimson30:  "rgba(255,0,68,0.3)",
-  teal06:     "rgba(0,168,200,0.06)",
-  teal30:     "rgba(0,168,200,0.3)",
-  yellow05:   "rgba(255,218,0,0.05)",
-  yellow12:   "rgba(255,218,0,0.12)",
-  yellow50:   "rgba(255,218,0,0.5)",
-};
 
 // ── Reusable Button Component ────────────────────────────────────────────────
 function Button({ children, variant = "primary", href, disabled, style, className, onClick, ...rest }) {
@@ -215,13 +169,13 @@ function BookingModal({ instrument, onClose }) {
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:52,marginBottom:16}}>🎶</div>
             <h2 style={{
-              fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+              fontFamily:fonts.display,fontWeight:800,
               fontSize:28,color:C.crimson,
               margin:"0 0 6px",lineHeight:1.1,
             }}>
               We'll be in touch soon!
             </h2>
-            <p style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,fontSize:14,lineHeight:1.5,maxWidth:360,margin:"0 auto 24px"}}>
+            <p style={{fontFamily:fonts.body,color:C.muted,fontSize:14,lineHeight:1.5,maxWidth:360,margin:"0 auto 24px"}}>
               We'll get back to you within the next 24 hours. Expect a call from us to get everything set up.
             </p>
             <Button onClick={onClose}>Back to site</Button>
@@ -230,13 +184,13 @@ function BookingModal({ instrument, onClose }) {
           <>
             <div style={{marginBottom:20}}>
               <h2 style={{
-                fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+                fontFamily:fonts.display,fontWeight:800,
                 fontSize:28,color:C.crimson,
                 margin:"0 0 4px",lineHeight:1.1,
               }}>
                 Let's find your sound.
               </h2>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.muted,margin:0,lineHeight:1.5}}>
+              <p style={{fontFamily:fonts.body,fontSize:14,color:C.muted,margin:0,lineHeight:1.5}}>
                 Tell us a little about your musician and we'll call you to set things up.
               </p>
             </div>
@@ -247,7 +201,7 @@ function BookingModal({ instrument, onClose }) {
               </Field>
               <Field label="Your email *">
                 <input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={e=>set("email",e.target.value)}/>
-                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.subtext,margin:"4px 0 0"}}>
+                <p style={{fontFamily:fonts.body,fontSize:11,color:C.subtext,margin:"4px 0 0"}}>
                   We'll only use this to confirm your inquiry. No spam, ever.
                 </p>
               </Field>
@@ -292,7 +246,7 @@ function BookingModal({ instrument, onClose }) {
 
               {status==="error"&&(
                 <p style={{
-                  fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.errorText,
+                  fontFamily:fonts.body,fontSize:13,color:C.errorText,
                   background:C.errorBg,border:`1px solid ${C.errorBorder}`,
                   borderRadius:10,padding:"10px 14px",margin:0,
                 }}>
@@ -319,7 +273,7 @@ function BookingModal({ instrument, onClose }) {
           border: 1px solid ${C.border} !important;
           border-radius: 10px !important;
           color: ${C.espresso} !important;
-          font-family: 'DM Sans', sans-serif !important;
+          font-family: ${fonts.body} !important;
           font-size: 14px !important;
           padding: 10px 14px !important;
           width: 100% !important;
@@ -343,7 +297,7 @@ function Field({ label, children }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:6}}>
       <label style={{
-        fontFamily:"'DM Sans',sans-serif",
+        fontFamily:fonts.body,
         fontSize:10,fontWeight:700,
         letterSpacing:"0.14em",textTransform:"uppercase",color:C.muted,
       }}>{label}</label>
@@ -359,7 +313,7 @@ function PillToggle({ label, active, onClick }) {
       border: active ? `1.5px solid ${C.crimson}` : `1px solid ${C.border}`,
       background: active ? C.crimson06 : C.inputBg,
       color: active ? C.crimson : C.muted,
-      fontFamily:"'DM Sans',sans-serif",
+      fontFamily:fonts.body,
       fontSize:13,fontWeight: active?700:400,
       cursor:"pointer",transition:"all 0.15s",whiteSpace:"nowrap",
     }}>{label}</button>
@@ -369,11 +323,11 @@ function PillToggle({ label, active, onClick }) {
 function PrivacyPolicyPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:fonts.display,fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Privacy Policy
       </h1>
-      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
-      <div style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
+      <p style={{fontFamily:fonts.body,fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
+      <div style={{fontFamily:fonts.body,color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
         <p>Headliner Music Academy (a DBA of Marchena & Papadhima LLC) is committed to protecting your privacy. This policy explains how we collect, use, and protect your personal information.</p>
         {[
           ["Information we collect","We collect information you provide when enrolling a student or contacting us, including name, phone number, email address, and payment information. We also collect attendance and lesson history as part of our normal operations."],
@@ -399,11 +353,11 @@ function PrivacyPolicyPage() {
 function TermsAndConditionsPage() {
   return (
     <div style={{paddingTop:120,paddingBottom:80,paddingLeft:24,paddingRight:24,maxWidth:720,margin:"0 auto",minHeight:"100vh"}}>
-      <h1 style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
+      <h1 style={{fontFamily:fonts.display,fontWeight:800,fontSize:"clamp(2.4rem,6vw,3.4rem)",color:C.espresso,letterSpacing:-1,margin:"0 0 8px",lineHeight:1}}>
         Terms and Conditions
       </h1>
-      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
-      <div style={{fontFamily:"'DM Sans',sans-serif",color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
+      <p style={{fontFamily:fonts.body,fontSize:13,color:C.muted,marginBottom:40}}>Last updated: May 18, 2026</p>
+      <div style={{fontFamily:fonts.body,color:C.muted,lineHeight:1.8,display:"flex",flexDirection:"column",gap:24,fontSize:15}}>
         <p>These terms govern your enrollment and participation at Headliner Music Academy (a DBA of Marchena & Papadhima LLC), located at 2311 Sunset Blvd, Rocklin, CA 95765.</p>
         {[
           ["Enrollment and billing","Enrollment is on a monthly subscription basis. Billing occurs automatically each month on your billing date. You are responsible for keeping payment information current."],
@@ -494,7 +448,7 @@ function HeroSection({ navigate, setBookingFor }) {
           }} />
 
           <p className={loaded ? "fade-up delay-1" : ""} style={{
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: fonts.body,
             fontSize: 12, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
             color: C.teal, margin: "0 0 22px",
             display: "flex", alignItems: "center", gap: 10,
@@ -505,7 +459,7 @@ function HeroSection({ navigate, setBookingFor }) {
           </p>
 
           <h1 className={loaded ? "fade-up delay-2" : ""} style={{
-            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+            fontFamily: fonts.display, fontWeight: 800,
             fontSize: "clamp(42px, 6.4vw, 72px)", lineHeight: 0.96,
             letterSpacing: -2, color: C.white, margin: "0 0 22px",
             position: "relative", zIndex: 1,
@@ -514,7 +468,7 @@ function HeroSection({ navigate, setBookingFor }) {
           </h1>
 
           <p className={loaded ? "fade-up delay-3" : ""} style={{
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: fonts.body,
             color: C.white70, fontSize: 17, lineHeight: 1.75,
             maxWidth: 460, margin: "0 0 36px", fontWeight: 300,
             position: "relative", zIndex: 1,
@@ -555,7 +509,7 @@ function HeroSection({ navigate, setBookingFor }) {
                 style={{
                   display: "flex", alignItems: "center", gap: 6,
                   fontSize: 14, color: C.white45,
-                  textDecoration: "none", fontFamily: "'DM Sans', sans-serif",
+                  textDecoration: "none", fontFamily: fonts.body,
                   transition: "color 0.2s",
                 }}
                 onMouseEnter={e => e.currentTarget.style.color = C.teal}
@@ -642,7 +596,7 @@ function HeroSection({ navigate, setBookingFor }) {
             zIndex: 2,
           }}>
             <p key={active} style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+              fontFamily: fonts.body, fontSize: 13,
               fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
               color: C.white, margin: 0,
               animation: "fadeUp 0.5s ease both",
@@ -697,7 +651,7 @@ export default function App() {
   const navigate = (p) => { window.history.pushState({}, "", p); setPath(p); };
 
   return (
-    <div style={{fontFamily:"'DM Sans',sans-serif",minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
+    <div style={{fontFamily:fonts.body,minHeight:"100vh",background:C.white,color:C.espresso,overflowX:"hidden",maxWidth:"100vw"}}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap');
         *, *::before, *::after { box-sizing: border-box; }
@@ -743,7 +697,7 @@ export default function App() {
           font-size:10px; font-weight:700;
           letter-spacing:0.12em; text-transform:uppercase;
           color:${C.crimson}; margin-top:8px;
-          font-family:'DM Sans',sans-serif;
+          font-family:${fonts.body};
         }
         .grain-overlay {
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -798,13 +752,13 @@ export default function App() {
                 What we offer
               </p>
               <h2 style={{
-                fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+                fontFamily:fonts.display,fontWeight:800,
                 fontSize:"clamp(2.4rem,5vw,3.6rem)",letterSpacing:-1,
                 color:C.espresso,lineHeight:0.95,margin:0,
               }}>
                 Pick your <em style={{fontStyle:"italic",color:C.crimson}}>instrument.</em>
               </h2>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.muted,marginTop:12}}>
+              <p style={{fontFamily:fonts.body,fontSize:14,color:C.muted,marginTop:12}}>
                 Click any tile to request lessons.
               </p>
             </div>
@@ -836,11 +790,11 @@ export default function App() {
                 >
                   <span style={{fontSize:36,marginBottom:16}}>{item.icon}</span>
                   <h3 style={{
-                    fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+                    fontFamily:fonts.display,fontWeight:800,
                     fontSize:16,letterSpacing:"0.1em",textTransform:"uppercase",
                     color:C.espresso,margin:"0 0 4px",
                   }}>{item.name}</h3>
-                  <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.muted,margin:0}}>{item.desc}</p>
+                  <p style={{fontFamily:fonts.body,fontSize:16,color:C.muted,margin:0}}>{item.desc}</p>
                   <span className="card-hint">Request lessons →</span>
                 </div>
               ))}
@@ -864,20 +818,20 @@ export default function App() {
                   Summer 2026
                 </p>
                 <h1 style={{
-                  fontFamily:"'Baloo 2',sans-serif",fontWeight:800,
+                  fontFamily:fonts.display,fontWeight:800,
                   fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
                   color:C.white,lineHeight:0.95,margin:"0 0 16px",
                 }}>
                   Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
                 </h1>
                 <h2 style={{
-                  fontFamily:"'Baloo 2',sans-serif",fontWeight:700,
+                  fontFamily:fonts.display,fontWeight:700,
                   fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
                   color:C.white70,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
                 }}>
                   Your kid will be in a real band by Friday.
                 </h2>
-                <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.white80,lineHeight:1.8,marginBottom:36,maxWidth:420}}>
+                <p style={{fontFamily:fonts.body,fontSize:16,color:C.white80,lineHeight:1.8,marginBottom:36,maxWidth:420}}>
                   One week. No experience needed. Every kid gets an instrument, joins a band, and performs a real song on the last day.
                 </p>
                 <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
@@ -907,8 +861,8 @@ export default function App() {
                   {label:"Final Day", value:"Live performance + recording", color:C.crimson},
                 ].map(({label,value,color})=>(
                   <div key={label} style={{background:C.espresso,padding:"28px 24px"}}>
-                    <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:C.lightCream,marginBottom:8}}>{label}</p>
-                    <p style={{fontFamily:"'Baloo 2',sans-serif",fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
+                    <p style={{fontFamily:fonts.body,fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:C.lightCream,marginBottom:8}}>{label}</p>
+                    <p style={{fontFamily:fonts.display,fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
                   </div>
                 ))}
               </div>
@@ -938,13 +892,13 @@ export default function App() {
                 ))}
               </div>
               <p style={{
-                fontFamily:"'Baloo 2',sans-serif",fontWeight:700,fontStyle:"italic",
+                fontFamily:fonts.display,fontWeight:700,fontStyle:"italic",
                 fontSize:"clamp(1.1rem,2.5vw,1.5rem)",color:C.espresso,
                 lineHeight:1.55,maxWidth:640,margin:"0 auto 24px",
               }}>
                 "Love this place!! It's unique!!! Amicable and well organized. Amazing diverse and integrative for kids, young or adults."
               </p>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,fontFamily:"'DM Sans',sans-serif",fontSize:16}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:12,fontFamily:fonts.body,fontSize:16}}>
                 <span style={{fontWeight:700,color:C.espresso}}>Socorro Baez G.</span>
                 <span style={{color:C.border}}>|</span>
                 <span style={{display:"flex",alignItems:"center",gap:6,fontWeight:700,color:C.crimson}}>
@@ -967,7 +921,7 @@ export default function App() {
               <a href="/" style={{display:"block",marginBottom:20,lineHeight:0}}>
                 <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" style={{display:"block",height:"auto",maxHeight:44,width:"auto",maxWidth:220,objectFit:"contain"}}/>
               </a>
-              <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.white70,lineHeight:1.75,maxWidth:480,marginBottom:24}}>
+              <p style={{fontFamily:fonts.body,fontSize:16,color:C.white70,lineHeight:1.75,maxWidth:480,marginBottom:24}}>
                 Inspiring the next generation of musicians through premium, personalized education.
               </p>
               <Button variant="outlineRed" onClick={() => setBookingFor("")} style={{fontSize:12}}>
@@ -981,16 +935,16 @@ export default function App() {
                   onMouseLeave={e=>e.currentTarget.style.color=C.white}
                 >
                   <Phone size={16} color={C.crimson}/>
-                  <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:20,fontWeight:600,color:C.white,letterSpacing:-0.5}}>(916) 435-1300</span>
+                  <span style={{fontFamily:fonts.body,fontSize:20,fontWeight:600,color:C.white,letterSpacing:-0.5}}>(916) 435-1300</span>
                 </a>
-                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:C.white70,fontFamily:"'DM Sans',sans-serif",fontSize:14,wordBreak:"break-all",overflowWrap:"break-word",minWidth:0}}
+                <a href="mailto:admin@headlinermusicacademy.com" style={{display:"flex",alignItems:"center",gap:10,textDecoration:"none",color:C.white70,fontFamily:fonts.body,fontSize:14,wordBreak:"break-all",overflowWrap:"break-word",minWidth:0}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                   onMouseLeave={e=>e.currentTarget.style.color=C.white38}
                 >
                   <Mail size={15} color={C.crimson}/>
                   admin@headlinermusicacademy.com
                 </a>
-                <div style={{display:"flex",alignItems:"flex-start",gap:10,color:C.white70,fontFamily:"'DM Sans',sans-serif",fontSize:14,lineHeight:1.6}}>
+                <div style={{display:"flex",alignItems:"flex-start",gap:10,color:C.white70,fontFamily:fonts.body,fontSize:14,lineHeight:1.6}}>
                   <MapPin size={15} color={C.crimson} style={{marginTop:2,flexShrink:0}}/>
                   2311 Sunset Blvd<br/>Rocklin, CA 95765
                 </div>
@@ -998,7 +952,7 @@ export default function App() {
             </div>
           </div>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16}}>
-            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:C.white18}}>
+            <p style={{fontFamily:fonts.body,fontSize:10,letterSpacing:"0.1em",color:C.white18}}>
               © {new Date().getFullYear()} Headliner Music Academy. All rights reserved.
             </p>
             <div style={{display:"flex",flexWrap:"wrap",gap:20}}>
@@ -1006,13 +960,13 @@ export default function App() {
                 {href:"/privacy-policy",label:"Privacy Policy"},
                 {href:"/terms-and-conditions",label:"Terms & Conditions"},
               ].map(({href,label})=>(
-                <a key={label} href={href} style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform:"uppercase"}}
+                <a key={label} href={href} style={{fontFamily:fonts.body,fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform:"uppercase"}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                   onMouseLeave={e=>e.currentTarget.style.color=C.white28}
                 >{label}</a>
               ))}
               <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer"
-                style={{display:"flex",alignItems:"center",gap:6,fontFamily:"'DM Sans',sans-serif",fontSize:10,color:C.white28,textDecoration:"none",textTransform:"uppercase",letterSpacing:"0.1em"}}
+                style={{display:"flex",alignItems:"center",gap:6,fontFamily:fonts.body,fontSize:10,color:C.white28,textDecoration:"none",textTransform:"uppercase",letterSpacing:"0.1em"}}
                 onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                 onMouseLeave={e=>e.currentTarget.style.color=C.white28}
               >
