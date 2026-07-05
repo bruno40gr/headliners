@@ -53,8 +53,10 @@ const LevelBadge = ({ number, color, bg }) => (
    ═══════════════════════════════════════════════════════════════════════════ */
 export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
   const [interstitialOpen, setInterstitialOpen] = useState(false);
+  const [interstitialMode, setInterstitialMode] = useState("booking");
 
-  const openModal = () => {
+  const openModal = (mode = "booking") => {
+    setInterstitialMode(mode);
     setInterstitialOpen(true);
   };
 
@@ -125,22 +127,9 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
               </p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-                <Button onClick={openModal}>Reserve a spot</Button>
-                <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: "6px 0 0", textAlign: "center" }}>
-                  Takes about 2 minutes.
-                </p>
-                <button
-                  onClick={() => document.getElementById("tk-curriculum")?.scrollIntoView({ behavior: "smooth" })}
-                  style={{
-                    background: "none", border: "none", cursor: "pointer",
-                    fontFamily: fonts.body, fontSize: 15,
-                    color: C.tealDark, fontWeight: 600, padding: 0,
-                    textDecoration: "underline",
-                    textDecorationColor: `${C.teal}80`,
-                    textUnderlineOffset: 3,
-                  }}>
-                  See what we teach
-                </button>
+                <Button onClick={() => openModal("booking")}>Book a session</Button>
+                <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Come see us!</Button>
+                
               </div>
 
               {/* Quick stats */}
@@ -419,13 +408,9 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         title="Spots fill up."
         body="Reach out when your child is ready and we'll find the right class together."
       >
-        <Button onClick={openModal}>Reserve a spot</Button>
-        <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: "6px 0 0", textAlign: "center" }}>
-          Takes about 2 minutes.
-        </p>
-        <Button variant="secondary" accent={C.teal} onClick={() => navigate("/programs")}>
-          See all programs
-        </Button>
+        <Button onClick={() => openModal("booking")}>Book a session</Button>
+        <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Come visit us!</Button>
+        
         <p style={{
           fontFamily: fonts.body, fontSize: 14, color: C.muted,
           width: "100%", marginTop: 8,
@@ -449,6 +434,8 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
           opusL1="https://headlinerma.opus1.io/w/tinykeys"
           opusL2="https://headlinerma.opus1.io/w/tinykeys"
           opusL3="https://headlinerma.opus1.io/w/tinykeys"
+          initialScreen={interstitialMode === "tour" ? 2 : 1}
+          submitLabel={interstitialMode === "booking" ? "Reserve a spot" : "Continue to booking"}
           onClose={() => setInterstitialOpen(false)}
           emailjsServiceId="service_734y6qg"
           emailjsTemplateId="template_526w74g"

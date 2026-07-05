@@ -58,8 +58,10 @@ export default function BookingInterstitial({
   emailjsServiceId,
   emailjsTemplateId,
   emailjsPublicKey,
+  initialScreen = 1,
+  submitLabel = "Continue to booking",
 }) {
-  const [screen, setScreen] = useState(1);
+  const [screen, setScreen] = useState(initialScreen);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [form, setForm] = useState({
     name: "", studentName: "", age: "", program: programName, email: "", phone: "",
@@ -186,7 +188,7 @@ export default function BookingInterstitial({
             transition: "background 0.2s",
           }}
         >
-          Continue to booking
+          {submitLabel}
         </button>
 
         <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, marginTop: 12, textAlign: "center" }}>
@@ -434,7 +436,7 @@ export default function BookingInterstitial({
               transition: "background 0.2s",
             }}
           >
-            {status === "sending" ? "Sending..." : "Request a tour"}
+            {status === "sending" ? "Sending..." : "Book a tour"}
           </button>
 
           <div style={{ textAlign: "center", marginTop: 4 }}>
