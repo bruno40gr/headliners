@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { C, fonts } from "./tokens";
 import {
   Button,
@@ -70,12 +70,12 @@ const InstrumentIllustration = () => (
 /* ═══════════════════════════════════════════════════════════════════════════
    PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
-export default function LittleRockersPage({ navigate, setPath, onRequestLessons }) {
+export default function WonderNotesPage({ navigate, setPath, onRequestLessons }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
     if (onRequestLessons) {
-      onRequestLessons("Little Rockers");
+      onRequestLessons("Wonder Notes");
     } else {
       setModalOpen(true);
     }
@@ -142,7 +142,7 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 padding: "7px 16px",
                 borderRadius: 50,
                 marginBottom: 20,
-              }}>Ages 3 to 5 · MUSIC & DEVELOPMENT</div>
+              }}>Ages 3 to 5 · GROW THROUGH MUSIC</div>
 
               {/* Program title */}
               <h1 style={{
@@ -150,8 +150,8 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 fontSize: "clamp(48px, 7vw, 72px)",
                 margin: "0 0 24px", lineHeight: 1, letterSpacing: "-0.03em",
               }}>
-                <span style={{ color: C.espresso, display: "block" }}>Little</span>
-                <span style={{ color: C.crimson, display: "block" }}>Rockers</span>
+                <span style={{ color: C.espresso, display: "block" }}>Wonder</span>
+                <span style={{ color: C.crimson, display: "block" }}>Notes</span>
               </h1>
 
               <p style={{
@@ -159,7 +159,7 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 fontSize: 17, lineHeight: 1.75, color: C.muted,
                 margin: "0 0 32px", maxWidth: 400,
               }}>
-An engaging, play-based music program that helps preschoolers build confidence, coordination, communication, and a lifelong love of music.             </p>
+A joyful, play-based music class where preschoolers sing, move, explore, and grow through music together.             </p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                 <Button onClick={openModal}>Reserve a spot</Button>
@@ -186,7 +186,7 @@ An engaging, play-based music program that helps preschoolers build confidence, 
                   { value: "3 to 5",  label: "Ages"        },
                   { value: "Group",    label: "Format"      },
                   { value: "45 min",   label: "Per class"   },
-                  { value: "Interactive",        label: "Every Lesson" },
+                  { value: "Play-Based",        label: "Every Lesson" },
                 ].map(({ value, label }) => (
                   <div key={label}>
                     <div style={{
@@ -210,9 +210,9 @@ An engaging, play-based music program that helps preschoolers build confidence, 
                 position: "absolute", top: -8, right: 8, zIndex: 2,
                 background: C.yellow, color: C.espresso, borderRadius: 50,
                 padding: "9px 18px", fontFamily: fonts.display,
-                fontWeight: 800, fontSize: 13, transform: "none",
+                fontWeight: 800, fontSize: 13, transform: "rotate(5deg)",
                 border: `2px solid ${C.espresso}18`,
-              }}>Learning Through Music</div>
+              }}>LEARNING THROUGH MUSIC</div>
 
               {/* Sticker: crimson */}
               <div className="lr-sticker-left" style={{
@@ -220,7 +220,7 @@ An engaging, play-based music program that helps preschoolers build confidence, 
                 background: C.teal, color: "#fff", borderRadius: 50,
                 padding: "9px 18px", fontFamily: fonts.display,
                 fontWeight: 800, fontSize: 13, transform: "none",
-              }}>AGES 3–5 • PRESCHOOL MUSIC</div>
+              }}>EXPLORE. PLAY. LEARN</div>
 
               {/* Photo card */}
               <div style={{
@@ -233,7 +233,7 @@ An engaging, play-based music program that helps preschoolers build confidence, 
                   src="https://res.cloudinary.com/gozdpo8j/image/upload/v1782939927/ChatGPT_Image_Jul_1_2026_02_04_46_PM_fuwgb6.png
                 "
                   alt="Young kids playing instruments"
-                  style={{ width: "100%", height: 430, objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: 430, objectFit: "cover", objectPosition: "center 25%", display: "block" }}
                   onError={e => {
                     e.target.src = "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80";
                   }}
@@ -247,137 +247,326 @@ An engaging, play-based music program that helps preschoolers build confidence, 
       </section>
 
       {/* ── INSTRUMENTS ──────────────────────────────────────────────────── */}
-      <section style={{ background: C.offWhite, padding: "64px 24px" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+      <section
+  style={{
+    background: C.offWhite,
+    padding: "72px 24px",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
+   {/* Pink circle */}
+  <div
+    style={{
+      position: "absolute",
+      width: 280,
+      height: 280,
+      borderRadius: "50%",
+      background: "#FFD4CC",
+      opacity: 0.9,
+      top: -110,
+      left: -110,
+      zIndex: 0,
+    }}
+  />
+
+  {/* Yellow circle */}
+  <div
+    style={{
+      position: "absolute",
+      width: 150,
+      height: 150,
+      borderRadius: "50%",
+      background: "#FFECA8",
+      opacity: 0.9,
+      top: 240,
+      right: -45,
+      zIndex: 0,
+    }}
+  />
+
+  {/* Blue circle */}
+  <div
+    style={{
+      position: "absolute",
+      width: 180,
+      height: 180,
+      borderRadius: "50%",
+      background: "#CDEEFF",
+      opacity: 0.9,
+      bottom: 70,
+      left: -90,
+      zIndex: 0,
+    }}
+  />
+        <div style={{
+  maxWidth: 1200,
+  margin: "0 auto",
+  padding: "0 32px",
+}}>
 
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{
               fontFamily: fonts.display, fontWeight: 800,
               fontSize: "clamp(28px, 4vw, 42px)", color: C.espresso,
               margin: "0 0 10px", letterSpacing: "-0.02em",
-            }}>Four instruments, one class</h2>
+            }}>Every Class Is a New Musical Adventure</h2>
             <p style={{
-              fontFamily: fonts.body, fontSize: 16, color: C.muted,
-              maxWidth: 460, margin: "0 auto", lineHeight: 1.65,
-            }}>
-              We introduce kids to all four core instruments. No pressure to pick
-              one. At this age, the goal is curiosity.
+  fontFamily: fonts.body,
+  fontSize: 17,
+  color: C.muted,
+  maxWidth: 720,
+  margin: "0 auto 56px",
+  lineHeight: 1.7,
+}}>
+              Every lesson combines music, movement, storytelling, and hands-on exploration to keep preschoolers engaged while introducing new musical concepts in a fun and meaningful way.
             </p>
           </div>
 
           {/* Instrument badges */}
           <div className="lr-badges" style={{
-            display: "flex", gap: 16, justifyContent: "center",
-            marginBottom: 40, flexWrap: "nowrap",
-          }}>
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 18,
+  marginBottom: 64,
+  flexWrap: "nowrap",
+}}>
             {[
-              { icon: "🎸", name: "Guitar", bg: C.yellow, soft: C.yellowPastel },
-              { icon: "🥁", name: "Drums",  bg: C.crimson, soft: C.blush },
-              { icon: "🎹", name: "Keys",   bg: C.teal,    soft: C.tealPastel },
-              { icon: "🎸", name: "Bass",   bg: C.yellow,  soft: C.yellowPastel },
-            ].map(({ icon, name, bg, soft }) => (
-              <div key={name} style={{
-                background: "#fff", borderRadius: 16,
-                border: `2px solid ${bg}40`,
-                padding: "20px 24px",
-                display: "flex", flexDirection: "column",
-                alignItems: "center", gap: 10,
-                minWidth: 130,
-              }}>
-                <div style={{
-                  width: 52, height: 52, borderRadius: "50%",
-                  background: soft, display: "flex",
-                  alignItems: "center", justifyContent: "center",
-                  fontSize: 26,
-                }}>{icon}</div>
-                <div style={{
-                  fontFamily: fonts.display, fontWeight: 800,
-                  fontSize: 15, color: C.espresso,
-                }}>{name}</div>
-              </div>
-            ))}
+              { icon: "🎤", name: "Sing & Express", bg: C.yellow, soft: C.yellowPastel },
+              { icon: "🪇", name: "Explore & Discover",  bg: C.crimson, soft: C.blush },
+              { icon: "🥁", name: "Rhythm & Movement",   bg: C.teal,    soft: C.tealPastel },
+              { icon: "📖", name: "Stories & Imagination",   bg: C.yellow,  soft: C.yellowPastel },
+            ].map(({ icon, name, bg, soft }, index) => (
+  <React.Fragment key={name}>
+
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 12,
+      width: 280,
+    }}>
+      <div style={{
+        width: 84,
+        height: 84,
+        borderRadius: "50%",
+        background: soft,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 38,
+        boxShadow: "0 8px 20px rgba(42,18,8,0.06)",
+      }}>
+        {icon}
+      </div>
+
+      <div style={{
+        fontFamily: fonts.display,
+        fontWeight: 800,
+        fontSize: 18,
+        color: C.espresso,
+        textAlign: "center",
+        lineHeight: 1.3,
+      }}>
+        {name}
+      </div>
+    </div>
+
+    {index < 3 && (
+      <svg
+        width="70"
+        height="12"
+        viewBox="0 0 70 12"
+        style={{ marginTop: -28 }}
+      >
+        <line
+          x1="0"
+          y1="6"
+          x2="58"
+          y2="6"
+          stroke="rgba(255,0,68,.22)"
+          strokeWidth="2"
+          strokeDasharray="4 5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M58 2 L66 6 L58 10"
+          fill="none"
+          stroke="rgba(255,0,68,.22)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    )}
+
+  </React.Fragment>
+))}
           </div>
 
-          {/* Illustration card */}
-          <div style={{
-            background: "#fff", borderRadius: 20,
-            padding: "32px 28px",
-            border: `2px solid ${C.border}`,
-            textAlign: "center",
-          }}>
-            <p style={{
-              fontFamily: fonts.display, fontWeight: 800, fontSize: 13,
-              color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em",
-              margin: "0 0 20px",
-            }}>Every class, hands on a real instrument</p>
-            <InstrumentIllustration />
-          </div>
-        </div>
+          {/* Instrument photo feature */}
+<div style={{
+  marginTop: 44,
+  textAlign: "center",
+}}>
+  <img
+    src="https://res.cloudinary.com/gozdpo8j/image/upload/v1783107188/Screenshot_2026-07-03_at_12.26.17_PM_xy5ozv.png"
+    alt="Real musical instruments used in Wonder Notes classes"
+    style={{
+      width: "100%",
+      maxWidth: 980,
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+      borderRadius: 24,
+      boxShadow: "0 18px 50px rgba(42,18,8,0.10)",
+    }}
+  />
+
+  <p style={{
+    fontFamily: fonts.body,
+    fontSize: 16,
+    color: C.muted,
+    lineHeight: 1.6,
+    maxWidth: 520,
+    margin: "22px auto 0",
+  }}>
+    Every class introduces children to real instruments they can touch, hear, and explore.
+  </p>
+</div>
+
+  </div>
       </section>
 
       {/* ── WHAT WE DO ───────────────────────────────────────────────────── */}
-      <WaveDivider from={C.offWhite} to={C.blush} direction="up" />
-      <section id="lr-what" style={{ background: C.blush, padding: "64px 24px" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+      <section
+  id="lr-what"
+  style={{
+    position: "relative",
+    maxWidth: 1220,
+    margin: "0 auto",
+    padding: "0 32px 90px",
+    overflow: "visible",
+  }}>
+    {/* Background circles */}
 
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
+<div
+  style={{
+    position: "absolute",
+    top: 160,
+left: -240,
+    width: 220,
+    height: 220,
+    borderRadius: "50%",
+    background: "#FFD6CF",
+    opacity: 0.8,
+    zIndex: 0,
+  }}
+/>
+
+<div
+  style={{
+    position: "absolute",
+    top: 40,
+    right: 40,
+    width: 140,
+    height: 140,
+    borderRadius: "50%",
+    background: "#FFF0A8",
+    opacity: 0.85,
+    zIndex: 0,
+  }}
+/>
+
+<div
+  style={{
+    position: "absolute",
+    bottom: -10,
+    right: -170,
+    width: 170,
+    height: 170,
+    borderRadius: "50%",
+    background: "#CFEFFF",
+    opacity: 0.8,
+    zIndex: 0,
+  }}
+/>
+<div
+  style={{
+    position: "relative",
+    zIndex: 1,
+  }}
+>
+
+</div>
+
+          <div
+  style={{
+    textAlign: "center",
+    marginTop: 60,
+    marginBottom: 56,
+  }}>
             <h2 style={{
               fontFamily: fonts.display, fontWeight: 800,
               fontSize: "clamp(28px, 4vw, 42px)", color: C.espresso,
               margin: "0 0 10px", letterSpacing: "-0.02em",
-            }}>What we do in class</h2>
+            }}>Inside Every Class</h2>
             <p style={{
               fontFamily: fonts.body, fontSize: 16, color: C.muted,
-              maxWidth: 460, margin: "0 auto", lineHeight: 1.65,
+              maxWidth: 720, margin: "0 auto", lineHeight: 1.65,
             }}>
-              Every session is hands-on, active, and built for short attention spans.
+              Every class is filled with music, movement, stories, and discovery. Preschoolers sing, explore, imagine, and make music together in a warm, playful environment where confidence grows, friendships begin, and every lesson feels like an adventure.
             </p>
           </div>
 
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 20,
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+gap: 36,
+maxWidth: 1180,
+margin: "0 auto",
+alignItems: "stretch",
           }}>
             {[
               {
                 accent: C.crimson,
                 photoBg: C.blush,
-                photo: "https://images.unsplash.com/photo-1525201548942-d8732f6617a0?w=600&q=80",
-                alt: "Young child with a guitar",
-                title: "Meet the instruments",
-                body: "Kids get hands-on time with guitar, drums, keys, and bass every class. No sitting and watching. Everyone plays.",
+                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101990/ChatGPT_Image_Jul_3_2026_11_05_57_AM_ky6xao.png",
+                alt: "Preschoolers singing with a teacher and having fun",
+                title: "Sing & Express",
+                body: "Songs, echo games, and playful repetition help children build confidence, communication, and listening skills.",
               },
               {
                 accent: C.yellow,
                 photoBg: C.yellowPastel,
-                photo: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&q=80",
-                alt: "Kids moving to music",
-                title: "Rhythm and movement",
-                body: "We use rhythm games, clapping, and movement to help kids feel the music before they play it. It works really well at this age.",
+                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101948/ChatGPT_Image_Jul_3_2026_10_53_58_AM_clxc43.png",
+                alt: "Variey of musical instruments for kids to explore",
+                title: "Explore & Discover",
+                body: "Children explore real instruments, exciting sounds, and musical textures through hands-on experiences that spark curiosity.",
               },
               {
                 accent: C.teal,
                 photoBg: C.tealPastel,
-                photo: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=600&q=80",
-                alt: "Kids listening and playing together",
-                title: "Playing together",
-                body: "Classes are small and social. Kids play alongside each other, take turns, and start to understand what it feels like to make music with someone else in the room.",
+                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101948/ChatGPT_Image_Jul_3_2026_10_59_35_AM_firmhg.png",
+                alt: "Preschoolers marching to music and playing percussion instrument",
+                title: "Rhythm & Movement",
+                body: "Through clapping, tapping, dancing, and rhythm games, children develop coordination, focus, balance, and a steady musical beat.",
               },
               {
                 accent: C.yellow,
                 photoBg: C.yellowPastel,
-                photo: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80",
-                alt: "Young child exploring music",
-                title: "Just having fun",
-                body: "There are no wrong answers in Little Rockers. We keep it loose, playful, and low-pressure. Kids leave happy. That is the goal.",
+                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101990/ChatGPT_Image_Jul_3_2026_11_06_11_AM_v17owy.png",
+                alt: "Teacher telling stories through music and handgestures to preschoolers",
+                title: "Stories & Imagination",
+                body: "Music and storytelling come together to teach emotions, social skills, and early preschool concepts while inspiring creativity and imaginative play.",
               },
             ].map(({ accent, photoBg, photo, alt, title, body }) => (
               <Card
                 key={title}
                 image={photo}
                 imageAlt={alt}
-                imageHeight={140}
+                imageHeight={250}
                 imageBg={photoBg}
                 accent={accent}
               >
@@ -392,7 +581,6 @@ An engaging, play-based music program that helps preschoolers build confidence, 
               </Card>
             ))}
           </div>
-        </div>
       </section>
       <WaveDivider from={C.blush} to={C.cream} direction="down" />
 

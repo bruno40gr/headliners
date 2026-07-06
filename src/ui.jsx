@@ -708,7 +708,7 @@ export function StatsGrid({ items, columns = 3, style }) {
 export function Card({
   image,
   imageAlt = "",
-  imageHeight = 160,
+  imageHeight = 255,
   imageBg = C.offWhite,
   accent = C.crimson,
   children,
@@ -718,9 +718,12 @@ export function Card({
     <div
       style={{
         background: C.white,
-        borderRadius: 20,
-        border: `2px solid ${accent}50`,
+        borderRadius: 24,
+        border: `1.5px solid ${accent}40`,
+        boxShadow: "0 14px 40px rgba(42,18,8,0.08)",
         overflow: "hidden",
+        boxShadow: "0 16px 40px rgba(42,18,8,0.08)",
+transition: "all .25s ease",
         ...style,
       }}
     >
@@ -748,7 +751,7 @@ export function Card({
           />
         </div>
       )}
-      <div style={{ padding: "18px 20px 22px" }}>{children}</div>
+      <div style={{ padding: "24px 28px 30px" }}>{children}</div>
     </div>
   );
 }
