@@ -240,11 +240,25 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             <div className="bp-img-wrap" style={{ borderRadius: 16, height: 440 }}>
               <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Band in rehearsal" />
             </div>
-            <div style={{
-              position: "absolute", bottom: -20, right: -20,
-              background: C.crimson, borderRadius: 12, padding: "20px 24px",
-              boxShadow: "0 16px 40px rgba(255,0,68,0.3)",
-            }}>
+            <div
+              onClick={() => {
+                const now = Date.now();
+                if (!window._hltClicks) window._hltClicks = [];
+                window._hltClicks.push(now);
+                // Only keep clicks within the last 2 seconds
+                window._hltClicks = window._hltClicks.filter(t => now - t < 2000);
+                if (window._hltClicks.length >= 3) {
+                  window._hltClicks = [];
+                  navigate("/internal/band-program");
+                }
+              }}
+              style={{
+                position: "absolute", bottom: -20, right: -20,
+                background: C.crimson, borderRadius: 12, padding: "20px 24px",
+                boxShadow: "0 16px 40px rgba(255,0,68,0.3)",
+                cursor: "default", userSelect: "none",
+              }}
+            >
               <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 28, color: "#fff", margin: "0 0 4px", lineHeight: 1 }}>Live.</p>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", margin: 0 }}>Performance from day one</p>
             </div>
