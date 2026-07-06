@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { C, fonts } from "./tokens";
 import {
   Button,
@@ -72,8 +72,8 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
           .tk-sticker-right { right: 0 !important; }
           .tk-level-card { padding: 18px 20px !important; gap: 14px !important; }
           .tk-graduation { padding: 18px 20px !important; gap: 12px !important; }
-          .tk-hero-logo { max-width: 200px !important; }
           .tk-hero-section { padding-top: 100px !important; }
+          .tk-badges { flex-wrap: wrap !important; }
         }
       `}</style>
 
@@ -88,7 +88,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
       <section className="tk-hero-section" style={{
         background: C.cream,
         paddingTop: 120,
-        paddingBottom: 48,
+        paddingBottom: 72,
         paddingLeft: 24,
         paddingRight: 24,
         position: "relative",
@@ -99,22 +99,40 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         <Bubble top={120} left={-80} size={240} color={C.tealPastel} />
         <Bubble bottom={80} right="30%" size={100} color={C.blush} />
 
-        <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
           <div className="tk-split" style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 48,
+            gridTemplateColumns: "0.9fr 1.15fr",
+            gap: 56,
             alignItems: "center",
           }}>
 
-            {/* Left: logo + copy */}
+            {/* Left: copy */}
             <div>
+              {/* Eyebrow pill */}
+              <div style={{
+                display: "inline-block",
+                background: C.tealPastel,
+                color: C.tealDark,
+                fontFamily: fonts.body,
+                fontWeight: 700,
+                fontSize: 13,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                padding: "7px 16px",
+                borderRadius: 50,
+                marginBottom: 20,
+              }}>Ages 3 – 7 · Piano Foundations</div>
+
               {/* Program title */}
               <h1 style={{
                 fontFamily: fonts.display, fontWeight: 800,
-                fontSize: "clamp(48px, 7vw, 72px)", color: C.crimson,
+                fontSize: "clamp(48px, 7vw, 72px)",
                 margin: "0 0 24px", lineHeight: 1, letterSpacing: "-0.03em",
-              }}>Tiny Keys</h1>
+              }}>
+                <span style={{ color: C.espresso, display: "block" }}>Tiny</span>
+                <span style={{ color: C.crimson, display: "block" }}>Keys</span>
+              </h1>
 
               <p style={{
                 fontFamily: fonts.body,
@@ -127,8 +145,8 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
               </p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-                <Button onClick={() => openModal("booking")}>Book a session</Button>
-                <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Come see us!</Button>
+                <Button onClick={() => openModal("booking")}>Reserve a spot</Button>
+                <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Book a tour</Button>
                 
               </div>
 
@@ -187,7 +205,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                   className="tk-hero-img"
                   src="https://res.cloudinary.com/diy08lj9x/image/upload/v1782868727/ChatGPT_Image_Jun_30_2026_06_18_16_PM_2_n5zur8.png"
                   alt="Young children at a piano with a teacher"
-                  style={{ width: "100%", height: 380, objectFit: "cover", display: "block" }}
+                  style={{ width: "100%", height: 430, objectFit: "cover", objectPosition: "center 25%", display: "block" }}
                   onError={e => {
                     e.target.src = "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80";
                   }}
@@ -200,97 +218,347 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         <WaveDivider from={C.cream} to={C.offWhite} direction="down" />
       </section>
 
-      {/* ── WHAT WE TEACH ────────────────────────────────────────────────── */}
-      <section id="tk-curriculum" style={{ background: C.offWhite, padding: "64px 24px" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+      {/* ── SKILLS BADGES ────────────────────────────────────────────────── */}
+      <section
+        style={{
+          background: C.offWhite,
+          padding: "72px 24px",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Pink circle */}
+        <div
+          style={{
+            position: "absolute",
+            width: 280,
+            height: 280,
+            borderRadius: "50%",
+            background: "#FFD4CC",
+            opacity: 0.9,
+            top: -110,
+            left: -110,
+            zIndex: 0,
+          }}
+        />
+
+        {/* Yellow circle */}
+        <div
+          style={{
+            position: "absolute",
+            width: 150,
+            height: 150,
+            borderRadius: "50%",
+            background: "#FFECA8",
+            opacity: 0.9,
+            top: 240,
+            right: -45,
+            zIndex: 0,
+          }}
+        />
+
+        {/* Blue circle */}
+        <div
+          style={{
+            position: "absolute",
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            background: "#CDEEFF",
+            opacity: 0.9,
+            bottom: 70,
+            left: -90,
+            zIndex: 0,
+          }}
+        />
+        <div style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "0 32px",
+        }}>
 
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <h2 style={{
               fontFamily: fonts.display, fontWeight: 800,
               fontSize: "clamp(28px, 4vw, 42px)", color: C.espresso,
               margin: "0 0 10px", letterSpacing: "-0.02em",
-            }}>What we teach</h2>
+            }}>Every Class Builds Real Skills</h2>
             <p style={{
-              fontFamily: fonts.body, fontSize: 16, color: C.muted,
-              maxWidth: 460, margin: "0 auto", lineHeight: 1.65,
+              fontFamily: fonts.body,
+              fontSize: 17,
+              color: C.muted,
+              maxWidth: 720,
+              margin: "0 auto 56px",
+              lineHeight: 1.7,
             }}>
-              Every class is built around five core skills. Students work through
-              them progressively across three levels, at their own pace.
+              Every class is built around five core skills. Students work through them progressively across three levels, at their own pace.
             </p>
           </div>
 
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 20,
+          {/* Skill badges */}
+          <div className="tk-badges" style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 18,
+            marginBottom: 64,
+            flexWrap: "nowrap",
           }}>
             {[
-              {
-                accent: C.yellow,
-                photoBg: C.yellowPastel,
-                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg",
-                alt: "Hands on piano keyboard",
-                title: "Piano technique",
-                body: "Finger positioning, hand coordination, and basic chords. Students learn new songs every class so they can practice these skills in context, not in isolation.",
-              },
-              {
-                accent: C.teal,
-                photoBg: C.tealPastel,
-                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869153/6800e606-9e7f-4f01-a303-052dd700b141.png",
-                alt: "Child playing piano",
-                title: "Playing by ear",
-                body: "We use Suzuki-influenced methods to help kids listen actively and play intuitively. Playing by ear is one of the most valuable skills a young musician can build.",
-              },
-              {
-                accent: C.crimson,
-                photoBg: C.blush,
-                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869275/c18113ba-2a91-41f3-bb6e-1cd8fbddf197.png",
-                alt: "Kids reading music",
-                title: "Sight-reading",
-                body: "We introduce musical notation in a kid-friendly, step-by-step way. Most kids are ready for this around age 6 or 7, and we meet them there when the time is right.",
-              },
-              {
-                accent: C.teal,
-                photoBg: C.tealPastel,
-                photo: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&q=80",
-                alt: "Kids listening to music together",
-                title: "Creative listening",
-                body: "Every class includes a listening exercise. We introduce kids to a wide range of styles, from classical to pop to rock, to help them develop their ear and find music they love.",
-              },
-              {
-                accent: C.yellow,
-                photoBg: C.yellowPastel,
-                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869642/20353365-2533-4c7d-a938-808c7ddd5388.png",
-                alt: "Children performing music together",
-                title: "Group performance",
-                body: "Playing with other kids is part of the curriculum, not an afterthought. Students learn to listen to each other and perform together, which builds confidence from the start.",
-              },
-            ].map(({ accent, photoBg, photo, alt, title, body }) => (
-              <Card
-                key={title}
-                image={photo}
-                imageAlt={alt}
-                imageHeight={140}
-                imageBg={photoBg}
-                accent={accent}
-              >
-                <h4 style={{
-                  fontFamily: fonts.display, fontWeight: 800,
-                  fontSize: 17, color: C.espresso, margin: "0 0 7px",
-                }}>{title}</h4>
-                <p style={{
-                  fontFamily: fonts.body, fontSize: 14,
-                  lineHeight: 1.7, color: C.muted, margin: 0,
-                }}>{body}</p>
-              </Card>
+              { icon: "🎹", name: "Piano Technique", bg: C.yellow, soft: C.yellowPastel },
+              { icon: "👂", name: "Playing by Ear",  bg: C.crimson, soft: C.blush },
+              { icon: "🎼", name: "Sight-Reading",   bg: C.teal,    soft: C.tealPastel },
+              { icon: "🎧", name: "Creative Listening",   bg: C.yellow,  soft: C.yellowPastel },
+              { icon: "🎵", name: "Group Performance",   bg: C.teal,    soft: C.tealPastel },
+            ].map(({ icon, name, bg, soft }, index) => (
+              <React.Fragment key={name}>
+
+                <div style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 12,
+                  width: 200,
+                }}>
+                  <div style={{
+                    width: 84,
+                    height: 84,
+                    borderRadius: "50%",
+                    background: soft,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 38,
+                    boxShadow: "0 8px 20px rgba(42,18,8,0.06)",
+                  }}>
+                    {icon}
+                  </div>
+
+                  <div style={{
+                    fontFamily: fonts.display,
+                    fontWeight: 800,
+                    fontSize: 16,
+                    color: C.espresso,
+                    textAlign: "center",
+                    lineHeight: 1.3,
+                  }}>
+                    {name}
+                  </div>
+                </div>
+
+                {index < 4 && (
+                  <svg
+                    width="70"
+                    height="12"
+                    viewBox="0 0 70 12"
+                    style={{ marginTop: -28 }}
+                  >
+                    <line
+                      x1="0"
+                      y1="6"
+                      x2="58"
+                      y2="6"
+                      stroke="rgba(255,0,68,.22)"
+                      strokeWidth="2"
+                      strokeDasharray="4 5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M58 2 L66 6 L58 10"
+                      fill="none"
+                      stroke="rgba(255,0,68,.22)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+
+              </React.Fragment>
             ))}
           </div>
+
+          {/* Featured photo */}
+          <div style={{
+            marginTop: 44,
+            textAlign: "center",
+          }}>
+            <img
+              src="https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg"
+              alt="Children at a piano keyboard during class"
+              style={{
+                width: "100%",
+                maxWidth: 980,
+                height: "auto",
+                display: "block",
+                margin: "0 auto",
+                borderRadius: 24,
+                boxShadow: "0 18px 50px rgba(42,18,8,0.10)",
+              }}
+            />
+
+            <p style={{
+              fontFamily: fonts.body,
+              fontSize: 16,
+              color: C.muted,
+              lineHeight: 1.6,
+              maxWidth: 520,
+              margin: "22px auto 0",
+            }}>
+              Every class includes hands-on time at the keyboard. Students build muscle memory and confidence from day one.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── WHAT WE TEACH ────────────────────────────────────────────────── */}
+      <section
+        id="tk-curriculum"
+        style={{
+          position: "relative",
+          maxWidth: 1220,
+          margin: "0 auto",
+          padding: "0 32px 90px",
+          overflow: "visible",
+        }}>
+        {/* Background circles */}
+
+        <div
+          style={{
+            position: "absolute",
+            top: 160,
+            left: -240,
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
+            background: "#FFD6CF",
+            opacity: 0.8,
+            zIndex: 0,
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            top: 40,
+            right: 40,
+            width: 140,
+            height: 140,
+            borderRadius: "50%",
+            background: "#FFF0A8",
+            opacity: 0.85,
+            zIndex: 0,
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            bottom: -10,
+            right: -170,
+            width: 170,
+            height: 170,
+            borderRadius: "50%",
+            background: "#CFEFFF",
+            opacity: 0.8,
+            zIndex: 0,
+          }}
+        />
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+
+        </div>
+
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: 60,
+            marginBottom: 56,
+          }}>
+          <h2 style={{
+            fontFamily: fonts.display, fontWeight: 800,
+            fontSize: "clamp(28px, 4vw, 42px)", color: C.espresso,
+            margin: "0 0 10px", letterSpacing: "-0.02em",
+          }}>Inside Every Class</h2>
+          <p style={{
+            fontFamily: fonts.body, fontSize: 16, color: C.muted,
+            maxWidth: 720, margin: "0 auto", lineHeight: 1.65,
+          }}>
+            Every class is built around five core skills. Students work through them progressively across three levels, at their own pace.
+          </p>
+        </div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          gap: 36,
+          maxWidth: 1180,
+          margin: "0 auto",
+          alignItems: "stretch",
+        }}>
+          {[
+            {
+              accent: C.yellow,
+              photoBg: C.yellowPastel,
+              photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg",
+              alt: "Hands on piano keyboard",
+              title: "Piano technique",
+              body: "Finger positioning, hand coordination, and basic chords. Students learn new songs every class so they can practice these skills in context, not in isolation.",
+            },
+            {
+              accent: C.teal,
+              photoBg: C.tealPastel,
+              photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869153/6800e606-9e7f-4f01-a303-052dd700b141.png",
+              alt: "Child playing piano",
+              title: "Playing by ear",
+              body: "We use Suzuki-influenced methods to help kids listen actively and play intuitively. Playing by ear is one of the most valuable skills a young musician can build.",
+            },
+            {
+              accent: C.crimson,
+              photoBg: C.blush,
+              photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869275/c18113ba-2a91-41f3-bb6e-1cd8fbddf197.png",
+              alt: "Kids reading music",
+              title: "Sight-reading",
+              body: "We introduce musical notation in a kid-friendly, step-by-step way. Most kids are ready for this around age 6 or 7, and we meet them there when the time is right.",
+            },
+            {
+              accent: C.teal,
+              photoBg: C.tealPastel,
+              photo: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&q=80",
+              alt: "Kids listening to music together",
+              title: "Creative listening",
+              body: "Every class includes a listening exercise. We introduce kids to a wide range of styles, from classical to pop to rock, to help them develop their ear and find music they love.",
+            },
+          ].map(({ accent, photoBg, photo, alt, title, body }) => (
+            <Card
+              key={title}
+              image={photo}
+              imageAlt={alt}
+              imageHeight={250}
+              imageBg={photoBg}
+              accent={accent}
+            >
+              <h4 style={{
+                fontFamily: fonts.display, fontWeight: 800,
+                fontSize: 17, color: C.espresso, margin: "0 0 7px",
+              }}>{title}</h4>
+              <p style={{
+                fontFamily: fonts.body, fontSize: 14,
+                lineHeight: 1.7, color: C.muted, margin: 0,
+              }}>{body}</p>
+            </Card>
+          ))}
         </div>
       </section>
 
       {/* ── THREE LEVELS ─────────────────────────────────────────────────── */}
-      <WaveDivider from={C.offWhite} to={C.yellowPastel} direction="up" />
-      <section style={{ background: C.yellowPastel, padding: "48px 24px 64px" }}>
+      <section style={{ position: "relative", background: C.yellowPastel, padding: "48px 24px 64px" }}>
+        
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <h2 style={{
             fontFamily: fonts.display, fontWeight: 800,
@@ -383,8 +651,8 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
             </div>
           </div>
         </div>
+        <WaveDivider from={C.yellowPastel} to={C.cream} direction="down" />
       </section>
-      <WaveDivider from={C.yellowPastel} to={C.cream} direction="down" />
 
       {/* ── PIANO ILLUSTRATION STRIP ─────────────────────────────────────── */}
       <section style={{ background: C.cream, padding: "40px 24px" }}>
@@ -408,9 +676,11 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         title="Spots fill up."
         body="Reach out when your child is ready and we'll find the right class together."
       >
-        <Button onClick={() => openModal("booking")}>Book a session</Button>
-        <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Come visit us!</Button>
-        
+        <Button onClick={() => openModal("booking")}>Reserve a spot</Button>
+        <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Book a tour</Button>
+        <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: "6px 0 0", textAlign: "center" }}>
+          Takes about 2 minutes.
+        </p>
         <p style={{
           fontFamily: fonts.body, fontSize: 14, color: C.muted,
           width: "100%", marginTop: 8,

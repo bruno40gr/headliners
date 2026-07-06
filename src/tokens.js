@@ -122,7 +122,7 @@ export const programPalettes = {
     accent:     { token: "yellow",    pct: 10, note: "Playful pops and activity moments" },
     accent2:    { token: "teal",      pct: 5,  note: "CTAs and wayfinding only" },
   },
-  littleRockers: {
+  wonderNotes: {
     dominant:   { token: "crimson",  pct: 40, note: "Hero accents, stickers, card borders" },
     secondary:  { token: "cream",    pct: 30, note: "Page base and content panels" },
     secondary2: { token: "blush",    pct: 15, note: "Section fills, modal callout" },

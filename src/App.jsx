@@ -6,7 +6,7 @@ import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
 import CareersPage from "./CareersPage";  
 import TinyKeys from "./TinyKeys";
-import LittleRockers from "./LittleRockers";
+import WonderNotes from "./WonderNotes";
 import { C, fonts } from "./tokens";
 
 
@@ -732,7 +732,7 @@ export default function App() {
        path === "/teachers"             ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/careers"              ? <CareersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/tiny-keys"            ? <TinyKeys navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
-       path === "/little-rockers"       ? <LittleRockers navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/wonder-notes"       ? <WonderNotes navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/programs/band"        ? <BandProgramPage onRequestLessons={(i) => setBookingFor(i || "")} setPath={setPath} /> : (
         <>
           {/* ── HERO ── */}

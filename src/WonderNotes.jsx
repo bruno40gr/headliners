@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { C, fonts } from "./tokens";
 import {
   Button,
-  Modal,
   Bubble,
   Chip,
   WaveDivider,
@@ -11,6 +10,7 @@ import {
   globalStyles,
 } from "./ui";
 import ProgramsNav from "./ProgramsNav";
+import BookingInterstitial from "./BookingInterstitial";
 
 /* ─── Instrument illustration SVG ────────────────────────────────────────── */
 const InstrumentIllustration = () => (
@@ -71,16 +71,17 @@ const InstrumentIllustration = () => (
    PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
 export default function WonderNotesPage({ navigate, setPath, onRequestLessons }) {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [interstitialOpen, setInterstitialOpen] = useState(false);
+  const [interstitialMode, setInterstitialMode] = useState("booking");
 
-  const openModal = () => {
+  const openModal = (mode = "booking") => {
     if (onRequestLessons) {
       onRequestLessons("Wonder Notes");
     } else {
-      setModalOpen(true);
+      setInterstitialMode(mode);
+      setInterstitialOpen(true);
     }
   };
-  const closeModal = () => setModalOpen(false);
 
   return (
     <div style={{ fontFamily: fonts.body, background: C.cream, color: C.text }}>
@@ -108,7 +109,7 @@ export default function WonderNotesPage({ navigate, setPath, onRequestLessons })
       <section className="lr-hero-section" style={{
         background: C.cream,
         paddingTop: 120,
-        paddingBottom: 48,
+        paddingBottom: 72,
         paddingLeft: 24,
         paddingRight: 24,
         position: "relative",
@@ -162,19 +163,9 @@ export default function WonderNotesPage({ navigate, setPath, onRequestLessons })
 A joyful, play-based music class where preschoolers sing, move, explore, and grow through music together.             </p>
 
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
-                <Button onClick={openModal}>Reserve a spot</Button>
-                <button
-                  onClick={() => document.getElementById("lr-what")?.scrollIntoView({ behavior: "smooth" })}
-                  style={{
-                    background: "none", border: "none", cursor: "pointer",
-                    fontFamily: fonts.body, fontSize: 15,
-                    color: C.tealDark, fontWeight: 600, padding: 0,
-                    textDecoration: "underline",
-                    textDecorationColor: `${C.teal}80`,
-                    textUnderlineOffset: 3,
-                  }}>
-                  See what we do
-                </button>
+                <Button onClick={() => openModal("booking")}>Reserve a spot</Button>
+                <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Book a tour</Button>
+                
               </div>
 
               {/* Quick stats */}
@@ -581,8 +572,8 @@ alignItems: "stretch",
               </Card>
             ))}
           </div>
+        <WaveDivider from={C.blush} to={C.cream} direction="down" />
       </section>
-      <WaveDivider from={C.blush} to={C.cream} direction="down" />
 
       {/* ── BOTTOM CTA ───────────────────────────────────────────────────── */}
       <CTASection
@@ -590,10 +581,8 @@ alignItems: "stretch",
         title="Classes fill up fast."
         body="Reach out and we will find a spot for your little one."
       >
-        <Button onClick={openModal}>Reserve a spot</Button>
-        <Button variant="secondary" accent={C.teal} onClick={() => navigate("/programs")}>
-          See all programs
-        </Button>
+        <Button onClick={() => openModal("booking")}>Reserve a spot</Button>
+        <Button variant="secondary" accent={C.teal} onClick={() => openModal("tour")}>Book a tour</Button>
         <p style={{
           fontFamily: fonts.body, fontSize: 14, color: C.muted,
           width: "100%", marginTop: 8,
@@ -609,53 +598,21 @@ alignItems: "stretch",
         </p>
       </CTASection>
 
-      {/* Fallback modal */}
-      {modalOpen && !onRequestLessons && (
-        <Modal onClose={closeModal} maxWidth={440}>
-          <div style={{ textAlign: "center", marginBottom: 22 }}>
-            <div style={{ fontSize: 40, marginBottom: 12 }}>🥁</div>
-            <h2 style={{
-              fontFamily: fonts.display, fontWeight: 800,
-              fontSize: 22, color: C.espresso, margin: "0 0 8px",
-            }}>Ready to join?</h2>
-            <p style={{
-              fontFamily: fonts.body, fontSize: 14,
-              color: C.muted, lineHeight: 1.65, margin: 0,
-            }}>
-              We use Opus to manage enrollment. Clicking below takes you to our
-              scheduling page where you can find a class and reserve a spot.
-            </p>
-          </div>
-
-          <div style={{
-            background: C.blush, borderRadius: 10, padding: "13px 16px",
-            marginBottom: 22, borderLeft: `4px solid ${C.crimson}`,
-          }}>
-            <p style={{
-              fontFamily: fonts.body, fontSize: 13,
-              color: C.blushDark, margin: 0, lineHeight: 1.6,
-            }}>
-              Questions first? Call us at{" "}
-              <a href="tel:9164351300" style={{ color: C.blushDark, fontWeight: 700 }}>
-                (916) 435-1300
-              </a>. We're happy to chat before you book.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <Button
-              onClick={() => window.open("https://headlinermusicacademy.com", "_blank")}
-              style={{ textAlign: "center" }}
-            >
-              Reserve a spot in Opus
-            </Button>
-            <button onClick={closeModal} style={{
-              background: "none", border: "none", cursor: "pointer",
-              fontFamily: fonts.body, fontSize: 13,
-              color: C.muted, padding: "8px", textAlign: "center",
-            }}>Maybe later</button>
-          </div>
-        </Modal>
+      {/* Booking interstitial */}
+      {interstitialOpen && !onRequestLessons && (
+        <BookingInterstitial
+          programName="Wonder Notes"
+          programColor={C.crimson}
+          opusL1="https://headlinermusicacademy.com"
+          opusL2="https://headlinermusicacademy.com"
+          opusL3="https://headlinermusicacademy.com"
+          initialScreen={interstitialMode === "tour" ? 2 : 1}
+          submitLabel={interstitialMode === "booking" ? "Reserve a spot" : "Continue to booking"}
+          onClose={() => setInterstitialOpen(false)}
+          emailjsServiceId="service_734y6qg"
+          emailjsTemplateId="template_czlclec"
+          emailjsPublicKey="FdW-lGbAyQuJZFy-y"
+        />
       )}
     </div>
   );

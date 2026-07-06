@@ -293,12 +293,14 @@ export function WaveDivider({ from, to, direction = "down" }) {
       viewBox="0 0 1440 56"
       preserveAspectRatio="none"
       style={{
-        display: "block",
+        position: "absolute",
+        left: 0,
         width: "100%",
         height: 48,
         background: from,
-        marginBottom: isDown ? -1 : 0,
-        marginTop: isDown ? 0 : -1,
+        bottom: isDown ? 0 : undefined,
+        top: isDown ? undefined : 0,
+        zIndex: 1,
       }}
       aria-hidden="true"
     >
