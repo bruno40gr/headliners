@@ -219,27 +219,43 @@ export default function LightingVisualization() {
       rl.position.set(x, ROOM_H - 1.2, 2); s.scene.add(rl);
     });
 
-    // Logo backdrop — self-illuminating branded back-wall sign
+    // Logo backdrop — self-illuminating branded sign
     const logoLoader = new THREE.TextureLoader();
     logoLoader.load(
       "https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png",
       (tex) => {
         const asp = tex.image.width / tex.image.height;
         const lh = 4.2, lw = lh * asp;
-        const logoMat = new THREE.MeshBasicMaterial({ map: tex, transparent: true });
-        const lp = new THREE.Mesh(new THREE.PlaneGeometry(lw, lh), logoMat);
-        lp.position.set(0, 9, BWZ + 0.2); lp.renderOrder = 999; s.scene.add(lp);
-
+        const lmat = new THREE.MeshBasicMaterial({ map: tex, transparent: true });
+        const lp = new THREE.Mesh(new THREE.PlaneGeometry(lw, lh), lmat);
+        lp.position.set(0, 9, BWZ + 0.06); s.scene.add(lp);
         const halo = new THREE.Mesh(
           new THREE.PlaneGeometry(lw * 1.6, lh * 1.6),
-          new THREE.MeshBasicMaterial({ color: 0xfff4e0, transparent: true, opacity: 0.35, side: THREE.DoubleSide, depthWrite: false })
+          new THREE.MeshBasicMaterial({ color: 0xfff4e0, transparent: true, opacity: 0.15, side: THREE.DoubleSide, depthWrite: false })
         );
-        halo.position.set(0, 9, BWZ + 0.18); halo.renderOrder = 998; s.scene.add(halo);
-
-        const glowGeom = new THREE.PlaneGeometry(lw * 2, lh * 2);
-        const glowMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15, side: THREE.DoubleSide, depthWrite: false });
-        const glow = new THREE.Mesh(glowGeom, glowMat);
-        glow.position.set(0, 9, BWZ + 0.1); glow.renderOrder = 997; s.scene.add(glow);
+        halo.position.set(0, 9, BWZ + 0.04); s.scene.add(halo);
+      },
+      undefined,
+      () => {
+        // Fallback if Cloudinary fails
+        try {
+          const fallbackLoader = new THREE.TextureLoader();
+          fallbackLoader.load(
+            "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png",
+            (tex) => {
+              const asp = tex.image.width / tex.image.height;
+              const lh = 4.2, lw = lh * asp;
+              const lmat = new THREE.MeshBasicMaterial({ map: tex, transparent: true });
+              const lp = new THREE.Mesh(new THREE.PlaneGeometry(lw, lh), lmat);
+              lp.position.set(0, 9, BWZ + 0.06); s.scene.add(lp);
+              const halo = new THREE.Mesh(
+                new THREE.PlaneGeometry(lw * 1.6, lh * 1.6),
+                new THREE.MeshBasicMaterial({ color: 0xfff4e0, transparent: true, opacity: 0.15, side: THREE.DoubleSide, depthWrite: false })
+              );
+              halo.position.set(0, 9, BWZ + 0.04); s.scene.add(halo);
+            }
+          );
+        } catch (e) { /* silent */ }
       }
     );
 
@@ -393,22 +409,6 @@ export default function LightingVisualization() {
             fontSize: 11, fontWeight: 600, cursor: "pointer", transition: "all .2s",
           }}>Class</button>
         </div>
-      </div>
-
-      {/* Legend */}
-      <div style={{
-        position: "absolute", top: 16, right: 16, zIndex: 10,
-        background: "rgba(26,19,15,.9)", border: "1px solid #333",
-        borderRadius: 10, padding: "11px 15px", color: "#F6F3EE",
-        fontSize: 10, lineHeight: 1.85, maxWidth: 238, pointerEvents: "none",
-      }}>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#FF0044" }} />Row A: 2× Fresnel 350W (outer, band key)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#00A8C8" }} />Row A: 1× COB 300W wash par (center)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#FFE9CE" }} />Row B: 3× 18×18W fanless (class wash)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#c084fc" }} />2× floor uplights (back-wall separation)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#ff5555" }} />10in dead zone (no mounting)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#00ff88" }} />DMX line (green=IN · red=OUT)</div>
-        <div><span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", marginRight: 5, background: "#ffd400" }} />Power distro (parallel taps)</div>
       </div>
 
       {/* Wiring note */}
