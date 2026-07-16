@@ -122,7 +122,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 padding: "7px 16px",
                 borderRadius: 50,
                 marginBottom: 20,
-              }}>Ages 3 – 7 · Piano Foundations</div>
+              }}>Ages 5 – 7 · Piano Foundations</div>
 
               {/* Program title */}
               <h1 style={{
@@ -156,7 +156,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 paddingTop: 28, borderTop: `1.5px solid ${C.offWhite}`,
               }}>
                 {[
-                  { value: "3 – 7",    label: "Ages"      },
+                  { value: "5 – 7",    label: "Ages"      },
                   { value: "Group",    label: "Format"    },
                   { value: "45 min",   label: "Per class" },
                   { value: "3",        label: "Levels"    },
@@ -193,7 +193,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 background: C.teal, color: "#fff", borderRadius: 50,
                 padding: "9px 18px", fontFamily: fonts.display,
                 fontWeight: 800, fontSize: 13, transform: "rotate(-4deg)",
-              }}>Ages 3 – 7</div>
+              }}>Ages 5 – 7</div>
 
               {/* Photo card */}
               <div style={{
