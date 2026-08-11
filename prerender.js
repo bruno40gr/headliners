@@ -19,6 +19,47 @@ const routes = [
   '/programs/band',
 ];
 
+const BASE_URL = 'https://headlinermusicacademy.com';
+
+const SEO_META = {
+  '/': {
+    title: 'Headliner Music Academy | Rocklin, CA',
+    description: 'Private, semi-private, and group music lessons in Rocklin, CA. Inspiring the next generation of musicians through premium, personalized education.',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Headliner Music Academy',
+    description: 'Privacy policy for Headliner Music Academy. Learn how we collect, use, and protect your personal information.',
+  },
+  '/terms-and-conditions': {
+    title: 'Terms & Conditions | Headliner Music Academy',
+    description: 'Terms and conditions for enrollment at Headliner Music Academy in Rocklin, CA.',
+  },
+  '/summer-camp': {
+    title: 'Summer Band Camp 2026 | Headliner Music Academy',
+    description: 'One-week summer band camp for kids ages 8–12 in Rocklin, CA. No experience needed. Every kid gets an instrument, joins a band, and performs a real song.',
+  },
+  '/teachers': {
+    title: 'Our Teachers | Headliner Music Academy',
+    description: 'Meet the passionate instructors at Headliner Music Academy in Rocklin, CA.',
+  },
+  '/careers': {
+    title: 'Careers | Headliner Music Academy',
+    description: 'Join the team at Headliner Music Academy in Rocklin, CA. Explore career opportunities in music education.',
+  },
+  '/tiny-keys': {
+    title: 'Tiny Keys — Piano for Ages 5–7 | Headliner Music Academy',
+    description: 'Group piano classes for kids ages 5 to 7 in Rocklin, CA. A structured, three-level curriculum that builds real skills through songs, games, and time at the keys.',
+  },
+  '/wonder-notes': {
+    title: 'Wonder Notes — Music for Ages 3–5 | Headliner Music Academy',
+    description: 'A joyful, play-based music class for preschoolers ages 3 to 5 in Rocklin, CA. Sing, move, explore, and grow through music together.',
+  },
+  '/programs/band': {
+    title: 'Band Performance Program | Headliner Music Academy',
+    description: 'Live stage experience for young musicians in Rocklin, CA. Join a band and perform on a real stage.',
+  },
+};
+
 const MIME = {
   '.html': 'text/html',
   '.js': 'application/javascript',
@@ -74,7 +115,49 @@ async function prerender() {
     // Wait for React to hydrate
     await new Promise(r => setTimeout(r, 2000));
 
-    const html = await page.content();
+    let html = await page.content();
+
+    // Inject per-page SEO metadata
+    const meta = SEO_META[route];
+    if (meta) {
+      const pageUrl = route === '/' ? BASE_URL : `${BASE_URL}${route}`;
+
+      // Replace <title>
+      html = html.replace(
+        /<title>.*?<\/title>/,
+        `<title>${meta.title}</title>`
+      );
+
+      // Replace meta description
+      html = html.replace(
+        /<meta name="description" content=".*?"/,
+        `<meta name="description" content="${meta.description}"`
+      );
+
+      // Replace canonical URL
+      html = html.replace(
+        /<link rel="canonical" href=".*?"/,
+        `<link rel="canonical" href="${pageUrl}"`
+      );
+
+      // Replace og:title
+      html = html.replace(
+        /<meta property="og:title" content=".*?"/,
+        `<meta property="og:title" content="${meta.title}"`
+      );
+
+      // Replace og:description
+      html = html.replace(
+        /<meta property="og:description" content=".*?"/,
+        `<meta property="og:description" content="${meta.description}"`
+      );
+
+      // Replace og:url
+      html = html.replace(
+        /<meta property="og:url" content=".*?"/,
+        `<meta property="og:url" content="${pageUrl}"`
+      );
+    }
 
     // Determine output path
     const outDir = join(DIST, route === '/' ? '' : route);

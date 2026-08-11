@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://headlinermusicacademy.com/sitemap.xml

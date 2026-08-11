@@ -333,7 +333,7 @@ function PrivacyPolicyPage() {
         {[
           ["Information we collect","We collect information you provide when enrolling a student or contacting us, including name, phone number, email address, and payment information. We also collect attendance and lesson history as part of our normal operations."],
           ["How we use your information","We use your information to manage enrollments, process payments, communicate about lessons and scheduling, and send you updates about Headliner Music Academy programs and events."],
-          ["SMS and email communications","By providing your phone number or email address, you consent to receive SMS and email communications from Headliner Music Academy. You may opt out of SMS messages at any time by replying STOP. You may opt out of email communications by clicking unsubscribe in any email we send."],
+          ["SMS and email communications","By providing your phone number or email address, you consent to receive SMS and email communications from Headliner Music Academy, including scheduling, billing, reminders, account updates, and promotional messages about programs and events. You may opt out of SMS messages at any time by replying STOP. You may opt out of email communications by clicking unsubscribe in any email we send."],
           ["Information sharing","We do not sell or share your personal information with third parties for marketing purposes. We may share information with service providers who help us operate our business (such as payment processors and messaging platforms) under strict confidentiality agreements."],
           ["Data security","We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure."],
         ].map(([title,body])=>(
@@ -365,7 +365,7 @@ function TermsAndConditionsPage() {
           ["Cancellations and holds","You may cancel or place your account on hold by contacting us at (916) 435-1300 or admin@headlinermusicacademy.com. Cancellations require notice before your next billing date to avoid being charged for the following month."],
           ["24-Hour Absence Notice","If, for any reason, your student is unable to attend a lesson, please note that we have a strict 24-hour cancellation policy out of respect for our teachers' schedules and how they are compensated. If you call, email, or leave a voicemail at least 24 hours before the reserved lesson, even if Headliner is closed at the time you contact us, we would be happy to reschedule it within 30 days."],
           ["Communications","By enrolling, you agree to receive operational and promotional communications from Headliner Music Academy via SMS and email. You may opt out at any time by replying STOP to any SMS or contacting us directly."],
-          ["SMS Communications","By enrolling, you agree to receive SMS messages from Headliner Music Academy. The Headliner Music Academy SMS program includes scheduling reminders, billing notifications, lesson updates, and account-related communications. Message frequency varies. Message and data rates may apply. You may opt out at any time by replying STOP. For assistance, reply HELP or contact us at (916) 435-1300 or admin@headlinermusicacademy.com."],
+          ["SMS Communications","By enrolling, you agree to receive SMS messages from Headliner Music Academy regarding scheduling, billing, reminders, account updates, and promotional messages about programs and events. Message frequency varies. Message and data rates may apply. You may opt out at any time by replying STOP. For assistance, reply HELP or contact us at (916) 435-1300 or admin@headlinermusicacademy.com."],
           ["Code of conduct","We are committed to maintaining a respectful and safe environment for all students, families, and staff. Headliner Music Academy reserves the right to terminate enrollment for conduct that disrupts the learning environment."],
           ["Limitation of liability","Headliner Music Academy is not responsible for lost, stolen, or damaged personal property on academy premises."],
           ["Changes to these terms","We may update these terms from time to time. Continued enrollment constitutes acceptance of any updated terms."],
@@ -721,13 +721,16 @@ export default function App() {
         <BookingModal instrument={bookingFor} onClose={() => setBookingFor(null)} />
       )}
 
-      <ProgramsNav
-        variant="dark"
-        navigate={navigate}
-        ctaLabel="Request Lessons"
-        onCtaClick={() => setBookingFor("")}
-      />
+      <header>
+        <ProgramsNav
+          variant="dark"
+          navigate={navigate}
+          ctaLabel="Request Lessons"
+          onCtaClick={() => setBookingFor("")}
+        />
+      </header>
 
+      <main>
       {path === "/privacy-policy"       ? <PrivacyPolicyPage /> :
        path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
        path === "/summer-camp"          ? <SummerCampPage setPath={setPath} /> :
@@ -915,6 +918,8 @@ export default function App() {
           </section>
         </>
       )}
+
+      </main>
 
       {/* ── FOOTER ── */}
       <footer style={{background:C.espresso,color:C.white,padding:"64px 40px 40px"}}>

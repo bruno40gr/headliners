@@ -67,6 +67,7 @@ export default function BookingInterstitial({
     name: "", studentName: "", age: "", program: programName, email: "", phone: "",
     date: "", timeWindow: "",
   });
+  const [smsConsent, setSmsConsent] = useState(false);
   const [status, setStatus] = useState("idle");
   const [programOpen, setProgramOpen] = useState(false);
 
@@ -97,19 +98,20 @@ export default function BookingInterstitial({
           service_id: "service_734y6qg",
           template_id: "template_czlclec",
           user_id: "FdW-lGbAyQuJZFy-y",
-          template_params: {
-            form_type: "Tour Request",
-            name: form.name,
-            age: form.age || "Not provided",
-            email: form.email || "Not provided",
-            instrument: form.program || "Not specified",
-            experience_level: "N/A",
-            time_of_day: "N/A",
-            days: "N/A",
-            preferred_date: form.date || "Not specified",
-            time_window: form.timeWindow || "Not specified",
-            message: "N/A",
-          },
+            template_params: {
+              form_type: "Tour Request",
+              name: form.name,
+              age: form.age || "Not provided",
+              email: form.email || "Not provided",
+              instrument: form.program || "Not specified",
+              experience_level: "N/A",
+              time_of_day: "N/A",
+              days: "N/A",
+              preferred_date: form.date || "Not specified",
+              time_window: form.timeWindow || "Not specified",
+              message: "N/A",
+              sms_consent: smsConsent ? "Yes" : "No",
+            },
         }),
       });
       const text = await res.text();
@@ -380,6 +382,27 @@ export default function BookingInterstitial({
               onChange={e => set("phone", e.target.value)}
             />
           </Field>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginTop: 2 }}>
+            <input
+              type="checkbox"
+              id="sms-consent"
+              checked={smsConsent}
+              onChange={e => setSmsConsent(e.target.checked)}
+              style={{
+                width: 16, height: 16, marginTop: 2, flexShrink: 0,
+                accentColor: C.crimson, cursor: "pointer",
+              }}
+            />
+            <label
+              htmlFor="sms-consent"
+              style={{
+                fontFamily: fonts.body, fontSize: 11, color: C.muted,
+                lineHeight: 1.5, cursor: "pointer",
+              }}
+            >
+              By checking this box, I agree to receive SMS messages from Headliner Music Academy regarding scheduling, billing, reminders, account updates, and promotional messages about programs and events. Message frequency varies. Reply STOP to opt out at any time.
+            </label>
+          </div>
           <Field label="Preferred date *">
             <input
               type="date"
