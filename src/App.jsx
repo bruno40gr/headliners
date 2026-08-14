@@ -965,8 +965,8 @@ export default function App() {
             </p>
             <div style={{display:"flex",flexWrap:"wrap",gap:20}}>
               {[
-                {href:"/privacy-policy",label:"Privacy Policy"},
-                {href:"/terms-and-conditions",label:"Terms & Conditions"},
+                {href:"/privacy-policy.html",label:"Privacy Policy"},
+                {href:"/terms-and-conditions.html",label:"Terms & Conditions"},
               ].map(({href,label})=>(
                 <a key={label} href={href} style={{fontFamily:fonts.body,fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform:"uppercase"}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
