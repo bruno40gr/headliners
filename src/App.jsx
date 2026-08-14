@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { MapPin, Mail, Phone, X, ChevronDown, ArrowRight } from "lucide-react";
 import ProgramsNav from "./ProgramsNav";
-import SummerCampPage from "./SummerCampPage";
 import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
 import CareersPage from "./CareersPage";  
@@ -27,7 +26,6 @@ const offerings = [
 const DAYS  = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 const TIMES = ["Morning (8am–12pm)","Afternoon (12pm–4pm)","Evening (4pm–8pm)"];
 const PORTAL_URL  = "https://headlinerma.opus1.io/login";
-const CAMP_URL    = "https://headlinerma.opus1.io/w/summercamp2026";
 
 const EMAILJS_SERVICE_ID  = "service_734y6qg";
 const EMAILJS_TEMPLATE_ID = "template_czlclec";
@@ -488,14 +486,6 @@ function HeroSection({ navigate, setBookingFor }) {
             >
               Request Lessons
             </Button>
-            <Button
-              variant="ghost"
-              href="/summer-camp"
-              onClick={e => { e.preventDefault(); navigate("/summer-camp"); }}
-              style={{ fontSize: 14, padding: "16px 32px" }}
-            >
-              Summer Camp 2026
-            </Button>
           </div>
 
           <div className={loaded ? "fade-up delay-5" : ""} style={{
@@ -733,7 +723,6 @@ export default function App() {
       <main>
       {path === "/privacy-policy"       ? <PrivacyPolicyPage /> :
        path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
-       path === "/summer-camp"          ? <SummerCampPage setPath={setPath} /> :
        path === "/teachers"             ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/careers"              ? <CareersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/tiny-keys"            ? <TinyKeys navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
@@ -804,74 +793,6 @@ export default function App() {
                   <span className="card-hint">Request lessons →</span>
                 </div>
               ))}
-            </div>
-          </section>
-
-          {/* ── SUMMER CAMP ── */}
-          <section style={{background:C.espresso,padding:"72px 20px",position:"relative",overflow:"hidden",boxSizing:"border-box",width:"100%"}}>
-            <div style={{
-              position:"absolute",inset:0,
-              backgroundImage:`radial-gradient(at 100% 0%, ${C.yellow05} 0px, transparent 55%)`,
-              pointerEvents:"none",
-            }}/>
-            <div className="camp-grid" style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center",width:"100%"}}>
-              <div>
-                <p style={{
-                  fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
-                  color:C.teal,marginBottom:16,display:"flex",alignItems:"center",gap:8,
-                }}>
-                  <span style={{display:"block",width:28,height:3,background:C.teal,borderRadius:2}}/>
-                  Summer 2026
-                </p>
-                <h1 style={{
-                  fontFamily:fonts.display,fontWeight:800,
-                  fontSize:"clamp(2.4rem,5vw,3.8rem)",letterSpacing:-1,
-                  color:C.white,lineHeight:0.95,margin:"0 0 16px",
-                }}>
-                  Summer Camp <em style={{fontStyle:"italic",color:C.crimson}}>2026.</em>
-                </h1>
-                <h2 style={{
-                  fontFamily:fonts.display,fontWeight:700,
-                  fontSize:"clamp(1.1rem,2vw,1.5rem)",letterSpacing:-0.5,
-                  color:C.white70,lineHeight:1.3,margin:"0 0 24px",fontStyle:"italic",
-                }}>
-                  Your kid will be in a real band by Friday.
-                </h2>
-                <p style={{fontFamily:fonts.body,fontSize:16,color:C.white80,lineHeight:1.8,marginBottom:36,maxWidth:420}}>
-                  One week. No experience needed. Every kid gets an instrument, joins a band, and performs a real song on the last day.
-                </p>
-                <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
-                  <Button
-                    href={CAMP_URL} target="_blank" rel="noreferrer"
-                    style={{boxShadow:`0 4px 20px ${C.crimson30}`}}
-                  >
-                    Enroll Now
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    href="/summer-camp"
-                    onClick={e=>{ e.preventDefault(); navigate("/summer-camp"); }}
-                  >
-                    Learn More
-                  </Button>
-                </div>
-              </div>
-
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:1,background:C.white07,border:`1px solid ${C.white07}`}}>
-                {[
-                  {label:"Dates",     value:"June 22–26, 2026",  color:C.white},
-                  {label:"Ages",      value:"8–12 years old",    color:C.white},
-                  {label:"Schedule",  value:"9 AM – 12:30 PM",   color:C.white},
-                  {label:"Band Size", value:"Max 7 kids",        color:C.white},
-                  {label:"Experience",value:"None required",     color:C.teal},
-                  {label:"Final Day", value:"Live performance + recording", color:C.crimson},
-                ].map(({label,value,color})=>(
-                  <div key={label} style={{background:C.espresso,padding:"28px 24px"}}>
-                    <p style={{fontFamily:fonts.body,fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",color:C.lightCream,marginBottom:8}}>{label}</p>
-                    <p style={{fontFamily:fonts.display,fontWeight:800,fontSize:16,color,lineHeight:1.3}}>{value}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </section>
 

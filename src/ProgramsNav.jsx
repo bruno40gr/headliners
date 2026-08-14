@@ -20,7 +20,6 @@ export const PROGRAMS = [
   { label: "Band Program", sub: "All ages · Join a band & perform live.", href: "/programs/band", active: true },
   { label: "Private Lessons", sub: "All ages · One-on-one, paced around you.", href: null, active: false },
   { label: "Semi-Private Lessons", sub: "All ages · Share lessons with a sibling or friend.", href: null, active: false },
-  { label: "Summer Camp 2026", sub: "Ages 8–12 · One week to rock out.", href: "/summer-camp", active: true, badge: "Enrolling Now" },
   { label: "Tiny Keys", sub: "Ages 5–7 · Early piano & fundamentals.", href: "/tiny-keys", active: true },
   { label: "Wonder Notes", sub: "Ages 3–5 · Intro to instruments & rhythm.", href: "/wonder-notes", active: true },
   { label: "Music & Me", sub: "Ages 0–4 · Mommy & Me musical bonding.", href: null, active: false },
@@ -28,7 +27,7 @@ export const PROGRAMS = [
 ];
 
 const ABOUT_ITEMS = [
-  { label: "Our Story", sub: "History, mission & values", href: "/about", active: true },
+  { label: "Our Story", sub: "History, mission & values", href: null, active: false },
   { label: "Careers", sub: "Join our growing team", href: "/careers", active: true },
 ];
 

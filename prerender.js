@@ -11,7 +11,6 @@ const routes = [
   '/',
   '/privacy-policy',
   '/terms-and-conditions',
-  '/summer-camp',
   '/teachers',
   '/careers',
   '/tiny-keys',
@@ -33,10 +32,6 @@ const SEO_META = {
   '/terms-and-conditions': {
     title: 'Terms & Conditions | Headliner Music Academy',
     description: 'Terms and conditions for enrollment at Headliner Music Academy in Rocklin, CA.',
-  },
-  '/summer-camp': {
-    title: 'Summer Band Camp 2026 | Headliner Music Academy',
-    description: 'One-week summer band camp for kids ages 8–12 in Rocklin, CA. No experience needed. Every kid gets an instrument, joins a band, and performs a real song.',
   },
   '/teachers': {
     title: 'Our Teachers | Headliner Music Academy',
