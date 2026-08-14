@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SMS consent and opt-in for Headliner Music Academy. Receive scheduling, billing, reminders, account updates, and promotional messages about programs and events." />
+  <meta name="description" content="SMS opt-in for Headliner Music Academy. Two separate, optional checkboxes: transactional/informational messages and promotional/marketing messages." />
   <title>SMS Consent — Headliner Music Academy</title>
   <link rel="canonical" href="https://headlinermusicacademy.com/sms-consent" />
   <style>
@@ -26,6 +26,10 @@
     .subtitle {
       font-size: 15px; color: #7A6A5A; margin: 0 0 32px; line-height: 1.5;
     }
+    .note {
+      font-size: 12px; color: #9A8B7B; margin: 0 0 24px; line-height: 1.5;
+      font-style: italic;
+    }
     label.field-label {
       display: block; font-size: 10px; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -39,7 +43,7 @@
     }
     input[type="tel"]:focus { border-color: #FF0044; background: #fff; }
     .consent-row {
-      display: flex; align-items: flex-start; gap: 10px; margin-top: 20px;
+      display: flex; align-items: flex-start; gap: 10px; margin-top: 16px;
     }
     input[type="checkbox"] {
       width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0;
@@ -47,6 +51,20 @@
     }
     .consent-text {
       font-size: 12px; color: #7A6A5A; line-height: 1.6; cursor: pointer;
+    }
+    .btn {
+      width: 100%; background: #FF0044; color: #fff; border: none;
+      border-radius: 999px; padding: 13px 32px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s; margin-top: 24px;
+    }
+    .btn:hover { background: #D60039; }
+    .confirm {
+      display: none; text-align: center; padding: 16px 0;
+      background: #E8F5E9; border-radius: 12px; margin-top: 24px;
+      color: #2E7D32; font-size: 14px; font-weight: 600; line-height: 1.5;
     }
     .links {
       margin-top: 28px; padding-top: 20px;
@@ -80,17 +98,35 @@
       Provide your phone number below to opt in to SMS messages from Headliner Music Academy
       in Rocklin, CA. Opt-in is optional and not required to enroll or receive services.
     </p>
+    <p class="note">
+      This page reflects the opt-in language used at booking on headlinermusicacademy.com.
+    </p>
 
     <label class="field-label" for="phone">Phone number</label>
     <input type="tel" id="phone" placeholder="(916) 000-0000" />
 
     <div class="consent-row">
-      <input type="checkbox" id="sms-consent" />
-      <label class="consent-text" for="sms-consent">
-        By checking this box, I agree to receive SMS messages from Headliner Music Academy
-        regarding scheduling, billing, reminders, account updates, and promotional messages
-        about programs and events. Message frequency varies. Reply STOP to opt out at any time.
+      <input type="checkbox" id="consent-transactional" />
+      <label class="consent-text" for="consent-transactional">
+        I agree to receive transactional/informational SMS communications from Headliner Music Academy. Frequency may vary. Data rates may apply, reply HELP for help or STOP for STOP.
       </label>
+    </div>
+
+    <div class="consent-row">
+      <input type="checkbox" id="consent-marketing" />
+      <label class="consent-text" for="consent-marketing">
+        I agree to receive promotional/marketing SMS communications from Headliner Music Academy. Frequency may vary. Data rates may apply, reply HELP for help or STOP for STOP.
+      </label>
+    </div>
+
+    <p style="font-size:11px;color:#7A6A5A;margin-top:12px;line-height:1.5;">
+      Opt-in to each is independent and optional. You may opt out of either type at any time by replying STOP.
+    </p>
+
+    <button class="btn" id="next-btn">Book a tour</button>
+
+    <div class="confirm" id="confirm-msg">
+      ✅ Opt-in confirmed. Thank you!
     </div>
 
     <p style="font-size:12px;color:#7A6A5A;margin-top:24px;line-height:1.6;">
@@ -104,5 +140,11 @@
       <a href="/">Home</a>
     </div>
   </div>
+
+  <script>
+    document.getElementById("next-btn").addEventListener("click", function () {
+      document.getElementById("confirm-msg").style.display = "block";
+    });
+  </script>
 </body>
 </html>
