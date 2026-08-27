@@ -95,7 +95,7 @@ function Button({ children, variant = "primary", href, disabled, style, classNam
 // ── BookingModal ─────────────────────────────────────────────────────────────
 function BookingModal({ instrument, onClose }) {
   const [form, setForm] = useState({
-    name:"", age:"", email:"", instrument: instrument||"",
+    name:"", age:"", email:"", phone:"", instrument: instrument||"",
     level:"", days:[], times:[], notes:"",
   });
   const [status, setStatus] = useState("idle");
@@ -122,7 +122,7 @@ function BookingModal({ instrument, onClose }) {
           template_params:{
             form_type: "Lesson Inquiry",
             name: form.name, age: form.age||"Not provided",
-            email: form.email, instrument: form.instrument,
+            email: form.email, phone: form.phone||"Not provided", instrument: form.instrument,
             experience_level: form.level,
             days: form.days.join(", ")||"Not specified",
             time_of_day: form.times.join(", ")||"Not specified",
@@ -203,6 +203,9 @@ function BookingModal({ instrument, onClose }) {
                 <p style={{fontFamily:fonts.body,fontSize:11,color:C.subtext,margin:"4px 0 0"}}>
                   We'll only use this to confirm your inquiry. No spam, ever.
                 </p>
+              </Field>
+              <Field label="Phone (optional)">
+                <input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={e=>set("phone",e.target.value)}/>
               </Field>
               <Field label="Age (optional)">
                 <input type="number" placeholder="e.g. 14" min={4} max={99} value={form.age} onChange={e=>set("age",e.target.value)} style={{maxWidth:120}}/>
