@@ -204,7 +204,7 @@ function BookingModal({ instrument, onClose }) {
                   We'll only use this to confirm your inquiry. No spam, ever.
                 </p>
               </Field>
-              <Field label="Phone (optional)">
+              <Field label="Phone">
                 <input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={e=>set("phone",e.target.value)}/>
               </Field>
               <Field label="Age (optional)">
