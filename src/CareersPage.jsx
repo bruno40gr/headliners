@@ -396,7 +396,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
                     </Field>
                   </div>
                   <div style={{ flex: "1 1 180px" }}>
-                    <Field label="Phone (optional)">
+                    <Field label="Phone">
                       <input className="cf-input" type="tel" placeholder="(916) 555-0123"
                         value={form.phone} onChange={e => set("phone", e.target.value)} />
                     </Field>

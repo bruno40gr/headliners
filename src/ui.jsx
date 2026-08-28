@@ -607,7 +607,7 @@ export function CTASection({
 /* ═══════════════════════════════════════════════════════════════════════════
    FAQ LIST — stacked Q&A
    ═══════════════════════════════════════════════════════════════════════════ */
-export function FAQList({ items, accent = C.crimson, style }) {
+export function FAQList({ items, accent = C.crimson, style, questionFontFamily = fonts.display }) {
   return (
     <div style={{ maxWidth: 800, ...style }}>
       {items.map(({ q, a }, i) => (
@@ -621,7 +621,7 @@ export function FAQList({ items, accent = C.crimson, style }) {
         >
           <h3
             style={{
-              fontFamily: fonts.display,
+              fontFamily: questionFontFamily,
               fontWeight: 800,
               fontSize: 18,
               color: C.espresso,
@@ -715,17 +715,17 @@ export function Card({
   accent = C.crimson,
   children,
   style,
+  radius = 24,
 }) {
   return (
     <div
       style={{
         background: C.white,
-        borderRadius: 24,
+        borderRadius: radius,
         border: `1.5px solid ${accent}40`,
         boxShadow: "0 14px 40px rgba(42,18,8,0.08)",
         overflow: "hidden",
-        boxShadow: "0 16px 40px rgba(42,18,8,0.08)",
-transition: "all .25s ease",
+        transition: "all .25s ease",
         ...style,
       }}
     >

@@ -67,8 +67,6 @@ export default function BookingInterstitial({
     name: "", studentName: "", age: "", program: programName, email: "", phone: "",
     date: "", timeWindow: "",
   });
-  const [smsConsentTransactional, setSmsConsentTransactional] = useState(false);
-  const [smsConsentMarketing, setSmsConsentMarketing] = useState(false);
   const [status, setStatus] = useState("idle");
   const [programOpen, setProgramOpen] = useState(false);
 
@@ -111,8 +109,6 @@ export default function BookingInterstitial({
               preferred_date: form.date || "Not specified",
               time_window: form.timeWindow || "Not specified",
               message: "N/A",
-              sms_consent_transactional: smsConsentTransactional ? "Yes" : "No",
-              sms_consent_marketing: smsConsentMarketing ? "Yes" : "No",
             },
         }),
       });
@@ -384,54 +380,6 @@ export default function BookingInterstitial({
               onChange={e => set("phone", e.target.value)}
             />
           </Field>
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginTop: 2 }}>
-            <input
-              type="checkbox"
-              id="consent-transactional"
-              checked={smsConsentTransactional}
-              onChange={e => setSmsConsentTransactional(e.target.checked)}
-              style={{
-                width: 16, height: 16, marginTop: 2, flexShrink: 0,
-                accentColor: C.crimson, cursor: "pointer",
-              }}
-            />
-            <label
-              htmlFor="consent-transactional"
-              style={{
-                fontFamily: fonts.body, fontSize: 11, color: C.muted,
-                lineHeight: 1.5, cursor: "pointer",
-              }}
-            >
-              I agree to receive transactional/informational SMS communications from Headliner Music Academy. Frequency may vary. Data rates may apply, reply HELP for help or STOP for STOP.
-            </label>
-          </div>
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginTop: 2 }}>
-            <input
-              type="checkbox"
-              id="consent-marketing"
-              checked={smsConsentMarketing}
-              onChange={e => setSmsConsentMarketing(e.target.checked)}
-              style={{
-                width: 16, height: 16, marginTop: 2, flexShrink: 0,
-                accentColor: C.crimson, cursor: "pointer",
-              }}
-            />
-            <label
-              htmlFor="consent-marketing"
-              style={{
-                fontFamily: fonts.body, fontSize: 11, color: C.muted,
-                lineHeight: 1.5, cursor: "pointer",
-              }}
-            >
-              I agree to receive promotional/marketing SMS communications from Headliner Music Academy. Frequency may vary. Data rates may apply, reply HELP for help or STOP for STOP.
-            </label>
-          </div>
-          <p style={{
-            fontFamily: fonts.body, fontSize: 10, color: C.subtext,
-            margin: 0, lineHeight: 1.5,
-          }}>
-            Opt-in to each is independent and optional. You may opt out of either type at any time by replying STOP.
-          </p>
           <Field label="Preferred date *">
             <input
               type="date"
@@ -490,6 +438,13 @@ export default function BookingInterstitial({
           >
             {status === "sending" ? "Sending..." : "Book a tour"}
           </button>
+
+          <p style={{ textAlign: "center", fontFamily: fonts.body, fontSize: 12, color: C.muted, margin: 0 }}>
+            Or call us at{" "}
+            <a href="tel:916-435-1300" style={{ color: C.crimson, fontWeight: 700, textDecoration: "none" }}>
+              (916) 435-1300
+            </a>
+          </p>
 
           <div style={{ textAlign: "center", marginTop: 4 }}>
             <button
@@ -557,7 +512,7 @@ export default function BookingInterstitial({
 
       <style>{`
         .bi-tour-form select { appearance:none !important; -webkit-appearance:none !important; }
-        .bi-tour-form input, .bi-tour-form select, .bi-tour-form textarea {
+        .bi-tour-form input:not([type="checkbox"]), .bi-tour-form select, .bi-tour-form textarea {
           background: ${C.inputBg} !important;
           border: 1px solid ${C.border} !important;
           border-radius: 10px !important;
@@ -570,7 +525,7 @@ export default function BookingInterstitial({
           outline: none !important;
           transition: border-color 0.2s !important;
         }
-        .bi-tour-form input:focus, .bi-tour-form select:focus, .bi-tour-form textarea:focus {
+        .bi-tour-form input:not([type="checkbox"]):focus, .bi-tour-form select:focus, .bi-tour-form textarea:focus {
           border-color: ${C.crimson} !important;
           background: ${C.white} !important;
         }

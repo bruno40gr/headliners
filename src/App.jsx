@@ -7,6 +7,13 @@ import CareersPage from "./CareersPage";
 import TinyKeys from "./TinyKeys";
 import WonderNotes from "./WonderNotes";
 import InternalBandProgram from "./InternalBandProgram";
+import ServicesRecordingProductionPage from "./ServicesRecordingProductionPage";
+import ServicesPaRentalPage from "./ServicesPaRentalPage";
+import ServicesDjEventsPage from "./ServicesDjEventsPage";
+import ServicesInstrumentSetupPage from "./ServicesInstrumentSetupPage";
+import ServicesRehearsalSpacePage from "./ServicesRehearsalSpacePage";
+import PrivateLessonsPage from "./PrivateLessonsPage";
+import FundingSupportPage from "./FundingSupportPage";
 import { C, fonts } from "./tokens";
 
 
@@ -122,7 +129,7 @@ function BookingModal({ instrument, onClose }) {
           template_params:{
             form_type: "Lesson Inquiry",
             name: form.name, age: form.age||"Not provided",
-            email: form.email, phone: form.phone||"Not provided", instrument: form.instrument,
+            email: form.email, phone: form.phone||"Not provided", instrument: form.instrument || "General",
             experience_level: form.level,
             days: form.days.join(", ")||"Not specified",
             time_of_day: form.times.join(", ")||"Not specified",
@@ -263,6 +270,12 @@ function BookingModal({ instrument, onClose }) {
               >
                 {status === "sending" ? "Sending…" : "Let's make music"}
               </Button>
+              <p style={{ textAlign: "center", fontFamily: fonts.body, fontSize: 12, color: C.muted, margin: 0 }}>
+                Or call us at{" "}
+                <a href="tel:916-435-1300" style={{ color: C.crimson, fontWeight: 700, textDecoration: "none" }}>
+                  (916) 435-1300
+                </a>
+              </p>
             </div>
           </>
         )}
@@ -728,8 +741,15 @@ export default function App() {
        path === "/terms-and-conditions" ? <TermsAndConditionsPage /> :
        path === "/teachers"             ? <TeachersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/careers"              ? <CareersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/about/funding-support" ? <FundingSupportPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/tiny-keys"            ? <TinyKeys navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
-       path === "/wonder-notes"       ? <WonderNotes navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/wonder-notes"         ? <WonderNotes navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/programs/private-lessons" ? <PrivateLessonsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+       path === "/services/recording-music-production" ? <ServicesRecordingProductionPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+       path === "/services/pa-system-rental" ? <ServicesPaRentalPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+       path === "/services/dj-and-events" ? <ServicesDjEventsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+       path === "/services/instrument-setup" ? <ServicesInstrumentSetupPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+       path === "/services/rehearsal-space" ? <ServicesRehearsalSpacePage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/internal/band-program" ? <InternalBandProgram /> :
        path === "/programs/band"        ? <BandProgramPage onRequestLessons={(i) => setBookingFor(i || "")} setPath={setPath} /> : (
         <>
@@ -839,6 +859,84 @@ export default function App() {
                 </span>
               </div>
             </a>
+          </section>
+
+          <section style={{ background: C.white, padding: "28px 20px 88px", width: "100%" }}>
+            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <p style={{
+                  fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+                  color: C.teal, marginBottom: 12, display: "inline-flex", alignItems: "center", gap: 8,
+                }}>
+                  <span style={{ display: "block", width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
+                  In the community
+                </p>
+                <h2 style={{
+                  fontFamily: fonts.displaySerious, fontWeight: 800,
+                  fontSize: "clamp(2rem, 4.5vw, 3rem)", letterSpacing: -1,
+                  color: C.espresso, lineHeight: 1, margin: "0 0 12px",
+                }}>
+                  A few of the events and organizations we have worked with.
+                </h2>
+                <p style={{ fontFamily: fonts.body, fontSize: 16, color: C.muted, margin: 0 }}>
+                  Headliner keeps showing up in the community around us.
+                </p>
+              </div>
+
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                gap: 16,
+              }}>
+                {[
+                  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787856767/62f9c4d9-f1d9-45d6-9184-8272ac7c509b.png", alt: "Placer SPCA" },
+                  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787856320/34ae2934-47cf-49f4-8feb-5c0fa24d5634.png", alt: "Railroad Museum" },
+                  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787856614/9c93611d-37b8-40c0-85ee-c9ff9b7086d9.png", alt: "Placer County Fair" },
+                  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787857019/cbc0a656-bb2a-4244-bae6-04a2d6abec11.png", alt: "Hot Chili Cool Cars" },
+                  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787857303/2e7dd706-0ab8-4c3d-b661-36a9658321f3.png", alt: "Maker Faire Rocklin" },
+                ].map((logo) => (
+                  <div
+                    key={logo.alt}
+                    style={{
+                      background: C.white,
+                      border: `1px solid ${C.border}`,
+                      borderRadius: 14,
+                      minHeight: 118,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: 18,
+                    }}
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      style={{ maxWidth: "100%", maxHeight: 64, width: "auto", height: "auto", display: "block", objectFit: "contain" }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ textAlign: "center", marginTop: 26 }}>
+                <button
+                  onClick={() => navigate("/about/funding-support")}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: C.crimson,
+                    cursor: "pointer",
+                    fontFamily: fonts.body,
+                    fontSize: 14,
+                    fontWeight: 700,
+                    padding: 0,
+                    textDecoration: "underline",
+                    textUnderlineOffset: 3,
+                  }}
+                >
+                  Need help with charter or SDP/FMS funding?
+                </button>
+              </div>
+            </div>
           </section>
         </>
       )}

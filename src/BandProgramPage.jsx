@@ -110,6 +110,10 @@ const faqs = [
     q: "Are recording sessions free?",
     a: "Recording is included in the program. There's no separate fee. When your band is ready to document what you've built, the studio is there for you.",
   },
+  {
+    q: "Can we use charter or Self-Determination funding?",
+    a: <>We work with charter schools and Self-Determination funding programs, and funding can support instruction here — including paths that grow into bands and live performance. Coverage depends on your funding source, so see our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a> or ask us and we'll help you sort it out.</>,
+  },
 ];
 
 export default function BandProgramPage({ onRequestLessons, setPath }) {
@@ -238,7 +242,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           </div>
           <div style={{ position: "relative" }}>
             <div className="bp-img-wrap" style={{ borderRadius: 16, height: 440 }}>
-              <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Band in rehearsal" />
+              <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1787862861/9198476e-d047-4ef5-9584-51ec4ff1b010.png" alt="Band in rehearsal" />
             </div>
             <div
               onClick={() => {

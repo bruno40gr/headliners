@@ -6,11 +6,27 @@ import {
   Chip,
   WaveDivider,
   CTASection,
+  FAQList,
   Card,
   globalStyles,
 } from "./ui";
 import ProgramsNav from "./ProgramsNav";
 import BookingInterstitial from "./BookingInterstitial";
+
+const faqs = [
+  {
+    q: "What ages is Tiny Keys for?",
+    a: "Tiny Keys is built for ages 5 to 7. Classes are small and hands-on, and every child gets time at the keys in every session.",
+  },
+  {
+    q: "Does my child need any piano experience?",
+    a: "No. Tiny Keys starts from the beginning — posture, hand position, rhythm, and first songs. Kids who have never touched a piano do just fine.",
+  },
+  {
+    q: "Is financial support or charter funding available?",
+    a: <>Yes. We work with charter schools and Self-Determination funding programs. See what that covers and how it works on our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a>.</>,
+  },
+];
 
 /* ─── Playful piano SVG ──────────────────────────────────────────────────── */
 const PianoKeys = () => {
@@ -667,6 +683,25 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
             fontFamily: fonts.body, fontSize: 14, color: C.muted,
             marginTop: 14, lineHeight: 1.5,
           }}>Each child gets time at the keys, every session.</p>
+        </div>
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section style={{ background: C.white, padding: "72px 24px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <p style={{
+            fontFamily: fonts.display, fontWeight: 800, fontSize: 13,
+            color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em",
+            margin: "0 0 16px", textAlign: "center",
+          }}>Common questions</p>
+          <h2 style={{
+            fontFamily: fonts.display, fontWeight: 800,
+            fontSize: "clamp(26px, 3.4vw, 38px)", color: C.espresso,
+            margin: "0 0 36px", textAlign: "center", lineHeight: 1.1,
+          }}>
+            Questions parents ask
+          </h2>
+          <FAQList items={faqs} />
         </div>
       </section>
 

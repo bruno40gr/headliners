@@ -6,11 +6,27 @@ import {
   Chip,
   WaveDivider,
   CTASection,
+  FAQList,
   Card,
   globalStyles,
 } from "./ui";
 import ProgramsNav from "./ProgramsNav";
 import BookingInterstitial from "./BookingInterstitial";
+
+const faqs = [
+  {
+    q: "What ages is Wonder Notes for?",
+    a: "Wonder Notes is designed for ages 3 to 5. No experience needed — it's an introduction to instruments, rhythm, and making music together.",
+  },
+  {
+    q: "What happens in a class?",
+    a: "Each class mixes instrument play, rhythm and movement games, and music-based storytelling. Kids explore real instruments, build coordination and listening skills, and make music with other kids their age.",
+  },
+  {
+    q: "Is financial support or charter funding available?",
+    a: <>Yes. We work with charter schools and Self-Determination funding programs. See what that covers and how it works on our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a>.</>,
+  },
+];
 
 /* ─── Instrument illustration SVG ────────────────────────────────────────── */
 const InstrumentIllustration = () => (
@@ -573,6 +589,25 @@ alignItems: "stretch",
             ))}
           </div>
         <WaveDivider from={C.blush} to={C.cream} direction="down" />
+      </section>
+
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section style={{ background: C.cream, padding: "72px 24px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <p style={{
+            fontFamily: fonts.display, fontWeight: 800, fontSize: 13,
+            color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em",
+            margin: "0 0 16px", textAlign: "center",
+          }}>Common questions</p>
+          <h2 style={{
+            fontFamily: fonts.display, fontWeight: 800,
+            fontSize: "clamp(26px, 3.4vw, 38px)", color: C.espresso,
+            margin: "0 0 36px", textAlign: "center", lineHeight: 1.1,
+          }}>
+            Questions parents ask
+          </h2>
+          <FAQList items={faqs} />
+        </div>
       </section>
 
       {/* ── BOTTOM CTA ───────────────────────────────────────────────────── */}

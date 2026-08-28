@@ -42,6 +42,10 @@ const faqs = [
     q: "How small are the groups?",
     a: "Each band has a maximum of 7 kids. Small on purpose. Every child gets real attention from the instructors, and every child has a real role in the band. When a group is full, it closes."
   },
+  {
+    q: "Is financial support or charter funding available for camp?",
+    a: <>We work with charter schools and Self-Determination funding programs. Whether camp qualifies depends on your funding source — see our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a> or reach out and we'll help you figure it out.</>
+  },
 ];
 
 export default function SummerCampPage({ setPath }) {

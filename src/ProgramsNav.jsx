@@ -17,17 +17,28 @@ const LOGO_DARK   = "https://res.cloudinary.com/diy08lj9x/image/upload/v17807134
 const LOGO_LIGHT  = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
 
 export const PROGRAMS = [
+  { label: "Private Lessons", sub: "All ages · One-on-one, paced around you.", href: "/programs/private-lessons", active: true },
+  { label: "Semi-Private Lessons", sub: "All ages · Share lessons with a sibling or friend.", href: "/programs/private-lessons", active: true },
   { label: "Band Program", sub: "All ages · Join a band & perform live.", href: "/programs/band", active: true },
-  { label: "Private Lessons", sub: "All ages · One-on-one, paced around you.", href: null, active: false },
-  { label: "Semi-Private Lessons", sub: "All ages · Share lessons with a sibling or friend.", href: null, active: false },
   { label: "Tiny Keys", sub: "Ages 5–7 · Early piano & fundamentals.", href: "/tiny-keys", active: true },
   { label: "Wonder Notes", sub: "Ages 3–5 · Intro to instruments & rhythm.", href: "/wonder-notes", active: true },
   { label: "Music & Me", sub: "Ages 0–4 · Mommy & Me musical bonding.", href: null, active: false },
   { label: "Mini Beats", sub: "Ages 3–5 · Foundation in rhythm & beats.", href: null, active: false },
 ];
 
+export const SERVICES = [
+  { label: "Recording & Music Production", sub: "Studio recording, demos, and production support.", href: "/services/recording-music-production", active: true },
+  { label: "Rehearsal Space", sub: "Space for bands, groups, and set run-throughs.", href: "/services/rehearsal-space", active: true },
+  { label: "Birthday Parties", sub: "Music-filled party packages for kids & teens.", href: null, active: false },
+  { label: "Private Events", sub: "Community, school, and private gatherings.", href: null, active: false },
+  { label: "DJ & Events", sub: "Music, announcements, and event flow support.", href: "/services/dj-and-events", active: true },
+  { label: "PA System Rental", sub: "Sound support for parties, showcases, and events.", href: "/services/pa-system-rental", active: true },
+  { label: "Instrument Setup", sub: "Electronics, rigs, synths, and home studio gear.", href: "/services/instrument-setup", active: true },
+];
+
 const ABOUT_ITEMS = [
   { label: "Our Story", sub: "History, mission & values", href: null, active: false },
+  { label: "Funding Support", sub: "Charter and SDP/FMS funding help for families.", href: "/about/funding-support", active: true },
   { label: "Careers", sub: "Join our growing team", href: "/careers", active: true },
 ];
 
@@ -454,6 +465,7 @@ export default function ProgramsNav({
         <div className="pn-desktop" style={{ display: "flex", alignItems: "center", gap: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <MegaDropdown title="Programs" items={PROGRAMS} variant={variant} navigate={navigate} />
+            <MegaDropdown title="Services" items={SERVICES} variant={variant} navigate={navigate} />
             <MegaDropdown title="About Us" items={ABOUT_ITEMS} variant={variant} navigate={navigate} />
             <TopLevelLink label="Teachers" href="/teachers" variant={variant} navigate={navigate} />
           </div>
@@ -512,6 +524,7 @@ export default function ProgramsNav({
 
           <div style={{ flex: 1, overflowY: "auto", padding: "0 24px 40px" }}>
             <MobileAccordion title="Programs" items={PROGRAMS} navigate={navigate} onClose={() => setMobileOpen(false)} />
+            <MobileAccordion title="Services" items={SERVICES} navigate={navigate} onClose={() => setMobileOpen(false)} />
             <MobileAccordion title="About Us" items={ABOUT_ITEMS} navigate={navigate} onClose={() => setMobileOpen(false)} />
 
             <a

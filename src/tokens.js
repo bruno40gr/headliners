@@ -81,7 +81,41 @@ export const C = {
 
 export const fonts = {
   display: "'Baloo 2', sans-serif",
+  displayExpressive: "'Baloo 2', sans-serif",
+  displaySerious: "'Archivo', sans-serif",
   body:    "'DM Sans', sans-serif",
+};
+
+// Page archetypes define the visual mode for different content types.
+// Use these rules to keep typography, hero treatment, and decoration consistent.
+export const pageArchetypes = {
+  earlyChildhood: {
+    id: "earlyChildhood",
+    displayFont: "displayExpressive",
+    heroTone: "light",
+    navMode: "full",
+    decoration: "expressive",
+    componentDensity: "layered",
+    notes: "Use for early childhood and family-facing class pages. Expressive treatment is allowed, but keep the content calm and readable.",
+  },
+  coreAcademy: {
+    id: "coreAcademy",
+    displayFont: "displaySerious",
+    heroTone: "dark",
+    navMode: "full",
+    decoration: "restrained",
+    componentDensity: "balanced",
+    notes: "Use for band program, adult/student program pages, teachers, and general academy pages that need a stronger, more grounded tone.",
+  },
+  professionalServices: {
+    id: "professionalServices",
+    displayFont: "displaySerious",
+    heroTone: "dark",
+    navMode: "full",
+    decoration: "minimal",
+    componentDensity: "lean",
+    notes: "Use for service landing pages and future campaign landing pages. Lead with bold copy, a supporting image, lean navigation, and direct content.",
+  },
 };
 
 // Program-level color rules
