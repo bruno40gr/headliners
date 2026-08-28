@@ -118,8 +118,14 @@ const faqs = [
 
 export default function BandProgramPage({ onRequestLessons, setPath }) {
   const navigate = (path) => {
-    window.history.pushState({}, "", path);
-    if (setPath) setPath(path);
+    if (setPath) {
+      setPath(path);
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = path;
+    }
   };
 
   return (

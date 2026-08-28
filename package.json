@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node prerender.js || true",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "next": "^15.5.2",
     "@tailwindcss/vite": "^4.2.4",
     "@vercel/analytics": "^2.0.1",
     "lucide-react": "^1.14.0",

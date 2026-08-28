@@ -409,8 +409,14 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
   const [selected, setSelected] = useState(null);
 
   const navigate = (path) => {
-    window.history.pushState({}, "", path);
-    if (setPath) setPath(path);
+    if (setPath) {
+      setPath(path);
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = path;
+    }
   };
 
   return (

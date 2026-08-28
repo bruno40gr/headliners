@@ -169,8 +169,14 @@ function ListBlock({ title, items }) {
 // ── Page ───────────────────────────────────────────────────────────────────────
 export default function CareersPage({ setPath, onRequestLessons }) {
   const navigate = (path) => {
-    window.history.pushState({}, "", path);
-    if (setPath) setPath(path);
+    if (setPath) {
+      setPath(path);
+      return;
+    }
+
+    if (typeof window !== "undefined") {
+      window.location.href = path;
+    }
   };
 
   const [form, setForm] = useState({
