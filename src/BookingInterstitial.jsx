@@ -17,7 +17,7 @@ import { C, fonts } from "./tokens";
 import { PROGRAMS } from "./ProgramsNav";
 import { submitLead } from "./lib/formDelivery";
 
-const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
+const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 /* ─── Field ──────────────────────────────────────────────────────────────── */
 function Field({ label, children }) {

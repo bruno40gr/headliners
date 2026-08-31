@@ -1,22 +1,42 @@
 import { createClient } from "@supabase/supabase-js";
 
-const FORM_DELIVERY_MODE = import.meta.env.VITE_FORM_DELIVERY_MODE || "emailjs";
-const CRM_API_BASE_URL = import.meta.env.VITE_CRM_API_BASE_URL || "http://localhost:3000";
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const SUPABASE_SCHEMA = import.meta.env.VITE_SUPABASE_SCHEMA || "public";
-const SUPABASE_LEADS_TABLE = import.meta.env.VITE_SUPABASE_LEADS_TABLE || "leads";
+function getFormDeliveryMode() {
+  return process.env.NEXT_PUBLIC_FORM_DELIVERY_MODE || "emailjs";
+}
+
+function getCrmApiBaseUrl() {
+  return process.env.NEXT_PUBLIC_CRM_API_BASE_URL || "http://localhost:3000";
+}
+
+function getSupabaseUrl() {
+  return process.env.NEXT_PUBLIC_SUPABASE_URL;
+}
+
+function getSupabaseAnonKey() {
+  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+}
+
+function getSupabaseSchema() {
+  return process.env.NEXT_PUBLIC_SUPABASE_SCHEMA || "public";
+}
+
+function getSupabaseLeadsTable() {
+  return process.env.NEXT_PUBLIC_SUPABASE_LEADS_TABLE || "leads";
+}
 
 let supabaseClient;
 
 function getSupabaseClient() {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseAnonKey = getSupabaseAnonKey();
+
+  if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error("Missing Supabase environment variables.");
   }
 
   if (!supabaseClient) {
-    supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      db: { schema: SUPABASE_SCHEMA },
+    supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+      db: { schema: getSupabaseSchema() },
     });
   }
 
@@ -46,7 +66,7 @@ export async function submitToEmailJS(templateParams, emailConfig) {
 }
 
 export async function submitToCrmIntake(payload) {
-  const res = await fetch(`${CRM_API_BASE_URL}/api/intake`, {
+  const res = await fetch(`${getCrmApiBaseUrl()}/api/intake`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -67,7 +87,7 @@ export async function submitToSupabase(payload) {
     payload: payload.payload || null,
   };
 
-  const { error } = await client.from(SUPABASE_LEADS_TABLE).insert([leadRow]);
+  const { error } = await client.from(getSupabaseLeadsTable()).insert([leadRow]);
 
   if (error) {
     throw error;
@@ -77,7 +97,7 @@ export async function submitToSupabase(payload) {
 }
 
 export async function submitLead({ leadPayload, emailPayload, emailConfig }) {
-  switch (FORM_DELIVERY_MODE) {
+  switch (getFormDeliveryMode()) {
     case "crm":
       return submitToCrmIntake(leadPayload);
 
@@ -98,4 +118,4 @@ export async function submitLead({ leadPayload, emailPayload, emailConfig }) {
   }
 }
 
-export { FORM_DELIVERY_MODE };
+export { getFormDeliveryMode as FORM_DELIVERY_MODE };

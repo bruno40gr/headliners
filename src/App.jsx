@@ -35,7 +35,7 @@ const DAYS  = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Su
 const TIMES = ["Morning (8am–12pm)","Afternoon (12pm–4pm)","Evening (4pm–8pm)"];
 const PORTAL_URL  = "https://headlinerma.opus1.io/login";
 
-const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
+const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 const EMAILJS_SERVICE_ID  = "service_734y6qg";
 const EMAILJS_TEMPLATE_ID = "template_czlclec";

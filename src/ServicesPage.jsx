@@ -18,7 +18,7 @@ import {
 } from "./ui";
 import { submitLead } from "./lib/formDelivery";
 
-const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
+const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 function ServiceInquiryModal({ serviceName, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", details: "" });
