@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, Music, Clock, Mic2, TrendingUp, Check } from "lucide-react";
 import ProgramsNav from "./ProgramsNav";
+import { submitLead } from "./lib/formDelivery";
 
 // ── Design tokens (kept local per-page, matching the rest of the site) ────────
 const C = {
@@ -31,14 +32,7 @@ const C = {
   teal15:    "rgba(0,168,200,0.16)",
 };
 
-// ── EmailJS (public client-side keys, same account as the booking form) ──────
-const EMAILJS_SERVICE_ID  = "service_734y6qg";
-// NOTE: This points at your existing template for now so applications never error.
-// For a cleaner email, create a dedicated "Careers" template in EmailJS and paste
-// its ID here. Either way, every field is also bundled into {{message}} below,
-// so nothing is ever lost.
-const EMAILJS_TEMPLATE_ID = "template_526w74g";
-const EMAILJS_PUBLIC_KEY  = "FdW-lGbAyQuJZFy-y";
+const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 // ── Editable content ──────────────────────────────────────────────────────────
 const POSITIONS = [
@@ -197,45 +191,50 @@ export default function CareersPage({ setPath, onRequestLessons }) {
     if (!valid) return;
     setStatus("sending");
 
-    const availability = form.availability.join(", ") || "Not specified";
-    const position = form.position.join(", ") || "Not specified";
-    const summary =
-      `New job application\n\n` +
-      `Name: ${form.name}\n` +
-      `Email: ${form.email}\n` +
-      `Phone: ${form.phone || "Not provided"}\n` +
-      `Programs: ${position}\n` +
-      `Experience: ${form.experience || "Not specified"}\n` +
-      `Sight reading: ${form.sightRead || "Not specified"}\n` +
-      `Availability: ${availability}\n` +
-      `Resume/link: ${form.resume || "Not provided"}\n\n` +
-      `About them:\n${form.message}`;
+    const leadPayload = {
+      tenant_id: CRM_TENANT_ID,
+      intake_type: "job_application",
+      source_form: "careers_form",
+      source_page: window.location.pathname,
+      full_name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      referrer: window.location.href,
+      payload: {
+        positions: form.position,
+        experience: form.experience || null,
+        sight_reading: form.sightRead || null,
+        availability: form.availability,
+        resume_link: form.resume || null,
+        message: form.message || null,
+      },
+    };
+
+    const emailPayload = {
+      name: form.name,
+      email: form.email,
+      phone: form.phone || "Not provided",
+      position: form.position.join(", ") || "Not specified",
+      experience: form.experience || "Not specified",
+      sight_read: form.sightRead || "Not specified",
+      availability: form.availability.join(", ") || "Not specified",
+      resume: form.resume || "Not provided",
+      message: form.message || "None",
+    };
 
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            name: form.name,
-            email: form.email,
-            phone: form.phone || "Not provided",
-            position: form.position.join(", ") || "Not specified",
-            experience: form.experience || "Not specified",
-            sight_read: form.sightRead || "Not specified",
-            availability: form.availability.join(", ") || "Not specified",
-            resume: form.resume || "Not provided",
-            message: form.message || "None",
-          },
-        }),
+      await submitLead({
+        leadPayload,
+        emailPayload,
+        emailConfig: {
+          serviceId: "service_734y6qg",
+          templateId: "template_526w74g",
+          publicKey: "FdW-lGbAyQuJZFy-y",
+        },
       });
-      const text = await res.text();
-      setStatus(res.ok ? "success" : "error");
-      if (!res.ok) console.error("EmailJS:", text);
-    } catch {
+      setStatus("success");
+    } catch (error) {
+      console.error("Lead submit failed:", error);
       setStatus("error");
     }
   };

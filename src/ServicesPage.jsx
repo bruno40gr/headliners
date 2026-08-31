@@ -16,10 +16,9 @@ import {
   Textarea,
   globalStyles,
 } from "./ui";
+import { submitLead } from "./lib/formDelivery";
 
-const EMAILJS_SERVICE_ID = "service_734y6qg";
-const EMAILJS_TEMPLATE_ID = "template_czlclec";
-const EMAILJS_PUBLIC_KEY = "FdW-lGbAyQuJZFy-y";
+const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 function ServiceInquiryModal({ serviceName, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", details: "" });
@@ -31,33 +30,49 @@ function ServiceInquiryModal({ serviceName, onClose }) {
   const handleSubmit = async () => {
     if (!valid) return;
     setStatus("sending");
+
+    const leadPayload = {
+      tenant_id: CRM_TENANT_ID,
+      intake_type: "service_inquiry",
+      source_form: "services_modal",
+      source_page: window.location.pathname,
+      full_name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      service_label: serviceName,
+      referrer: window.location.href,
+      payload: {
+        message: form.details || null,
+      },
+    };
+
+    const emailPayload = {
+      form_type: "Service Inquiry",
+      name: form.name,
+      email: form.email,
+      phone: form.phone || "Not provided",
+      instrument: serviceName,
+      experience_level: "N/A",
+      days: "N/A",
+      time_of_day: "N/A",
+      preferred_date: "N/A",
+      time_window: "N/A",
+      message: form.details || "No additional details",
+    };
+
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            form_type: "Service Inquiry",
-            name: form.name,
-            email: form.email,
-            phone: form.phone || "Not provided",
-            instrument: serviceName,
-            experience_level: "N/A",
-            days: "N/A",
-            time_of_day: "N/A",
-            preferred_date: "N/A",
-            time_window: "N/A",
-            message: form.details || "No additional details",
-          },
-        }),
+      await submitLead({
+        leadPayload,
+        emailPayload,
+        emailConfig: {
+          serviceId: "service_734y6qg",
+          templateId: "template_czlclec",
+          publicKey: "FdW-lGbAyQuJZFy-y",
+        },
       });
-      const text = await res.text();
-      setStatus(res.ok ? "success" : "error");
-      if (!res.ok) console.error("EmailJS:", text);
-    } catch {
+      setStatus("success");
+    } catch (error) {
+      console.error("Lead submit failed:", error);
       setStatus("error");
     }
   };

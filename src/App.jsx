@@ -15,6 +15,7 @@ import ServicesRehearsalSpacePage from "./ServicesRehearsalSpacePage";
 import PrivateLessonsPage from "./PrivateLessonsPage";
 import FundingSupportPage from "./FundingSupportPage";
 import { C, fonts } from "./tokens";
+import { submitLead } from "./lib/formDelivery";
 
 
 const offerings = [
@@ -33,6 +34,8 @@ const offerings = [
 const DAYS  = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 const TIMES = ["Morning (8am–12pm)","Afternoon (12pm–4pm)","Evening (4pm–8pm)"];
 const PORTAL_URL  = "https://headlinerma.opus1.io/login";
+
+const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 const EMAILJS_SERVICE_ID  = "service_734y6qg";
 const EMAILJS_TEMPLATE_ID = "template_czlclec";
@@ -120,29 +123,57 @@ function BookingModal({ instrument, onClose }) {
   const handleSubmit = async () => {
     if (!form.name.trim()||!form.instrument.trim()||!form.level||!form.email.trim()) return;
     setStatus("sending");
+
+    const leadPayload = {
+      tenant_id: CRM_TENANT_ID,
+      intake_type: "lesson_inquiry",
+      source_form: "app_booking_modal",
+      source_page: window.location.pathname,
+      full_name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      program_label: form.instrument || "General",
+      referrer: window.location.href,
+      payload:{
+        age: form.age || null,
+        instrument: form.instrument || "General",
+        experience_level: form.level,
+        preferred_days: form.days,
+        preferred_times: form.times,
+        message: form.notes || null,
+      },
+    };
+
+    const emailPayload = {
+      form_type: "Lesson Inquiry",
+      name: form.name,
+      age: form.age || "Not provided",
+      email: form.email,
+      phone: form.phone || "Not provided",
+      instrument: form.instrument || "General",
+      experience_level: form.level,
+      days: form.days.join(", ") || "Not specified",
+      time_of_day: form.times.join(", ") || "Not specified",
+      message: form.notes || "None",
+      preferred_date: "N/A",
+      time_window: "N/A",
+    };
+
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send",{
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID, template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params:{
-            form_type: "Lesson Inquiry",
-            name: form.name, age: form.age||"Not provided",
-            email: form.email, phone: form.phone||"Not provided", instrument: form.instrument || "General",
-            experience_level: form.level,
-            days: form.days.join(", ")||"Not specified",
-            time_of_day: form.times.join(", ")||"Not specified",
-            message: form.notes||"None",
-            preferred_date: "N/A",
-            time_window: "N/A",
-          },
-        }),
+      await submitLead({
+        leadPayload,
+        emailPayload,
+        emailConfig: {
+          serviceId: EMAILJS_SERVICE_ID,
+          templateId: EMAILJS_TEMPLATE_ID,
+          publicKey: EMAILJS_PUBLIC_KEY,
+        },
       });
-      const text = await res.text();
-      setStatus(res.ok ? "success" : "error");
-      if (!res.ok) console.error("EmailJS:", text);
-    } catch { setStatus("error"); }
+      setStatus("success");
+    } catch (error) {
+      console.error("Lead submit failed:", error);
+      setStatus("error");
+    }
   };
 
   const valid = form.name.trim()&&form.email.trim()&&form.instrument.trim()&&form.level&&status==="idle";

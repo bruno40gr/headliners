@@ -15,6 +15,9 @@ import { useState, useEffect } from "react";
 import { X, ChevronDown } from "lucide-react";
 import { C, fonts } from "./tokens";
 import { PROGRAMS } from "./ProgramsNav";
+import { submitLead } from "./lib/formDelivery";
+
+const CRM_TENANT_ID = import.meta.env.VITE_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 /* ─── Field ──────────────────────────────────────────────────────────────── */
 function Field({ label, children }) {
@@ -61,6 +64,10 @@ export default function BookingInterstitial({
   initialScreen = 1,
   submitLabel = "Continue to booking",
 }) {
+  const resolvedEmailServiceId = emailjsServiceId || "service_734y6qg";
+  const resolvedEmailTemplateId = emailjsTemplateId || "template_czlclec";
+  const resolvedEmailPublicKey = emailjsPublicKey || "FdW-lGbAyQuJZFy-y";
+
   const [screen, setScreen] = useState(initialScreen);
   const [selectedLevel, setSelectedLevel] = useState(null);
   const [form, setForm] = useState({
@@ -89,33 +96,52 @@ export default function BookingInterstitial({
   const handleSubmitTour = async () => {
     if (!form.name.trim() || !form.studentName.trim() || !form.date || !form.timeWindow) return;
     setStatus("sending");
+
+    const leadPayload = {
+      tenant_id: CRM_TENANT_ID,
+      intake_type: "tour_request",
+      source_form: "booking_interstitial",
+      source_page: window.location.pathname,
+      full_name: form.name,
+      email: form.email || null,
+      phone: form.phone || null,
+      program_label: form.program || programName || null,
+      referrer: window.location.href,
+      payload: {
+        student_name: form.studentName,
+        age: form.age || null,
+        preferred_date: form.date || null,
+        time_window: form.timeWindow || null,
+      },
+    };
+
+    const emailPayload = {
+      form_type: "Tour Request",
+      name: form.name,
+      age: form.age || "Not provided",
+      email: form.email || "Not provided",
+      instrument: form.program || "Not specified",
+      experience_level: "N/A",
+      time_of_day: "N/A",
+      days: "N/A",
+      preferred_date: form.date || "Not specified",
+      time_window: form.timeWindow || "Not specified",
+      message: "N/A",
+    };
+
     try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: "service_734y6qg",
-          template_id: "template_czlclec",
-          user_id: "FdW-lGbAyQuJZFy-y",
-            template_params: {
-              form_type: "Tour Request",
-              name: form.name,
-              age: form.age || "Not provided",
-              email: form.email || "Not provided",
-              instrument: form.program || "Not specified",
-              experience_level: "N/A",
-              time_of_day: "N/A",
-              days: "N/A",
-              preferred_date: form.date || "Not specified",
-              time_window: form.timeWindow || "Not specified",
-              message: "N/A",
-            },
-        }),
+      await submitLead({
+        leadPayload,
+        emailPayload,
+        emailConfig: {
+          serviceId: resolvedEmailServiceId,
+          templateId: resolvedEmailTemplateId,
+          publicKey: resolvedEmailPublicKey,
+        },
       });
-      const text = await res.text();
-      setStatus(res.ok ? "success" : "error");
-      if (!res.ok) console.error("EmailJS:", text);
-    } catch {
+      setStatus("success");
+    } catch (error) {
+      console.error("Lead submit failed:", error);
       setStatus("error");
     }
   };
