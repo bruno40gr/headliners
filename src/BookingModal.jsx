@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { X, ChevronDown } from "lucide-react";
-import { C, fonts } from "./tokens";
+import { useEffect, useMemo, useState } from "react";
 import { submitLead } from "./lib/formDelivery";
+import { C, fonts } from "./tokens";
+import { Button, FormField, Input, Modal, PillToggle, Select, Textarea } from "./ui";
 
-const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const TIMES = ["Morning (8am–12pm)", "Afternoon (12pm–4pm)", "Evening (4pm–8pm)"];
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const TIMES = ["Morning", "Afternoon", "Evening"];
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
 const EMAILJS_SERVICE_ID = "service_734y6qg";
@@ -24,112 +24,13 @@ const offerings = [
   { icon: "🎙️", name: "Recording Studio" },
 ];
 
-function Button({ children, variant = "primary", href, disabled, style, className, onClick, ...rest }) {
-  const [isHovered, setIsHovered] = useState(false);
+const fieldTextStyle = {
+  fontSize: 16,
+  padding: "13px 16px",
+};
 
-  let bg;
-  let color;
-  let border;
-  let hoverBg;
-  let hoverColor;
-
-  if (variant === "primary") {
-    bg = disabled ? C.border : C.crimson;
-    color = disabled ? C.muted : C.white;
-    border = "none";
-    hoverBg = disabled ? C.border : C.crimsonHover;
-    hoverColor = disabled ? C.muted : C.white;
-  } else if (variant === "ghost") {
-    bg = C.white07;
-    color = C.white80;
-    border = `1px solid ${C.white15}`;
-    hoverBg = C.white10;
-    hoverColor = C.white;
-  } else if (variant === "yellow") {
-    bg = C.yellow;
-    color = C.espresso;
-    border = "none";
-    hoverBg = C.yellowHover;
-    hoverColor = C.espresso;
-  } else if (variant === "outlineRed") {
-    bg = "transparent";
-    color = C.crimson;
-    border = `1.5px solid ${C.crimson}`;
-    hoverBg = C.crimson;
-    hoverColor = C.white;
-  }
-
-  const baseStyle = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    fontSize: 13,
-    fontWeight: 700,
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
-    padding: "13px 32px",
-    borderRadius: 999,
-    border,
-    cursor: disabled ? "not-allowed" : "pointer",
-    textDecoration: "none",
-    transition: "all 0.2s",
-    background: isHovered ? hoverBg : bg,
-    color: isHovered ? hoverColor : color,
-    ...style,
-  };
-
-  const Element = href ? "a" : "button";
-
-  return (
-    <Element
-      href={href}
-      onClick={onClick}
-      disabled={disabled}
-      className={className}
-      style={baseStyle}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      {...rest}
-    >
-      {children}
-    </Element>
-  );
-}
-
-function Field({ label, children }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label style={{ fontFamily: fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted }}>
-        {label}
-      </label>
-      {children}
-    </div>
-  );
-}
-
-function PillToggle({ label, active, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      type="button"
-      style={{
-        padding: "7px 14px",
-        borderRadius: 999,
-        border: active ? `1.5px solid ${C.crimson}` : `1px solid ${C.border}`,
-        background: active ? C.crimson06 : C.inputBg,
-        color: active ? C.crimson : C.muted,
-        fontFamily: fonts.body,
-        fontSize: 13,
-        fontWeight: active ? 700 : 400,
-        cursor: "pointer",
-        transition: "all 0.15s",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {label}
-    </button>
-  );
+function normalizeInstrument(instrument) {
+  return instrument || "";
 }
 
 export default function BookingModal({ instrument, onClose }) {
@@ -138,7 +39,7 @@ export default function BookingModal({ instrument, onClose }) {
     age: "",
     email: "",
     phone: "",
-    instrument: instrument || "",
+    instrument: normalizeInstrument(instrument),
     level: "",
     days: [],
     times: [],
@@ -147,18 +48,15 @@ export default function BookingModal({ instrument, onClose }) {
   const [status, setStatus] = useState("idle");
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
-  useEffect(() => {
-    setForm((current) => ({ ...current, instrument: instrument || current.instrument || "" }));
+    setForm((current) => ({
+      ...current,
+      instrument: normalizeInstrument(instrument) || current.instrument || "",
+    }));
   }, [instrument]);
 
-  const set = (key, value) => setForm((current) => ({ ...current, [key]: value }));
-  const toggleArr = (key, value) =>
+  const setField = (key, value) => setForm((current) => ({ ...current, [key]: value }));
+
+  const toggleArrayField = (key, value) =>
     setForm((current) => ({
       ...current,
       [key]: current[key].includes(value)
@@ -166,8 +64,13 @@ export default function BookingModal({ instrument, onClose }) {
         : [...current[key], value],
     }));
 
+  const valid = useMemo(
+    () => form.name.trim() && form.email.trim() && form.instrument.trim() && form.level && status === "idle",
+    [form, status],
+  );
+
   const handleSubmit = async () => {
-    if (!form.name.trim() || !form.instrument.trim() || !form.level || !form.email.trim()) return;
+    if (!valid) return;
     setStatus("sending");
 
     const leadPayload = {
@@ -222,149 +125,137 @@ export default function BookingModal({ instrument, onClose }) {
     }
   };
 
-  const valid = form.name.trim() && form.email.trim() && form.instrument.trim() && form.level && status === "idle";
-
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 200,
-        background: C.espresso75,
-        backdropFilter: "blur(8px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 16,
-        overflowY: "auto",
-      }}
-    >
-      <div
-        style={{
-          background: C.white,
-          borderRadius: 24,
-          width: "100%",
-          maxWidth: 520,
-          padding: "40px 36px",
-          position: "relative",
-          boxSizing: "border-box",
-          margin: "auto",
-          boxShadow: `0 24px 64px ${C.black20}`,
-          border: `1px solid ${C.border}`,
-        }}
-      >
-        {status !== "sending" && (
-          <button
-            onClick={onClose}
-            style={{
-              position: "absolute",
-              top: 16,
-              right: 16,
-              background: C.border,
-              border: "none",
-              borderRadius: "50%",
-              width: 34,
-              height: 34,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              color: C.muted,
-            }}
-          >
-            <X size={16} />
-          </button>
-        )}
+    <Modal onClose={onClose} maxWidth={980} style={{ padding: "46px 42px 38px" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .booking-modal-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
 
-        {status === "success" ? (
-          <div style={{ textAlign: "center", padding: "16px 0" }}>
-            <div style={{ fontSize: 52, marginBottom: 16 }}>🎶</div>
-            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 28, color: C.crimson, margin: "0 0 6px", lineHeight: 1.1 }}>
-              We&apos;ll be in touch soon!
+          .booking-modal-divider {
+            border-left: none !important;
+            padding-left: 0 !important;
+          }
+        }
+      `}</style>
+
+      {status === "success" ? (
+        <div style={{ textAlign: "center", padding: "16px 0" }}>
+          <div style={{ fontSize: 52, marginBottom: 16 }}>🎶</div>
+          <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 30, color: C.crimson, margin: "0 0 6px", lineHeight: 1.1 }}>
+            We'll be in touch soon!
+          </h2>
+          <p style={{ fontFamily: fonts.body, color: C.muted, fontSize: 16, lineHeight: 1.6, maxWidth: 420, margin: "0 auto 24px" }}>
+            We'll get back to you within the next 24 hours. Expect a call from us to get everything set up.
+          </p>
+          <Button onClick={onClose}>Back to site</Button>
+        </div>
+      ) : (
+        <>
+          <div style={{ marginBottom: 22, paddingRight: 28 }}>
+            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 34, color: C.crimson, margin: "0 0 8px", lineHeight: 1.05 }}>
+              Let's find your sound.
             </h2>
-            <p style={{ fontFamily: fonts.body, color: C.muted, fontSize: 14, lineHeight: 1.5, maxWidth: 360, margin: "0 auto 24px" }}>
-              We&apos;ll get back to you within the next 24 hours. Expect a call from us to get everything set up.
+            <p style={{ fontFamily: fonts.body, fontSize: 17, color: C.muted, margin: 0, lineHeight: 1.65, maxWidth: 620 }}>
+              Tell us a little about your musician and we'll call you to set things up.
             </p>
-            <Button onClick={onClose}>Back to site</Button>
           </div>
-        ) : (
-          <>
-            <div style={{ marginBottom: 20 }}>
-              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 28, color: C.crimson, margin: "0 0 4px", lineHeight: 1.1 }}>
-                Let&apos;s find your sound.
-              </h2>
-              <p style={{ fontFamily: fonts.body, fontSize: 14, color: C.muted, margin: 0, lineHeight: 1.5 }}>
-                Tell us a little about your musician and we&apos;ll call you to set things up.
-              </p>
-            </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <Field label="Student name *">
-                <input type="text" placeholder="e.g. Jordan Smith" value={form.name} onChange={(event) => set("name", event.target.value)} />
-              </Field>
-              <Field label="Your email *">
-                <input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={(event) => set("email", event.target.value)} />
-                <p style={{ fontFamily: fonts.body, fontSize: 11, color: C.subtext, margin: "4px 0 0" }}>
-                  We&apos;ll only use this to confirm your inquiry. No spam, ever.
-                </p>
-              </Field>
-              <Field label="Phone">
-                <input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={(event) => set("phone", event.target.value)} />
-              </Field>
-              <Field label="Age (optional)">
-                <input type="number" placeholder="e.g. 14" min={4} max={99} value={form.age} onChange={(event) => set("age", event.target.value)} style={{ maxWidth: 120 }} />
-              </Field>
-              <Field label="Instrument or program *">
-                <div style={{ position: "relative" }}>
-                  <select value={form.instrument} onChange={(event) => set("instrument", event.target.value)} style={{ paddingRight: 36 }}>
-                    <option value="">Select one…</option>
-                    {offerings.map((offering) => (
-                      <option key={offering.name} value={offering.name}>
-                        {offering.icon} {offering.name}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown size={14} style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: C.subtext }} />
-                </div>
-              </Field>
-              <Field label="Experience level *">
+          <div className="booking-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 26, alignItems: "start" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 140px", gap: 14, alignItems: "end" }}>
+                <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Student name *</span>}>
+                  <Input type="text" placeholder="e.g. Jordan Smith" value={form.name} onChange={(event) => setField("name", event.target.value)} style={fieldTextStyle} />
+                </FormField>
+
+                <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Age</span>}>
+                  <Input type="number" placeholder="e.g. 14" min={4} max={99} value={form.age} onChange={(event) => setField("age", event.target.value)} style={{ ...fieldTextStyle, maxWidth: "100%" }} />
+                </FormField>
+              </div>
+
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Phone</span>}>
+                <Input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={(event) => setField("phone", event.target.value)} style={fieldTextStyle} />
+              </FormField>
+
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Your email *</span>} hint={<span style={{ fontSize: 13, color: C.muted }}>We'll only use this to confirm your inquiry. No spam, ever.</span>}>
+                <Input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={(event) => setField("email", event.target.value)} style={fieldTextStyle} />
+              </FormField>
+
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Instrument or program *</span>}>
+                <Select value={form.instrument} onChange={(event) => setField("instrument", event.target.value)} style={{ width: "100%" }} selectStyle={fieldTextStyle}>
+                  <option value="">Select one…</option>
+                  {offerings.map((offering) => (
+                    <option key={offering.name} value={offering.name}>
+                      {offering.icon} {offering.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormField>
+
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Experience level *</span>}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {["Beginner", "Intermediate", "Advanced", "I don't know"].map((level) => (
-                    <PillToggle key={level} label={level} active={form.level === level} onClick={() => set("level", level)} />
+                  {["Beginner", "Intermediate", "Advanced"].map((level) => (
+                    <PillToggle key={level} label={level} active={form.level === level} onClick={() => setField("level", level)} />
                   ))}
                 </div>
-              </Field>
-              <Field label="Days that work best">
+              </FormField>
+            </div>
+
+            <div className="booking-modal-divider" style={{ display: "flex", flexDirection: "column", gap: 16, borderLeft: `1px solid ${C.border}`, paddingLeft: 22 }}>
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Days that work best</span>}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {DAYS.map((day) => (
-                    <PillToggle key={day} label={day} active={form.days.includes(day)} onClick={() => toggleArr("days", day)} />
+                    <PillToggle key={day} label={day} active={form.days.includes(day)} onClick={() => toggleArrayField("days", day)} />
                   ))}
                 </div>
-              </Field>
-              <Field label="Preferred time of day">
+              </FormField>
+
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Preferred time of day</span>}>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {TIMES.map((time) => (
-                    <PillToggle key={time} label={time} active={form.times.includes(time)} onClick={() => toggleArr("times", time)} />
+                    <PillToggle key={time} label={time} active={form.times.includes(time)} onClick={() => toggleArrayField("times", time)} />
                   ))}
                 </div>
-              </Field>
-              <Field label="Anything we should know?">
-                <textarea rows={4} placeholder="Goals, favorite artists, prior experience, scheduling notes..." value={form.notes} onChange={(event) => set("notes", event.target.value)} />
-              </Field>
+              </FormField>
 
-              {status === "error" && (
-                <p style={{ color: C.crimson, fontSize: 13, margin: "-4px 0 0" }}>
-                  Something went wrong. Please try again or call us directly.
-                </p>
-              )}
-
-              <Button onClick={handleSubmit} disabled={!valid} style={{ width: "100%", marginTop: 4, fontSize: 15 }}>
-                {status === "sending" ? "Sending…" : "Request lessons"}
-              </Button>
+              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Anything else?</span>}>
+                <Textarea rows={10} placeholder="Goals, questions, previous experience, scheduling notes..." value={form.notes} onChange={(event) => setField("notes", event.target.value)} style={{ ...fieldTextStyle, minHeight: 246 }} />
+              </FormField>
             </div>
-          </>
-        )}
-      </div>
-    </div>
+          </div>
+
+          {status === "error" && (
+            <p
+              style={{
+                fontFamily: fonts.body,
+                fontSize: 13,
+                color: C.errorText,
+                background: C.errorBg,
+                border: `1px solid ${C.errorBorder}`,
+                borderRadius: 10,
+                padding: "10px 14px",
+                margin: "18px 0 0",
+              }}
+            >
+              Something went wrong. Please try again or reach us at (916) 435-1300.
+            </p>
+          )}
+
+          <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 12 }}>
+            <Button onClick={handleSubmit} disabled={!valid} style={{ width: "100%", fontSize: 16, padding: "16px 32px" }}>
+              {status === "sending" ? "Sending…" : "Let's make music"}
+            </Button>
+            <p style={{ textAlign: "center", fontFamily: fonts.body, fontSize: 12, color: C.muted, margin: 0 }}>
+              Or call us at{" "}
+              <a href="tel:916-435-1300" style={{ color: C.crimson, fontWeight: 700, textDecoration: "none" }}>
+                (916) 435-1300
+              </a>
+            </p>
+          </div>
+        </>
+      )}
+    </Modal>
   );
 }
