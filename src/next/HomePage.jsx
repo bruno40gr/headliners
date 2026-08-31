@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { MapPin, Mail, Phone } from 'lucide-react';
+import BookingModal from '../BookingModal';
 import ProgramsNav from '../ProgramsNav';
 import { C, fonts } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
@@ -193,9 +194,11 @@ function SiteFooter({ onPrimaryClick }) {
 
 export default function HomePage() {
   const navigate = useNextNavigate();
+  const [bookingFor, setBookingFor] = useState(null);
 
   return (
     <div style={{ fontFamily: fonts.body, minHeight: '100vh', background: C.white, color: C.espresso, overflowX: 'hidden', maxWidth: '100vw' }}>
+      {bookingFor !== null && <BookingModal instrument={bookingFor} onClose={() => setBookingFor(null)} />}
       <style>{`
         *, *::before, *::after { box-sizing: border-box; }
         @keyframes fadeUp {
@@ -248,11 +251,11 @@ export default function HomePage() {
       `}</style>
 
       <header>
-        <ProgramsNav variant="dark" navigate={navigate} ctaLabel="Request Lessons" onCtaClick={() => navigate('/programs/private-lessons')} />
+        <ProgramsNav variant="dark" navigate={navigate} ctaLabel="Request Lessons" onCtaClick={() => setBookingFor('')} />
       </header>
 
       <main>
-        <HomeHero onPrimaryClick={() => navigate('/programs/private-lessons')} />
+        <HomeHero onPrimaryClick={() => setBookingFor('')} />
 
         <section style={{ padding: '72px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
           <div style={{ marginBottom: 40 }}>
@@ -332,7 +335,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <SiteFooter onPrimaryClick={() => navigate('/programs/private-lessons')} />
+      <SiteFooter onPrimaryClick={() => setBookingFor('')} />
     </div>
   );
 }
