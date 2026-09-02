@@ -9,6 +9,7 @@ export default function sitemap() {
     '/sms-consent',
     '/teachers',
     '/careers',
+    '/about/our-story',
     '/about/funding-support',
     '/tiny-keys',
     '/wonder-notes',

@@ -37,7 +37,7 @@ export const SERVICES = [
 ];
 
 const ABOUT_ITEMS = [
-  { label: "Our Story", sub: "History, mission & values", href: null, active: false },
+  { label: "Our Story", sub: "History, mission & values", href: "/about/our-story", active: true },
   { label: "Funding Support", sub: "Charter and SDP/FMS funding help for families.", href: "/about/funding-support", active: true },
   { label: "Careers", sub: "Join our growing team", href: "/careers", active: true },
 ];

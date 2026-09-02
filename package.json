@@ -4,8 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && node prerender.js || true",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "vite:dev": "vite",
+    "vite:build": "vite build && node prerender.js || true",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",

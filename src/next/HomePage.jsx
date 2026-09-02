@@ -247,6 +247,7 @@ export default function HomePage() {
           section { padding-left:20px !important; padding-right:20px !important; }
           header  { padding-left:20px !important; padding-right:20px !important; }
           .offerings-grid { grid-template-columns:1fr 1fr !important; }
+          .about-headliner-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -301,6 +302,42 @@ export default function HomePage() {
               <span style={{ fontWeight: 700, color: C.crimson }}>Yelp</span>
             </div>
           </a>
+        </section>
+
+        <section style={{ background: C.offwhite, padding: '0 20px 88px', width: '100%' }}>
+          <div className="about-headliner-grid" style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 32, alignItems: 'center' }}>
+            <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 24, padding: '42px 40px', boxShadow: `0 4px 24px ${C.espresso06}` }}>
+              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.teal, margin: '0 0 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ display: 'block', width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
+                About us
+              </p>
+              <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', letterSpacing: '-0.03em', color: C.espresso, lineHeight: 0.98, margin: '0 0 20px' }}>
+                About Headliner
+              </h2>
+              <div style={{ display: 'grid', gap: 18 }}>
+                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
+                  Headliner has been part of the community for over 10 years, originally operating under a franchise. Now, Bruno and Lorena are proud to carry that legacy forward, bringing their experience in music and operations while building on the strong foundation created by David and Mel.
+                </p>
+                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
+                  We continue to specialize in private and semi-private lessons, while also expanding our band program, professional recording and production offerings, and birthday parties and event experiences.
+                </p>
+                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
+                  Our vision is to make music a lasting and accessible part of people’s lives by providing thoughtful instruction, meaningful experiences both on and off the stage, and a supportive community. Through a range of programs, we work to support each student’s individual needs with care, passion, and personal attention.
+                </p>
+                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
+                  We’re excited about what’s ahead for Headliner, and we’d love to welcome you into our community.
+                </p>
+              </div>
+            </div>
+
+            <div style={{ borderRadius: 24, overflow: 'hidden', minHeight: 100, boxShadow: `0 14px 36px ${C.espresso10}`, background: C.white }}>
+              <img
+                src="https://res.cloudinary.com/diy08lj9x/image/upload/v1788312254/9fd46acb-1557-437d-8776-5c969e96687f.png"
+                alt="Bruno and Lorena at Headliner Music Academy"
+                style={{ width: '100%', height: '100%', minHeight: 520, display: 'block', objectFit: 'cover', objectPosition: 'center center' }}
+              />
+            </div>
+          </div>
         </section>
 
         <section style={{ background: C.white, padding: '28px 20px 88px', width: '100%' }}>
