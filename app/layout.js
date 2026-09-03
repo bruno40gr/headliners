@@ -10,6 +10,9 @@ export const metadata = {
   },
   description:
     'Private, semi-private, and group music lessons in Rocklin, CA. Inspiring the next generation of musicians through premium, personalized education.',
+  icons: {
+    icon: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788457911/favicon_ajrnub.png',
+  },
   alternates: {
     canonical: '/',
   },
