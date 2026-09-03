@@ -26,7 +26,7 @@ function Field({ label, children }) {
       <label style={{
         fontFamily: fonts.body,
         fontSize: 10, fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted,
+        letterSpacing: "0.14em", textTransform: "none", color: C.muted,
       }}>{label}</label>
       {children}
     </div>
@@ -209,7 +209,7 @@ export default function BookingInterstitial({
             background: selectedLevel === null ? "#D0C4BC" : C.crimson,
             color: C.white, border: "none", borderRadius: 999,
             padding: "13px 32px", fontFamily: fonts.body, fontSize: 13,
-            fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+            fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
             cursor: selectedLevel === null ? "not-allowed" : "pointer",
             transition: "background 0.2s",
           }}
@@ -257,7 +257,7 @@ export default function BookingInterstitial({
               background: C.crimson, color: C.white, border: "none",
               borderRadius: 999, padding: "13px 32px",
               fontFamily: fonts.body, fontSize: 13, fontWeight: 700,
-              letterSpacing: "0.1em", textTransform: "uppercase",
+              letterSpacing: "0.1em", textTransform: "none",
               cursor: "pointer", transition: "background 0.2s",
             }}
             onMouseEnter={e => { e.currentTarget.style.background = C.crimsonHover; }}
@@ -457,7 +457,7 @@ export default function BookingInterstitial({
               background: !tourValid ? "#D0C4BC" : C.crimson,
               color: C.white, border: "none", borderRadius: 999,
               padding: "13px 32px", fontFamily: fonts.body, fontSize: 13,
-              fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+              fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
               cursor: !tourValid ? "not-allowed" : "pointer",
               transition: "background 0.2s",
             }}

@@ -134,7 +134,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 fontWeight: 700,
                 fontSize: 13,
                 letterSpacing: "0.08em",
-                textTransform: "uppercase",
+                textTransform: "none",
                 padding: "7px 16px",
                 borderRadius: 50,
                 marginBottom: 20,
@@ -184,7 +184,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                     }}>{value}</div>
                     <div style={{
                       fontFamily: fonts.body, fontSize: 11, color: C.muted,
-                      textTransform: "uppercase", letterSpacing: "0.09em",
+                      textTransform: "none", letterSpacing: "0.09em",
                       fontWeight: 700, marginTop: 2,
                     }}>{label}</div>
                   </div>
@@ -675,7 +675,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         <div style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
           <p style={{
             fontFamily: fonts.display, fontWeight: 800, fontSize: 13,
-            color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em",
+            color: C.muted, textTransform: "none", letterSpacing: "0.1em",
             margin: "0 0 16px",
           }}>Every class includes keyboard time</p>
           <PianoKeys />
@@ -691,7 +691,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <p style={{
             fontFamily: fonts.display, fontWeight: 800, fontSize: 13,
-            color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em",
+            color: C.muted, textTransform: "none", letterSpacing: "0.1em",
             margin: "0 0 16px", textAlign: "center",
           }}>Common questions</p>
           <h2 style={{

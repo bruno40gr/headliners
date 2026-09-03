@@ -329,7 +329,7 @@ function MobileMegaMenuItem({ item, onClick }) {
         <span style={{
           display: "inline-block", marginTop: 4, padding: "4px 8px", borderRadius: 4,
           background: C.white10, fontSize: 9, fontWeight: 700, letterSpacing: "0.1em",
-          textTransform: "uppercase", color: C.white55,
+          textTransform: "none", color: C.white55,
         }}>
           Coming Soon
         </span>

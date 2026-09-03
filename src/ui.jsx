@@ -80,8 +80,8 @@ export function Button({
     fontFamily: fonts.body,
     fontSize: fs,
     fontWeight: 700,
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
+    letterSpacing: "0.02em",
+    textTransform: "none",
     padding: pad,
     borderRadius: 999,
     border,
@@ -190,17 +190,16 @@ export function Modal({ children, onClose, maxWidth = 520, style, closeColor = C
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   EYEBROW — uppercase label + colored bar
+   EYEBROW — sentence-case label + colored bar
    ═══════════════════════════════════════════════════════════════════════════ */
 export function Eyebrow({ children, accent = C.teal, style }) {
   return (
     <p
       style={{
         fontFamily: fonts.body,
-        fontSize: 12,
-        fontWeight: 800,
-        letterSpacing: "0.18em",
-        textTransform: "uppercase",
+        fontSize: 14,
+        fontWeight: 600,
+        letterSpacing: "0.02em",
         color: accent,
         marginBottom: 20,
         display: "flex",
@@ -350,8 +349,8 @@ const TEXT_VARIANTS = {
     fontFamily: fonts.body,
     fontSize: 11,
     fontWeight: 700,
-    letterSpacing: "0.14em",
-    textTransform: "uppercase",
+    letterSpacing: "0.02em",
+    textTransform: "none",
     color: C.tealDark,
   },
   caption: {
@@ -389,8 +388,8 @@ export function FormField({ label, children, hint }) {
           fontFamily: fonts.body,
           fontSize: 10,
           fontWeight: 700,
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
+          letterSpacing: "0.02em",
+          textTransform: "none",
           color: C.muted,
         }}
       >
@@ -549,8 +548,8 @@ export function CTASection({
               fontFamily: fonts.body,
               fontSize: 11,
               fontWeight: 800,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
+              letterSpacing: "0.02em",
+              textTransform: "none",
               color: accent,
               margin: "0 0 16px",
             }}
@@ -678,8 +677,8 @@ export function StatsGrid({ items, columns = 3, style }) {
               fontFamily: fonts.body,
               fontSize: 12,
               fontWeight: 800,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
+              letterSpacing: "0.02em",
+              textTransform: "none",
               color: C.muted,
               margin: "0 0 8px",
             }}

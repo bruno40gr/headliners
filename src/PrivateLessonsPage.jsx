@@ -185,7 +185,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
                   { label: "Performances", value: "Monthly recitals", color: C.crimson },
                 ].map((item) => (
                   <div key={item.label} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 18, padding: "18px 18px 16px" }}>
-                    <p style={{ margin: "0 0 8px", fontSize: 11, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase", color: C.muted }}>
+                    <p style={{ margin: "0 0 8px", fontSize: 11, fontWeight: 800, letterSpacing: "0.16em", textTransform: "none", color: C.muted }}>
                       {item.label}
                     </p>
                     <p style={{ margin: 0, fontFamily: fonts.display, fontWeight: 800, fontSize: 20, lineHeight: 1.2, color: item.color }}>

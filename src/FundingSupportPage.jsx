@@ -42,7 +42,7 @@ export default function FundingSupportPage({ navigate, onRequestLessons }) {
         <div style={{ maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="fsp-hero-grid" style={{ display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 48, alignItems: "center" }}>
             <div>
-              <Eyebrow accent={C.teal}>About us · funding support</Eyebrow>
+              <Eyebrow accent={C.teal}>Funding support</Eyebrow>
               <h1 style={{
                 fontFamily: fonts.display,
                 fontWeight: 800,

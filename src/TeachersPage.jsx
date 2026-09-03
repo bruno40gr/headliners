@@ -118,7 +118,7 @@ const TEACHERS = [
 // ── Eyebrow label (matches BandProgramPage) ───────────────────────────────────
 const Eyebrow = ({ children, color = C.teal }) => (
   <p style={{
-    fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+    fontSize: 14, fontWeight: 600, letterSpacing: "0.02em",
     color, marginBottom: 20, display: "flex", alignItems: "center", gap: 10,
     fontFamily: "'DM Sans', sans-serif",
   }}>
@@ -222,7 +222,7 @@ function TeacherModal({ teacher, onClose }) {
               <span style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: 11, fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", color: C.yellow,
+                textTransform: "none", color: C.yellow,
               }}>
                 {teacher.instruments}
               </span>
@@ -254,7 +254,7 @@ function TeacherModal({ teacher, onClose }) {
             <div style={{ marginTop: "auto" }}>
               <p style={{
                 fontFamily: "'DM Sans', sans-serif", fontSize: 10,
-                fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
+                fontWeight: 800, letterSpacing: "0.2em", textTransform: "none",
                 color: C.espresso, margin: "0 0 14px",
                 paddingBottom: 10, borderBottom: `1px solid ${C.border}`,
               }}>
@@ -376,7 +376,7 @@ function TeacherCard({ teacher, onClick }) {
         }}>
           <span style={{
             fontFamily: "'DM Sans', sans-serif", fontSize: 11,
-            fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase",
+            fontWeight: 800, letterSpacing: "0.1em", textTransform: "none",
             color: C.espresso,
           }}>
             View Bio
@@ -513,7 +513,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
       }}>
         <p style={{
           fontFamily: "'DM Sans', sans-serif", fontSize: 11,
-          fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
+          fontWeight: 800, letterSpacing: "0.2em", textTransform: "none",
           color: C.teal, margin: "0 0 16px",
         }}>
           Ready to start?
@@ -532,7 +532,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
             background: C.crimson, color: "#fff", border: "none",
             borderRadius: 999, cursor: "pointer",
             padding: "16px 40px", fontSize: 14,
-            fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+            fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
             display: "inline-flex", alignItems: "center", gap: 10,
             boxShadow: "0 8px 28px rgba(255,0,68,0.28)",
             transition: "background 0.2s, transform 0.15s",

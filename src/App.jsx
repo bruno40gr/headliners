@@ -75,7 +75,7 @@ function Button({ children, variant = "primary", href, disabled, style, classNam
 
   const baseStyle = {
     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
-    fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+    fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
     padding: "13px 32px", borderRadius: 999, border: border,
     cursor: disabled ? "not-allowed" : "pointer",
     textDecoration: "none", transition: "all 0.2s",
@@ -345,7 +345,7 @@ function Field({ label, children }) {
       <label style={{
         fontFamily:fonts.body,
         fontSize:10,fontWeight:700,
-        letterSpacing:"0.14em",textTransform:"uppercase",color:C.muted,
+        letterSpacing:"0.14em",textTransform: "none",color:C.muted,
       }}>{label}</label>
       {children}
     </div>
@@ -496,7 +496,7 @@ function HeroSection({ navigate, setBookingFor }) {
 
           <p className={loaded ? "fade-up delay-1" : ""} style={{
             fontFamily: fonts.body,
-            fontSize: 12, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase",
+            fontSize: 12, fontWeight: 800, letterSpacing: "0.2em", textTransform: "none",
             color: C.teal, margin: "0 0 22px",
             display: "flex", alignItems: "center", gap: 10,
             position: "relative", zIndex: 1,
@@ -636,7 +636,7 @@ function HeroSection({ navigate, setBookingFor }) {
           }}>
             <p key={active} style={{
               fontFamily: fonts.body, fontSize: 13,
-              fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+              fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
               color: C.white, margin: 0,
               animation: "fadeUp 0.5s ease both",
             }}>
@@ -734,7 +734,7 @@ export default function App() {
         .card-hint {
           opacity:0; transition:opacity 0.2s;
           font-size:10px; font-weight:700;
-          letter-spacing:0.12em; text-transform:uppercase;
+          letter-spacing:0.12em; text-transform: none;
           color:${C.crimson}; margin-top:8px;
           font-family:${fonts.body};
         }
@@ -794,7 +794,7 @@ export default function App() {
           <section style={{padding:"72px 20px",maxWidth:1200,margin:"0 auto",boxSizing:"border-box",width:"100%"}}>
             <div style={{marginBottom:40}}>
               <p style={{
-                fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform:"uppercase",
+                fontSize:12,fontWeight:800,letterSpacing:"0.18em",textTransform: "none",
                 color:C.teal,marginBottom:12,display:"flex",alignItems:"center",gap:8,
               }}>
                 <span style={{display:"block",width:28,height:3,background:C.teal,borderRadius:2}}/>
@@ -840,7 +840,7 @@ export default function App() {
                   <span style={{fontSize:36,marginBottom:16}}>{item.icon}</span>
                   <h3 style={{
                     fontFamily:fonts.display,fontWeight:800,
-                    fontSize:16,letterSpacing:"0.1em",textTransform:"uppercase",
+                    fontSize:16,letterSpacing:"0.1em",textTransform: "none",
                     color:C.espresso,margin:"0 0 4px",
                   }}>{item.name}</h3>
                   <p style={{fontFamily:fonts.body,fontSize:16,color:C.muted,margin:0}}>{item.desc}</p>
@@ -896,7 +896,7 @@ export default function App() {
             <div style={{ maxWidth: 1100, margin: "0 auto" }}>
               <div style={{ textAlign: "center", marginBottom: 28 }}>
                 <p style={{
-                  fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+                  fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "none",
                   color: C.teal, marginBottom: 12, display: "inline-flex", alignItems: "center", gap: 8,
                 }}>
                   <span style={{ display: "block", width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
@@ -1021,13 +1021,13 @@ export default function App() {
                 {href:"/privacy-policy.html",label:"Privacy Policy"},
                 {href:"/terms-and-conditions.html",label:"Terms & Conditions"},
               ].map(({href,label})=>(
-                <a key={label} href={href} style={{fontFamily:fonts.body,fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform:"uppercase"}}
+                <a key={label} href={href} style={{fontFamily:fonts.body,fontSize:10,letterSpacing:"0.1em",color:C.white28,textDecoration:"none",textTransform: "none"}}
                   onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                   onMouseLeave={e=>e.currentTarget.style.color=C.white28}
                 >{label}</a>
               ))}
               <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer"
-                style={{display:"flex",alignItems:"center",gap:6,fontFamily:fonts.body,fontSize:10,color:C.white28,textDecoration:"none",textTransform:"uppercase",letterSpacing:"0.1em"}}
+                style={{display:"flex",alignItems:"center",gap:6,fontFamily:fonts.body,fontSize:10,color:C.white28,textDecoration:"none",textTransform: "none",letterSpacing:"0.1em"}}
                 onMouseEnter={e=>e.currentTarget.style.color=C.crimson}
                 onMouseLeave={e=>e.currentTarget.style.color=C.white28}
               >

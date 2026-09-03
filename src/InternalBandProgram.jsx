@@ -150,7 +150,7 @@ export default function InternalBandProgram() {
         background: C.espresso, color: C.yellow,
         textAlign: "center", padding: "12px 24px",
         fontFamily: fonts.body, fontSize: 13, fontWeight: 700,
-        letterSpacing: "0.08em", textTransform: "uppercase",
+        letterSpacing: "0.08em", textTransform: "none",
       }}>
         ⚠️ Internal Staff Reference — Not publicly linked
       </div>
@@ -172,7 +172,7 @@ export default function InternalBandProgram() {
             letterSpacing: "-0.01em",
           }}>
             Band Program<br />
-            <span style={{ color: C.crimson, fontSize: 12, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+            <span style={{ color: C.crimson, fontSize: 12, fontWeight: 600, letterSpacing: "0.05em", textTransform: "none" }}>
               Staff Reference
             </span>
           </div>

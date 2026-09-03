@@ -24,7 +24,7 @@ const BtnRed = ({ children, onClick, large }) => (
       borderRadius: 999, cursor: "pointer",
       padding: large ? "16px 40px" : "13px 28px",
       fontSize: large ? 15 : 13,
-      fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+      fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
       display: "inline-flex", alignItems: "center", gap: 8,
       boxShadow: "0 4px 20px rgba(255,0,68,0.25)",
       transition: "background 0.2s, transform 0.15s",
@@ -39,7 +39,7 @@ const BtnRed = ({ children, onClick, large }) => (
 
 const Eyebrow = ({ children, color = C.teal }) => (
   <p style={{
-    fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+    fontSize: 14, fontWeight: 600, letterSpacing: "0.02em",
     color, marginBottom: 20, display: "flex", alignItems: "center", gap: 10,
   }}>
     <span style={{ display: "block", width: 28, height: 3, background: color, borderRadius: 2, flexShrink: 0 }} />
@@ -143,7 +143,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
         .d4 { animation-delay: 0.42s; }
 
         .bp-nav-link {
-          font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+          font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: none;
           color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
         }
         .bp-nav-link:hover { color: #fff; }
@@ -270,7 +270,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               }}
             >
               <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 28, color: "#fff", margin: "0 0 4px", lineHeight: 1 }}>Live.</p>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", margin: 0 }}>Performance from day one</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "none", color: "rgba(255,255,255,0.6)", margin: 0 }}>Performance from day one</p>
             </div>
           </div>
         </div>
@@ -313,7 +313,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             {venues.map(({ name, location }) => (
               <div key={name} className="bp-venue-row" style={{ borderBottomColor: "rgba(255,255,255,0.07)" }}>
                 <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 18, color: "#fff", margin: 0 }}>{name}</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", margin: 0 }}>{location}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "none", color: "rgba(255,255,255,0.28)", margin: 0 }}>{location}</p>
               </div>
             ))}
 

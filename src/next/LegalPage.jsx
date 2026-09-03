@@ -8,7 +8,7 @@ export default function LegalPage({ title, updated, intro, sections, links }) {
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '80px 24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
           <img src={brandLogo} alt="Headliner Music Academy" style={{ height: 36, width: 'auto' }} />
-          <span style={{ fontSize: 13, fontWeight: 700, color: '#7A6A5A', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#7A6A5A', letterSpacing: '0.06em', textTransform: "none" }}>
             Headliner Music Academy
           </span>
         </div>
@@ -44,7 +44,7 @@ export default function LegalPage({ title, updated, intro, sections, links }) {
             <Link
               key={link.href}
               href={link.href}
-              style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}
+              style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: "none", letterSpacing: '0.08em', fontWeight: 600 }}
             >
               {link.label}
             </Link>

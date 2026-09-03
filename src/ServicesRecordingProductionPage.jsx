@@ -5,7 +5,7 @@ export default function ServicesRecordingProductionPage(props) {
     <ServicesPage
       {...props}
       pageName="Recording and music production"
-      eyebrow="Services · studio work"
+      eyebrow="Studio work"
       title="Recording and music production"
       intro="Recording, demos, vocals, and production support for artists, students, and bands in the Sacramento area."
       listIntro="Recording sessions, demos, and production help for projects that are still taking shape and projects that are ready to track."

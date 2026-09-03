@@ -5,7 +5,7 @@ export default function ServicesRehearsalSpacePage(props) {
     <ServicesPage
       {...props}
       pageName="Rehearsal space"
-      eyebrow="Services · rehearsal space"
+      eyebrow="Rehearsal space"
       title="Rehearsal space"
       intro="Rehearsal space for bands, small groups, and musicians who need room to run a set, work through songs, or prepare for a show."
       listIntro="Room availability for band rehearsals, set run-throughs, and performance prep."

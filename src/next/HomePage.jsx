@@ -6,18 +6,86 @@ import BookingModal from '../BookingModal';
 import ProgramsNav from '../ProgramsNav';
 import { C, fonts } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
+import ImageTextPair from './ImageTextPair';
 
-const offerings = [
-  { icon: '🎸', name: 'Guitar', desc: 'Acoustic & electric', href: '/programs/private-lessons' },
-  { icon: '🎹', name: 'Piano', desc: 'Classical & contemporary', href: '/programs/private-lessons' },
-  { icon: '🥁', name: 'Drums', desc: 'Kit & percussion', href: '/programs/private-lessons' },
-  { icon: '🎸', name: 'Bass', desc: 'Electric & upright', href: '/programs/private-lessons' },
-  { icon: '🎤', name: 'Vocals', desc: 'All styles', href: '/programs/private-lessons' },
-  { icon: '🎺', name: 'Brass', desc: 'Trumpet & more', href: '/programs/private-lessons' },
-  { icon: '🎻', name: 'Strings', desc: 'Violin & viola', href: '/programs/private-lessons' },
-  { icon: '🤘', name: 'Band Performance', desc: 'Live stage experience', href: '/programs/band' },
-  { icon: '🎉', name: 'Private Parties', desc: 'Birthdays & events', href: '/services/dj-and-events' },
-  { icon: '🎙️', name: 'Recording Studio', desc: 'Record & produce music', href: '/services/recording-music-production' },
+const featuredPaths = [
+  {
+    title: 'Private Lessons',
+    body: 'One-on-one and semi-private instruction for kids, teens, and adults.',
+    href: '/programs/private-lessons',
+    accent: C.teal,
+    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg',
+    focal: 'center 35%',
+  },
+  {
+    title: 'Band Program',
+    body: 'Rehearse, perform, and grow with real stage experience.',
+    href: '/programs/band',
+    accent: C.crimson,
+    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250628_153338_srnhk2.jpg',
+    focal: 'center 30%',
+  },
+  {
+    title: 'Recording & Production',
+    body: 'Creative support for demos, live recording, and student projects.',
+    href: '/services/recording-music-production',
+    accent: C.yellow,
+    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787854712/e7994742-e89a-4d31-873c-5fc55dc6a028.png',
+    focal: 'center 28%',
+  },
+  {
+    title: 'Private Events & Parties',
+    body: 'Music-filled celebrations, showcases, and event support in one space.',
+    href: '/services/dj-and-events',
+    accent: C.espresso,
+    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781716216/PXL_20260524_013313165.PORTRAIT.ORIGINAL_bpckwf.jpg',
+    focal: 'center 25%',
+  },
+];
+
+const announcements = [
+  {
+    date: 'Sep 2',
+    title: 'Closed for Labor Day',
+    body: 'Closed on Labor Day. Lessons and front desk support resume the following day.',
+  },
+  {
+    date: 'Sep 1',
+    title: 'This week at Headliner',
+    body: 'Ask the front desk about performance sign-ups, lesson availability, and upcoming event details.',
+  },
+];
+
+const upcomingPosters = [
+  {
+    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788369374/074ae361-4983-475b-8958-1c1bdd204c21.png',
+    alt: 'Upcoming event flyer',
+  },
+  {
+    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788369316/d7f34685-3cf5-4d54-baf7-67788eb89cfb.png',
+    alt: 'Upcoming promotional poster',
+  },
+  {
+    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787862861/9198476e-d047-4ef5-9584-51ec4ff1b010.png',
+    alt: 'Band program poster',
+  },
+];
+
+const socialLinks = [
+  {
+    title: 'Instagram',
+    handle: '@headlinerma',
+    href: 'https://instagram.com/headlinerma/',
+    body: 'Photos, clips, performances, and day-to-day moments from the academy.',
+    accent: C.crimson,
+  },
+  {
+    title: 'TikTok',
+    handle: '@headlinerma',
+    href: 'https://tiktok.com/headlinerma',
+    body: 'Short performance clips, rehearsals, and what is happening around Headliner.',
+    accent: C.teal,
+  },
 ];
 
 const heroSlides = [
@@ -71,9 +139,9 @@ function HomeHero({ onPrimaryClick }) {
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2 }}>
           <div style={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${C.white} 1px, transparent 1px)`, backgroundSize: '26px 26px', opacity: 0.025, pointerEvents: 'none' }} />
 
-          <p className={loaded ? 'fade-up delay-1' : ''} style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.teal, margin: '0 0 22px', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', zIndex: 1 }}>
+          <p className={loaded ? 'fade-up delay-1' : ''} style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.2em', textTransform: "none", color: C.teal, margin: '0 0 22px', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', zIndex: 1 }}>
             <span className="tag-dot" />
-            Rocklin, CA · Est. 2026
+            Rocklin, CA
           </p>
 
           <h1 className={loaded ? 'fade-up delay-2' : ''} style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(42px, 6.4vw, 72px)', lineHeight: 0.96, letterSpacing: -2, color: C.white, margin: '0 0 22px', position: 'relative', zIndex: 1 }}>
@@ -83,11 +151,11 @@ function HomeHero({ onPrimaryClick }) {
           </h1>
 
           <p className={loaded ? 'fade-up delay-3' : ''} style={{ fontFamily: fonts.body, color: C.white70, fontSize: 17, lineHeight: 1.75, maxWidth: 460, margin: '0 0 36px', fontWeight: 300, position: 'relative', zIndex: 1 }}>
-            Private, semi-private, and group lessons taught by passionate instructors.
+            Private lessons, group lessons, a band program that puts you on stage, recording and production, and creative experiences right here in Rocklin.
           </p>
 
           <div className={loaded ? 'fade-up delay-4' : ''} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 40, position: 'relative', zIndex: 1 }}>
-            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
+            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
               Request Lessons
             </button>
           </div>
@@ -119,7 +187,7 @@ function HomeHero({ onPrimaryClick }) {
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.6) 0%, transparent 30%)', pointerEvents: 'none' }} />
 
           <div style={{ position: 'absolute', bottom: 28, left: 32, right: 32, display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 2 }}>
-            <p key={active} style={{ fontFamily: fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white, margin: 0, animation: 'fadeUp 0.5s ease both' }}>
+            <p key={active} style={{ fontFamily: fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: '0.02em', textTransform: 'none', color: C.white, margin: 0, animation: 'fadeUp 0.5s ease both' }}>
               {heroSlides[active].caption}
             </p>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', maxWidth: 220, justifyContent: 'flex-end' }}>
@@ -148,7 +216,7 @@ function SiteFooter({ onPrimaryClick }) {
             <p style={{ fontFamily: fonts.body, fontSize: 16, color: C.white70, lineHeight: 1.75, maxWidth: 480, marginBottom: 24 }}>
               Inspiring the next generation of musicians through premium, personalized education.
             </p>
-            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '13px 32px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', background: 'transparent', color: C.crimson }}>
+            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13px 32px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', background: 'transparent', color: C.crimson }}>
               Request Lessons
             </button>
           </div>
@@ -176,13 +244,13 @@ function SiteFooter({ onPrimaryClick }) {
             © {new Date().getFullYear()} Headliner Music Academy. All rights reserved.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-            <a href="/privacy-policy" style={{ fontFamily: fonts.body, fontSize: 10, letterSpacing: '0.1em', color: C.white28, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <a href="/privacy-policy" style={{ fontFamily: fonts.body, fontSize: 10, letterSpacing: '0.1em', color: C.white28, textDecoration: 'none', textTransform: "none" }}>
               Privacy Policy
             </a>
-            <a href="/terms-and-conditions" style={{ fontFamily: fonts.body, fontSize: 10, letterSpacing: '0.1em', color: C.white28, textDecoration: 'none', textTransform: 'uppercase' }}>
+            <a href="/terms-and-conditions" style={{ fontFamily: fonts.body, fontSize: 10, letterSpacing: '0.1em', color: C.white28, textDecoration: 'none', textTransform: "none" }}>
               Terms & Conditions
             </a>
-            <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: fonts.body, fontSize: 10, color: C.white28, textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: fonts.body, fontSize: 10, color: C.white28, textDecoration: 'none', textTransform: "none", letterSpacing: '0.1em' }}>
               Yelp
             </a>
           </div>
@@ -235,19 +303,22 @@ export default function HomePage() {
         .card-hint {
           opacity:0; transition:opacity 0.2s;
           font-size:10px; font-weight:700;
-          letter-spacing:0.12em; text-transform:uppercase;
+          letter-spacing:0.12em; text-transform: none;
           color:${C.crimson}; margin-top:8px;
           font-family:${fonts.body};
         }
         @media (max-width:860px) {
           .hero-split { grid-template-columns: 1fr !important; }
           .hero-media { min-height: 360px !important; order: -1; }
+          .home-feature-grid,
+          .home-stage-grid,
+          .home-about-grid,
+          .footer-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width:768px) {
           section { padding-left:20px !important; padding-right:20px !important; }
           header  { padding-left:20px !important; padding-right:20px !important; }
-          .offerings-grid { grid-template-columns:1fr 1fr !important; }
-          .about-headliner-grid { grid-template-columns: 1fr !important; }
+          .home-feature-grid { grid-template-columns:1fr !important; }
         }
       `}</style>
 
@@ -258,34 +329,98 @@ export default function HomePage() {
       <main>
         <HomeHero onPrimaryClick={() => setBookingFor('')} />
 
-        <section style={{ padding: '72px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
-          <div style={{ marginBottom: 40 }}>
-            <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.teal, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ display: 'block', width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
-              What we offer
-            </p>
-            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2.4rem,5vw,3.6rem)', letterSpacing: -1, color: C.espresso, lineHeight: 0.95, margin: 0 }}>
-              Pick your <em style={{ fontStyle: 'italic', color: C.crimson }}>instrument.</em>
-            </h2>
-            <p style={{ fontFamily: fonts.body, fontSize: 14, color: C.muted, marginTop: 12 }}>
-              Explore programs, services, and the next best step for your musician.
-            </p>
-          </div>
-
-          <div className="offerings-grid" style={{ borderRadius: 20, overflow: 'hidden', border: `1px solid ${C.border}`, display: 'grid', gap: 1, background: C.border, gridTemplateColumns: 'repeat(auto-fill,minmax(200px,1fr))', width: '100%' }}>
-            {offerings.map((item) => (
-              <div key={item.name} className="offering-card" style={{ padding: '36px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }} onClick={() => navigate(item.href)} role="button" tabIndex={0} onKeyDown={(event) => event.key === 'Enter' && navigate(item.href)}>
-                <span style={{ fontSize: 36, marginBottom: 16 }}>{item.icon}</span>
-                <h3 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 16, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.espresso, margin: '0 0 4px' }}>{item.name}</h3>
-                <p style={{ fontFamily: fonts.body, fontSize: 16, color: C.muted, margin: 0 }}>{item.desc}</p>
-                <span className="card-hint">View page →</span>
-              </div>
+        <section style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
+          <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 }}>
+            {featuredPaths.map((item) => (
+              <button key={item.title} type="button" onClick={() => navigate(item.href)} style={{ textAlign: 'left', background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 0, cursor: 'pointer', boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
+                <div style={{ position: 'relative', height: 200 }}>
+                  <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.focal, display: 'block' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.55) 0%, rgba(26,19,15,0.08) 42%, transparent 75%)' }} />
+                  <span style={{ position: 'absolute', left: 20, bottom: 18, display: 'inline-block', width: 54, height: 6, borderRadius: 999, background: item.accent }} />
+                </div>
+                <div style={{ padding: '24px 24px 26px', display: 'grid', gap: 18 }}>
+                <div style={{ display: 'grid', gap: 10 }}>
+                  <h3 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 28, lineHeight: 1.02, letterSpacing: '-0.02em', color: C.espresso, margin: 0 }}>
+                    {item.title}
+                  </h3>
+                  <p style={{ fontFamily: fonts.body, fontSize: 16, lineHeight: 1.7, color: C.muted, margin: 0 }}>
+                    {item.body}
+                  </p>
+                </div>
+                <span style={{ fontFamily: fonts.body, fontSize: 13, fontWeight: 700, color: C.crimson, letterSpacing: '0.08em', textTransform: "none" }}>
+                  Learn more
+                </span>
+                </div>
+              </button>
             ))}
           </div>
         </section>
 
-        <section style={{ padding: '72px 20px 88px', maxWidth: 900, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
+        <section style={{ background: C.offwhite, padding: '48px 20px 92px', width: '100%' }}>
+          <ImageTextPair
+            imageSrc="https://res.cloudinary.com/diy08lj9x/image/upload/v1787854919/e8dfe1ae-2f43-41c7-9528-5b459eafdadd.png"
+            imageAlt="Headliner performance stage"
+            imageHeight={460}
+            heading="A space built for real performance"
+            body="Our performance stage is one of the things that sets Headliner apart. It is built for events, rehearsals, demo live recording, intimate performances, livestreams, a complete PA system, and professional lighting and scenography."
+            linkLabel="Learn more about the Band Program"
+            linkHref="/programs/band"
+            onNavigate={navigate}
+          />
+        </section>
+
+        <section style={{ background: C.white, padding: '48px 20px 92px', width: '100%' }}>
+          <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+            <div className="home-stage-grid" style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.48fr 0.52fr', gap: 80, alignItems: 'start' }}>
+              <div>
+                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3.1rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 8px' }}>
+                  Bulletin Board
+                </h2>
+                <p style={{ fontFamily: fonts.body, fontSize: 15, lineHeight: 1.6, color: C.muted, margin: '0 0 22px', maxWidth: 600 }}>
+                  Keep an eye here for the next showcase, event date, and what is happening around Headliner.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
+                  {upcomingPosters.map((poster) => (
+                    <div key={poster.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 0, overflow: 'hidden', boxShadow: `0 1px 3px ${C.black20}`, display: 'flex', flexDirection: 'column' }}>
+                      <img src={poster.src} alt={poster.alt} style={{ width: '100%', height: 340, objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+                      <div style={{ padding: '10px 12px' }}>
+                        <span style={{ fontFamily: fonts.body, fontSize: 11, color: C.muted, letterSpacing: '0.05em' }}>Pin to board</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <aside>
+                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 18px' }}>
+                  Front Desk
+                </h2>
+                <div style={{ display: 'grid', gap: 0 }}>
+                  {announcements.map((item, i) => (
+                    <div key={item.title}>
+                      {i > 0 && <div style={{ height: 1, background: C.border, margin: '12px 0' }} />}
+                      <span style={{ fontFamily: fonts.body, fontSize: 11, lineHeight: 1, fontWeight: 600, color: C.muted, letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+                        {item.date}
+                      </span>
+                      <h3 style={{ fontFamily: fonts.body, fontWeight: 600, fontSize: 15, lineHeight: 1.4, color: C.espresso, margin: '0 0 4px' }}>
+                        {item.title}
+                      </h3>
+                      <p style={{ fontFamily: fonts.body, fontSize: 13, lineHeight: 1.55, color: C.muted, margin: 0 }}>
+                        {item.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </aside>
+              
+            </div>
+          </div>
+        </section>
+
+        <section style={{ padding: '0 20px 88px', maxWidth: 900, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
           <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'block', background: C.white, borderRadius: 20, padding: '48px 56px', border: `1px solid ${C.border}`, textDecoration: 'none', textAlign: 'center', boxShadow: `0 4px 24px ${C.espresso06}` }}>
+              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.4rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 24px' }}>
+              What families say
+            </h2>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24 }}>
               {[1, 2, 3, 4, 5].map((star) => (
                 <svg key={star} width={18} height={18} viewBox="0 0 24 24" fill={C.yellow}>
@@ -304,60 +439,20 @@ export default function HomePage() {
           </a>
         </section>
 
-        <section style={{ background: C.offwhite, padding: '0 20px 88px', width: '100%' }}>
-          <div className="about-headliner-grid" style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 32, alignItems: 'center' }}>
-            <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 24, padding: '42px 40px', boxShadow: `0 4px 24px ${C.espresso06}` }}>
-              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.teal, margin: '0 0 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ display: 'block', width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
-                About us
-              </p>
-              <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', letterSpacing: '-0.03em', color: C.espresso, lineHeight: 0.98, margin: '0 0 20px' }}>
-                About Headliner
-              </h2>
-              <div style={{ display: 'grid', gap: 18 }}>
-                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
-                  Headliner has been part of the community for over 10 years, originally operating under a franchise. Now, Bruno and Lorena are proud to carry that legacy forward, bringing their experience in music and operations while building on the strong foundation created by David and Mel.
-                </p>
-                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
-                  We continue to specialize in private and semi-private lessons, while also expanding our band program, professional recording and production offerings, and birthday parties and event experiences.
-                </p>
-                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
-                  Our vision is to make music a lasting and accessible part of people’s lives by providing thoughtful instruction, meaningful experiences both on and off the stage, and a supportive community. Through a range of programs, we work to support each student’s individual needs with care, passion, and personal attention.
-                </p>
-                <p style={{ fontFamily: fonts.body, fontSize: 17, lineHeight: 1.75, color: C.text, margin: 0 }}>
-                  We’re excited about what’s ahead for Headliner, and we’d love to welcome you into our community.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ borderRadius: 24, overflow: 'hidden', minHeight: 100, boxShadow: `0 14px 36px ${C.espresso10}`, background: C.white }}>
-              <img
-                src="https://res.cloudinary.com/diy08lj9x/image/upload/v1788312254/9fd46acb-1557-437d-8776-5c969e96687f.png"
-                alt="Bruno and Lorena at Headliner Music Academy"
-                style={{ width: '100%', height: '100%', minHeight: 520, display: 'block', objectFit: 'cover', objectPosition: 'center center' }}
-              />
-            </div>
-          </div>
-        </section>
-
-        <section style={{ background: C.white, padding: '28px 20px 88px', width: '100%' }}>
+        <section style={{ background: C.white, padding: '0 20px 88px', width: '100%' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
-              <p style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.teal, marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ display: 'block', width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
-                In the community
-              </p>
-              <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: -1, color: C.espresso, lineHeight: 1, margin: '0 0 12px' }}>
-                A few of the events and organizations we have worked with.
+              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 12px' }}>
+                Rooted in the community
               </h2>
               <p style={{ fontFamily: fonts.body, fontSize: 16, color: C.muted, margin: 0 }}>
-                Headliner keeps showing up in the community around us.
+                Headliner shows up across the community through performances, partnerships, and local events.
               </p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16 }}>
               {communityLogos.map((logo) => (
-                <div key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 14, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
+                <div key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
                   <img src={logo.src} alt={logo.alt} style={{ maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
                 </div>
               ))}
@@ -366,6 +461,25 @@ export default function HomePage() {
             <div style={{ textAlign: 'center', marginTop: 26 }}>
               <button type="button" onClick={() => navigate('/about/funding-support')} style={{ background: 'none', border: 'none', color: C.crimson, cursor: 'pointer', fontFamily: fonts.body, fontSize: 14, fontWeight: 700, padding: 0, textDecoration: 'underline', textUnderlineOffset: 3 }}>
                 Need help with charter or SDP/FMS funding?
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section style={{ background: C.offwhite, padding: '88px 20px 96px', width: '100%' }}>
+          <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 16px' }}>
+              Start your music journey with Headliner
+            </h2>
+            <p style={{ fontFamily: fonts.body, fontSize: 18, lineHeight: 1.8, color: C.text, margin: '0 auto 28px', maxWidth: 620 }}>
+              A place to learn, play, perform, and grow.
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12 }}>
+              <button type="button" onClick={() => setBookingFor('')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
+                Request Lessons
+              </button>
+              <button type="button" onClick={() => navigate('/programs/private-lessons')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.crimson }}>
+                View Programs
               </button>
             </div>
           </div>

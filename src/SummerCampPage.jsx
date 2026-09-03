@@ -79,7 +79,7 @@ export default function SummerCampPage({ setPath }) {
         .btn-red {
           display: inline-flex; align-items: center; justify-content: center; gap: 8px;
           background: #FF0044; color: #fff;
-          font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+          font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: none;
           padding: 14px 32px; border-radius: 999px; border: none; cursor: pointer;
           text-decoration: none; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
         }
@@ -96,7 +96,7 @@ export default function SummerCampPage({ setPath }) {
         .sc-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(26,19,15,0.06); border-color: #00A8C8; }
         
         .sc-nav-link {
-          font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+          font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: none;
           color: #7A6A5A; text-decoration: none; position: relative; padding-bottom: 2px; transition: color 0.2s;
         }
         .sc-nav-link::after {
@@ -227,7 +227,7 @@ export default function SummerCampPage({ setPath }) {
               { label: "Ages",     value: "8–12 years old" },
             ].map(({ label, value }) => (
               <div key={label} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.16em" }}>{label}</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "none", letterSpacing: "0.16em" }}>{label}</span>
                 <span style={{ fontSize: 16, fontWeight: 600, color: "#fff" }}>{value}</span>
               </div>
             ))}
@@ -246,7 +246,7 @@ export default function SummerCampPage({ setPath }) {
           {[...Array(2)].fill(["Electric Guitar","•","Bass Guitar","•","Drums","•","Keyboard","•","Vocals","•","No Experience Needed","•","Max 7 Kids Per Band","•","July 27–31","•"]).flat().map((item, i) => (
             <span key={i} style={{
               fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 11,
-              letterSpacing: "0.2em", textTransform: "uppercase",
+              letterSpacing: "0.2em", textTransform: "none",
               color: item === "•" ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.9)",
               padding: item === "•" ? "0 8px" : "0 24px",
             }}>{item}</span>
@@ -258,7 +258,7 @@ export default function SummerCampPage({ setPath }) {
       <section style={{ background: C.white, padding: "96px 24px", borderBottom: `1px solid ${C.border}`, width: "100%" }}>
         <div className="sc-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "start" }}>
           <div>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.teal, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "none", color: C.teal, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
               <span style={{ display: "block", width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
               The Camp
             </p>
@@ -279,7 +279,7 @@ export default function SummerCampPage({ setPath }) {
               On the final day, we record the band performing their song and share that recording with every family.
             </p>
             <div style={{ marginTop: 56 }}>
-              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+              <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "none", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
                 <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
                 Instruments Available
               </p>
@@ -293,7 +293,7 @@ export default function SummerCampPage({ setPath }) {
 
           {/* Camp Details — styled like the registration table */}
           <div>
-            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.muted, marginBottom: 20 }}>
+            <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "none", color: C.muted, marginBottom: 20 }}>
               Camp Details
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 0, background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, overflow: "hidden" }}>
@@ -311,7 +311,7 @@ export default function SummerCampPage({ setPath }) {
                   padding: "28px 32px",
                   borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none",
                 }}>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: C.muted, margin: "0 0 8px" }}>{label}</p>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "none", color: C.muted, margin: "0 0 8px" }}>{label}</p>
                   <p style={{
                     fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: 22,
                     color: highlight === "teal" ? C.teal : highlight === "crimson" ? C.crimson : C.espresso,
@@ -357,7 +357,7 @@ export default function SummerCampPage({ setPath }) {
             ].map(({ value, label, color }) => (
               <div key={label} style={{ background: C.espresso, padding: "48px 24px", textAlign: "center" }}>
                 <p style={{ fontFamily: "'Baloo 2', sans-serif", fontWeight: 800, fontSize: "clamp(2.5rem, 4vw, 3.5rem)", color, lineHeight: 1, margin: "0 0 12px" }}>{value}</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "none", color: "rgba(255,255,255,0.4)", margin: 0 }}>{label}</p>
               </div>
             ))}
           </div>
@@ -367,7 +367,7 @@ export default function SummerCampPage({ setPath }) {
       {/* FAQ */}
       <section style={{ background: C.white, padding: "96px 24px", borderBottom: `1px solid ${C.border}`, width: "100%" }}>
         <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "none", color: C.crimson, marginBottom: 20, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
             <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
             FAQ
             <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
@@ -393,7 +393,7 @@ export default function SummerCampPage({ setPath }) {
       {/* REGISTRATION */}
       <section style={{ background: C.white, padding: "96px 24px", width: "100%" }}>
         <div style={{ maxWidth: 640, margin: "0 auto" }}>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.22em", textTransform: "none", color: C.crimson, marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
             <span style={{ display: "block", width: 28, height: 3, background: C.crimson, borderRadius: 2 }} />
             Registration
           </p>

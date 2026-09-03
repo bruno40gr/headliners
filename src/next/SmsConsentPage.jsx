@@ -8,7 +8,7 @@ export default function SmsConsentPage() {
       <div style={{ background: '#fff', borderRadius: 20, padding: '48px 40px', maxWidth: 560, width: '100%', boxShadow: '0 8px 32px rgba(26,19,15,0.08)', border: '1px solid #E8E2DA' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
           <img src={brandLogo} alt="Headliner Music Academy" style={{ height: 36, width: 'auto' }} />
-          <span style={{ fontSize: 13, fontWeight: 700, color: '#7A6A5A', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#7A6A5A', letterSpacing: '0.06em', textTransform: "none" }}>
             Headliner Music Academy
           </span>
         </div>
@@ -21,7 +21,7 @@ export default function SmsConsentPage() {
           This page reflects the opt-in language used at booking on headlinermusicacademy.com.
         </p>
 
-        <label htmlFor="phone" style={{ display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#7A6A5A', marginBottom: 6 }}>
+        <label htmlFor="phone" style={{ display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: "none", color: '#7A6A5A', marginBottom: 6 }}>
           Phone number
         </label>
         <input id="phone" type="tel" placeholder="(916) 000-0000" style={{ width: '100%', padding: '10px 14px', border: '1px solid #E8E2DA', borderRadius: 10, fontSize: 14, color: '#1A130F', background: '#FAF9F7', outline: 'none', fontFamily: 'inherit' }} />
@@ -44,7 +44,7 @@ export default function SmsConsentPage() {
           Opt-in to each is independent and optional. You may opt out of either type at any time by replying STOP.
         </p>
 
-        <button type="button" style={{ width: '100%', background: '#FF0044', color: '#fff', border: 'none', borderRadius: 999, padding: '13px 32px', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 24 }}>
+        <button type="button" style={{ width: '100%', background: '#FF0044', color: '#fff', border: 'none', borderRadius: 999, padding: '13px 32px', fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", marginTop: 24 }}>
           Book a tour
         </button>
 
@@ -61,13 +61,13 @@ export default function SmsConsentPage() {
         </p>
 
         <nav style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid #E8E2DA', display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-          <Link href="/privacy-policy" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+          <Link href="/privacy-policy" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: "none", letterSpacing: '0.08em', fontWeight: 600 }}>
             Privacy Policy
           </Link>
-          <Link href="/terms-and-conditions" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+          <Link href="/terms-and-conditions" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: "none", letterSpacing: '0.08em', fontWeight: 600 }}>
             Terms & Conditions
           </Link>
-          <Link href="/" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
+          <Link href="/" style={{ fontSize: 11, color: '#7A6A5A', textDecoration: 'none', textTransform: "none", letterSpacing: '0.08em', fontWeight: 600 }}>
             Home
           </Link>
         </nav>

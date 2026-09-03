@@ -97,7 +97,7 @@ function Button({ children, variant = "primary", href, disabled, style, onClick,
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
-        fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+        fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
         padding: "13px 32px", borderRadius: 999, border,
         cursor: disabled ? "not-allowed" : "pointer", textDecoration: "none",
         transition: "all 0.2s", background: hover ? hoverBg : bg, color: hover ? hoverColor : color,
@@ -115,7 +115,7 @@ function Field({ label, children }) {
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
       <label style={{
         fontFamily: "'DM Sans',sans-serif", fontSize: 10, fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "uppercase", color: C.muted,
+        letterSpacing: "0.14em", textTransform: "none", color: C.muted,
       }}>{label}</label>
       {children}
     </div>
@@ -281,7 +281,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
         }} />
         <div className="cf-fade" style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <p style={{
-            fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase",
+            fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "none",
             color: C.teal, marginBottom: 16, display: "flex", alignItems: "center", gap: 8,
           }}>
             <span style={{ display: "block", width: 28, height: 3, background: C.teal, borderRadius: 2 }} />
@@ -480,7 +480,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
       }}>
         <p style={{
           fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 800,
-          letterSpacing: "0.2em", textTransform: "uppercase", color: C.teal, margin: "0 0 16px",
+          letterSpacing: "0.2em", textTransform: "none", color: C.teal, margin: "0 0 16px",
         }}>
           Questions first?
         </p>

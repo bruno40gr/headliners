@@ -355,7 +355,7 @@ export function Button({
     fontSize: fs,
     fontWeight: 700,
     letterSpacing: "0.1em",
-    textTransform: "uppercase",
+    textTransform: "none",
     padding: pad,
     borderRadius: 999,
     border,
@@ -496,10 +496,9 @@ export function Eyebrow({ children, accent = C.teal, style }) {
     <p
       style={{
         fontFamily: fonts.body,
-        fontSize: 12,
-        fontWeight: 800,
-        letterSpacing: "0.18em",
-        textTransform: "uppercase",
+        fontSize: 14,
+        fontWeight: 600,
+        letterSpacing: "0.02em",
         color: accent,
         marginBottom: 20,
         display: "flex",
@@ -687,7 +686,7 @@ const TEXT_VARIANTS = {
     fontSize: 11,
     fontWeight: 700,
     letterSpacing: "0.14em",
-    textTransform: "uppercase",
+    textTransform: "none",
     color: C.tealDark,
   },
   caption: {
@@ -750,7 +749,7 @@ export function FormField({ label, children, hint }) {
           fontSize: 10,
           fontWeight: 700,
           letterSpacing: "0.14em",
-          textTransform: "uppercase",
+          textTransform: "none",
           color: C.muted,
         }}
       >
@@ -977,7 +976,7 @@ export function CTASection({
               fontSize: 11,
               fontWeight: 800,
               letterSpacing: "0.2em",
-              textTransform: "uppercase",
+              textTransform: "none",
               color: accent,
               margin: "0 0 16px",
             }}
@@ -1134,7 +1133,7 @@ export function StatsGrid({ items, columns = 3, style }) {
               fontSize: 12,
               fontWeight: 800,
               letterSpacing: "0.18em",
-              textTransform: "uppercase",
+              textTransform: "none",
               color: C.muted,
               margin: "0 0 8px",
             }}
