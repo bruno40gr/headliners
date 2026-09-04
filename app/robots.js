@@ -4,6 +4,6 @@ export default function robots() {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://headlinermusicacademy.com/sitemap.xml',
+    sitemap: 'https://www.headlinermusicacademy.com/sitemap.xml',
   };
 }

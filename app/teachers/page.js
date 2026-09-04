@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Our Teachers | Headliner Music Academy',
     description:
       'Meet the passionate instructors at Headliner Music Academy in Rocklin, CA.',
-    url: 'https://headlinermusicacademy.com/teachers',
+    url: 'https://www.headlinermusicacademy.com/teachers',
   },
 };
 

@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Band Performance Program | Headliner Music Academy',
     description:
       'Live stage experience for young musicians in Rocklin, CA. Join a band and perform on a real stage.',
-    url: 'https://headlinermusicacademy.com/programs/band',
+    url: 'https://www.headlinermusicacademy.com/programs/band',
   },
 };
 

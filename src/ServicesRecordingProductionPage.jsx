@@ -6,10 +6,11 @@ export default function ServicesRecordingProductionPage(props) {
       {...props}
       pageName="Recording and music production"
       eyebrow="Studio work"
-      title="Recording and music production"
-      intro="Recording, demos, vocals, and production support for artists, students, and bands in the Sacramento area."
-      listIntro="Recording sessions, demos, and production help for projects that are still taking shape and projects that are ready to track."
+      title="Recording studio and music production in Rocklin"
+      intro="Recording studio sessions, demos, vocals, and music production support for artists, students, and bands in the Rocklin and Sacramento area."
+      listIntro="Recording sessions, vocal tracking, song demos, editing, arrangement, and production help for projects that are still taking shape and projects that are ready to track."
       serviceList={[
+        "Recording studio sessions",
         "Vocal recording",
         "Song demos",
         "Production support",
@@ -40,6 +41,7 @@ export default function ServicesRecordingProductionPage(props) {
       faqs={[
         { q: "Can I reach out if the song is still rough?", a: "Yes. A voice memo, demo, or unfinished session is enough to start the conversation." },
         { q: "Do you help with editing and production too?", a: "Yes. We can help with recording, edits, arrangement, and production support." },
+        { q: "Is this only for Headliner students?", a: "No. Students, artists, bands, and musicians from Rocklin, Roseville, Lincoln, Loomis, Granite Bay, and the Sacramento area can reach out about recording projects." },
         { q: "Is pricing listed online?", a: "Not yet. Reach out with the project details and we will follow up from there." },
       ]}
       ctaTitle="Tell us about the project."

@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Privacy Policy | Headliner Music Academy',
     description:
       'Privacy policy for Headliner Music Academy in Rocklin, CA. Learn how we collect, use, and protect your personal information.',
-    url: 'https://headlinermusicacademy.com/privacy-policy',
+    url: 'https://www.headlinermusicacademy.com/privacy-policy',
   },
 };
 

@@ -11,7 +11,7 @@ export const metadata = {
     title: 'DJ & Event Services in Rocklin, CA | Headliner Music Academy',
     description:
       'DJ and event support in Rocklin, CA for private, school, and community events. Reach out about music, announcements, and event flow.',
-    url: 'https://headlinermusicacademy.com/services/dj-and-events',
+    url: 'https://www.headlinermusicacademy.com/services/dj-and-events',
   },
 };
 

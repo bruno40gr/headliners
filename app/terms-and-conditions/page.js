@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Terms & Conditions | Headliner Music Academy',
     description:
       'Terms and conditions for enrollment at Headliner Music Academy in Rocklin, CA.',
-    url: 'https://headlinermusicacademy.com/terms-and-conditions',
+    url: 'https://www.headlinermusicacademy.com/terms-and-conditions',
   },
 };
 

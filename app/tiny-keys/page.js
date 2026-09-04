@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Tiny Keys — Piano for Ages 5–7 | Headliner Music Academy',
     description:
       'Group piano classes for kids ages 5 to 7 in Rocklin, CA. A structured, three-level curriculum that builds real skills through songs, games, and time at the keys.',
-    url: 'https://headlinermusicacademy.com/tiny-keys',
+    url: 'https://www.headlinermusicacademy.com/tiny-keys',
   },
 };
 

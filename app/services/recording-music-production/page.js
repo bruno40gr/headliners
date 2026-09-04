@@ -1,20 +1,56 @@
 import ServicesRecordingProductionRoute from '../../../src/next/ServicesRecordingProductionRoute';
 
+const pageUrl = 'https://www.headlinermusicacademy.com/services/recording-music-production';
+const description =
+  'Recording studio and music production support in Rocklin, CA for vocal recording, demos, song development, editing, arrangement, and small band sessions.';
+
+const recordingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Recording Studio and Music Production in Rocklin, CA',
+  alternateName: ['Recording Studio', 'Vocal Recording', 'Demo Recording', 'Music Production', 'Small Band Recording'],
+  description,
+  serviceType: 'Recording studio and music production',
+  url: pageUrl,
+  provider: {
+    '@type': ['MusicSchool', 'LocalBusiness'],
+    name: 'Headliner Music Academy',
+    url: 'https://www.headlinermusicacademy.com',
+    telephone: '(916) 435-1300',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '2311 Sunset Blvd',
+      addressLocality: 'Rocklin',
+      addressRegion: 'CA',
+      postalCode: '95765',
+      addressCountry: 'US',
+    },
+  },
+  areaServed: ['Rocklin, CA', 'Roseville, CA', 'Lincoln, CA', 'Loomis, CA', 'Granite Bay, CA', 'Placer County, CA'],
+};
+
 export const metadata = {
-  title: 'Recording & Music Production in Rocklin, CA',
-  description:
-    'Recording and music production support in Rocklin, CA. Reach out about demos, vocal sessions, song development, and production help.',
+  title: 'Recording Studio & Music Production in Rocklin, CA',
+  description,
   alternates: {
     canonical: '/services/recording-music-production',
   },
   openGraph: {
-    title: 'Recording & Music Production in Rocklin, CA | Headliner Music Academy',
-    description:
-      'Recording and music production support in Rocklin, CA. Reach out about demos, vocal sessions, song development, and production help.',
-    url: 'https://headlinermusicacademy.com/services/recording-music-production',
+    title: 'Recording Studio & Music Production in Rocklin, CA | Headliner Music Academy',
+    description,
+    url: pageUrl,
   },
 };
 
 export default function Page() {
-  return <ServicesRecordingProductionRoute />;
+  return (
+    <>
+      <ServicesRecordingProductionRoute />
+      <script
+        id="headliner-recording-production-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(recordingJsonLd) }}
+      />
+    </>
+  );
 }

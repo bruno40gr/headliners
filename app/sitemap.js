@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://headlinermusicacademy.com';
+  const baseUrl = 'https://www.headlinermusicacademy.com';
   const now = new Date();
 
   return [

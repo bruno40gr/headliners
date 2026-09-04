@@ -25,7 +25,7 @@ const routes = [
   '/services/rehearsal-space',
 ];
 
-const BASE_URL = 'https://headlinermusicacademy.com';
+const BASE_URL = 'https://www.headlinermusicacademy.com';
 
 const SEO_META = {
   '/': {

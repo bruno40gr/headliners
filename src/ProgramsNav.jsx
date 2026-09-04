@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ArrowRight, ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown, Menu, X, ArrowUpRight } from "lucide-react";
 import { C, fonts } from "./tokens";
 
 /*
@@ -203,11 +203,17 @@ function MegaDropdown({ title, items, variant = "dark", navigate }) {
 function MegaDropdownItem({ item, onClick }) {
   const isActive = item.active;
   const [isHovered, setIsHovered] = useState(false);
+  const Element = isActive && item.href ? "a" : "button";
+  const elementProps = isActive && item.href ? { href: item.href } : { disabled: true, type: "button" };
 
   return (
-    <button
-      onClick={() => onClick(item)}
-      disabled={!isActive}
+    <Element
+      {...elementProps}
+      onClick={(e) => {
+        if (!isActive) return;
+        e.preventDefault();
+        onClick(item);
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -220,6 +226,7 @@ function MegaDropdownItem({ item, onClick }) {
         border: "none",
         borderRadius: 8,
         textAlign: "left",
+        textDecoration: "none",
         cursor: isActive ? "pointer" : "default",
         transition: "background 0.2s",
         gap: 4,
@@ -275,18 +282,24 @@ function MegaDropdownItem({ item, onClick }) {
       }}>
         {item.sub}
       </p>
-    </button>
+    </Element>
   );
 }
 
 // ── Mobile: dark full-screen accordion (from V1) ────────────────────────────
 function MobileMegaMenuItem({ item, onClick }) {
   const isActive = item.active;
+  const Element = isActive && item.href ? "a" : "button";
+  const elementProps = isActive && item.href ? { href: item.href } : { disabled: true, type: "button" };
 
   return (
-    <button
-      onClick={() => onClick(item)}
-      disabled={!isActive}
+    <Element
+      {...elementProps}
+      onClick={(e) => {
+        if (!isActive) return;
+        e.preventDefault();
+        onClick(item);
+      }}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -298,6 +311,7 @@ function MobileMegaMenuItem({ item, onClick }) {
         padding: "16px",
         cursor: isActive ? "pointer" : "default",
         textAlign: "left",
+        textDecoration: "none",
         marginBottom: 12,
         transition: "background 0.2s",
         gap: 4,
@@ -334,7 +348,7 @@ function MobileMegaMenuItem({ item, onClick }) {
           Coming Soon
         </span>
       )}
-    </button>
+    </Element>
   );
 }
 

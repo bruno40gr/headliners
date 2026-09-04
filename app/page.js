@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Headliner Music Academy | Rocklin, CA',
     description:
       'Private, semi-private, and group music lessons in Rocklin, CA. Inspiring the next generation of musicians through premium, personalized education.',
-    url: 'https://headlinermusicacademy.com',
+    url: 'https://www.headlinermusicacademy.com',
   },
 };
 

@@ -5,12 +5,13 @@ export default function ServicesRehearsalSpacePage(props) {
     <ServicesPage
       {...props}
       pageName="Rehearsal space"
-      eyebrow="Rehearsal space"
-      title="Rehearsal space"
-      intro="Rehearsal space for bands, small groups, and musicians who need room to run a set, work through songs, or prepare for a show."
-      listIntro="Room availability for band rehearsals, set run-throughs, and performance prep."
+      eyebrow="Band rehearsal space"
+      title="Band rehearsal space in Rocklin"
+      intro="Rehearsal space and practice room rental in Rocklin for bands, small groups, and musicians who need room to run a set, work through songs, or prepare for a show."
+      listIntro="Room availability for band rehearsals, practice sessions, set run-throughs, and performance prep near Rocklin, Roseville, Lincoln, Loomis, and Granite Bay."
       serviceList={[
-        "Band rehearsals",
+        "Band rehearsal space",
+        "Hourly practice room rental",
         "Set run-throughs",
         "Performance prep",
         "One-time bookings",
@@ -38,8 +39,9 @@ export default function ServicesRehearsalSpacePage(props) {
         },
       ]}
       faqs={[
-        { q: "Who is rehearsal space for?", a: "Bands, small groups, and musicians who need a place to rehearse or run a set." },
+        { q: "Who is rehearsal space for?", a: "Bands, small groups, and musicians who need a place to rehearse, practice, or run a set." },
         { q: "Can I ask about one-time use and recurring time?", a: "Yes. Let us know what kind of booking you are looking for." },
+        { q: "Do you serve bands outside Rocklin?", a: "Yes. Bands and musicians from nearby Roseville, Lincoln, Loomis, Granite Bay, and the surrounding Placer County area can reach out about availability." },
         { q: "Is pricing or availability listed online?", a: "Not yet. Rehearsal space depends on scheduling, so the best first step is to ask." },
       ]}
       ctaTitle="Ask about rehearsal space."

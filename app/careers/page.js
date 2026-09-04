@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Careers | Headliner Music Academy',
     description:
       'Join the team at Headliner Music Academy in Rocklin, CA. Explore career opportunities in music education.',
-    url: 'https://headlinermusicacademy.com/careers',
+    url: 'https://www.headlinermusicacademy.com/careers',
   },
 };
 

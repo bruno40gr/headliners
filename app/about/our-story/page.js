@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Our Story | Headliner Music Academy',
     description:
       'Learn about Headliner Music Academy in Rocklin, CA — our history, vision, and the team continuing the legacy forward.',
-    url: 'https://headlinermusicacademy.com/about/our-story',
+    url: 'https://www.headlinermusicacademy.com/about/our-story',
   },
 };
 

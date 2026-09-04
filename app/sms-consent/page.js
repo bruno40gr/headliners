@@ -11,7 +11,7 @@ export const metadata = {
     title: 'SMS Consent | Headliner Music Academy',
     description:
       'SMS opt-in for Headliner Music Academy. Two separate, optional checkboxes: transactional or informational messages and promotional or marketing messages.',
-    url: 'https://headlinermusicacademy.com/sms-consent',
+    url: 'https://www.headlinermusicacademy.com/sms-consent',
   },
 };
 
