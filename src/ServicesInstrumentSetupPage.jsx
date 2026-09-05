@@ -5,7 +5,6 @@ export default function ServicesInstrumentSetupPage(props) {
     <ServicesPage
       {...props}
       pageName="Instrument setup"
-      eyebrow="Gear and setup"
       title="Instrument setup"
       intro="Help with instrument electronics, pedalboards, synth rigs, signal flow, and home studio gear in Rocklin."
       listIntro="Setup support for instruments and rigs that need attention, troubleshooting, or a cleaner signal path."

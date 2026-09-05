@@ -135,7 +135,7 @@ export default function ServicesPage({
   navigate,
   onRequestLessons,
   title,
-  eyebrow,
+  sectionTitle,
   intro,
   serviceList,
   listIntro,
@@ -182,7 +182,6 @@ export default function ServicesPage({
         <div style={{ maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="svc-hero-grid" style={{ display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 44, alignItems: "center" }}>
             <div>
-              <Eyebrow accent={C.teal}>{eyebrow}</Eyebrow>
               <TextBlock as="h1" variant="display" accent={C.white} style={{ fontFamily: displayFont, fontSize: "clamp(42px, 6vw, 70px)", marginBottom: 20 }}>
                 {title}
               </TextBlock>
@@ -211,7 +210,7 @@ export default function ServicesPage({
           <div>
             <Eyebrow accent={C.teal}>What we offer</Eyebrow>
             <TextBlock as="h2" variant="heading" style={{ fontFamily: displayFont, marginBottom: 14 }}>
-              {title}
+              {sectionTitle || title}
             </TextBlock>
             <TextBlock style={{ marginBottom: 0 }}>
               {listIntro}

@@ -5,7 +5,6 @@ export default function ServicesDjEventsPage(props) {
     <ServicesPage
       {...props}
       pageName="DJ and events"
-      eyebrow="Events"
       title="DJ and events"
       intro="DJ support for private, school, and community events, with music, announcements, and event flow handled in a clear and steady way."
       listIntro="Music, announcements, and event support for gatherings that need a smooth pace and a room that feels taken care of."

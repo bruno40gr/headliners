@@ -5,7 +5,6 @@ export default function ServicesRehearsalSpacePage(props) {
     <ServicesPage
       {...props}
       pageName="Rehearsal space"
-      eyebrow="Band rehearsal space"
       title="Band rehearsal space in Rocklin"
       intro="Rehearsal space and practice room rental in Rocklin for bands, small groups, and musicians who need room to run a set, work through songs, or prepare for a show."
       listIntro="Room availability for band rehearsals, practice sessions, set run-throughs, and performance prep near Rocklin, Roseville, Lincoln, Loomis, and Granite Bay."

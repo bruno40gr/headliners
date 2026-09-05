@@ -5,10 +5,10 @@ export default function ServicesRecordingProductionPage(props) {
     <ServicesPage
       {...props}
       pageName="Recording and music production"
-      eyebrow="Recording studio"
-      title="Cut the single. Build the album. Chase the idea."
-      intro="Headliner’s Rocklin recording studio is for artists, bands, vocalists, producers, and writers making records in progress: singles, albums, remixes, features, demos, and ideas that need a real room. Track vocals, record live instruments, build out production, finish a mix, master a release, or bring your own producer and take over the room."
-      listIntro="A good session starts with where the project is now and where it needs to go next. That might mean a clean vocal day, full-band tracking, a production pass, editing and comping, mixing, mastering, or room-only time for an artist and producer who already have a plan."
+      title="Recording for artists, bands, and producers"
+      sectionTitle="Studio sessions shaped around the project"
+      intro="Headliner’s Rocklin recording studio is built for projects in motion: singles, albums, remixes, features, demos, and ideas that need a real room. Track vocals, record live instruments, build out production, finish a mix, master a release, or bring your own producer and use the space your way."
+      listIntro="Start with what you’re making and where it needs to go. A session might focus on vocals, full-band tracking, production, editing, comping, mixing, mastering, or room-only time for an artist and producer who already have a plan."
       serviceList={[
         "Singles, albums, remixes, features, and demos",
         "Engineered sessions or room-only bookings",
