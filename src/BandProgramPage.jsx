@@ -55,7 +55,7 @@ const bands = [
     genre: "Rock / Indie",
   },
   {
-    name:  "The Myphs",
+    name:  "The M.I.P.H.S",
     logo:  "https://res.cloudinary.com/diy08lj9x/image/upload/v1781535130/Miphs_dfyjjd.png",
     quote: "Joined with two songs. Currently arguing about a third.",
     genre: "Alternative",
@@ -72,7 +72,7 @@ const venues = [
   { name: "Denio's Market", location: "Roseville, CA" },
   { name: "High Hand Brewery", location: "Loomis, CA" },
   { name: "Pistol Pete's", location: "Auburn, CA" },
-  { name: "Crossroads Pizza", location: "Rocklin, CA" },
+  { name: "Cross Roads Pizza", location: "Rocklin, CA" },
   { name: "Placer County Fair", location: "Roseville, CA" },
 ];
 
@@ -80,11 +80,11 @@ const venues = [
 const faqs = [
   {
     q: "What's included in the program?",
-    a: "A dedicated director who guides your band through every stage of development. Access to backline and our on-site recording studio. We handle the logistics and production for your shows so you can focus on performing. We also connect you with real gig opportunities across Placer County. We'll talk through each one together and find what fits. Everything you need to go from rehearsing to actually playing live.",
+    a: "A dedicated manager who guides your band through every stage of development. Access to backline (guitars, amps, etc) and our on-site recording studio. We handle the logistics and production for your shows so you can focus on performing. We also connect you with real gig opportunities across Placer County.",
   },
   {
     q: "What do you expect from a band?",
-    a: "Show up consistently and communicate openly with your bandmates and director. Be someone people enjoy making music with. Respect the space, the instruments, and each other. Beyond that, we're here to support the band you're building, every step of the way.",
+    a: "Show up consistently and communicate openly with your bandmates and manager. Be someone who people enjoy making music with. Respect the space, the instruments, and each other. Beyond that, we're here to support the band you're building, every step of the way.",
   },
   {
     q: "I don't have a band. Can I still join?",
@@ -92,11 +92,11 @@ const faqs = [
   },
   {
     q: "When will my band be ready to perform?",
-    a: "It depends on the band, and that's a good thing. Every group moves at its own pace. Some are ready for their first gig within a few months. Others take a little longer to find their footing. Your director will give you an honest read on where you stand and help you get there.",
+    a: "It depends on the band, and that's a good thing. Every group moves at its own pace. Some are ready for their first gig within a few months. Others take a little longer to find their footing. Your manager will give you an honest read on where you stand and help you get there.",
   },
   {
     q: "What happens if my band or a bandmate can't make it to a session?",
-    a: "Rehearsal continues with whoever is there. Learning to work around an absent member is actually a valuable part of being in a real band. That said, consistency makes a huge difference. The more you show up, the faster you grow together.",
+    a: "Rehearsal continues with whoever is there. Learning to work around an absent member is actually a valuable part of being in a real band. That said, we can always reschedule make up sessions with a proper advanced notice.",
   },
   {
     q: "Are performances mandatory?",
@@ -104,7 +104,7 @@ const faqs = [
   },
   {
     q: "Does Headliner manage the band?",
-    a: "Your director is there to coach, advise, and support, every step of the way. We'll talk through the creative and logistical decisions together. Our job is to help you grow into a band that can stand on its own, not to run it for you.",
+    a: "Your manager is there to coach, advise, and support, every step of the way. We'll talk through the creative and logistical decisions together. Our job is to help you grow into a band that can stand on its own, not to run it for you.",
   },
   {
     q: "Are recording sessions free?",
@@ -112,7 +112,7 @@ const faqs = [
   },
   {
     q: "Can we use charter or Self-Determination funding?",
-    a: <>We work with charter schools and Self-Determination funding programs, and funding can support instruction here — including paths that grow into bands and live performance. Coverage depends on your funding source, so see our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a> or ask us and we'll help you sort it out.</>,
+    a: <>We work with charter schools and Self-Determination funding programs, and funding can support instruction here, including paths that grow into bands and live performance. Coverage depends on your funding source, so see our <a href="/about/funding-support" style={{ color: C.crimson, fontWeight: 600, textDecoration: "underline" }}>Funding Support page</a> or ask us and we'll help you sort it out.</>,
   },
 ];
 
@@ -213,7 +213,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", color: "rgba(255,255,255,0.6)",
             margin: "0 0 32px",
           }}>
-            Wherever your band is right now, we're here to help you find the stage.
+            
           </p>
 
           <p className="fu d3" style={{
@@ -240,10 +240,10 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               There is nothing<br/>like being in a <span style={{ color: C.crimson }}>band.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9, marginBottom: 24 }}>
-              As you rehearse and start playing live, your director works alongside you on setlist choices, stage presence, and finding your sound. We'll talk through the big decisions together, every step of the way.
+              As you rehearse and start playing live, manager works alongside you on setlist choices, stage presence, and finding your sound.
             </p>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
-              Every band starts somewhere different and moves at its own pace. Some come in with two songs and a name. Some come in with six months of rehearsals and no idea what to do next. The program meets you where you are, and your director stays with you through all of it.
+              Every band starts somewhere different and moves at its own pace. Some come in with two songs and a name. Some come in with six months of rehearsals and no idea what to do next
             </p>
           </div>
           <div style={{ position: "relative" }}>
@@ -288,7 +288,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
               We're with you,<br/><span style={{ color: C.crimson }}>all the way to the stage.</span>
             </h2>
             <p style={{ fontSize: 17, color: C.muted, lineHeight: 1.9 }}>
-              You get access to backline at the academy so gear is not a barrier to entry. Recording sessions are there when you are ready to document what you have built. We run the logistics and production side of your shows so you can actually enjoy performing instead of stressing about the details.
+              You get access to gear at the academy so gear is not a barrier to entry. Recording sessions are there when you are ready to document what you have built. We run the logistics and production side of your shows so you can actually enjoy performing instead of stressing about the details.
             </p>
           </div>
         </div>

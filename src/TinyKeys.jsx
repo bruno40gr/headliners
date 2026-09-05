@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Does my child need any piano experience?",
-    a: "No. Tiny Keys starts from the beginning — posture, hand position, rhythm, and first songs. Kids who have never touched a piano do just fine.",
+    a: "No. Tiny Keys starts from the beginning, posture, hand position, rhythm, and first songs.",
   },
   {
     q: "Is financial support or charter funding available?",
@@ -155,7 +155,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 fontSize: 17, lineHeight: 1.75, color: C.muted,
                 margin: "0 0 32px", maxWidth: 400,
               }}>
-                Group piano classes for kids ages 3 to 7. A structured,
+                Group piano classes for kids ages 5 to 7. A structured,
                 three-level curriculum that builds real skills through
                 songs, games, and time at the keys every single class.
               </p>
@@ -505,7 +505,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
             fontFamily: fonts.body, fontSize: 16, color: C.muted,
             maxWidth: 720, margin: "0 auto", lineHeight: 1.65,
           }}>
-            Every class is built around five core skills. Students work through them progressively across three levels, at their own pace.
+            
           </p>
         </div>
 
@@ -524,7 +524,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
               photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg",
               alt: "Hands on piano keyboard",
               title: "Piano technique",
-              body: "Finger positioning, hand coordination, and basic chords. Students learn new songs every class so they can practice these skills in context, not in isolation.",
+              body: "Finger positioning, hand coordination, and basic chords.",
             },
             {
               accent: C.teal,
@@ -532,7 +532,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
               photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869153/6800e606-9e7f-4f01-a303-052dd700b141.png",
               alt: "Child playing piano",
               title: "Playing by ear",
-              body: "We use Suzuki-influenced methods to help kids listen actively and play intuitively. Playing by ear is one of the most valuable skills a young musician can build.",
+              body: "Playing by ear is one of the most valuable skills a young musician can build.",
             },
             {
               accent: C.crimson,
@@ -540,7 +540,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
               photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1782869275/c18113ba-2a91-41f3-bb6e-1cd8fbddf197.png",
               alt: "Kids reading music",
               title: "Sight-reading",
-              body: "We introduce musical notation in a kid-friendly, step-by-step way. Most kids are ready for this around age 6 or 7, and we meet them there when the time is right.",
+              body: "We introduce musical notation in a kid-friendly, step-by-step way.",
             },
             {
               accent: C.teal,
@@ -585,7 +585,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
             fontFamily: fonts.body, textAlign: "center", color: C.muted,
             fontSize: 16, maxWidth: 440, margin: "0 auto 44px", lineHeight: 1.65,
           }}>
-            Tiny Keys is a structured program. Your teacher tracks their progress and moves them forward when the time is right.
+            
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -603,7 +603,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
                 color: C.teal,
                 bg: C.tealPastel,
                 title: "Building foundations",
-                body: "Students begin reading simple notation, develop hand coordination, and start learning chords. Songs get more interesting, and group performance becomes a regular part of class.",
+                body: "Students begin reading simple notation, develop hand coordination, and start learning chords.",
                 skills: ["Simple notation", "Hand coordination", "Basic chords", "Group performance"],
               },
               {
@@ -682,7 +682,7 @@ export default function TinyKeysPage({ navigate, setPath, onRequestLessons }) {
           <p style={{
             fontFamily: fonts.body, fontSize: 14, color: C.muted,
             marginTop: 14, lineHeight: 1.5,
-          }}>Each child gets time at the keys, every session.</p>
+          }}></p>
         </div>
       </section>
 

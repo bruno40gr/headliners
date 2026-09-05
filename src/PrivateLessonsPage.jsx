@@ -70,10 +70,7 @@ const faqs = [
     q: "Who are lessons for?",
     a: "Kids, teens, and adults. We teach beginners, returning players, and students who already play and want better instruction.",
   },
-  {
-    q: "What is the difference between private and semi-private lessons?",
-    a: "Private lessons are one-on-one. Semi-private lessons place two students with one teacher. Semi-private works best when both students are close in age, level, or goals.",
-  },
+  
   {
     q: "Do you offer online lessons?",
     a: "Yes. We offer Zoom lessons.",
@@ -347,9 +344,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
               <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
                 Monthly recitals and live performance opportunities
               </h2>
-              <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: "0 0 18px" }}>
-                We host monthly recitals. Students prepare a piece, work it up in lessons, and perform it in front of an audience.
-              </p>
+             
               <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: 0 }}>
                 We also offer live performance opportunities for students who want more stage time. Lessons can support recital prep, band prep, and live set prep.
               </p>

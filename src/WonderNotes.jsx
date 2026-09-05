@@ -16,7 +16,7 @@ import BookingInterstitial from "./BookingInterstitial";
 const faqs = [
   {
     q: "What ages is Wonder Notes for?",
-    a: "Wonder Notes is designed for ages 3 to 5. No experience needed — it's an introduction to instruments, rhythm, and making music together.",
+    a: "Wonder Notes is designed for ages 3 to 5. No experience needed, it's an introduction to instruments, rhythm, and making music together.",
   },
   {
     q: "What happens in a class?",

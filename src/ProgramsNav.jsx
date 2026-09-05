@@ -17,8 +17,7 @@ const LOGO_DARK   = "https://res.cloudinary.com/diy08lj9x/image/upload/v17807134
 const LOGO_LIGHT  = "https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png";
 
 export const PROGRAMS = [
-  { label: "Private Lessons", sub: "All ages · One-on-one, paced around you.", href: "/programs/private-lessons", active: true },
-  { label: "Semi-Private Lessons", sub: "All ages · Share lessons with a sibling or friend.", href: "/programs/private-lessons", active: true },
+  { label: "Private and Semi-private Lessons", sub: "All ages · One-on-one or shared with a sibling or friend.", href: "/programs/private-lessons", active: true },
   { label: "Band Program", sub: "All ages · Join a band & perform live.", href: "/programs/band", active: true },
   { label: "Tiny Keys", sub: "Ages 5–7 · Early piano & fundamentals.", href: "/tiny-keys", active: true },
   { label: "Wonder Notes", sub: "Ages 3–5 · Intro to instruments & rhythm.", href: "/wonder-notes", active: true },

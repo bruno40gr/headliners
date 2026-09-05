@@ -10,7 +10,7 @@ import ImageTextPair from './ImageTextPair';
 
 const featuredPaths = [
   {
-    title: 'Private Lessons',
+    title: 'Private and Semi-private Lessons',
     body: 'One-on-one and semi-private instruction for kids, teens, and adults.',
     href: '/programs/private-lessons',
     accent: C.teal,

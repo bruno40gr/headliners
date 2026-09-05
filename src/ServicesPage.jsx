@@ -227,15 +227,6 @@ export default function ServicesPage({
 
       <section style={{ background: C.cream, padding: "72px 24px" }}>
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
-          <div style={{ maxWidth: 700, marginBottom: 24 }}>
-            <Eyebrow accent={C.teal}>Gallery</Eyebrow>
-            <TextBlock as="h2" variant="heading" style={{ fontFamily: displayFont, marginBottom: 14 }}>
-              {title} in practice.
-            </TextBlock>
-            <TextBlock>
-              {galleryIntro}
-            </TextBlock>
-          </div>
           <div className="svc-gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {remainingGallery.map((item) => (
               <Card key={item.title} image={item.image} imageAlt={item.alt} imageHeight={220} accent={C.teal} radius={serviceRadius}>
