@@ -41,13 +41,13 @@ export default function ServicesRecordingProductionPage(props) {
           caption: "Help with song structure, parts, sounds, edits, hooks, transitions, and production choices before the final mix.",
         },
         {
-          image: "https://images.unsplash.com/photo-1519677584237-752f8853252e?w=1200&q=80",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788635746/23f9480c-9999-469c-ae29-2d6cb6206e53.png",
           alt: "Recording studio room prepared for a music session",
           title: "Room-only studio time",
           caption: "Bring your own producer or engineer and book the room for a writing session, vocal session, tracking date, or project work.",
         },
         {
-          image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=1200&q=80",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788635798/ec9ff101-d65f-4a07-adcf-836239dcc7fd.png",
           alt: "Headliner studio workstation for editing mixing and mastering",
           title: "Mixing and mastering",
           caption: "Editing, cleanup, mix balance, mastering, and final delivery for songs, demos, and release projects.",
