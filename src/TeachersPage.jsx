@@ -199,15 +199,8 @@ function TeacherModal({ teacher, onClose }) {
               alt={teacher.name}
               style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
-                filter: "sepia(0.28) contrast(1.12) brightness(0.96) saturate(0.8)",
               }}
             />
-            {/* Grain overlay */}
-            <div className="grain-overlay" style={{
-              position: "absolute", inset: 0,
-              opacity: 0.07,
-              pointerEvents: "none",
-            }} />
             {/* Bottom gradient */}
             <div style={{
               position: "absolute", bottom: 0, left: 0, right: 0, height: 120,
@@ -334,24 +327,8 @@ function TeacherCard({ teacher, onClick }) {
             objectFit: "cover", objectPosition: "center top",
             transform: hovered ? "scale(1.05)" : "scale(1)",
             transition: "transform 0.55s cubic-bezier(0.16,1,0.3,1)",
-            filter: "sepia(0.28) contrast(1.12) brightness(0.96) saturate(0.8)",
           }}
         />
-
-        {/* Grain + vignette overlay */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: `
-            radial-gradient(ellipse at center, transparent 40%, rgba(26,19,15,0.45) 100%)
-          `,
-          mixBlendMode: "multiply",
-          pointerEvents: "none",
-        }} />
-        <div className="grain-overlay" style={{
-          position: "absolute", inset: 0,
-          opacity: 0.08,
-          pointerEvents: "none",
-        }} />
 
         {/* Hover overlay */}
         <div style={{
@@ -440,13 +417,6 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
         }
         @media (max-width: 560px) {
           .tp-grid { grid-template-columns: 1fr; gap: 48px; }
-        }
-
-        /* Grain overlay using inline SVG noise */
-        .grain-overlay {
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-          background-size: 180px 180px;
-          background-repeat: repeat;
         }
       `}</style>
 

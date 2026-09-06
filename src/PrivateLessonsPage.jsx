@@ -101,7 +101,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
   const [tourOpen, setTourOpen] = useState(false);
 
   return (
-    <div style={{ fontFamily: fonts.body, background: C.cream, color: C.text }}>
+    <div style={{ fontFamily: fonts.display, background: C.cream, color: C.text }}>
       <style>{globalStyles}</style>
       <style>{`
         @media (max-width: 900px) {
@@ -150,7 +150,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
             <div>
               <Eyebrow accent={C.teal}>Programs</Eyebrow>
               <h1 style={{
-                fontFamily: fonts.displaySerious,
+                fontFamily: fonts.display,
                 fontWeight: 800,
                 fontSize: "clamp(40px, 6vw, 68px)",
                 lineHeight: 0.96,
@@ -240,7 +240,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <div style={{ maxWidth: 760, marginBottom: 34 }}>
             <Eyebrow accent={C.teal}>Our lesson formats</Eyebrow>
-            <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 14px" }}>
+              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 14px" }}>
               Lessons at your own pace
             </h2>
             
@@ -271,7 +271,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
 <div className="pl-two-col" style={{ display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 42, alignItems: "start" }}>
 <div>
 <Eyebrow accent={C.teal}>What happens in lessons</Eyebrow>
-<h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
+<h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
                 What we teach
 </h2>
 <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: "0 0 20px" }}>
@@ -314,8 +314,8 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <div style={{ maxWidth: 780, marginBottom: 28 }}>
             <Eyebrow accent={C.teal}>Instruments we teach</Eyebrow>
-            <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
-              Private lessons for the instruments students actually want to play
+            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
+              Dedicated teachers for these instruments
             </h2>
             <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: 0 }}>
               Lessons are organized by Levels 1, 2, and 3, so students have a clear path whether they are starting fresh, building fundamentals, or ready for more advanced work.
@@ -362,7 +362,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
           <div className="pl-two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 30, alignItems: "start" }}>
             <div>
               <Eyebrow accent={C.teal}>Performance opportunities</Eyebrow>
-              <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
+              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
                 Monthly recitals and live performance opportunities
               </h2>
              
@@ -391,7 +391,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
       <section style={{ background: C.offWhite, padding: "80px 24px", borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 920, margin: "0 auto" }}>
           <Eyebrow accent={C.teal}>Questions families actually ask</Eyebrow>
-          <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 44px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 24px" }}>
+          <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: "clamp(30px, 4vw, 44px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 24px" }}>
             Questions about lessons
           </h2>
           <FAQList items={faqs} />
