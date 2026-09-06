@@ -15,6 +15,7 @@ export default function sitemap() {
     '/wonder-notes',
     '/programs/private-lessons',
     '/programs/band',
+    '/services/birthday-parties',
     '/services/recording-music-production',
     '/services/pa-system-rental',
     '/services/dj-and-events',

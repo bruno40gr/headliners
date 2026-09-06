@@ -10,6 +10,7 @@ import InternalBandProgram from "./InternalBandProgram";
 import ServicesRecordingProductionPage from "./ServicesRecordingProductionPage";
 import ServicesPaRentalPage from "./ServicesPaRentalPage";
 import ServicesDjEventsPage from "./ServicesDjEventsPage";
+import ServicesBirthdayPartiesPage from "./ServicesBirthdayPartiesPage";
 import ServicesInstrumentSetupPage from "./ServicesInstrumentSetupPage";
 import ServicesRehearsalSpacePage from "./ServicesRehearsalSpacePage";
 import PrivateLessonsPage from "./PrivateLessonsPage";
@@ -777,7 +778,8 @@ export default function App() {
        path === "/wonder-notes"         ? <WonderNotes navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/programs/private-lessons" ? <PrivateLessonsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/recording-music-production" ? <ServicesRecordingProductionPage navigate={navigate} onRequestLessons={setBookingFor} /> :
-       path === "/services/pa-system-rental" ? <ServicesPaRentalPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+        path === "/services/pa-system-rental" ? <ServicesPaRentalPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+        path === "/services/birthday-parties" ? <ServicesBirthdayPartiesPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/dj-and-events" ? <ServicesDjEventsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/instrument-setup" ? <ServicesInstrumentSetupPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/rehearsal-space" ? <ServicesRehearsalSpacePage navigate={navigate} onRequestLessons={setBookingFor} /> :

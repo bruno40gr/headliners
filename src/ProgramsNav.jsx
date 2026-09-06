@@ -28,7 +28,7 @@ export const PROGRAMS = [
 export const SERVICES = [
   { label: "Recording & Music Production", sub: "Studio recording, demos, and production support.", href: "/services/recording-music-production", active: true },
   { label: "Rehearsal Space", sub: "Space for bands, groups, and set run-throughs.", href: "/services/rehearsal-space", active: true },
-  { label: "Birthday Parties", sub: "Music-filled party packages for kids & teens.", href: null, active: false },
+  { label: "Birthday Parties", sub: "Music-filled parties for kids and teens.", href: "/services/birthday-parties", active: true },
   { label: "Private Events", sub: "Community, school, and private gatherings.", href: null, active: false },
   { label: "DJ & Events", sub: "Music, announcements, and event flow support.", href: "/services/dj-and-events", active: true },
   { label: "PA System Rental", sub: "Sound support for parties, showcases, and events.", href: "/services/pa-system-rental", active: true },
