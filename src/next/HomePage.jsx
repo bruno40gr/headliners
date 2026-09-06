@@ -205,6 +205,21 @@ function HomeHero({ onPrimaryClick }) {
 }
 
 function SiteFooter({ onPrimaryClick }) {
+  const footerLinks = [
+    { label: 'Private Lessons', href: '/programs/private-lessons' },
+    { label: 'Band Program', href: '/programs/band' },
+    { label: 'Teachers', href: '/teachers' },
+    { label: 'Funding Support', href: '/about/funding-support' },
+    { label: 'Our Story', href: '/about/our-story' },
+    { label: 'Birthday Parties', href: '/services/birthday-parties' },
+    { label: 'Private Events', href: '/services/private-events' },
+    { label: 'Recording & Production', href: '/services/recording-music-production' },
+    { label: 'Rehearsal Space', href: '/services/rehearsal-space' },
+    { label: 'PA System Rental', href: '/services/pa-system-rental' },
+    { label: 'Instrument Setup', href: '/services/instrument-setup' },
+    { label: 'Careers', href: '/careers' },
+  ];
+
   return (
     <footer style={{ background: C.espresso, color: C.white, padding: '64px 40px 40px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -237,6 +252,18 @@ function SiteFooter({ onPrimaryClick }) {
                 Rocklin, CA 95765
               </div>
             </div>
+          </div>
+        </div>
+        <div style={{ paddingBottom: 28, borderBottom: `1px solid ${C.white08}`, marginBottom: 28 }}>
+          <p style={{ fontFamily: fonts.body, fontSize: 11, fontWeight: 800, letterSpacing: '0.14em', color: C.white28, margin: '0 0 14px', textTransform: 'none' }}>
+            Explore Headliner
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 20px' }}>
+            {footerLinks.map((link) => (
+              <a key={link.href} href={link.href} style={{ fontFamily: fonts.body, fontSize: 12, color: C.white50, textDecoration: 'none', lineHeight: 1.4 }}>
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
