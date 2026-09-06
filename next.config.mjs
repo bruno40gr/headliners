@@ -20,6 +20,11 @@ const nextConfig = {
         destination: '/sms-consent',
         permanent: true,
       },
+      {
+        source: '/summer-camp',
+        destination: '/programs/band',
+        permanent: true,
+      },
     ];
   },
   images: {
