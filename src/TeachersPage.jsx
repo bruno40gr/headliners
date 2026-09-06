@@ -115,6 +115,44 @@ const TEACHERS = [
   },
 ];
 
+const TRUST_POINTS = [
+  {
+    title: "Credited working musicians",
+    body: "Our teachers perform, record, write, arrange, and stay active in music outside the lesson room.",
+    accent: C.crimson,
+  },
+  {
+    title: "Multi-instrumental staff",
+    body: "Many of our instructors teach across several instruments, which helps students connect rhythm, theory, ear training, and song work.",
+    accent: C.teal,
+  },
+  {
+    title: "Trained in our approach",
+    body: "Teachers use Headliner's curriculum and levels so students have a clear next step from lesson to lesson.",
+    accent: C.yellow,
+  },
+  {
+    title: "Safe and supportive",
+    body: "Staff members are background checked and chosen for how they work with kids, teens, and adults.",
+    accent: C.espresso,
+  },
+];
+
+const TEACHER_FAQS = [
+  {
+    q: "How do you choose teachers?",
+    a: "We look for strong musicianship, teaching ability, patience, and the ability to work well with students at different ages and levels.",
+  },
+  {
+    q: "Are teachers trained in the same curriculum?",
+    a: "Yes. Teachers use Headliner's lesson approach, curriculum, and student levels, while still adapting the lesson to the student in front of them.",
+  },
+  {
+    q: "Do your teachers work with young beginners?",
+    a: "Yes. Our teachers work with kids, teens, and adults. For younger beginners, lessons stay clear, patient, and age-appropriate.",
+  },
+];
+
 // ── Eyebrow label (matches BandProgramPage) ───────────────────────────────────
 const Eyebrow = ({ children, color = C.teal }) => (
   <p style={{
@@ -414,9 +452,13 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
         }
         @media (max-width: 900px) {
           .tp-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
+          .tp-trust-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .tp-faq-grid { grid-template-columns: 1fr !important; }
+          .tp-recruit-card { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 560px) {
           .tp-grid { grid-template-columns: 1fr; gap: 48px; }
+          .tp-trust-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -435,7 +477,7 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
         overflow: "hidden",
       }}>
         {/* Dot grid texture */}
-        <div style={{
+        <div className="tp-recruit-card" style={{
           position: "absolute", inset: 0, zIndex: 0,
           backgroundImage: `radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)`,
           backgroundSize: "28px 28px",
@@ -453,14 +495,13 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
             fontSize: "clamp(2.6rem, 6vw, 4.8rem)",
             color: C.white, margin: "0 0 28px", lineHeight: 0.92, letterSpacing: -2,
           }}>
-            The people who<br />
-            <span style={{ color: C.crimson }}>make it happen.</span>
+            Meet our teachers<br />
           </h1>
           <p style={{
             fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.6)",
             maxWidth: 560, margin: 0,
           }}>
-            Every instructor at Headliner is an active musician. They bring real stages, real experience, and genuine love for what they do into every session.
+            Our teachers are active musicians, trained instructors, and multi-instrumentalists who know how to work with kids, teens, and adults.
           </p>
         </div>
       </section>
@@ -473,6 +514,158 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
           ))}
         </div>
       </section>
+
+      {/* ── Trust section ── */}
+      <section style={{ background: C.offwhite, padding: "72px 40px", borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ maxWidth: 1160, margin: "0 auto" }}>
+          <div style={{ maxWidth: 760, marginBottom: 32 }}>
+            <Eyebrow color={C.teal}>Why families trust our teachers</Eyebrow>
+            <h2 style={{
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+              fontSize: "clamp(2rem, 4vw, 3rem)", color: C.espresso,
+              margin: "0 0 16px", lineHeight: 1, letterSpacing: -1,
+            }}>
+              Skilled musicians who know how to teach
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: 0, maxWidth: 680 }}>
+              Headliner teachers combine musicianship with structure, patience, and care. Students get clear instruction, steady feedback, and a teacher who understands the instrument they want to learn.
+            </p>
+          </div>
+
+          <div className="tp-trust-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }}>
+            {TRUST_POINTS.map((point) => (
+              <div key={point.title} style={{
+                background: C.white,
+                border: `1.5px solid ${point.accent === C.espresso ? C.border : `${point.accent}55`}`,
+                borderRadius: 20,
+                padding: "24px 22px 22px",
+                boxShadow: "0 12px 34px rgba(26,19,15,0.06)",
+              }}>
+                <h3 style={{
+                  fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+                  fontSize: 22, lineHeight: 1.05, color: C.espresso,
+                  margin: "0 0 10px",
+                }}>
+                  {point.title}
+                </h3>
+                <p style={{ fontSize: 15, lineHeight: 1.75, color: C.muted, margin: 0 }}>
+                  {point.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ background: C.white, padding: "80px 40px", borderTop: `1px solid ${C.border}` }}>
+        <div className="tp-faq-grid" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "0.78fr 1.22fr", gap: 44, alignItems: "start" }}>
+          <div>
+            <Eyebrow color={C.teal}>Teacher FAQ</Eyebrow>
+            <h2 style={{
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+              fontSize: "clamp(2rem, 4vw, 3rem)", color: C.espresso,
+              margin: "0 0 14px", lineHeight: 1, letterSpacing: -1,
+            }}>
+              A few common questions
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: 0 }}>
+              Choosing a teacher matters. Here is how we think about fit, training, and student support.
+            </p>
+          </div>
+
+          <div>
+            {TEACHER_FAQS.map((item, index) => (
+              <div key={item.q} style={{
+                paddingBottom: 28,
+                borderBottom: index < TEACHER_FAQS.length - 1 ? `1px solid ${C.border}` : "none",
+                marginBottom: 28,
+              }}>
+                <h3 style={{
+                  fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+                  fontSize: 21, lineHeight: 1.15, color: C.espresso,
+                  margin: "0 0 10px",
+                }}>
+                  {item.q}
+                </h3>
+                <p style={{ fontSize: 16, lineHeight: 1.85, color: C.muted, margin: 0 }}>
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Recruiting ── */}
+      <section style={{ background: C.cream, padding: "72px 40px", borderTop: `1px solid ${C.border}` }}>
+        <div className="tp-recruit-card" style={{
+          maxWidth: 960,
+          margin: "0 auto",
+          background: C.espresso,
+          borderRadius: 28,
+          padding: "44px clamp(28px, 5vw, 56px)",
+          display: "grid",
+          gridTemplateColumns: "1fr auto",
+          gap: 28,
+          alignItems: "center",
+          boxShadow: "0 18px 48px rgba(26,19,15,0.14)",
+        }}>
+          <div>
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: "0.18em",
+              textTransform: "none",
+              color: C.teal,
+              margin: "0 0 14px",
+            }}>
+              Want to be part of Headliner?
+            </p>
+            <h2 style={{
+              fontFamily: "'Baloo 2', sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              color: C.white,
+              margin: "0 0 12px",
+              lineHeight: 1,
+              letterSpacing: -1,
+            }}>
+              We are always glad to meet strong teachers.
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: "rgba(255,255,255,0.7)", margin: 0, maxWidth: 620 }}>
+              If you are a musician who cares about students, families, and steady teaching, send us an application.
+            </p>
+          </div>
+
+          <a
+            href="/careers"
+            onClick={(e) => { e.preventDefault(); navigate("/careers"); }}
+            style={{
+              background: C.crimson,
+              color: C.white,
+              borderRadius: 999,
+              padding: "16px 30px",
+              textDecoration: "none",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 13,
+              fontWeight: 800,
+              letterSpacing: "0.08em",
+              textTransform: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+              whiteSpace: "nowrap",
+              boxShadow: "0 8px 28px rgba(255,0,68,0.28)",
+            }}
+          >
+            Apply here <ArrowRight size={15} />
+          </a>
+        </div>
+      </section>
+
 
       {/* ── CTA strip ── */}
       <section style={{

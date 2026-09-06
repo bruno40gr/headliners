@@ -43,7 +43,7 @@ const SEO_META = {
   },
   '/teachers': {
     title: 'Our Teachers | Headliner Music Academy',
-    description: 'Meet the passionate instructors at Headliner Music Academy in Rocklin, CA.',
+    description: 'Meet Headliner Music Academy’s trained music teachers in Rocklin, CA. Our faculty includes active musicians and multi-instrumental instructors for kids, teens, and adults.',
   },
   '/careers': {
     title: 'Careers | Headliner Music Academy',
