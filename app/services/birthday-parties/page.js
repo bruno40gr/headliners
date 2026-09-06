@@ -2,7 +2,7 @@ import ServicesBirthdayPartiesRoute from '../../../src/next/ServicesBirthdayPart
 
 const pageUrl = 'https://www.headlinermusicacademy.com/services/birthday-parties';
 const description =
-  'Music birthday parties for kids in Rocklin, CA with karaoke, instruments, games, DJ music, recording, and age-appropriate party activities.';
+  'Music birthday parties for kids in Rocklin, CA with karaoke, rock band, DJ, recording, rhythm games, staff-led activities, and a party area with kitchenette.';
 
 const birthdayPartiesJsonLd = {
   '@context': 'https://schema.org',
@@ -15,10 +15,11 @@ const birthdayPartiesJsonLd = {
     'Rock Band Birthday Party',
     'DJ Birthday Party',
     'Recording Birthday Party',
+    'Little Rockers Party',
     'Birthday Party Venue',
   ],
   description,
-  serviceType: 'Kids birthday parties, music birthday parties, karaoke parties, rock band parties, DJ parties, recording parties',
+  serviceType: 'Kids birthday parties, music birthday parties, karaoke parties, rock band parties, DJ parties, recording parties, Little Rockers parties',
   url: pageUrl,
   provider: {
     '@type': ['MusicSchool', 'LocalBusiness'],
