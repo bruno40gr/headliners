@@ -2,7 +2,7 @@ import ServicesRehearsalSpaceRoute from '../../../src/next/ServicesRehearsalSpac
 
 const pageUrl = 'https://www.headlinermusicacademy.com/services/rehearsal-space';
 const description =
-  'Band rehearsal space and practice room rental in Rocklin, CA for groups, set run-throughs, performance prep, and recurring band rehearsal time when available.';
+  'Band rehearsal space in Rocklin, CA for $50/hr with drum kit, guitar amps, bass amp, PA system, wedges, and performance lights included.';
 
 const rehearsalSpaceJsonLd = {
   '@context': 'https://schema.org',
@@ -12,6 +12,13 @@ const rehearsalSpaceJsonLd = {
   description,
   serviceType: 'Band rehearsal space rental',
   url: pageUrl,
+  offers: {
+    '@type': 'Offer',
+    price: '50',
+    priceCurrency: 'USD',
+    unitText: 'HOUR',
+    availability: 'https://schema.org/InStock',
+  },
   provider: {
     '@type': ['MusicSchool', 'LocalBusiness'],
     name: 'Headliner Music Academy',
@@ -30,13 +37,13 @@ const rehearsalSpaceJsonLd = {
 };
 
 export const metadata = {
-  title: 'Band Rehearsal Space & Practice Room in Rocklin, CA',
+  title: 'Band Rehearsal Space in Rocklin, CA | $50/hr',
   description,
   alternates: {
     canonical: '/services/rehearsal-space',
   },
   openGraph: {
-    title: 'Band Rehearsal Space & Practice Room in Rocklin, CA | Headliner Music Academy',
+    title: 'Band Rehearsal Space in Rocklin, CA | $50/hr | Headliner Music Academy',
     description,
     url: pageUrl,
   },

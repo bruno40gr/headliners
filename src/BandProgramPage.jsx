@@ -280,7 +280,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
       <section style={{ background: C.offwhite, padding: "80px 40px", borderBottom: `1px solid ${C.border}` }}>
         <div className="bp-split" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "center" }}>
           <div className="bp-img-wrap" style={{ borderRadius: 16, height: 460 }}>
-            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80" alt="Band developing" />
+            <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1788655201/7ab10410-51d6-45d5-bba4-25d55070e9d1.png" alt="Band developing" />
           </div>
           <div>
             <Eyebrow color={C.teal}>How it goes</Eyebrow>

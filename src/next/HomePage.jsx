@@ -90,9 +90,9 @@ const socialLinks = [
 
 const heroSlides = [
   {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787854782/f797c6b9-6819-4759-9e0e-7ca1bb43a4d0.png',
+    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788654677/d164a513-d848-449e-8c94-6fac4c0ab61a.png',
     focal: 'center center',
-    caption: 'Monthly recitals and real performance opportunities',
+    caption: 'Personalized music lessons that help students build a love for music',
   },
   {
     src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260615_232511605.MP_v0hy5e.jpg',
@@ -100,9 +100,9 @@ const heroSlides = [
     caption: 'Private and semi-private lessons for kids, teens, and adults',
   },
   {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787862861/9198476e-d047-4ef5-9584-51ec4ff1b010.png',
+    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788654979/7fe87b12-7a1a-42be-8e09-55495b414fa0.png',
     focal: 'center center',
-    caption: 'Band program support from first rehearsal to live show',
+    caption: 'Performance opportunities',
   },
 ];
 
