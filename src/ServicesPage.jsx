@@ -145,10 +145,22 @@ export default function ServicesPage({
   ctaTitle,
   ctaBody,
   pageName,
+  displayFontKey,
+  tone = "professional",
 }) {
   const archetype = pageArchetypes.professionalServices;
-  const displayFont = fonts[archetype.displayFont] || fonts.displaySerious;
-  const serviceRadius = 14;
+  const displayFont = fonts[displayFontKey] || fonts[archetype.displayFont] || fonts.displaySerious;
+  const isPlayful = tone === "playful";
+  const serviceRadius = isPlayful ? 24 : 14;
+  const accent = isPlayful ? C.yellow : C.teal;
+  const accentText = isPlayful ? C.yellow : C.teal;
+  const accentCard = isPlayful ? C.yellowPastel : C.teal;
+  const heroBackground = isPlayful
+    ? `linear-gradient(135deg, ${C.espresso} 0%, ${C.espressoLt} 58%, ${C.tealDark} 100%)`
+    : C.espresso;
+  const heroOverlay = isPlayful
+    ? "radial-gradient(circle at 18% 22%, rgba(255,218,0,0.18), transparent 28%), radial-gradient(circle at 86% 16%, rgba(0,168,200,0.20), transparent 32%), radial-gradient(circle at 75% 82%, rgba(255,0,68,0.14), transparent 28%)"
+    : "radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 38%)";
   const [modalOpen, setModalOpen] = useState(false);
   const heroImage = gallery[0];
   const remainingGallery = gallery.slice(1);
@@ -174,10 +186,11 @@ export default function ServicesPage({
         onCtaClick={() => onRequestLessons && onRequestLessons("")}
       />
 
-      <section style={{ background: C.espresso, color: C.white, padding: "118px 24px 84px", position: "relative", overflow: "hidden" }}>
-        <Bubble top={-90} right={-70} size={300} color={C.white07} />
-        <Bubble bottom={-120} left={-90} size={280} color={C.white07} />
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 38%)", pointerEvents: "none" }} />
+      <section style={{ background: heroBackground, color: C.white, padding: "118px 24px 84px", position: "relative", overflow: "hidden" }}>
+        <Bubble top={-90} right={-70} size={isPlayful ? 340 : 300} color={isPlayful ? "rgba(255,218,0,0.16)" : C.white07} />
+        <Bubble bottom={-120} left={-90} size={isPlayful ? 320 : 280} color={isPlayful ? "rgba(0,168,200,0.16)" : C.white07} />
+        {isPlayful && <Bubble top={220} right={120} size={92} color="rgba(255,255,255,0.10)" />}
+        <div style={{ position: "absolute", inset: 0, background: heroOverlay, pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="svc-hero-grid" style={{ display: "grid", gridTemplateColumns: "0.95fr 1.05fr", gap: 44, alignItems: "center" }}>
@@ -189,12 +202,12 @@ export default function ServicesPage({
                 {intro}
               </TextBlock>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24 }}>
-                <Button onClick={() => setModalOpen(true)} size="lg">Reach out <ArrowRight size={16} /></Button>
+                <Button onClick={() => setModalOpen(true)} size="lg" accent={accent}>Reach out <ArrowRight size={16} /></Button>
                 <Button href="mailto:admin@headlinermusicacademy.com" variant="ghost" size="lg">Email us</Button>
               </div>
             </div>
 
-            <div style={{ position: "relative", borderRadius: serviceRadius, overflow: "hidden", border: `1px solid ${C.white15}`, boxShadow: "0 24px 60px rgba(0,0,0,0.18)" }}>
+            <div style={{ position: "relative", borderRadius: serviceRadius, overflow: "hidden", border: `1px solid ${C.white15}`, boxShadow: isPlayful ? "0 24px 60px rgba(0,0,0,0.18), 0 0 0 8px rgba(255,218,0,0.12)" : "0 24px 60px rgba(0,0,0,0.18)" }}>
               <img
                 src={heroImage.image}
                 alt={heroImage.alt}
@@ -208,7 +221,7 @@ export default function ServicesPage({
       <section style={{ background: C.white, padding: "72px 24px" }}>
         <div className="svc-body-grid" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "0.82fr 1.18fr", gap: 36, alignItems: "start" }}>
           <div>
-            <Eyebrow accent={C.teal}>What we offer</Eyebrow>
+            <Eyebrow accent={accentText}>What we offer</Eyebrow>
             <TextBlock as="h2" variant="heading" style={{ fontFamily: displayFont, marginBottom: 14 }}>
               {sectionTitle || title}
             </TextBlock>
@@ -216,7 +229,7 @@ export default function ServicesPage({
               {listIntro}
             </TextBlock>
           </div>
-          <Card accent={C.teal} radius={serviceRadius}>
+          <Card accent={accentCard} radius={serviceRadius}>
             <ul style={{ margin: 0, paddingLeft: 18, display: "grid", gap: 12, color: C.text, lineHeight: 1.6, fontWeight: 500, fontSize: 16, fontFamily: fonts.body }}>
               {serviceList.map((item) => <li key={item}>{item}</li>)}
             </ul>
@@ -224,11 +237,11 @@ export default function ServicesPage({
         </div>
       </section>
 
-      <section style={{ background: C.cream, padding: "72px 24px" }}>
+      <section style={{ background: isPlayful ? C.yellowPastel : C.cream, padding: "72px 24px" }}>
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
           <div className="svc-gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {remainingGallery.map((item) => (
-              <Card key={item.title} image={item.image} imageAlt={item.alt} imageHeight={220} accent={C.teal} radius={serviceRadius}>
+              <Card key={item.title} image={item.image} imageAlt={item.alt} imageHeight={220} accent={accentCard} radius={serviceRadius}>
                 <TextBlock as="h3" variant="heading" style={{ fontFamily: displayFont, fontSize: 24, marginBottom: 8 }}>
                   
                   {item.title}
@@ -243,7 +256,7 @@ export default function ServicesPage({
       <section style={{ background: C.white, padding: "72px 24px" }}>
         <div className="svc-faq-grid" style={{ maxWidth: 1160, margin: "0 auto", display: "grid", gridTemplateColumns: "0.78fr 1.22fr", gap: 40, alignItems: "start" }}>
           <div>
-            <Eyebrow accent={C.teal}>FAQ</Eyebrow>
+            <Eyebrow accent={accentText}>FAQ</Eyebrow>
             <TextBlock as="h2" variant="heading" style={{ fontFamily: displayFont, marginBottom: 14 }}>
               A few common questions.
             </TextBlock>
@@ -253,8 +266,8 @@ export default function ServicesPage({
         </div>
       </section>
 
-      <CTASection eyebrow="Get in touch" title={ctaTitle} body={ctaBody} accent={C.teal}>
-        <Button onClick={() => setModalOpen(true)}>Reach out</Button>
+      <CTASection eyebrow="Get in touch" title={ctaTitle} body={ctaBody} accent={accentText}>
+        <Button onClick={() => setModalOpen(true)} accent={accent}>Reach out</Button>
         <Button href="mailto:admin@headlinermusicacademy.com" variant="ghost">Email us</Button>
       </CTASection>
 
