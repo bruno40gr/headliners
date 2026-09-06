@@ -454,7 +454,6 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
           .tp-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
           .tp-trust-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .tp-faq-grid { grid-template-columns: 1fr !important; }
-          .tp-recruit-card { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 560px) {
           .tp-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -598,71 +597,20 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
       </section>
 
       {/* ── Recruiting ── */}
-      <section style={{ background: C.cream, padding: "72px 40px", borderTop: `1px solid ${C.border}` }}>
-        <div className="tp-recruit-card" style={{
-          maxWidth: 960,
+      <section style={{ background: C.white, padding: "0 40px 72px" }}>
+        <div style={{
+          maxWidth: 1160,
           margin: "0 auto",
-          background: C.espresso,
-          borderRadius: 28,
-          padding: "44px clamp(28px, 5vw, 56px)",
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          gap: 28,
-          alignItems: "center",
-          boxShadow: "0 18px 48px rgba(26,19,15,0.14)",
+          borderTop: `1px solid ${C.border}`,
+          paddingTop: 28,
         }}>
-          <div>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              fontWeight: 800,
-              letterSpacing: "0.18em",
-              textTransform: "none",
-              color: C.teal,
-              margin: "0 0 14px",
-            }}>
-              Want to be part of Headliner?
-            </p>
-            <h2 style={{
-              fontFamily: "'Baloo 2', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              color: C.white,
-              margin: "0 0 12px",
-              lineHeight: 1,
-              letterSpacing: -1,
-            }}>
-              We are always glad to meet strong teachers.
-            </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.75, color: "rgba(255,255,255,0.7)", margin: 0, maxWidth: 620 }}>
-              If you are a musician who cares about students, families, and steady teaching, send us an application.
-            </p>
-          </div>
-
-          <a
-            href="/careers"
-            onClick={(e) => { e.preventDefault(); navigate("/careers"); }}
-            style={{
-              background: C.crimson,
-              color: C.white,
-              borderRadius: 999,
-              padding: "16px 30px",
-              textDecoration: "none",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 13,
-              fontWeight: 800,
-              letterSpacing: "0.08em",
-              textTransform: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 10,
-              whiteSpace: "nowrap",
-              boxShadow: "0 8px 28px rgba(255,0,68,0.28)",
-            }}
-          >
-            Apply here <ArrowRight size={15} />
-          </a>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: C.muted, margin: 0, maxWidth: 760 }}>
+            Want to be part of Headliner? We are always interested in meeting musicians and teachers who care about students. <a
+              href="/careers"
+              onClick={(e) => { e.preventDefault(); navigate("/careers"); }}
+              style={{ color: C.crimson, fontWeight: 800, textDecoration: "none" }}
+            >Apply here</a>.
+          </p>
         </div>
       </section>
 
