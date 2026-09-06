@@ -5,44 +5,61 @@ export default function ServicesDjEventsPage(props) {
     <ServicesPage
       {...props}
       pageName="DJ and events"
-      title="DJ and events"
-      intro="DJ support for private, school, and community events, with music, announcements, and event flow handled in a clear and steady way."
-      listIntro="Music, announcements, and event support for gatherings that need a smooth pace and a room that feels taken care of."
+      title="DJ services for parties, schools, and community events"
+      sectionTitle="Music and sound for local events"
+      intro="Headliner provides DJ services for private parties, school events, community events, and local gatherings. We can handle music, announcements, microphones, and event sound based on what the event needs."
+      listIntro="We bring the music and sound support. You tell us what kind of event you are planning."
       serviceList={[
-        "Private events",
-        "School events",
-        "Community events",
-        "Announcements",
-        "Music and event flow",
+        "Private parties and family events",
+        "School dances, assemblies, recitals, and fundraisers",
+        "Community events and local gatherings",
+        "DJ music and announcements",
+        "Microphones and event sound",
+        "Setup based on the venue and event",
       ]}
-      galleryIntro="A look at the kind of event support this page is built for."
+      galleryIntro="DJ and event services available at Headliner."
       gallery={[
         {
           image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80",
           alt: "DJ setup at an evening event",
-          title: "DJ support",
-          caption: "Music that fits the room and helps the event move well.",
+          title: "DJ and event services",
+          caption: "DJ music, microphones, announcements, and sound support for local events.",
         },
         {
           image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&q=80",
           alt: "People gathered at an indoor event venue",
-          title: "Event flow",
-          caption: "Useful when the day includes transitions, speaking moments, or multiple moving parts.",
+          title: "Private parties",
+          caption: "Music and sound for birthdays, celebrations, family events, and private gatherings.",
         },
         {
           image: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=1200&q=80",
           alt: "Audio and DJ controls in use",
-          title: "Announcements and sound",
-          caption: "A good fit for events that need both music and practical sound support.",
+          title: "School events",
+          caption: "DJ support for dances, assemblies, recitals, fundraisers, and student events.",
+        },
+        {
+          image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&q=80",
+          alt: "Community event with people gathered together",
+          title: "Community events",
+          caption: "Music and sound for local gatherings, fundraisers, showcases, and public programs.",
+        },
+        {
+          image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
+          alt: "Microphone and audio controls for event announcements",
+          title: "Announcements and microphones",
+          caption: "Support for introductions, awards, transitions, and speaking moments.",
         },
       ]}
       faqs={[
-        { q: "Can you help with announcements too?", a: "Yes. If the event includes announcements or microphones, include that in your inquiry." },
-        { q: "Do I need to know the exact music plan ahead of time?", a: "No. It helps to know the tone you want and anything you want included or avoided." },
-        { q: "Is pricing listed online?", a: "Not yet. Event scope can vary, so it makes more sense to start with the event details." },
+        { q: "What events do you DJ?", a: "Private parties, school events, community events, recitals, fundraisers, and local gatherings." },
+        { q: "Can you make announcements?", a: "Yes. We can handle basic announcements and speaking moments." },
+        { q: "Do you provide microphones?", a: "Yes. Let us know how many microphones the event needs." },
+        { q: "Can we request songs?", a: "Yes. Send songs you want included and anything you want avoided." },
+        { q: "Do you work school events?", a: "Yes. We can keep the music school-appropriate." },
+        { q: "How much does it cost?", a: "Pricing depends on the event length, location, and setup." },
       ]}
       ctaTitle="Tell us about the event."
-      ctaBody="Send us the date, location, and the kind of event you are planning. We will follow up from there."
+      ctaBody="Send the date, location, and what you need handled."
     />
   );
 }
