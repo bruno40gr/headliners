@@ -247,9 +247,7 @@ export default function ServicesPage({
             <TextBlock as="h2" variant="heading" style={{ fontFamily: displayFont, marginBottom: 14 }}>
               A few common questions.
             </TextBlock>
-            <TextBlock>
-              If your question is not here, reach out and we can talk through it.
-            </TextBlock>
+            
           </div>
           <FAQList items={faqs} questionFontFamily={displayFont} />
         </div>

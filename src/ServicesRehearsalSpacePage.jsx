@@ -7,12 +7,11 @@ export default function ServicesRehearsalSpacePage(props) {
       pageName="Rehearsal space"
       title="Band rehearsal space in Rocklin"
       sectionTitle="Rehearsal space with backline and PA"
-      intro="Headliner offers rehearsal space for bands, small groups, and musicians who need a room to prepare for a show or work through new material. Ask about one-time rehearsal time or recurring availability."
-      listIntro="Rehearsal space is $50 per hour and includes a drum kit, two guitar amps, one bass amp, a complete PA system, wedges, and performance lights. After-hours bookings and Sunday rehearsals may be available by consultation."
+      intro="Headliner offers rehearsal space for bands, small groups, and musicians who need a room to prepare for a show or work through new material."
+      listIntro="Rehearsal space is $50 per hour and includes a complete PA system, wedges, drum kit, guitar amps, bass amp, keyboard, mics, and performance lights. After-hours bookings and Sunday rehearsals may be available by consultation."
       serviceList={[
-        "$50 per hour",
-        "Drum kit, two guitar amps, and one bass amp included",
         "Complete PA system, wedges, and performance lights",
+        "Drum kit, guitar amps, bass amp, keyboard, mics included",
         "One-time rehearsal time or recurring availability",
         "After-hours and Sunday bookings by consultation",
         "No alcohol, smoking, or storage",

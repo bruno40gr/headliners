@@ -234,9 +234,7 @@ export default function ServicesPaRentalPage({ navigate, onRequestLessons }) {
             <TextBlock as="h2" variant="heading" style={{ fontFamily: fonts.displaySerious, marginBottom: 14 }}>
               Frequently asked questions
             </TextBlock>
-            <TextBlock>
-              If your question is not here, reach out and we can talk through it.
-            </TextBlock>
+            
           </div>
           <FAQList items={faqs} questionFontFamily={fonts.displaySerious} />
         </div>
