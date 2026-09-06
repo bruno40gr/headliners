@@ -16,6 +16,7 @@ export default function sitemap() {
     '/programs/private-lessons',
     '/programs/band',
     '/services/birthday-parties',
+    '/services/private-events',
     '/services/recording-music-production',
     '/services/pa-system-rental',
     '/services/dj-and-events',

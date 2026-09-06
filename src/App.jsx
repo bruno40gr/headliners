@@ -11,6 +11,7 @@ import ServicesRecordingProductionPage from "./ServicesRecordingProductionPage";
 import ServicesPaRentalPage from "./ServicesPaRentalPage";
 import ServicesDjEventsPage from "./ServicesDjEventsPage";
 import ServicesBirthdayPartiesPage from "./ServicesBirthdayPartiesPage";
+import ServicesPrivateEventsPage from "./ServicesPrivateEventsPage";
 import ServicesInstrumentSetupPage from "./ServicesInstrumentSetupPage";
 import ServicesRehearsalSpacePage from "./ServicesRehearsalSpacePage";
 import PrivateLessonsPage from "./PrivateLessonsPage";
@@ -780,6 +781,7 @@ export default function App() {
        path === "/services/recording-music-production" ? <ServicesRecordingProductionPage navigate={navigate} onRequestLessons={setBookingFor} /> :
         path === "/services/pa-system-rental" ? <ServicesPaRentalPage navigate={navigate} onRequestLessons={setBookingFor} /> :
         path === "/services/birthday-parties" ? <ServicesBirthdayPartiesPage navigate={navigate} onRequestLessons={setBookingFor} /> :
+        path === "/services/private-events" ? <ServicesPrivateEventsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/dj-and-events" ? <ServicesDjEventsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/instrument-setup" ? <ServicesInstrumentSetupPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/rehearsal-space" ? <ServicesRehearsalSpacePage navigate={navigate} onRequestLessons={setBookingFor} /> :

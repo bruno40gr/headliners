@@ -36,7 +36,7 @@ const featuredPaths = [
   {
     title: 'Private Events & Parties',
     body: 'Music-filled celebrations, showcases, and event support in one space.',
-    href: '/services/dj-and-events',
+    href: '/services/private-events',
     accent: C.espresso,
     image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781716216/PXL_20260524_013313165.PORTRAIT.ORIGINAL_bpckwf.jpg',
     focal: 'center 25%',

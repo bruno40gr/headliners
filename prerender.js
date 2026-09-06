@@ -20,6 +20,7 @@ const routes = [
   '/programs/band',
   '/services/recording-music-production',
   '/services/pa-system-rental',
+  '/services/private-events',
   '/services/dj-and-events',
   '/services/instrument-setup',
   '/services/rehearsal-space',
@@ -62,7 +63,7 @@ const SEO_META = {
   },
   '/programs/private-lessons': {
     title: 'Private and Semi-Private Music Lessons | Headliner Music Academy',
-    description: 'Private and semi-private music lessons in Rocklin, CA for kids, teens, and adults. In-person and Zoom lesson options, monthly recitals, and no registration fee.',
+    description: 'Private and semi-private music lessons in Rocklin, CA for kids, teens, and adults. Piano, guitar, voice, drums, bass, ukulele, violin, cello, brass, woodwinds, music production, songwriting, Levels 1-3, Zoom lessons, and monthly recitals.',
   },
   '/programs/band': {
     title: 'Band Performance Program | Headliner Music Academy',
@@ -75,6 +76,10 @@ const SEO_META = {
   '/services/pa-system-rental': {
     title: 'PA System Rental in Rocklin, CA | Headliner Music Academy',
     description: 'PA system rental in Rocklin, CA for parties, showcases, school functions, and community events. Ask about event sound support and availability.',
+  },
+  '/services/private-events': {
+    title: 'Private Music Events & Corporate Parties in Rocklin, CA | Headliner Music Academy',
+    description: 'Private music events in Rocklin, CA for corporate events, team-building, karaoke parties, adult birthdays, family celebrations, DJ music, recording, and group activities.',
   },
   '/services/dj-and-events': {
     title: 'DJ & Event Services in Rocklin, CA | Headliner Music Academy',

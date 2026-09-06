@@ -9,7 +9,6 @@ import {
   FAQList,
   StatsGrid,
   Card,
-  Chip,
   Eyebrow,
   globalStyles,
 } from "./ui";
@@ -17,13 +16,18 @@ import ProgramsNav from "./ProgramsNav";
 import BookingInterstitial from "./BookingInterstitial";
 
 const instruments = [
-  "Guitar",
-  "Piano",
-  "Drums",
-  "Bass",
-  "Vocals",
-  "Brass",
-  "Strings",
+  "Piano lessons",
+  "Guitar lessons",
+  "Voice lessons",
+  "Drum lessons",
+  "Bass lessons",
+  "Ukulele lessons",
+  "Violin lessons",
+  "Cello lessons",
+  "Brass lessons",
+  "Woodwind lessons",
+  "Music production lessons",
+  "Songwriting lessons",
 ];
 
 const lessonPhotos = [
@@ -106,10 +110,12 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
           .pl-pillar-grid { grid-template-columns: 1fr !important; }
           .pl-stats { grid-template-columns: 1fr 1fr !important; }
           .pl-format-grid { grid-template-columns: 1fr !important; }
+          .pl-instrument-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .pl-photo-strip { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 640px) {
           .pl-stats { grid-template-columns: 1fr !important; }
+          .pl-instrument-grid { grid-template-columns: 1fr !important; }
           .pl-hero-section { padding-top: 100px !important; }
         }
       `}</style>
@@ -161,7 +167,7 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
                 maxWidth: 650,
                 margin: "0 0 26px",
               }}>
-                We teach kids, teens, and adults in one-on-one and semi-private lessons. We cover technique, rhythm, ear training, reading, theory, and song work.
+                We teach kids, teens, and adults in one-on-one and semi-private lessons. Students work through Levels 1, 2, and 3 while building technique, rhythm, ear training, reading, theory, and song work.
               </p>
               
 
@@ -307,32 +313,47 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
       <section style={{ background: C.cream, padding: "82px 24px", borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <div style={{ maxWidth: 780, marginBottom: 28 }}>
-            <Eyebrow accent={C.teal}>Instruments and options</Eyebrow>
+            <Eyebrow accent={C.teal}>Instruments we teach</Eyebrow>
             <h2 style={{ fontFamily: fonts.displaySerious, fontWeight: 800, fontSize: "clamp(30px, 4vw, 48px)", lineHeight: 1, letterSpacing: "-0.03em", color: C.espresso, margin: "0 0 16px" }}>
-              Instruments, lesson formats, and scheduling options
+              Private lessons for the instruments students actually want to play
             </h2>
-            
+            <p style={{ fontSize: 17, lineHeight: 1.85, color: C.muted, margin: 0 }}>
+              Lessons are organized by Levels 1, 2, and 3, so students have a clear path whether they are starting fresh, building fundamentals, or ready for more advanced work.
+            </p>
+          </div>
+
+          <div className="pl-instrument-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 30 }}>
+            {instruments.map((item, index) => (
+              <div
+                key={item}
+                style={{
+                  background: C.white,
+                  border: `1.5px solid ${index % 3 === 0 ? C.teal30 : index % 3 === 1 ? C.yellow50 : C.crimson15}`,
+                  borderRadius: 18,
+                  padding: "18px 16px",
+                  minHeight: 72,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  boxShadow: "0 12px 30px rgba(26,19,15,0.06)",
+                }}
+              >
+                <h3 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 21, lineHeight: 1.05, color: C.espresso, margin: 0 }}>
+                  {item}
+                </h3>
+              </div>
+            ))}
           </div>
 
           <StatsGrid
             columns={3}
             items={[
-              { label: "Lesson options", value: "Monthly enrollment or a la carte", color: C.tealDark },
+              { label: "Lesson path", value: "Levels 1, 2, and 3", color: C.tealDark },
               { label: "Lesson formats", value: "Private and semi-private", color: C.yellowDark },
               { label: "Performance options", value: "Monthly recitals and live opportunities", color: C.crimson },
             ]}
-            style={{ marginBottom: 30 }}
           />
-
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            {instruments.map((item, index) => (
-              <Chip
-                key={item}
-                label={item}
-                accent={index % 3 === 0 ? C.teal : index % 3 === 1 ? C.yellow : C.crimson}
-              />
-            ))}
-          </div>
         </div>
       </section>
 
