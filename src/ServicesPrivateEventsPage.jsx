@@ -4,10 +4,10 @@ export default function ServicesPrivateEventsPage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="Private events"
+      pageName="Private Events"
       title="Private music events in Rocklin"
       sectionTitle="Music-centered events for groups"
-      intro="Headliner hosts private music events for companies, families, teams, schools, and groups that want something more active than a standard party. Choose karaoke, live-band style activities, DJ music, recording, or a custom music experience."
+      intro="Headliner hosts private music events for companies, families, teams, schools, and groups that want something more active than a standard party. Choose karaoke, live-band style activities, DJ music, recording, or a custom music experience. BYOB is welcome for adult events; alcohol is not offered or sold by Headliner."
       listIntro="Private events can be simple or fully hosted. Tell us the group size, age range, date, and what kind of experience you want, and we can help shape the event."
       serviceList={[
         "Corporate events and team-building",
@@ -17,14 +17,15 @@ export default function ServicesPrivateEventsPage(props) {
         "DJ music, microphones, and announcements",
         "Recording options for songs, shoutouts, or group keepsakes",
         "Private party room and music space",
+        "BYOB for adult events; alcohol is not offered or sold",
         "Custom event format based on the group",
       ]}
       galleryIntro="Private music event options available at Headliner."
       gallery={[
         {
-          image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&q=80",
-          alt: "People gathered for a private indoor event",
-          title: "Private music events",
+          image: "https://images.unsplash.com/photo-1741594412133-ffd6530482ad?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+          alt: "Adults singing karaoke together at a party",
+          title: "Private karaoke parties",
           caption: "Bring your group to Headliner for karaoke, DJ music, recording, or a hosted music activity.",
         },
         {
@@ -35,27 +36,21 @@ export default function ServicesPrivateEventsPage(props) {
         },
         {
           image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
-          alt: "Singer using a microphone for karaoke",
-          title: "Karaoke parties",
-          caption: "Book a private karaoke-style event with microphones, song choices, and a staff-supported setup.",
+          alt: "Singer using a microphone at a private event",
+          title: "Karaoke Parties",
+          caption: "Choose your songs, grab the mic, and enjoy a private karaoke setup supported by Headliner staff.",
         },
         {
-          image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1200&q=80",
-          alt: "Musicians playing together in a studio",
+          image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+          alt: "Adults playing music together on stage at a casual event",
           title: "Rock band experience",
-          caption: "Guests can try instruments, learn simple parts, and perform together with help from Headliner staff.",
+          caption: "Guests can try simple parts, play together, and get a casual on-stage moment with help from Headliner staff.",
         },
         {
           image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787854712/e7994742-e89a-4d31-873c-5fc55dc6a028.png",
           alt: "Headliner recording studio for private event recording add-ons",
           title: "Recording add-ons",
           caption: "Add a recording option for a song, group message, chant, or keepsake from the event.",
-        },
-        {
-          image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80",
-          alt: "DJ and event sound setup with lights",
-          title: "DJ music and microphones",
-          caption: "Use Headliner for music, announcements, introductions, awards, and party flow.",
         },
       ]}
       faqs={[
@@ -65,7 +60,7 @@ export default function ServicesPrivateEventsPage(props) {
         { q: "Can we do karaoke?", a: "Yes. Private karaoke parties are one of the easiest event formats to set up." },
         { q: "Can guests play instruments?", a: "Yes. For some events, guests can try instruments and play simple parts with help from Headliner staff." },
         { q: "Can we add recording?", a: "Yes. Recording can be added depending on the event format and schedule." },
-        { q: "Can we bring food and drinks?", a: "Yes. We can discuss food, drinks, setup, and timing when planning the event." },
+        { q: "Can we bring food and drinks?", a: "Yes. You can bring your own food and drinks. For adult events, BYOB is welcome; alcohol is not offered or sold by Headliner." },
         { q: "How much does it cost?", a: "Pricing depends on the date, length, group size, staffing, and event format." },
       ]}
       ctaTitle="Plan a private music event."

@@ -2,7 +2,7 @@ import ServicesPrivateEventsRoute from '../../../src/next/ServicesPrivateEventsR
 
 const pageUrl = 'https://www.headlinermusicacademy.com/services/private-events';
 const description =
-  'Private music events in Rocklin, CA for corporate events, team-building, karaoke parties, adult birthdays, family celebrations, DJ music, recording, and group activities.';
+  'Private music events in Rocklin, CA for corporate events, team-building, karaoke parties, adult birthdays, family celebrations, DJ music, recording, BYOB adult events, and group activities. Alcohol is not offered or sold.';
 
 const privateEventsJsonLd = {
   '@context': 'https://schema.org',
