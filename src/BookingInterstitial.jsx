@@ -25,13 +25,18 @@ function Field({ label, children }) {
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
       <label style={{
         fontFamily: fonts.body,
-        fontSize: 10, fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "none", color: C.muted,
+        fontSize: 16, fontWeight: 600,
+        letterSpacing: 0, textTransform: "none", color: C.espresso,
       }}>{label}</label>
       {children}
     </div>
   );
 }
+
+const fieldTextStyle = {
+  fontSize: 16,
+  padding: "13px 16px",
+};
 
 /* ─── PillToggle ─────────────────────────────────────────────────────────── */
 function PillToggle({ label, active, onClick }) {
@@ -76,6 +81,7 @@ export default function BookingInterstitial({
   });
   const [status, setStatus] = useState("idle");
   const [programOpen, setProgramOpen] = useState(false);
+  const canGoBack = initialScreen !== 2;
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
@@ -272,145 +278,155 @@ export default function BookingInterstitial({
     return (
       <div className="bi-tour-form">
         <p style={{
-          fontFamily: fonts.body, fontSize: 14, color: C.muted,
-          lineHeight: 1.5, margin: "0 0 16px",
+          fontFamily: fonts.body, fontSize: 17, color: C.muted,
+          lineHeight: 1.65, margin: "0 0 22px", maxWidth: 620,
         }}>
           Pick a day and time below. Just come by at that time and our friendly team will be ready to show you around.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <Field label="Your name *">
-            <input
-              type="text"
-              placeholder="First and last name"
-              value={form.name}
-              onChange={e => set("name", e.target.value)}
-            />
-          </Field>
-          <Field label="Student name *">
-            <input
-              type="text"
-              placeholder="Your child's first name"
-              value={form.studentName}
-              onChange={e => set("studentName", e.target.value)}
-            />
-          </Field>
-          <Field label="Student age">
-            <input
-              type="text"
-              placeholder="e.g. 4, or turning 5 in August"
-              value={form.age}
-              onChange={e => set("age", e.target.value)}
-            />
-          </Field>
-          <Field label="Interested in">
-            <div style={{ position: "relative" }}>
-              <button
-                type="button"
-                onClick={() => setProgramOpen(o => !o)}
-                style={{
-                  background: C.inputBg,
-                  border: `1px solid ${C.border}`,
-                  borderRadius: 10,
-                  color: form.program ? C.espresso : C.placeholder,
-                  fontFamily: fonts.body,
-                  fontSize: 14,
-                  padding: "10px 14px",
-                  width: "100%",
-                  boxSizing: "border-box",
-                  outline: "none",
-                  textAlign: "left",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: 8,
-                }}
-              >
-                <span style={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}>
-                  {form.program || "Select a program…"}
-                </span>
-                <ChevronDown
-                  size={14}
-                  style={{
-                    flexShrink: 0,
-                    transition: "transform 0.2s",
-                    transform: programOpen ? "rotate(180deg)" : "rotate(0deg)",
-                    color: C.subtext,
-                  }}
+        <div className="bi-tour-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 26, alignItems: "start" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 140px", gap: 14, alignItems: "end" }}>
+              <Field label="Student name *">
+                <input
+                  type="text"
+                  placeholder="e.g. Jordan Smith"
+                  value={form.studentName}
+                  onChange={e => set("studentName", e.target.value)}
+                  style={fieldTextStyle}
                 />
-              </button>
-              {programOpen && (
-                <div style={{
-                  position: "absolute",
-                  top: "calc(100% + 4px)",
-                  left: 0,
-                  right: 0,
-                  background: C.white,
-                  border: `1px solid ${C.border}`,
-                  borderRadius: 10,
-                  boxShadow: "0 8px 24px rgba(26,19,15,0.08)",
-                  zIndex: 10,
-                  maxHeight: 240,
-                  overflowY: "auto",
-                }}>
-                  {PROGRAMS.map(p => (
-                    <button
-                      key={p.label}
-                      type="button"
-                      onClick={() => {
-                        set("program", p.label);
-                        setProgramOpen(false);
-                      }}
-                      style={{
-                        display: "block",
-                        width: "100%",
-                        background: "none",
-                        border: "none",
-                        textAlign: "left",
-                        padding: "10px 14px",
-                        cursor: "pointer",
-                        fontFamily: fonts.body,
-                        fontSize: 14,
-                        color: C.espresso,
-                        transition: "background 0.15s",
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = "#FAF9F7"; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = "none"; }}
-                    >
-                      <span style={{ fontWeight: 600, display: "block" }}>{p.label}</span>
-                      <span style={{ fontSize: 11, color: C.muted }}>{p.sub}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+              </Field>
+              <Field label="Age">
+                <input
+                  type="text"
+                  placeholder="e.g. 8"
+                  value={form.age}
+                  onChange={e => set("age", e.target.value)}
+                  style={fieldTextStyle}
+                />
+              </Field>
             </div>
-          </Field>
-          <Field label="Email">
-            <input
-              type="email"
-              placeholder="email@example.com"
-              value={form.email}
-              onChange={e => set("email", e.target.value)}
-            />
-          </Field>
-          <Field label="Phone">
-            <input
-              type="tel"
-              placeholder="(916) 000-0000"
-              value={form.phone}
-              onChange={e => set("phone", e.target.value)}
-            />
-          </Field>
+
+            <Field label="Parent name *">
+              <input
+                type="text"
+                placeholder="First and last name"
+                value={form.name}
+                onChange={e => set("name", e.target.value)}
+                style={fieldTextStyle}
+              />
+            </Field>
+
+            <Field label="Email">
+              <input
+                type="email"
+                placeholder="email@example.com"
+                value={form.email}
+                onChange={e => set("email", e.target.value)}
+                style={fieldTextStyle}
+              />
+            </Field>
+
+            <Field label="Phone">
+              <input
+                type="tel"
+                placeholder="(916) 000-0000"
+                value={form.phone}
+                onChange={e => set("phone", e.target.value)}
+                style={fieldTextStyle}
+              />
+            </Field>
+          </div>
+
+          <div className="bi-tour-divider" style={{ display: "flex", flexDirection: "column", gap: 16, borderLeft: `1px solid ${C.border}`, paddingLeft: 22 }}>
+            <Field label="Interested in">
+              <div style={{ position: "relative" }}>
+                <button
+                  type="button"
+                  onClick={() => setProgramOpen(o => !o)}
+                  style={{
+                    background: C.inputBg,
+                    border: `1px solid ${C.border}`,
+                    borderRadius: 10,
+                    color: form.program ? C.espresso : C.placeholder,
+                    fontFamily: fonts.body,
+                    ...fieldTextStyle,
+                    width: "100%",
+                    boxSizing: "border-box",
+                    outline: "none",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 8,
+                  }}
+                >
+                  <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {form.program || "Select a program…"}
+                  </span>
+                  <ChevronDown
+                    size={14}
+                    style={{
+                      flexShrink: 0,
+                      transition: "transform 0.2s",
+                      transform: programOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      color: C.subtext,
+                    }}
+                  />
+                </button>
+                {programOpen && (
+                  <div style={{
+                    position: "absolute",
+                    top: "calc(100% + 4px)",
+                    left: 0,
+                    right: 0,
+                    background: C.white,
+                    border: `1px solid ${C.border}`,
+                    borderRadius: 10,
+                    boxShadow: "0 8px 24px rgba(26,19,15,0.08)",
+                    zIndex: 10,
+                    maxHeight: 240,
+                    overflowY: "auto",
+                  }}>
+                    {PROGRAMS.map(p => (
+                      <button
+                        key={p.label}
+                        type="button"
+                        onClick={() => {
+                          set("program", p.label);
+                          setProgramOpen(false);
+                        }}
+                        style={{
+                          display: "block",
+                          width: "100%",
+                          background: "none",
+                          border: "none",
+                          textAlign: "left",
+                          padding: "10px 14px",
+                          cursor: "pointer",
+                          fontFamily: fonts.body,
+                          fontSize: 14,
+                          color: C.espresso,
+                          transition: "background 0.15s",
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = "#FAF9F7"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = "none"; }}
+                      >
+                        <span style={{ fontWeight: 600, display: "block" }}>{p.label}</span>
+                        <span style={{ fontSize: 11, color: C.muted }}>{p.sub}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Field>
           <Field label="Preferred date *">
             <input
               type="date"
               min={new Date().toISOString().split('T')[0]}
               value={form.date}
+              style={fieldTextStyle}
               onChange={e => {
                 const newDate = e.target.value;
                 const newIsSaturday = newDate && new Date(newDate + "T00:00:00").getDay() === 6;
@@ -448,7 +464,10 @@ export default function BookingInterstitial({
               Something went wrong. Please try again or call us at (916) 435-1300.
             </p>
           )}
+          </div>
+        </div>
 
+        <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 12 }}>
           <button
             onClick={handleSubmitTour}
             disabled={!tourValid}
@@ -456,7 +475,7 @@ export default function BookingInterstitial({
               width: "100%",
               background: !tourValid ? "#D0C4BC" : C.crimson,
               color: C.white, border: "none", borderRadius: 999,
-              padding: "13px 32px", fontFamily: fonts.body, fontSize: 13,
+              padding: "16px 32px", fontFamily: fonts.body, fontSize: 16,
               fontWeight: 700, letterSpacing: "0.1em", textTransform: "none",
               cursor: !tourValid ? "not-allowed" : "pointer",
               transition: "background 0.2s",
@@ -472,20 +491,22 @@ export default function BookingInterstitial({
             </a>
           </p>
 
-          <div style={{ textAlign: "center", marginTop: 4 }}>
-            <button
-              onClick={() => setScreen(1)}
-              style={{
-                background: "none", border: "none", cursor: "pointer",
-                fontFamily: fonts.body, fontSize: 13, color: C.muted,
-                padding: 0, textDecoration: "none",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.textDecoration = "underline"; }}
-              onMouseLeave={e => { e.currentTarget.style.textDecoration = "none"; }}
-            >
-              Go back
-            </button>
-          </div>
+          {canGoBack && (
+            <div style={{ textAlign: "center", marginTop: 4 }}>
+              <button
+                onClick={() => setScreen(1)}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  fontFamily: fonts.body, fontSize: 13, color: C.muted,
+                  padding: 0, textDecoration: "none",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.textDecoration = "underline"; }}
+                onMouseLeave={e => { e.currentTarget.style.textDecoration = "none"; }}
+              >
+                Go back
+              </button>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -494,6 +515,9 @@ export default function BookingInterstitial({
   /* ─── Render ──────────────────────────────────────────────────────────── */
   return (
     <div
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget && status !== "sending") onClose();
+      }}
       style={{
         position: "fixed", inset: 0, zIndex: 200,
         background: "rgba(26,19,15,0.75)", backdropFilter: "blur(8px)",
@@ -501,8 +525,8 @@ export default function BookingInterstitial({
         padding: 16, overflowY: "auto",
       }}
     >
-      <div style={{
-        background: C.white, borderRadius: 24, width: "100%", maxWidth: 540,
+      <div onMouseDown={(event) => event.stopPropagation()} style={{
+        background: C.white, borderRadius: 24, width: "100%", maxWidth: screen === 2 && status !== "success" ? 760 : 540,
         padding: "40px 36px", position: "relative", boxSizing: "border-box",
         margin: "auto", maxHeight: "90vh", overflowY: "auto",
         boxShadow: `0 24px 64px ${C.black20}`,
@@ -528,7 +552,7 @@ export default function BookingInterstitial({
         {screen === 2 && status !== "success" && (
           <h2 style={{
             fontFamily: fonts.display, fontWeight: 800,
-            fontSize: 28, color: C.crimson, margin: "0 0 6px",
+            fontSize: 34, color: C.crimson, margin: "0 0 8px", lineHeight: 1.05,
           }}>Come see us</h2>
         )}
 
@@ -544,8 +568,8 @@ export default function BookingInterstitial({
           border-radius: 10px !important;
           color: ${C.espresso} !important;
           font-family: 'DM Sans', sans-serif !important;
-          font-size: 14px !important;
-          padding: 10px 14px !important;
+          font-size: 16px !important;
+          padding: 13px 16px !important;
           width: 100% !important;
           box-sizing: border-box !important;
           outline: none !important;
@@ -558,6 +582,16 @@ export default function BookingInterstitial({
         .bi-tour-form input::placeholder, .bi-tour-form textarea::placeholder { color: ${C.placeholder} !important; }
         .bi-tour-form textarea { resize: vertical; }
         .bi-tour-form input[type="number"] { max-width:120px !important; width:120px !important; }
+        @media (max-width: 768px) {
+          .bi-tour-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+          .bi-tour-divider {
+            border-left: none !important;
+            padding-left: 0 !important;
+          }
+        }
       `}</style>
     </div>
   );

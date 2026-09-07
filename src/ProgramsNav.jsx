@@ -394,6 +394,7 @@ export default function ProgramsNav({
   onCtaClick   = () => console.log("CTA Clicked"),
   ctaHref,
   ctaHrefTarget,
+  hideLogo     = false,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isDark = variant === "dark";
@@ -471,7 +472,19 @@ export default function ProgramsNav({
             onClick={e => { e.preventDefault(); navigate("/"); }}
             style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}
           >
-            <img src={logo} alt="Headliner Music Academy" style={{ height: 32, width: "auto", objectFit: "contain", display: "block" }} />
+            <img
+              src={logo}
+              alt="Headliner Music Academy"
+              style={{
+                height: 32,
+                width: "auto",
+                objectFit: "contain",
+                display: "block",
+                opacity: hideLogo ? 0 : 1,
+                pointerEvents: hideLogo ? "none" : "auto",
+                transition: "opacity 0.2s ease",
+              }}
+            />
           </a>
         </div>
 

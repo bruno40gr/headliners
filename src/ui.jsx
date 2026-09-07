@@ -429,7 +429,7 @@ export function Input({ accent = C.crimson, style, ...rest }) {
   );
 }
 
-export function Select({ accent = C.crimson, children, style, ...rest }) {
+export function Select({ accent = C.crimson, children, style, selectStyle, ...rest }) {
   return (
     <div style={{ position: "relative", ...style }}>
       <select
@@ -447,6 +447,7 @@ export function Select({ accent = C.crimson, children, style, ...rest }) {
           boxSizing: "border-box",
           outline: "none",
           transition: "border-color 0.2s, background 0.2s",
+          ...selectStyle,
         }}
         onFocus={(e) => { e.target.style.borderColor = accent; e.target.style.background = C.white; }}
         onBlur={(e) => { e.target.style.borderColor = C.border; e.target.style.background = C.inputBg; }}

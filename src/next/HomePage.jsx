@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import BookingModal from '../BookingModal';
+import BookingInterstitial from '../BookingInterstitial';
 import ProgramsNav from '../ProgramsNav';
 import { C, fonts } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
@@ -115,8 +116,9 @@ const communityLogos = [
 ];
 
 const HERO_PHOTO_FILTER = 'sepia(0.18) saturate(0.85) contrast(1.08) brightness(0.97)';
+const HERO_LOGO = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png';
 
-function HomeHero({ onPrimaryClick }) {
+function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
@@ -134,43 +136,32 @@ function HomeHero({ onPrimaryClick }) {
   }, [active]);
 
   return (
-    <section style={{ position: 'relative', paddingTop: 68, width: '100%', boxSizing: 'border-box', background: C.espresso, overflow: 'hidden' }}>
+    <section ref={heroRef} style={{ position: 'relative', paddingTop: 68, width: '100%', boxSizing: 'border-box', background: C.espresso, overflow: 'hidden' }}>
       <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'calc(100vh - 68px)', width: '100%' }}>
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2 }}>
           <div style={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${C.white} 1px, transparent 1px)`, backgroundSize: '26px 26px', opacity: 0.025, pointerEvents: 'none' }} />
 
-          <p className={loaded ? 'fade-up delay-1' : ''} style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.2em', textTransform: "none", color: C.teal, margin: '0 0 22px', display: 'flex', alignItems: 'center', gap: 10, position: 'relative', zIndex: 1 }}>
-            <span className="tag-dot" />
-            Rocklin, CA
-          </p>
-
-          <h1 className={loaded ? 'fade-up delay-2' : ''} style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(42px, 6.4vw, 72px)', lineHeight: 0.96, letterSpacing: -2, color: C.white, margin: '0 0 22px', position: 'relative', zIndex: 1 }}>
-            From first lesson
-            <br />
-            to <span style={{ color: C.crimson, fontStyle: 'italic' }}>real stage.</span>
-          </h1>
-
-          <p className={loaded ? 'fade-up delay-3' : ''} style={{ fontFamily: fonts.body, color: C.white70, fontSize: 17, lineHeight: 1.75, maxWidth: 460, margin: '0 0 36px', fontWeight: 300, position: 'relative', zIndex: 1 }}>
-            Private lessons, group lessons, a band program that puts you on stage, recording and production, and creative experiences right here in Rocklin.
-          </p>
-
-          <div className={loaded ? 'fade-up delay-4' : ''} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 40, position: 'relative', zIndex: 1 }}>
-            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
-              Request Lessons
-            </button>
+          <div className={loaded ? 'fade-up delay-2' : ''} style={{ position: 'relative', zIndex: 1, margin: '0 0 26px' }}>
+            <img src={HERO_LOGO} alt="Headliner Music Academy" style={{ display: 'block', width: 'min(100%, 430px)', height: 'auto' }} />
           </div>
 
-          <div className={loaded ? 'fade-up delay-5' : ''} style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 22px', position: 'relative', zIndex: 1 }}>
-            {[
-              { href: 'tel:916-435-1300', Icon: Phone, label: '(916) 435-1300' },
-              { href: 'mailto:admin@headlinermusicacademy.com', Icon: Mail, label: 'admin@headlinermusicacademy.com' },
-              { href: 'https://maps.google.com/?q=2311+Sunset+Blvd,+Rocklin,+CA+95765', Icon: MapPin, label: '2311 Sunset Blvd, Rocklin, CA', external: true },
-            ].map(({ href, Icon, label, external }) => (
-              <a key={label} href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: C.white45, textDecoration: 'none', fontFamily: fonts.body, transition: 'color 0.2s' }}>
-                <Icon size={14} />
-                {label}
-              </a>
-            ))}
+          <p className={loaded ? 'fade-up delay-3' : ''} style={{ fontFamily: fonts.body, color: C.white80, fontSize: 18, lineHeight: 1.7, maxWidth: 520, margin: '0 0 36px', fontWeight: 600, position: 'relative', zIndex: 1 }}>
+            A Rocklin music academy for kids, teens, and adults to learn instruments, join bands, record, perform, and grow with supportive teachers.
+          </p>
+
+          <div className={loaded ? 'fade-up delay-4' : ''} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, position: 'relative', zIndex: 1 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
+            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
+              Book a lesson
+            </button>
+              <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13.5px 34px', borderRadius: 999, border: `2.5px solid ${C.teal}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.teal }}>
+                Request a Tour
+              </button>
+            </div>
+            <a href="tel:916-435-1300" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 14, color: C.white55, textDecoration: 'none', fontFamily: fonts.body, lineHeight: 1.4 }}>
+              <Phone size={14} />
+              Or call us <strong style={{ color: C.white80, fontWeight: 700 }}>(916) 435-1300</strong>
+            </a>
           </div>
         </div>
 
@@ -289,11 +280,43 @@ function SiteFooter({ onPrimaryClick }) {
 
 export default function HomePage() {
   const navigate = useNextNavigate();
+  const heroRef = useRef(null);
   const [bookingFor, setBookingFor] = useState(null);
+  const [tourOpen, setTourOpen] = useState(false);
+  const [showNavLogo, setShowNavLogo] = useState(false);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowNavLogo(!entry.isIntersecting);
+      },
+      { threshold: 0.04 }
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div style={{ fontFamily: fonts.body, minHeight: '100vh', background: C.white, color: C.espresso, overflowX: 'hidden', maxWidth: '100vw' }}>
       {bookingFor !== null && <BookingModal instrument={bookingFor} onClose={() => setBookingFor(null)} />}
+      {tourOpen && (
+        <BookingInterstitial
+          programName="Headliner Music Academy"
+          programColor={C.teal}
+          opusL1="https://headlinermusicacademy.com"
+          opusL2="https://headlinermusicacademy.com"
+          opusL3="https://headlinermusicacademy.com"
+          initialScreen={2}
+          onClose={() => setTourOpen(false)}
+          emailjsServiceId="service_734y6qg"
+          emailjsTemplateId="template_czlclec"
+          emailjsPublicKey="FdW-lGbAyQuJZFy-y"
+        />
+      )}
       <style>{`
         *, *::before, *::after { box-sizing: border-box; }
         @keyframes fadeUp {
@@ -350,11 +373,11 @@ export default function HomePage() {
       `}</style>
 
       <header>
-        <ProgramsNav variant="dark" navigate={navigate} ctaLabel="Request Lessons" onCtaClick={() => setBookingFor('')} />
+        <ProgramsNav variant="dark" navigate={navigate} ctaLabel="Request Lessons" onCtaClick={() => setBookingFor('')} hideLogo={!showNavLogo} />
       </header>
 
       <main>
-        <HomeHero onPrimaryClick={() => setBookingFor('')} />
+        <HomeHero onPrimaryClick={() => setBookingFor('')} onTourClick={() => setTourOpen(true)} heroRef={heroRef} />
 
         <section style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
           <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 }}>
