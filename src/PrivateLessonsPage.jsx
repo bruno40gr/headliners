@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { C, fonts } from "./tokens";
 import {
@@ -30,10 +30,32 @@ const instruments = [
   "Songwriting lessons",
 ];
 
-const lessonPhotos = [
-  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260615_232511605.MP_v0hy5e.jpg", alt: "Students working together during a lesson at Headliner" },
-  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781716019/PXL_20260615_232758808.MP_bvvcif.jpg", alt: "A student playing during a lesson at Headliner" },
-  { src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232322116.MP_zhbrns.jpg", alt: "Students making music together at Headliner" },
+const lessonHeroSlides = [
+  {
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788654677/d164a513-d848-449e-8c94-6fac4c0ab61a.png",
+    alt: "Student learning music during a private lesson at Headliner",
+    caption: "Personalized music lessons that help students build a love for music",
+  },
+  {
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260616_002552898.PORTRAIT_anjebq.jpg",
+    alt: "Students working together during a semi-private lesson at Headliner",
+    caption: "Private and semi-private lessons for kids, teens, and adults",
+  },
+  {
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788654979/7fe87b12-7a1a-42be-8e09-55495b414fa0.png",
+    alt: "Students performing together at Headliner",
+    caption: "Performance opportunities",
+  },
+  {
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788816126/f8314d17-4f1b-43bb-9369-7e3df42a1a7e.png",
+    alt: "Headliner graduation ceremony",
+    caption: "Graduation ceremonies",
+  },
+  {
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1787862816/3c66ba38-627b-4fa6-8882-0413814d7b9f.png",
+    alt: "Student performance opportunity at Headliner",
+    caption: "Performance opportunities",
+  },
 ];
 
 const formatCards = [
@@ -99,6 +121,15 @@ const faqs = [
 
 export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
   const [tourOpen, setTourOpen] = useState(false);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setActiveHeroSlide((current) => (current + 1) % lessonHeroSlides.length);
+    }, 4600);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeHeroSlide]);
 
   return (
     <div style={{ fontFamily: fonts.display, background: C.cream, color: C.text }}>
@@ -222,12 +253,28 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
                 border: `2px solid ${C.teal30}`,
                 boxShadow: "0 18px 50px rgba(26,19,15,0.10)",
                 background: C.white,
+                position: "relative",
               }}>
-                <img
-                  src="https://res.cloudinary.com/diy08lj9x/image/upload/v1787854859/38266dda-d198-4221-b1c3-87ba5940f495.png"
-                  alt="Teacher working with a music student during a lesson"
-                  style={{ width: "100%", height: 560, objectFit: "cover", display: "block" }}
-                />
+                {lessonHeroSlides.map((slide, index) => (
+                  <img
+                    key={slide.src}
+                    src={slide.src}
+                    alt={index === activeHeroSlide ? slide.alt : ""}
+                    aria-hidden={index !== activeHeroSlide}
+                    style={{ position: index === 0 ? "relative" : "absolute", inset: 0, width: "100%", height: 560, objectFit: "cover", display: "block", opacity: index === activeHeroSlide ? 1 : 0, transition: "opacity 0.9s ease" }}
+                  />
+                ))}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,19,15,0.66) 0%, transparent 45%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", left: 22, right: 22, bottom: 20, display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}>
+                  <p key={activeHeroSlide} style={{ margin: 0, color: C.white, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, lineHeight: 1.45, maxWidth: 280, animation: "fadeUp 0.45s ease both" }}>
+                    {lessonHeroSlides[activeHeroSlide].caption}
+                  </p>
+                  <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                    {lessonHeroSlides.map((slide, index) => (
+                      <button key={slide.src} type="button" onClick={() => setActiveHeroSlide(index)} aria-label={`Show lesson photo ${index + 1}`} style={{ width: index === activeHeroSlide ? 20 : 7, height: 7, padding: 0, border: "none", borderRadius: 999, cursor: "pointer", background: index === activeHeroSlide ? C.yellow : "rgba(255,255,255,0.55)", transition: "width 0.25s ease, background 0.25s ease" }} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -296,17 +343,6 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
 </div>
 </div>
 
-          <div className="pl-photo-strip" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginTop: 42 }}>
-            {lessonPhotos.map((photo) => (
-              <div key={photo.src} style={{ borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}`, background: C.white, boxShadow: "0 14px 36px rgba(26,19,15,0.08)" }}>
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }}
-                />
-              </div>
-            ))}
-          </div>
 </div>
 </section>
 
