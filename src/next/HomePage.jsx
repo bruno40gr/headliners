@@ -39,7 +39,7 @@ const featuredPaths = [
     body: 'Music-filled celebrations, showcases, and event support in one space.',
     href: '/services/private-events',
     accent: C.espresso,
-    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781716216/PXL_20260524_013313165.PORTRAIT.ORIGINAL_bpckwf.jpg',
+    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260616_021959694.PORTRAIT.ORIGINAL_b7nfj5.jpg',
     focal: 'center 25%',
   },
 ];
@@ -89,24 +89,6 @@ const socialLinks = [
   },
 ];
 
-const heroSlides = [
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788654677/d164a513-d848-449e-8c94-6fac4c0ab61a.png',
-    focal: 'center center',
-    caption: 'Personalized music lessons that help students build a love for music',
-  },
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260615_232511605.MP_v0hy5e.jpg',
-    focal: 'center 35%',
-    caption: 'Private and semi-private lessons for kids, teens, and adults',
-  },
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788654979/7fe87b12-7a1a-42be-8e09-55495b414fa0.png',
-    focal: 'center center',
-    caption: 'Performance opportunities',
-  },
-];
-
 const communityLogos = [
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787856767/62f9c4d9-f1d9-45d6-9184-8272ac7c509b.png', alt: 'Placer SPCA' },
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787856320/34ae2934-47cf-49f4-8feb-5c0fa24d5634.png', alt: 'Railroad Museum' },
@@ -115,8 +97,10 @@ const communityLogos = [
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787857303/2e7dd706-0ab8-4c3d-b661-36a9658321f3.png', alt: 'Maker Faire Rocklin' },
 ];
 
-const HERO_PHOTO_FILTER = 'sepia(0.18) saturate(0.85) contrast(1.08) brightness(0.97)';
 const HERO_LOGO = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png';
+const HERO_VIDEO_URL = 'https://res.cloudinary.com/diy08lj9x/video/upload/f_auto,q_auto,vc_auto,w_960/v1788821113/headliner_reel_k84siv.mp4';
+const HERO_VIDEO_POSTER = 'https://res.cloudinary.com/diy08lj9x/video/upload/so_0,f_jpg,q_auto,w_960/v1788821113/headliner_reel_k84siv.jpg';
+const HERO_DESKTOP_VIDEO_OPACITY = 0.99;
 const LOCATION_ADDRESS = '2311 Sunset Blvd, Rocklin, CA 95765';
 const LOCATION_ADDRESS_LINES = ['2311 Sunset Blvd', 'Rocklin, CA 95765'];
 const GOOGLE_MAPS_QUERY_PARAM = encodeURIComponent(LOCATION_ADDRESS);
@@ -124,7 +108,6 @@ const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps?q=${GOOGLE_MAPS_QUERY
 const GOOGLE_MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${GOOGLE_MAPS_QUERY_PARAM}`;
 
 function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
-  const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -132,18 +115,10 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
     return () => window.cancelAnimationFrame(id);
   }, []);
 
-  useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      setActive((current) => (current + 1) % heroSlides.length);
-    }, 4200);
-
-    return () => window.clearTimeout(timeout);
-  }, [active]);
-
   return (
-    <section ref={heroRef} style={{ position: 'relative', paddingTop: 68, width: '100%', boxSizing: 'border-box', background: C.espresso, overflow: 'hidden' }}>
-      <div className="hero-split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'calc(100vh - 68px)', width: '100%' }}>
-        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2 }}>
+    <section ref={heroRef} className="home-hero" style={{ position: 'relative', paddingTop: 68, width: '100%', boxSizing: 'border-box', background: C.espresso, overflow: 'hidden' }}>
+      <div className="hero-split" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1.2fr 1fr', minHeight: 'calc(100vh - 68px)', width: '100%' }}>
+        <div className="hero-copy" style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2 }}>
           <div style={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${C.white} 1px, transparent 1px)`, backgroundSize: '26px 26px', opacity: 0.025, pointerEvents: 'none' }} />
 
           <div className={loaded ? 'fade-up delay-2' : ''} style={{ position: 'relative', zIndex: 1, margin: '0 0 26px' }}>
@@ -170,28 +145,24 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
           </div>
         </div>
 
-        <div className="hero-media" style={{ position: 'relative', overflow: 'hidden', minHeight: 360, background: C.espresso }}>
-          <div style={{ position: 'absolute', inset: 0, WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 18%)', maskImage: 'linear-gradient(to right, transparent 0%, black 18%)' }}>
-            {heroSlides.map((slide, index) => (
-              <div key={slide.caption} style={{ position: 'absolute', inset: 0, opacity: index === active ? 1 : 0, transition: 'opacity 1.1s ease', pointerEvents: 'none' }}>
-                <img src={slide.src} alt={slide.caption} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: slide.focal, display: 'block', filter: HERO_PHOTO_FILTER }} />
-              </div>
-            ))}
-          </div>
-
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(100deg, ${C.espresso} 0%, rgba(26,19,15,0.65) 6%, rgba(26,19,15,0.18) 14%, transparent 26%)`, pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.6) 0%, transparent 30%)', pointerEvents: 'none' }} />
-
-          <div style={{ position: 'absolute', bottom: 28, left: 32, right: 32, display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 2 }}>
-            <p key={active} style={{ fontFamily: fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: '0.02em', textTransform: 'none', color: C.white, margin: 0, animation: 'fadeUp 0.5s ease both' }}>
-              {heroSlides[active].caption}
-            </p>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', maxWidth: 220, justifyContent: 'flex-end' }}>
-              {heroSlides.map((_, index) => (
-                <button key={index} type="button" onClick={() => setActive(index)} aria-label={`Show slide ${index + 1}`} style={{ width: index === active ? 20 : 6, height: 6, borderRadius: 999, background: index === active ? C.crimson : 'rgba(255,255,255,0.35)', border: 'none', cursor: 'pointer', padding: 0, transition: 'width 0.3s ease, background 0.3s ease' }} />
-              ))}
-            </div>
-          </div>
+        <div className="hero-media" style={{ position: 'relative', minHeight: 360, background: C.espresso, overflow: 'hidden' }}>
+          <div className="hero-video-poster" style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_VIDEO_POSTER})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0 }} />
+          <video
+            className="hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={HERO_VIDEO_POSTER}
+            aria-hidden="true"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: HERO_DESKTOP_VIDEO_OPACITY }}
+          >
+            <source src={HERO_VIDEO_URL} type="video/mp4" />
+          </video>
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, ${C.espresso} 0%, rgba(26,19,15,0.84) 10%, rgba(26,19,15,0.28) 30%, transparent 55%)`, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.48) 0%, transparent 38%)', pointerEvents: 'none' }} />
+          <div className="hero-mobile-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
         </div>
       </div>
 
@@ -394,20 +365,13 @@ export default function HomePage() {
           animation: pulse 2s ease-in-out infinite;
           display:inline-block; flex-shrink:0;
         }
-        .offering-card {
-          background: ${C.white};
-          cursor:pointer;
-          transition: background 0.2s, transform 0.15s;
-          position:relative;
+        .home-learn-more {
+          transition: color 0.18s ease, transform 0.18s ease;
         }
-        .offering-card:hover { background: ${C.lightCream}; transform:translateY(-2px); z-index:1; }
-        .offering-card:hover .card-hint { opacity:1; }
-        .card-hint {
-          opacity:0; transition:opacity 0.2s;
-          font-size:10px; font-weight:700;
-          letter-spacing:0.12em; text-transform: none;
-          color:${C.crimson}; margin-top:8px;
-          font-family:${fonts.body};
+        .home-learn-more:hover,
+        .home-learn-more:focus-visible {
+          color: ${C.espresso} !important;
+          transform: translateX(3px);
         }
         .footer-explore-link {
           transition: color 0.18s ease, transform 0.18s ease;
@@ -417,9 +381,18 @@ export default function HomePage() {
           color: ${C.white} !important;
           transform: translateY(-1px);
         }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-video { display: none !important; }
+          .hero-video-poster { opacity: 1 !important; }
+        }
         @media (max-width:860px) {
-          .hero-split { grid-template-columns: 1fr !important; }
-          .hero-media { min-height: 360px !important; order: -1; }
+          .hero-split { display:block !important; min-height:calc(100vh - 68px) !important; }
+          .hero-copy { min-height:calc(100vh - 68px) !important; z-index:2 !important; }
+          .hero-media { position:absolute !important; inset:0 !important; min-height:0 !important; z-index:0 !important; }
+          .hero-video { opacity:0.72 !important; }
+          .hero-mobile-overlay {
+            background:linear-gradient(90deg, rgba(26,19,15,0.92) 0%, rgba(26,19,15,0.78) 54%, rgba(26,19,15,0.5) 100%), linear-gradient(to top, rgba(26,19,15,0.65) 0%, transparent 48%);
+          }
           .home-feature-grid,
           .home-stage-grid,
           .home-about-grid,
@@ -428,6 +401,7 @@ export default function HomePage() {
         }
         @media (max-width:768px) {
           section { padding-left:20px !important; padding-right:20px !important; }
+          .home-hero { padding-left:0 !important; padding-right:0 !important; }
           header  { padding-left:20px !important; padding-right:20px !important; }
           .home-feature-grid { grid-template-columns:1fr !important; }
         }
@@ -443,7 +417,7 @@ export default function HomePage() {
         <section style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
           <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 }}>
             {featuredPaths.map((item) => (
-              <button key={item.title} type="button" onClick={() => navigate(item.href)} style={{ textAlign: 'left', background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 0, cursor: 'pointer', boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
+              <article key={item.title} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 0, boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
                 <div style={{ position: 'relative', height: 200 }}>
                   <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.focal, display: 'block' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.55) 0%, rgba(26,19,15,0.08) 42%, transparent 75%)' }} />
@@ -458,11 +432,11 @@ export default function HomePage() {
                     {item.body}
                   </p>
                 </div>
-                <span style={{ fontFamily: fonts.body, fontSize: 13, fontWeight: 700, color: C.crimson, letterSpacing: '0.08em', textTransform: "none" }}>
+                <a href={item.href} className="home-learn-more" style={{ display: 'inline-block', width: 'fit-content', fontFamily: fonts.body, fontSize: 13, fontWeight: 700, color: C.crimson, letterSpacing: '0.08em', textTransform: "none", textDecoration: 'none' }}>
                   Learn more
-                </span>
+                </a>
                 </div>
-              </button>
+              </article>
             ))}
           </div>
         </section>
