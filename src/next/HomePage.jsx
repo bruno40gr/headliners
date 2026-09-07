@@ -117,6 +117,11 @@ const communityLogos = [
 
 const HERO_PHOTO_FILTER = 'sepia(0.18) saturate(0.85) contrast(1.08) brightness(0.97)';
 const HERO_LOGO = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png';
+const LOCATION_ADDRESS = '2311 Sunset Blvd, Rocklin, CA 95765';
+const LOCATION_ADDRESS_LINES = ['2311 Sunset Blvd', 'Rocklin, CA 95765'];
+const GOOGLE_MAPS_QUERY_PARAM = encodeURIComponent(LOCATION_ADDRESS);
+const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps?q=${GOOGLE_MAPS_QUERY_PARAM}&output=embed`;
+const GOOGLE_MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${GOOGLE_MAPS_QUERY_PARAM}`;
 
 function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
   const [active, setActive] = useState(0);
@@ -251,7 +256,7 @@ function SiteFooter({ onPrimaryClick }) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 20px' }}>
             {footerLinks.map((link) => (
-              <a key={link.href} href={link.href} style={{ fontFamily: fonts.body, fontSize: 12, color: C.white50, textDecoration: 'none', lineHeight: 1.4 }}>
+              <a key={link.href} href={link.href} className="footer-explore-link" style={{ fontFamily: fonts.body, fontSize: 12, color: C.white50, textDecoration: 'none', lineHeight: 1.4 }}>
                 {link.label}
               </a>
             ))}
@@ -275,6 +280,53 @@ function SiteFooter({ onPrimaryClick }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+function VisitUsSection({ onTourClick }) {
+  return (
+    <section style={{ background: C.white, padding: '8px 20px 88px', width: '100%' }}>
+      <div className="home-visit-grid" style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 34, alignItems: 'center' }}>
+        <div>
+          <p style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.14em', color: C.crimson, margin: '0 0 12px', textTransform: 'none' }}>
+            Visit us at
+          </p>
+          <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.8rem,3.6vw,2.7rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 18px' }}>
+            Headliner Music Academy
+          </h2>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, color: C.text, fontFamily: fonts.body, fontSize: 17, lineHeight: 1.7, marginBottom: 22 }}>
+            <MapPin size={19} color={C.crimson} style={{ marginTop: 4, flexShrink: 0 }} />
+            <address style={{ fontStyle: 'normal' }}>
+              {LOCATION_ADDRESS_LINES[0]}
+              <br />
+              {LOCATION_ADDRESS_LINES[1]}
+            </address>
+          </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 18px ${C.crimson30}` }}>
+              Book a tour
+            </button>
+            <a href={GOOGLE_MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, textDecoration: 'none', background: 'transparent', color: C.crimson }}>
+              Get directions
+            </a>
+          </div>
+        </div>
+
+        <div style={{ height: 320, overflow: 'hidden', background: C.lightCream }}>
+          <iframe
+            title="Map to Headliner Music Academy"
+            src={GOOGLE_MAPS_EMBED_URL}
+            width="100%"
+            height="100%"
+            style={{ border: 0, display: 'block' }}
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -357,12 +409,21 @@ export default function HomePage() {
           color:${C.crimson}; margin-top:8px;
           font-family:${fonts.body};
         }
+        .footer-explore-link {
+          transition: color 0.18s ease, transform 0.18s ease;
+        }
+        .footer-explore-link:hover,
+        .footer-explore-link:focus-visible {
+          color: ${C.white} !important;
+          transform: translateY(-1px);
+        }
         @media (max-width:860px) {
           .hero-split { grid-template-columns: 1fr !important; }
           .hero-media { min-height: 360px !important; order: -1; }
           .home-feature-grid,
           .home-stage-grid,
           .home-about-grid,
+          .home-visit-grid,
           .footer-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width:768px) {
@@ -515,6 +576,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <VisitUsSection onTourClick={() => setTourOpen(true)} />
 
         <section style={{ background: C.offwhite, padding: '88px 20px 96px', width: '100%' }}>
           <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
