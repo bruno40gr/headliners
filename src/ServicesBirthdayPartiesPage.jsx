@@ -4,7 +4,7 @@ export default function ServicesBirthdayPartiesPage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="Birthday parties"
+      pageName="Birthday Parties"
       displayFontKey="displayExpressive"
       tone="playful"
       title="Music birthday parties for kids in Rocklin"

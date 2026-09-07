@@ -4,7 +4,7 @@ export default function ServicesInstrumentSetupPage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="Instrument and gear services"
+      pageName="Instrument Setup"
       title="Instrument and gear services in Rocklin"
       sectionTitle="Setups, repairs, upgrades, and routing"
       intro="Setup, repair, upgrade, and routing help for guitars, basses, pedalboards, electronics, MIDI gear, and drum hardware."

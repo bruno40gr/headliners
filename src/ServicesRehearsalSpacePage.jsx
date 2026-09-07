@@ -4,7 +4,7 @@ export default function ServicesRehearsalSpacePage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="Rehearsal space"
+      pageName="Rehearsal Space"
       title="Band rehearsal space in Rocklin"
       sectionTitle="Rehearsal space with backline and PA"
       intro="Headliner offers rehearsal space for bands, small groups, and musicians who need a room to prepare for a show or work through new material."

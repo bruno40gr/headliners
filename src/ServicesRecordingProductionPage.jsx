@@ -4,7 +4,7 @@ export default function ServicesRecordingProductionPage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="Recording and music production"
+      pageName="Recording & Music Production"
       title="Recording studio, production, mixing, and mastering in Rocklin"
       sectionTitle="Recording, production, and room-only studio time"
       intro="Headliner offers recording, music production, mixing, and mastering for artists, bands, vocalists, producers, and songwriters in Rocklin and the Sacramento area. Book time with an engineer, bring your own producer, or ask about room-only studio use."

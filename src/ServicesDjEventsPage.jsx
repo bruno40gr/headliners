@@ -4,7 +4,7 @@ export default function ServicesDjEventsPage(props) {
   return (
     <ServicesPage
       {...props}
-      pageName="DJ and events"
+      pageName="DJ & Events"
       title="DJ services"
       sectionTitle="Music and sound for local events"
       intro="Headliner provides DJ services for private parties, school events, community events, and local gatherings. We can handle music, announcements, microphones, and event sound based on what the event needs."

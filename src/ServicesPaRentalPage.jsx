@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { C, fonts } from "./tokens";
 import ProgramsNav from "./ProgramsNav";
+import { ServiceInquiryModal } from "./ServicesPage";
 import {
   Button,
   Bubble,
@@ -67,6 +69,8 @@ const faqs = [
 ];
 
 export default function ServicesPaRentalPage({ navigate, onRequestLessons }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div style={{ fontFamily: fonts.body, background: C.cream, color: C.text, overflowX: "hidden" }}>
       <style>{globalStyles}</style>
@@ -107,7 +111,7 @@ export default function ServicesPaRentalPage({ navigate, onRequestLessons }) {
                 Tell us about your event and we'll put together the right setup, speakers, microphones, mixing and support as needed.
               </TextBlock>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <Button onClick={() => onRequestLessons && onRequestLessons("")} size="lg">Get a quote <ArrowRight size={16} /></Button>
+                <Button onClick={() => setModalOpen(true)} size="lg">Get a quote <ArrowRight size={16} /></Button>
                 <Button href="mailto:admin@headlinermusicacademy.com" variant="ghost" size="lg">Email us</Button>
               </div>
             </div>
@@ -241,9 +245,11 @@ export default function ServicesPaRentalPage({ navigate, onRequestLessons }) {
       </section>
 
       <CTASection title="Get a quote" body="Send us the date, venue, guest count and what you're planning. We'll take it from there." accent={C.teal}>
-        <Button onClick={() => onRequestLessons && onRequestLessons("")}>Get a quote</Button>
+        <Button onClick={() => setModalOpen(true)}>Get a quote</Button>
         <Button href="mailto:admin@headlinermusicacademy.com" variant="ghost">Email us</Button>
       </CTASection>
+
+      {modalOpen && <ServiceInquiryModal serviceName="PA System Rental" onClose={() => setModalOpen(false)} />}
     </div>
   );
 }
