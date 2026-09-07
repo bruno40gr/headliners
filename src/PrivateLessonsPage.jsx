@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { C, fonts } from "./tokens";
 import {
   Button,
@@ -32,7 +32,7 @@ const instruments = [
 
 const lessonHeroSlides = [
   {
-    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788654677/d164a513-d848-449e-8c94-6fac4c0ab61a.png",
+    src: "https://res.cloudinary.com/diy08lj9x/image/upload/v1788825159/56fae6e6-bffd-4840-895f-d7f7b0660dbc.png",
     alt: "Student learning music during a private lesson at Headliner",
     caption: "Personalized music lessons that help students build a love for music",
   },
@@ -122,6 +122,12 @@ const faqs = [
 export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
   const [tourOpen, setTourOpen] = useState(false);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const showPreviousHeroSlide = () => {
+    setActiveHeroSlide((current) => (current - 1 + lessonHeroSlides.length) % lessonHeroSlides.length);
+  };
+  const showNextHeroSlide = () => {
+    setActiveHeroSlide((current) => (current + 1) % lessonHeroSlides.length);
+  };
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
@@ -265,6 +271,14 @@ export default function PrivateLessonsPage({ navigate, onRequestLessons }) {
                   />
                 ))}
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(26,19,15,0.66) 0%, transparent 45%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", top: "50%", left: 16, right: 16, display: "flex", justifyContent: "space-between", transform: "translateY(-50%)" }}>
+                  <button type="button" onClick={showPreviousHeroSlide} aria-label="Show previous lesson photo" style={{ width: 42, height: 42, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.55)", background: "rgba(26,19,15,0.5)", color: C.white, display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(6px)" }}>
+                    <ArrowLeft size={20} aria-hidden="true" />
+                  </button>
+                  <button type="button" onClick={showNextHeroSlide} aria-label="Show next lesson photo" style={{ width: 42, height: 42, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.55)", background: "rgba(26,19,15,0.5)", color: C.white, display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "pointer", backdropFilter: "blur(6px)" }}>
+                    <ArrowRight size={20} aria-hidden="true" />
+                  </button>
+                </div>
                 <div style={{ position: "absolute", left: 22, right: 22, bottom: 20, display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16 }}>
                   <p key={activeHeroSlide} style={{ margin: 0, color: C.white, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, lineHeight: 1.45, maxWidth: 280, animation: "fadeUp 0.45s ease both" }}>
                     {lessonHeroSlides[activeHeroSlide].caption}
