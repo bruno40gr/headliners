@@ -5,14 +5,14 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import BookingModal from '../BookingModal';
 import BookingInterstitial from '../BookingInterstitial';
 import ProgramsNav from '../ProgramsNav';
-import { C, fonts } from '../tokens';
+import { C, fonts, radius } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
 import ImageTextPair from './ImageTextPair';
 
 const featuredPaths = [
   {
-    title: 'Private and Semi-private Lessons',
-    body: 'One-on-one and semi-private instruction for kids, teens, and adults.',
+    title: 'Instruments we teach',
+    body: 'Dedicated teachers and curriculum for piano, voice, guitar, bass, drums, ukulele, brass, woodwind, and more.',
     href: '/programs/private-lessons',
     accent: C.teal,
     image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg',
@@ -20,7 +20,7 @@ const featuredPaths = [
   },
   {
     title: 'Band Program',
-    body: 'Rehearse, perform, and grow with real stage experience.',
+    body: 'Guided rehearsals, monthly performances, and real stage experience.',
     href: '/programs/band',
     accent: C.crimson,
     image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715554/20250628_153338_srnhk2.jpg',
@@ -28,19 +28,11 @@ const featuredPaths = [
   },
   {
     title: 'Recording & Production',
-    body: 'Creative support for demos, live recording, and student projects.',
+    body: 'A professional space for recording, production, live sessions, and artist development.',
     href: '/services/recording-music-production',
     accent: C.yellow,
     image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787854712/e7994742-e89a-4d31-873c-5fc55dc6a028.png',
     focal: 'center 28%',
-  },
-  {
-    title: 'Private Events & Parties',
-    body: 'Music-filled celebrations, showcases, and event support in one space.',
-    href: '/services/private-events',
-    accent: C.espresso,
-    image: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1781715524/PXL_20260616_021959694.PORTRAIT.ORIGINAL_b7nfj5.jpg',
-    focal: 'center 25%',
   },
 ];
 
@@ -61,18 +53,6 @@ const weeklyUpdate = {
   range: 'September 6–12, 2026',
   items: announcements,
 };
-
-const upcomingPosters = [
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788369374/074ae361-4983-475b-8958-1c1bdd204c21.png',
-    alt: 'Upcoming event flyer',
-  },
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788369316/d7f34685-3cf5-4d54-baf7-67788eb89cfb.png',
-    alt: 'Upcoming promotional poster',
-    hasEnded: true,
-  },
-];
 
 const socialLinks = [
   {
@@ -162,10 +142,10 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
 
           <div className={loaded ? 'fade-up delay-4' : ''} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, position: 'relative', zIndex: 1 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
-            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
-              Book a lesson
+            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: radius.pill, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
+              Request a lesson
             </button>
-              <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13.5px 34px', borderRadius: 999, border: `2.5px solid ${C.teal}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.teal }}>
+              <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13.5px 34px', borderRadius: radius.pill, border: `2.5px solid ${C.teal}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.teal }}>
                 Request a Tour
               </button>
             </div>
@@ -176,7 +156,7 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
           </div>
         </div>
 
-        <div className="hero-media" style={{ position: 'relative', minHeight: 360, background: C.espresso, overflow: 'hidden', transform: `translateY(${mobileMediaOffset}px)` }}>
+        <div className="hero-media" style={{ position: 'relative', minHeight: 360, background: C.espresso, borderRadius: radius.lg, overflow: 'hidden', transform: `translateY(${mobileMediaOffset}px)` }}>
           <div className="hero-video-poster" style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_VIDEO_POSTER})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0 }} />
           <video
             className="hero-video"
@@ -204,7 +184,7 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
 
 function WeeklyUpdateCard({ className }) {
   return (
-    <section className={className} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 'clamp(24px, 4vw, 32px)', boxShadow: `0 8px 28px ${C.espresso06}` }}>
+    <section className={className} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: radius.lg, padding: 'clamp(24px, 4vw, 32px)', boxShadow: `0 8px 28px ${C.espresso06}` }}>
       <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.35rem,2.4vw,1.75rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1.05, margin: 0 }}>
         This week at Headliner
       </h2>
@@ -254,7 +234,7 @@ function SiteFooter({ onPrimaryClick }) {
             <a href="/" style={{ display: 'block', marginBottom: 20, lineHeight: 0 }}>
               <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" style={{ display: 'block', height: 'auto', maxHeight: 44, width: 'auto', maxWidth: 220, objectFit: 'contain' }} />
             </a>
-            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13px 32px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', background: 'transparent', color: C.crimson }}>
+            <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13px 32px', borderRadius: radius.pill, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', background: 'transparent', color: C.crimson }}>
               Request Lessons
             </button>
           </div>
@@ -331,16 +311,16 @@ function VisitUsSection({ onTourClick }) {
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 18px ${C.crimson30}` }}>
+            <button type="button" onClick={onTourClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: radius.pill, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 18px ${C.crimson30}` }}>
               Book a tour
             </button>
-            <a href={GOOGLE_MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, textDecoration: 'none', background: 'transparent', color: C.crimson }}>
+            <a href={GOOGLE_MAPS_DIRECTIONS_URL} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'none', padding: '13px 24px', borderRadius: radius.pill, border: `1.5px solid ${C.crimson}`, textDecoration: 'none', background: 'transparent', color: C.crimson }}>
               Get directions
             </a>
           </div>
         </div>
 
-        <div style={{ height: 320, overflow: 'hidden', background: C.lightCream }}>
+        <div style={{ height: 320, borderRadius: radius.lg, overflow: 'hidden', background: C.lightCream }}>
           <iframe
             title="Map to Headliner Music Academy"
             src={GOOGLE_MAPS_EMBED_URL}
@@ -435,7 +415,7 @@ export default function HomePage() {
         }
         .home-learn-more:hover,
         .home-learn-more:focus-visible {
-          color: ${C.espresso} !important;
+          color: ${C.tealDark} !important;
           transform: translateX(3px);
         }
         .footer-explore-link {
@@ -477,6 +457,7 @@ export default function HomePage() {
             aspect-ratio:auto !important;
             max-height:none !important;
             z-index:0 !important;
+            border-radius:0 !important;
           }
           .hero-copy {
             position:absolute !important;
@@ -495,8 +476,6 @@ export default function HomePage() {
           .hero-copy-mobile-overlay {
             background:linear-gradient(90deg, rgba(26,19,15,0.72) 0%, rgba(26,19,15,0.56) 62%, rgba(26,19,15,0.38) 100%);
           }
-          .home-bulletin-board { display:none !important; }
-          .desktop-weekly-update { display:none !important; }
           .community-logo-grid { grid-template-columns:repeat(4, minmax(0, 1fr)) !important; gap:8px !important; }
           .community-logo-card { min-height:74px !important; padding:10px !important; }
           .community-logo-card img { max-height:42px !important; }
@@ -507,15 +486,10 @@ export default function HomePage() {
           .home-about-grid,
           .home-visit-grid,
           .footer-grid { grid-template-columns: 1fr !important; }
-          .mobile-weekly-update { display:block !important; }
-        }
-        @media (min-width:861px) {
-          .mobile-weekly-update { display:none; }
-          .bulletin-layout { display:grid; grid-template-columns:minmax(0, 1fr) minmax(280px, 0.38fr); gap:36px; align-items:start; }
-          .bulletin-poster-grid { grid-template-columns:repeat(2, minmax(0, 1fr)) !important; }
         }
         @media (max-width:768px) {
           .home-feature-grid { grid-template-columns:1fr !important; }
+          .weekly-update-wrapper { margin-top:28px !important; }
         }
       `}</style>
 
@@ -528,35 +502,37 @@ export default function HomePage() {
 
         <section className="home-primary-content" style={{ background: C.white, padding: 0, width: '100%' }}>
           <div style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
-          <WeeklyUpdateCard className="mobile-weekly-update" />
           <div style={{ marginBottom: 30 }}>
             <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.9rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: 0 }}>
               What we offer
             </h2>
           </div>
-          <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 }}>
+          <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }}>
             {featuredPaths.map((item) => (
-              <article key={item.title} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 0, boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
+              <article key={item.title} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: radius.lg, padding: 0, boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
                 <div style={{ position: 'relative', height: 200 }}>
                   <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: item.focal, display: 'block' }} />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.55) 0%, rgba(26,19,15,0.08) 42%, transparent 75%)' }} />
-                  <span style={{ position: 'absolute', left: 20, bottom: 18, display: 'inline-block', width: 54, height: 6, borderRadius: 999, background: item.accent }} />
+                  <span style={{ position: 'absolute', left: 20, bottom: 18, display: 'inline-block', width: 54, height: 6, borderRadius: radius.pill, background: item.accent }} />
                 </div>
                 <div style={{ padding: '24px 24px 26px', display: 'grid', gap: 18 }}>
                 <div style={{ display: 'grid', gap: 10 }}>
                   <h3 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 28, lineHeight: 1.02, letterSpacing: '-0.02em', color: C.espresso, margin: 0 }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontFamily: fonts.body, fontSize: 16, lineHeight: 1.7, color: C.muted, margin: 0 }}>
+                  <p style={{ fontFamily: fonts.body, fontSize: 15, lineHeight: 1.65, color: C.muted, margin: 0 }}>
                     {item.body}
                   </p>
                 </div>
-                <a href={item.href} className="home-learn-more" style={{ display: 'inline-block', width: 'fit-content', fontFamily: fonts.body, fontSize: 13, fontWeight: 700, color: C.crimson, letterSpacing: '0.08em', textTransform: "none", textDecoration: 'none' }}>
+                <a href={item.href} className="home-learn-more" style={{ display: 'inline-block', width: 'fit-content', fontFamily: fonts.body, fontSize: 13, fontWeight: 700, color: C.teal, letterSpacing: '0.08em', textTransform: "none", textDecoration: 'none' }}>
                   Learn more
                 </a>
                 </div>
               </article>
             ))}
+          </div>
+          <div className="weekly-update-wrapper" style={{ maxWidth: 760, margin: '48px 0 0' }}>
+            <WeeklyUpdateCard />
           </div>
           </div>
         </section>
@@ -575,40 +551,8 @@ export default function HomePage() {
           />
         </section>
 
-        <section style={{ background: C.white, padding: '48px 20px 92px', width: '100%' }}>
-          <div style={{ maxWidth: 1120, margin: '0 auto' }}>
-            <div className="home-bulletin-board bulletin-layout" style={{ maxWidth: 1120, margin: '0 auto' }}>
-              <div>
-                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.55rem,3vw,2.2rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 8px' }}>
-                  Bulletin Board
-                </h2>
-                <p style={{ fontFamily: fonts.body, fontSize: 15, lineHeight: 1.6, color: C.muted, margin: '0 0 22px', maxWidth: 600 }}>
-                  Keep an eye here for the next showcase, event date, and what is happening around Headliner.
-                </p>
-                <div className="bulletin-poster-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
-                  {upcomingPosters.map((poster) => (
-                    <div key={poster.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 0, overflow: 'hidden', boxShadow: `0 1px 3px ${C.black20}`, display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ position: 'relative', aspectRatio: '2 / 3' }}>
-                        <img src={poster.src} alt={poster.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
-                        {poster.hasEnded && (
-                          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(26,19,15,0.58)' }}>
-                            <span style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white, padding: '10px 14px', border: `1px solid ${C.white50}`, borderRadius: 999 }}>
-                              Event has ended
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <WeeklyUpdateCard className="desktop-weekly-update" />
-            </div>
-          </div>
-        </section>
-
         <section style={{ padding: '0 20px 88px', maxWidth: 900, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
-          <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'block', background: C.white, borderRadius: 20, padding: '48px 56px', border: `1px solid ${C.border}`, textDecoration: 'none', textAlign: 'center', boxShadow: `0 4px 24px ${C.espresso06}` }}>
+          <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'block', background: C.white, borderRadius: radius.lg, padding: '48px 56px', border: `1px solid ${C.border}`, textDecoration: 'none', textAlign: 'center', boxShadow: `0 4px 24px ${C.espresso06}` }}>
               <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.4rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 24px' }}>
               What families say
             </h2>
@@ -643,14 +587,14 @@ export default function HomePage() {
 
             <div className="community-logo-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
               {communityLogos.map((logo) => (
-                <div className="community-logo-card" key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
+                <div className="community-logo-card" key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: radius.md, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
                   <img src={logo.src} alt={logo.alt} style={{ maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
                 </div>
               ))}
             </div>
 
             <div style={{ textAlign: 'center', marginTop: 26 }}>
-              <button type="button" onClick={() => navigate('/about/funding-support')} style={{ background: 'none', border: 'none', color: C.crimson, cursor: 'pointer', fontFamily: fonts.body, fontSize: 14, fontWeight: 700, padding: 0, textDecoration: 'underline', textUnderlineOffset: 3 }}>
+              <button type="button" onClick={() => navigate('/about/funding-support')} style={{ background: 'none', border: 'none', color: C.teal, cursor: 'pointer', fontFamily: fonts.body, fontSize: 14, fontWeight: 700, padding: 0, textDecoration: 'none' }}>
                 Need help with charter or SDP/FMS funding?
               </button>
             </div>
@@ -668,10 +612,10 @@ export default function HomePage() {
               A place to learn, play, perform, and grow.
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12 }}>
-              <button type="button" onClick={() => setBookingFor('')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
+              <button type="button" onClick={() => setBookingFor('')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: radius.pill, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
                 Request Lessons
               </button>
-              <button type="button" onClick={() => navigate('/programs/private-lessons')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.crimson }}>
+              <button type="button" onClick={() => navigate('/programs/private-lessons')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: radius.pill, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.crimson }}>
                 View Programs
               </button>
             </div>

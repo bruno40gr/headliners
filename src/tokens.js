@@ -86,6 +86,13 @@ export const fonts = {
   body:    "'DM Sans', sans-serif",
 };
 
+export const radius = {
+  sm: 8,
+  md: 12,
+  lg: 16,
+  pill: 999,
+};
+
 // Page archetypes define the visual mode for different content types.
 // Use these rules to keep typography, hero treatment, and decoration consistent.
 export const pageArchetypes = {

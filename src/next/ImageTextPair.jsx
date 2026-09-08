@@ -1,11 +1,11 @@
-import { C, fonts } from '../tokens';
+import { C, fonts, radius } from '../tokens';
 
 export default function ImageTextPair({
   imageSrc,
   imageAlt,
   imageHeight = 460,
   imageFocal = 'center center',
-  imageRadius = 16,
+  imageRadius = radius.lg,
   imageOnLeft = true,
   heading,
   body,
@@ -53,14 +53,13 @@ export default function ImageTextPair({
             style={{
               background: 'none',
               border: 'none',
-              color: C.crimson,
+              color: C.teal,
               cursor: 'pointer',
               fontFamily: fonts.body,
               fontSize: 14,
               fontWeight: 700,
               padding: 0,
-              textDecoration: 'underline',
-              textUnderlineOffset: 3,
+              textDecoration: 'none',
             }}
           >
             {linkLabel}
