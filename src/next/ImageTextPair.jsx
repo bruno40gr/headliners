@@ -13,6 +13,7 @@ export default function ImageTextPair({
   linkHref,
   onNavigate,
   gap = 36,
+  headingSize = 'clamp(2.1rem,4.4vw,3.4rem)',
 }) {
   const imageCol = (
     <div style={{ borderRadius: imageRadius, overflow: 'hidden', minHeight: imageHeight, boxShadow: `0 18px 40px ${C.espresso10}` }}>
@@ -30,7 +31,7 @@ export default function ImageTextPair({
         <h2 style={{
           fontFamily: fonts.display,
           fontWeight: 800,
-          fontSize: 'clamp(2.1rem,4.4vw,3.4rem)',
+          fontSize: headingSize,
           letterSpacing: '-0.02em',
           color: C.espresso,
           lineHeight: 0.98,

@@ -52,10 +52,15 @@ const announcements = [
   },
   {
     date: 'Sep 1',
-    title: 'This week at Headliner',
+    title: 'Some announcements',
     body: 'Ask the front desk about performance sign-ups, lesson availability, and upcoming event details.',
   },
 ];
+
+const weeklyUpdate = {
+  range: 'September 6–12, 2026',
+  items: announcements,
+};
 
 const upcomingPosters = [
   {
@@ -65,10 +70,7 @@ const upcomingPosters = [
   {
     src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1788369316/d7f34685-3cf5-4d54-baf7-67788eb89cfb.png',
     alt: 'Upcoming promotional poster',
-  },
-  {
-    src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787862861/9198476e-d047-4ef5-9584-51ec4ff1b010.png',
-    alt: 'Band program poster',
+    hasEnded: true,
   },
 ];
 
@@ -109,16 +111,45 @@ const GOOGLE_MAPS_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&desti
 
 function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
   const [loaded, setLoaded] = useState(false);
+  const [mobileFadeProgress, setMobileFadeProgress] = useState(0);
+  const [mobileMediaOffset, setMobileMediaOffset] = useState(0);
 
   useEffect(() => {
     const id = window.requestAnimationFrame(() => setLoaded(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
 
+  useEffect(() => {
+    const updateMobileFade = () => {
+      if (window.innerWidth > 860 || !heroRef.current) {
+        setMobileFadeProgress(0);
+        setMobileMediaOffset(0);
+        return;
+      }
+
+      const heroTop = heroRef.current.getBoundingClientRect().top + window.scrollY;
+      const heroScroll = Math.max(0, window.scrollY - heroTop);
+      const progress = Math.min(1, heroScroll / 260);
+      setMobileFadeProgress(progress);
+      setMobileMediaOffset(Math.min(heroScroll, 260));
+    };
+
+    updateMobileFade();
+    window.addEventListener('scroll', updateMobileFade, { passive: true });
+    window.addEventListener('resize', updateMobileFade);
+    return () => {
+      window.removeEventListener('scroll', updateMobileFade);
+      window.removeEventListener('resize', updateMobileFade);
+    };
+  }, [heroRef]);
+
+  const mobileHeroOpacity = 1 - mobileFadeProgress;
+
   return (
     <section ref={heroRef} className="home-hero" style={{ position: 'relative', paddingTop: 68, width: '100%', boxSizing: 'border-box', background: C.espresso, overflow: 'hidden' }}>
       <div className="hero-split" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1.2fr 1fr', minHeight: 'calc(100vh - 68px)', width: '100%' }}>
-        <div className="hero-copy" style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2 }}>
+        <div className="hero-copy" style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px clamp(28px, 6vw, 80px)', zIndex: 2, opacity: mobileHeroOpacity, pointerEvents: mobileFadeProgress === 1 ? 'none' : undefined }}>
+          <div className="hero-copy-mobile-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${C.white} 1px, transparent 1px)`, backgroundSize: '26px 26px', opacity: 0.025, pointerEvents: 'none' }} />
 
           <div className={loaded ? 'fade-up delay-2' : ''} style={{ position: 'relative', zIndex: 1, margin: '0 0 26px' }}>
@@ -145,7 +176,7 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
           </div>
         </div>
 
-        <div className="hero-media" style={{ position: 'relative', minHeight: 360, background: C.espresso, overflow: 'hidden' }}>
+        <div className="hero-media" style={{ position: 'relative', minHeight: 360, background: C.espresso, overflow: 'hidden', transform: `translateY(${mobileMediaOffset}px)` }}>
           <div className="hero-video-poster" style={{ position: 'absolute', inset: 0, backgroundImage: `url(${HERO_VIDEO_POSTER})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0 }} />
           <video
             className="hero-video"
@@ -160,13 +191,41 @@ function HomeHero({ onPrimaryClick, onTourClick, heroRef }) {
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
           </video>
-          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, ${C.espresso} 0%, rgba(26,19,15,0.84) 10%, rgba(26,19,15,0.28) 30%, transparent 55%)`, pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.48) 0%, transparent 38%)', pointerEvents: 'none' }} />
-          <div className="hero-mobile-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
+          <div className="hero-desktop-overlay" style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, ${C.espresso} 0%, rgba(26,19,15,0.84) 10%, rgba(26,19,15,0.28) 30%, transparent 55%)`, pointerEvents: 'none' }} />
+          <div className="hero-bottom-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,19,15,0.48) 0%, transparent 38%)', pointerEvents: 'none' }} />
+          <div className="hero-mobile-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: mobileHeroOpacity }} />
         </div>
       </div>
 
-      <div className="stage-line" style={{ zIndex: 30 }} />
+      <div className="stage-line" style={{ zIndex: 30, opacity: 0.85 * mobileHeroOpacity }} />
+    </section>
+  );
+}
+
+function WeeklyUpdateCard({ className }) {
+  return (
+    <section className={className} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 'clamp(24px, 4vw, 32px)', boxShadow: `0 8px 28px ${C.espresso06}` }}>
+      <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.35rem,2.4vw,1.75rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1.05, margin: 0 }}>
+        This week at Headliner
+      </h2>
+      <p style={{ fontFamily: fonts.body, fontSize: 14, fontWeight: 700, color: C.espresso, margin: '12px 0 0' }}>
+        {weeklyUpdate.range}
+      </p>
+      <div style={{ display: 'grid', gap: 12, marginTop: 16 }}>
+        {weeklyUpdate.items.map((item, i) => (
+          <div key={item.title} style={{ paddingTop: i ? 12 : 0, borderTop: i ? `1px solid ${C.border}` : 'none' }}>
+            <span style={{ fontFamily: fonts.body, fontSize: 11, fontWeight: 700, color: C.muted, letterSpacing: '0.05em', display: 'block', marginBottom: 5 }}>
+              {item.date}
+            </span>
+            <strong style={{ fontFamily: fonts.body, fontSize: 15, color: C.espresso, display: 'block', marginBottom: 3 }}>
+              {item.title}
+            </strong>
+            <span style={{ fontFamily: fonts.body, fontSize: 13, lineHeight: 1.55, color: C.muted }}>
+              {item.body}
+            </span>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -188,28 +247,25 @@ function SiteFooter({ onPrimaryClick }) {
   ];
 
   return (
-    <footer style={{ background: C.espresso, color: C.white, padding: '64px 40px 40px' }}>
+    <footer className="site-footer" style={{ background: C.espresso, color: C.white, padding: '64px 40px 40px' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, paddingBottom: 48, borderBottom: `1px solid ${C.white08}`, marginBottom: 28 }}>
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, paddingBottom: 48, borderBottom: `1px solid ${C.white08}`, marginBottom: 28 }}>
           <div>
             <a href="/" style={{ display: 'block', marginBottom: 20, lineHeight: 0 }}>
               <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" style={{ display: 'block', height: 'auto', maxHeight: 44, width: 'auto', maxWidth: 220, objectFit: 'contain' }} />
             </a>
-            <p style={{ fontFamily: fonts.body, fontSize: 16, color: C.white70, lineHeight: 1.75, maxWidth: 480, marginBottom: 24 }}>
-              Inspiring the next generation of musicians through premium, personalized education.
-            </p>
             <button type="button" onClick={onPrimaryClick} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '13px 32px', borderRadius: 999, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', background: 'transparent', color: C.crimson }}>
               Request Lessons
             </button>
           </div>
           <div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <a href="tel:916-435-1300" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: C.white }}>
-                <Phone size={16} color={C.crimson} />
-                <span style={{ fontFamily: fonts.body, fontSize: 20, fontWeight: 600, letterSpacing: -0.5 }}>(916) 435-1300</span>
+              <a href="tel:916-435-1300" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: C.white, whiteSpace: 'nowrap' }}>
+                <Phone size={16} color={C.crimson} style={{ flexShrink: 0 }} />
+                <span style={{ fontFamily: fonts.body, fontSize: 20, fontWeight: 600, letterSpacing: -0.5, whiteSpace: 'nowrap' }}>(916) 435-1300</span>
               </a>
-              <a href="mailto:admin@headlinermusicacademy.com" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: C.white70, fontFamily: fonts.body, fontSize: 14, wordBreak: 'break-all', overflowWrap: 'break-word', minWidth: 0 }}>
-                <Mail size={15} color={C.crimson} />
+              <a href="mailto:admin@headlinermusicacademy.com" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: C.white70, fontFamily: fonts.body, fontSize: 14, whiteSpace: 'nowrap' }}>
+                <Mail size={15} color={C.crimson} style={{ flexShrink: 0 }} />
                 admin@headlinermusicacademy.com
               </a>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: C.white70, fontFamily: fonts.body, fontSize: 14, lineHeight: 1.6 }}>
@@ -309,22 +365,31 @@ export default function HomePage() {
   const [showNavLogo, setShowNavLogo] = useState(false);
 
   useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return undefined;
+    const updateNavLogo = () => {
+      const hero = heroRef.current;
+      if (!hero) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowNavLogo(!entry.isIntersecting);
-      },
-      { threshold: 0.04 }
-    );
+      const heroTop = hero.getBoundingClientRect().top + window.scrollY;
 
-    observer.observe(hero);
-    return () => observer.disconnect();
+      if (window.innerWidth <= 860) {
+        setShowNavLogo(window.scrollY - heroTop >= 260);
+        return;
+      }
+
+      setShowNavLogo(hero.getBoundingClientRect().bottom <= 0);
+    };
+
+    updateNavLogo();
+    window.addEventListener('scroll', updateNavLogo, { passive: true });
+    window.addEventListener('resize', updateNavLogo);
+    return () => {
+      window.removeEventListener('scroll', updateNavLogo);
+      window.removeEventListener('resize', updateNavLogo);
+    };
   }, []);
 
   return (
-    <div style={{ fontFamily: fonts.body, minHeight: '100vh', background: C.white, color: C.espresso, overflowX: 'hidden', maxWidth: '100vw' }}>
+    <div style={{ fontFamily: fonts.body, minHeight: '100vh', background: C.white, color: C.espresso, overflowX: 'clip', maxWidth: '100vw' }}>
       {bookingFor !== null && <BookingModal instrument={bookingFor} onClose={() => setBookingFor(null)} />}
       {tourOpen && (
         <BookingInterstitial
@@ -386,23 +451,70 @@ export default function HomePage() {
           .hero-video-poster { opacity: 1 !important; }
         }
         @media (max-width:860px) {
-          .hero-split { display:block !important; min-height:calc(100vh - 68px) !important; }
-          .hero-copy { min-height:calc(100vh - 68px) !important; z-index:2 !important; }
-          .hero-media { position:absolute !important; inset:0 !important; min-height:0 !important; z-index:0 !important; }
+          .home-hero {
+            position:relative !important;
+            left:50% !important;
+            width:100vw !important;
+            max-width:none !important;
+            margin-left:-50vw !important;
+            margin-right:0 !important;
+            padding:68px 0 0 !important;
+            background:${C.espresso} !important;
+            overflow:visible !important;
+          }
+          .hero-split {
+            display:block !important;
+            width:100vw !important;
+            min-height:0 !important;
+            padding-bottom:260px !important;
+          }
+          .hero-media {
+            position:relative !important;
+            width:100% !important;
+            min-height:calc(100svh - 68px) !important;
+            height:calc(100svh - 68px) !important;
+            height:calc(100dvh - 68px) !important;
+            aspect-ratio:auto !important;
+            max-height:none !important;
+            z-index:0 !important;
+          }
+          .hero-copy {
+            position:absolute !important;
+            inset:0 0 260px !important;
+            min-height:0 !important;
+            padding:clamp(36px, 10vw, 64px) 28px !important;
+            z-index:2 !important;
+            transition:opacity 0.05s linear !important;
+          }
           .hero-video { opacity:0.72 !important; }
+          .hero-desktop-overlay,
+          .hero-bottom-overlay { display:none !important; }
           .hero-mobile-overlay {
             background:linear-gradient(90deg, rgba(26,19,15,0.92) 0%, rgba(26,19,15,0.78) 54%, rgba(26,19,15,0.5) 100%), linear-gradient(to top, rgba(26,19,15,0.65) 0%, transparent 48%);
           }
+          .hero-copy-mobile-overlay {
+            background:linear-gradient(90deg, rgba(26,19,15,0.72) 0%, rgba(26,19,15,0.56) 62%, rgba(26,19,15,0.38) 100%);
+          }
+          .home-bulletin-board { display:none !important; }
+          .desktop-weekly-update { display:none !important; }
+          .community-logo-grid { grid-template-columns:repeat(4, minmax(0, 1fr)) !important; gap:8px !important; }
+          .community-logo-card { min-height:74px !important; padding:10px !important; }
+          .community-logo-card img { max-height:42px !important; }
+          .site-footer { padding:48px 20px 32px !important; }
+          .site-footer .footer-grid { gap:32px !important; }
           .home-feature-grid,
           .home-stage-grid,
           .home-about-grid,
           .home-visit-grid,
           .footer-grid { grid-template-columns: 1fr !important; }
+          .mobile-weekly-update { display:block !important; }
+        }
+        @media (min-width:861px) {
+          .mobile-weekly-update { display:none; }
+          .bulletin-layout { display:grid; grid-template-columns:minmax(0, 1fr) minmax(280px, 0.38fr); gap:36px; align-items:start; }
+          .bulletin-poster-grid { grid-template-columns:repeat(2, minmax(0, 1fr)) !important; }
         }
         @media (max-width:768px) {
-          section { padding-left:20px !important; padding-right:20px !important; }
-          .home-hero { padding-left:0 !important; padding-right:0 !important; }
-          header  { padding-left:20px !important; padding-right:20px !important; }
           .home-feature-grid { grid-template-columns:1fr !important; }
         }
       `}</style>
@@ -414,7 +526,14 @@ export default function HomePage() {
       <main>
         <HomeHero onPrimaryClick={() => setBookingFor('')} onTourClick={() => setTourOpen(true)} heroRef={heroRef} />
 
-        <section style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
+        <section className="home-primary-content" style={{ background: C.white, padding: 0, width: '100%' }}>
+          <div style={{ padding: '84px 20px 20px', maxWidth: 1200, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
+          <WeeklyUpdateCard className="mobile-weekly-update" />
+          <div style={{ marginBottom: 30 }}>
+            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.9rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: 0 }}>
+              What we offer
+            </h2>
+          </div>
           <div className="home-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 }}>
             {featuredPaths.map((item) => (
               <article key={item.title} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 16, padding: 0, boxShadow: `0 8px 28px ${C.espresso06}`, display: 'grid', gap: 0, overflow: 'hidden' }}>
@@ -439,6 +558,7 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          </div>
         </section>
 
         <section style={{ background: C.offwhite, padding: '48px 20px 92px', width: '100%' }}>
@@ -451,52 +571,38 @@ export default function HomePage() {
             linkLabel="Learn more about the Band Program"
             linkHref="/programs/band"
             onNavigate={navigate}
+            headingSize="clamp(1.55rem,3vw,2.2rem)"
           />
         </section>
 
         <section style={{ background: C.white, padding: '48px 20px 92px', width: '100%' }}>
           <div style={{ maxWidth: 1120, margin: '0 auto' }}>
-            <div className="home-stage-grid" style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gridTemplateColumns: '1.48fr 0.52fr', gap: 80, alignItems: 'start' }}>
+            <div className="home-bulletin-board bulletin-layout" style={{ maxWidth: 1120, margin: '0 auto' }}>
               <div>
-                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3.1rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 8px' }}>
+                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.55rem,3vw,2.2rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 8px' }}>
                   Bulletin Board
                 </h2>
                 <p style={{ fontFamily: fonts.body, fontSize: 15, lineHeight: 1.6, color: C.muted, margin: '0 0 22px', maxWidth: 600 }}>
                   Keep an eye here for the next showcase, event date, and what is happening around Headliner.
                 </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
+                <div className="bulletin-poster-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
                   {upcomingPosters.map((poster) => (
                     <div key={poster.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 0, overflow: 'hidden', boxShadow: `0 1px 3px ${C.black20}`, display: 'flex', flexDirection: 'column' }}>
-                      <img src={poster.src} alt={poster.alt} style={{ width: '100%', height: 340, objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
-                      <div style={{ padding: '10px 12px' }}>
-                        <span style={{ fontFamily: fonts.body, fontSize: 11, color: C.muted, letterSpacing: '0.05em' }}>Pin to board</span>
+                      <div style={{ position: 'relative', aspectRatio: '2 / 3' }}>
+                        <img src={poster.src} alt={poster.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
+                        {poster.hasEnded && (
+                          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(26,19,15,0.58)' }}>
+                            <span style={{ fontFamily: fonts.body, fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.white, padding: '10px 14px', border: `1px solid ${C.white50}`, borderRadius: 999 }}>
+                              Event has ended
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <aside>
-                <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 18px' }}>
-                  Front Desk
-                </h2>
-                <div style={{ display: 'grid', gap: 0 }}>
-                  {announcements.map((item, i) => (
-                    <div key={item.title}>
-                      {i > 0 && <div style={{ height: 1, background: C.border, margin: '12px 0' }} />}
-                      <span style={{ fontFamily: fonts.body, fontSize: 11, lineHeight: 1, fontWeight: 600, color: C.muted, letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
-                        {item.date}
-                      </span>
-                      <h3 style={{ fontFamily: fonts.body, fontWeight: 600, fontSize: 15, lineHeight: 1.4, color: C.espresso, margin: '0 0 4px' }}>
-                        {item.title}
-                      </h3>
-                      <p style={{ fontFamily: fonts.body, fontSize: 13, lineHeight: 1.55, color: C.muted, margin: 0 }}>
-                        {item.body}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </aside>
-              
+              <WeeklyUpdateCard className="desktop-weekly-update" />
             </div>
           </div>
         </section>
@@ -535,9 +641,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16 }}>
+            <div className="community-logo-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
               {communityLogos.map((logo) => (
-                <div key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
+                <div className="community-logo-card" key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
                   <img src={logo.src} alt={logo.alt} style={{ maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
                 </div>
               ))}

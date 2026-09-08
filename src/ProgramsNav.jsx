@@ -452,7 +452,7 @@ export default function ProgramsNav({
   return (
     <>
       {/* ── DESKTOP NAV BAR (V3 style) ── */}
-      <nav style={{
+      <nav className="programs-nav" style={{
         position: "fixed",
         top: 0,
         width: "100%",
@@ -462,7 +462,7 @@ export default function ProgramsNav({
         height: 72,
         display: "flex",
         alignItems: "center",
-        padding: "0 40px",
+        padding: "0 var(--programs-nav-padding, 40px)",
         justifyContent: "space-between",
         boxSizing: "border-box",
       }}>
@@ -513,6 +513,7 @@ export default function ProgramsNav({
 
         <style>{`
           @media (max-width: 950px) {
+            .programs-nav { --programs-nav-padding: 20px; }
             .pn-desktop    { display: none !important; }
             .pn-mobile-btn { display: flex !important; }
           }
