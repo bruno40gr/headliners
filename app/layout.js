@@ -1,4 +1,5 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const siteUrl = 'https://www.headlinermusicacademy.com';
 
@@ -104,6 +105,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <Analytics />
       </body>
     </html>
   );
