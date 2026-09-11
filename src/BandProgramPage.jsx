@@ -187,14 +187,14 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
       />
 
       {/* HERO */}
-      <header style={{ background: C.espresso, paddingTop: 68, position: "relative", overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center" }}>
+      <header style={{ background: C.espresso, paddingTop: 68, position: "relative", overflow: "hidden", minHeight: "92vh", display: "flex", alignItems: "center" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
-            src="https://res.cloudinary.com/diy08lj9x/image/upload/v1781500022/Gemini_Generated_Image_i895u1i895u1i895_elyhqa.png"
+            src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789150969/ec4d0779-3583-4781-9112-daa386493e4e.png"
             alt="Empty stage ready to perform"
-            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6 }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.96 }}
           />
-          <div style={{ position: "absolute", inset: 0, background: `rgba(26,19,15,0.55)` }} />
+          <div style={{ position: "absolute", inset: 0, background: "rgba(26,19,15,0.12)" }} />
         </div>
 
         <div style={{ maxWidth: 1160, margin: "0 auto", padding: "80px 40px", position: "relative", zIndex: 1, width: "100%" }}>
@@ -220,7 +220,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
             fontSize: 17, color: "rgba(255,255,255,0.45)", lineHeight: 1.85,
             maxWidth: 500, marginBottom: 44, fontWeight: 300,
           }}>
-            Headliner works with you at every point, whether you're just forming, already rehearsing, or ready to perform. Weekly sessions, a dedicated director, and real gigs.
+            Join a band, work with an experienced coach, rehearse, record, and take the stage at monthly performances.
           </p>
 
           <div className="fu d4" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
@@ -248,7 +248,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           </div>
           <div style={{ position: "relative" }}>
             <div className="bp-img-wrap" style={{ borderRadius: 16, height: 440 }}>
-              <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1787862861/9198476e-d047-4ef5-9584-51ec4ff1b010.png" alt="Band in rehearsal" />
+              <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789151064/33ce37c2-2012-412e-9854-6a0fbe96e4e3.png" alt="Band in rehearsal" />
             </div>
             <div
               onClick={() => {
