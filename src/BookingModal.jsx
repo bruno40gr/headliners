@@ -118,6 +118,9 @@ export default function BookingModal({ instrument, onClose }) {
           publicKey: EMAILJS_PUBLIC_KEY,
         },
       });
+      if (typeof window.gtag_report_conversion === "function") {
+        window.gtag_report_conversion();
+      }
       setStatus("success");
     } catch (error) {
       console.error("Lead submit failed:", error);
@@ -245,7 +248,7 @@ export default function BookingModal({ instrument, onClose }) {
 
           <div style={{ marginTop: 30, display: "flex", flexDirection: "column", gap: 12 }}>
             <Button onClick={handleSubmit} disabled={!valid} style={{ width: "100%", fontSize: 16, padding: "16px 32px" }}>
-              {status === "sending" ? "Sending…" : "Let's make music"}
+              {status === "sending" ? "Sending…" : "Submit"}
             </Button>
             <p style={{ textAlign: "center", fontFamily: fonts.body, fontSize: 12, color: C.muted, margin: 0 }}>
               Or call us at{" "}
