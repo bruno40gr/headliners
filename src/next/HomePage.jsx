@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Mail, MapPin, Phone } from 'lucide-react';
 import BookingModal from '../BookingModal';
 import BookingInterstitial from '../BookingInterstitial';
 import ProgramsNav from '../ProgramsNav';
@@ -38,19 +38,19 @@ const featuredPaths = [
 
 const announcements = [
   {
-    date: 'Sep 2',
-    title: 'Closed for Labor Day',
-    body: 'Closed on Labor Day. Lessons and front desk support resume the following day.',
+    date: 'Sep 18–19',
+    title: 'Hot Chili & Cool Cars at Quarry Park',
+    body: 'Find us at Hot Chili & Cool Cars in Rocklin. Stop by, say hello, and ask about our special event offers.',
   },
   {
-    date: 'Sep 1',
-    title: 'Some announcements',
-    body: 'Ask the front desk about performance sign-ups, lesson availability, and upcoming event details.',
+    date: 'Oct 3',
+    title: 'Calling performers for Maker Faire Rocklin',
+    body: 'We’re looking for performers for Maker Faire Rocklin at Sierra College. Reach out to the front desk if you or your student would like to be considered.',
   },
 ];
 
 const weeklyUpdate = {
-  range: 'September 6–12, 2026',
+  range: 'September 14–21, 2026',
   items: announcements,
 };
 
@@ -75,8 +75,36 @@ const communityLogos = [
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787856767/62f9c4d9-f1d9-45d6-9184-8272ac7c509b.png', alt: 'Placer SPCA' },
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787856320/34ae2934-47cf-49f4-8feb-5c0fa24d5634.png', alt: 'Railroad Museum' },
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787856614/9c93611d-37b8-40c0-85ee-c9ff9b7086d9.png', alt: 'Placer County Fair' },
-  // { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787857019/cbc0a656-bb2a-4244-bae6-04a2d6abec11.png', alt: 'Hot Chili Cool Cars' },
+  { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787857019/cbc0a656-bb2a-4244-bae6-04a2d6abec11.png', alt: 'Hot Chili Cool Cars' },
   { src: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787857303/2e7dd706-0ab8-4c3d-b661-36a9658321f3.png', alt: 'Maker Faire Rocklin' },
+];
+
+const testimonials = [
+  {
+    name: 'Gav 04',
+    source: 'Google',
+    quote: 'Incredible place, great teachers, awesome owners. If you or anyone you know wants to learn anything musical, definitely give them a call.',
+  },
+  {
+    name: 'Brenda Velasquez',
+    source: 'Google',
+    quote: 'My 11-year-old daughter attended their summer camp and had an unforgettable experience. She sharpened her singing skills, learned piano and drums, and loved performing several songs as the lead singer of a band. The instructors are incredibly supportive and create such an inspiring environment for young musicians.',
+  },
+  {
+    name: 'Alberto Cantor',
+    source: 'Google',
+    quote: 'This is an exceptionally great music school. I wanted to become a better guitar player and came to Headliner; the instructors are very talented, patient, and excellent at teaching.',
+  },
+  {
+    name: 'Robert Aguilar',
+    source: 'Yelp',
+    quote: 'The best music teaching studios around. Great teachers, nice facility, awesome staff, and incredible new owners. If you want to learn an instrument, vocals, or anything to do with music, make sure you check them out. They are top-notch.',
+  },
+  {
+    name: 'Socorro Baez G.',
+    source: 'Yelp',
+    quote: 'Love this place! It’s unique, amicable, and well organized. Amazing, diverse, and inclusive for kids, young people, and adults.',
+  },
 ];
 
 const HERO_LOGO = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png';
@@ -205,6 +233,44 @@ function WeeklyUpdateCard({ className }) {
             </span>
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function TestimonialCarousel() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const testimonial = testimonials[activeIndex];
+
+  const showPrevious = () => setActiveIndex((current) => (current - 1 + testimonials.length) % testimonials.length);
+  const showNext = () => setActiveIndex((current) => (current + 1) % testimonials.length);
+
+  return (
+    <section aria-label="Reviews from Headliner families and students" style={{ margin: '0 auto', maxWidth: 984, padding: '72px 20px 88px', textAlign: 'center', width: '100%' }}>
+      <h2 style={{ color: C.espresso, fontFamily: fonts.display, fontSize: 'clamp(1.9rem, 3vw, 2.4rem)', fontWeight: 800, letterSpacing: '-.02em', lineHeight: 1, margin: '0 0 20px' }}>What families say</h2>
+      <div aria-label="Five out of five stars" style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24 }}>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <svg key={star} width={18} height={18} viewBox="0 0 24 24" fill={C.yellow} aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+        ))}
+      </div>
+      <div style={{ alignItems: 'center', display: 'grid', gap: 16, gridTemplateColumns: '38px minmax(0, 1fr) 38px' }}>
+        <button aria-label="Show previous review" onClick={showPrevious} style={{ alignItems: 'center', background: 'transparent', border: `1px solid ${C.border}`, borderRadius: '50%', color: C.espresso, cursor: 'pointer', display: 'inline-flex', height: 38, justifyContent: 'center', padding: 0, width: 38 }}><ChevronLeft size={20} aria-hidden="true" /></button>
+        <div style={{ minHeight: 264 }}>
+          <p style={{ color: C.espresso, fontFamily: fonts.body, fontSize: 'clamp(1.15rem, 2.4vw, 1.45rem)', fontStyle: 'italic', fontWeight: 400, lineHeight: 1.65, margin: '0 auto 22px', maxWidth: 864 }}>
+            “{testimonial.quote}”
+          </p>
+          <p style={{ color: C.muted, fontFamily: fonts.body, fontSize: 14, margin: 0 }}>
+            <strong style={{ color: C.espresso, fontWeight: 700 }}>{testimonial.name}</strong>
+            <span aria-hidden="true" style={{ color: C.border, margin: '0 9px' }}>•</span>
+            <span style={{ color: testimonial.source === 'Yelp' ? C.crimson : C.tealDark, fontWeight: 700 }}>{testimonial.source}</span>
+          </p>
+        </div>
+        <button aria-label="Show next review" onClick={showNext} style={{ alignItems: 'center', background: 'transparent', border: `1px solid ${C.border}`, borderRadius: '50%', color: C.espresso, cursor: 'pointer', display: 'inline-flex', height: 38, justifyContent: 'center', padding: 0, width: 38 }}><ChevronRight size={20} aria-hidden="true" /></button>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28 }}>
+        <div aria-label={`Review ${activeIndex + 1} of ${testimonials.length}`} style={{ display: 'flex', gap: 7 }}>
+          {testimonials.map((item, index) => <button key={item.name} aria-label={`Show review from ${item.name}`} aria-pressed={index === activeIndex} onClick={() => setActiveIndex(index)} style={{ background: index === activeIndex ? C.crimson : C.border, border: 'none', borderRadius: 999, cursor: 'pointer', height: 7, padding: 0, transition: 'all .2s ease', width: index === activeIndex ? 24 : 7 }} />)}
+        </div>
       </div>
     </section>
   );
@@ -476,7 +542,7 @@ export default function HomePage() {
           .hero-copy-mobile-overlay {
             background:linear-gradient(90deg, rgba(26,19,15,0.72) 0%, rgba(26,19,15,0.56) 62%, rgba(26,19,15,0.38) 100%);
           }
-          .community-logo-grid { grid-template-columns:repeat(4, minmax(0, 1fr)) !important; gap:8px !important; }
+          .community-logo-grid { grid-template-columns:repeat(5, minmax(0, 1fr)) !important; gap:8px !important; }
           .community-logo-card { min-height:74px !important; padding:10px !important; }
           .community-logo-card img { max-height:42px !important; }
           .site-footer { padding:48px 20px 32px !important; }
@@ -485,6 +551,7 @@ export default function HomePage() {
           .home-stage-grid,
           .home-about-grid,
           .home-visit-grid,
+          .home-final-cta-grid,
           .footer-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width:768px) {
@@ -531,9 +598,6 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <div className="weekly-update-wrapper" style={{ maxWidth: 760, margin: '48px 0 0' }}>
-            <WeeklyUpdateCard />
-          </div>
           </div>
         </section>
 
@@ -551,30 +615,9 @@ export default function HomePage() {
           />
         </section>
 
-        <section style={{ padding: '0 20px 88px', maxWidth: 900, margin: '0 auto', boxSizing: 'border-box', width: '100%' }}>
-          <a href="https://m.yelp.com/biz/headliner-music-academy-rocklin" target="_blank" rel="noreferrer" style={{ display: 'block', background: C.white, borderRadius: radius.lg, padding: '48px 56px', border: `1px solid ${C.border}`, textDecoration: 'none', textAlign: 'center', boxShadow: `0 4px 24px ${C.espresso06}` }}>
-              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.4rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 24px' }}>
-              What families say
-            </h2>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24 }}>
-              {[1, 2, 3, 4, 5].map((star) => (
-                <svg key={star} width={18} height={18} viewBox="0 0 24 24" fill={C.yellow}>
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
-            </div>
-            <p style={{ fontFamily: fonts.display, fontWeight: 700, fontStyle: 'italic', fontSize: 'clamp(1.1rem,2.5vw,1.5rem)', color: C.espresso, lineHeight: 1.55, maxWidth: 640, margin: '0 auto 24px' }}>
-              "Love this place!! It's unique!!! Amicable and well organized. Amazing diverse and integrative for kids, young or adults."
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, fontFamily: fonts.body, fontSize: 16 }}>
-              <span style={{ fontWeight: 700, color: C.espresso }}>Socorro Baez G.</span>
-              <span style={{ color: C.border }}>|</span>
-              <span style={{ fontWeight: 700, color: C.crimson }}>Yelp</span>
-            </div>
-          </a>
-        </section>
+        <TestimonialCarousel />
 
-        <section style={{ background: C.white, padding: '0 20px 88px', width: '100%' }}>
+        <section style={{ background: C.cream, padding: '96px 20px 88px', width: '100%' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 28 }}>
               <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem, 4.5vw, 3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 12px' }}>
@@ -585,7 +628,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="community-logo-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
+            <div className="community-logo-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: 16 }}>
               {communityLogos.map((logo) => (
                 <div className="community-logo-card" key={logo.alt} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: radius.md, minHeight: 118, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
                   <img src={logo.src} alt={logo.alt} style={{ maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', display: 'block', objectFit: 'contain' }} />
@@ -604,21 +647,20 @@ export default function HomePage() {
         <VisitUsSection onTourClick={() => setTourOpen(true)} />
 
         <section style={{ background: C.offwhite, padding: '88px 20px 96px', width: '100%' }}>
-          <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-            <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 16px' }}>
-              Start your music journey with Headliner
-            </h2>
-            <p style={{ fontFamily: fonts.body, fontSize: 18, lineHeight: 1.8, color: C.text, margin: '0 auto 28px', maxWidth: 620 }}>
-              A place to learn, play, perform, and grow.
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <div className="home-final-cta-grid" style={{ alignItems: 'center', display: 'grid', gap: 56, gridTemplateColumns: 'minmax(0, 1fr) minmax(320px, .82fr)', margin: '0 auto', maxWidth: 1120 }}>
+            <div>
+              <p style={{ color: C.tealDark, fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '.08em', margin: '0 0 14px', textTransform: 'uppercase' }}>Funding support</p>
+              <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 16px' }}>
+                Music through approved funding
+              </h2>
+              <p style={{ fontFamily: fonts.body, fontSize: 18, lineHeight: 1.8, color: C.text, margin: '0 0 28px', maxWidth: 600 }}>
+                Music instruction and experiences built around each student’s interests, comfort, and goals. We work with charter school and self-determination funding programs.
+              </p>
               <button type="button" onClick={() => setBookingFor('')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: radius.pill, border: 'none', cursor: 'pointer', textDecoration: 'none', background: C.crimson, color: C.white, boxShadow: `0 4px 24px ${C.crimson30}` }}>
                 Request Lessons
               </button>
-              <button type="button" onClick={() => navigate('/programs/private-lessons')} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: fonts.body, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em', textTransform: "none", padding: '16px 38px', borderRadius: radius.pill, border: `1.5px solid ${C.crimson}`, cursor: 'pointer', textDecoration: 'none', background: 'transparent', color: C.crimson }}>
-                View Programs
-              </button>
             </div>
+            <WeeklyUpdateCard />
           </div>
         </section>
       </main>

@@ -12,6 +12,7 @@ const SPECIAL_EVENT = {
   source: 'hot_chili_cool_cars',
   offerCode: '40_percent_first_month',
   discount: '40% off',
+  logo: 'https://res.cloudinary.com/diy08lj9x/image/upload/v1787857019/cbc0a656-bb2a-4244-bae6-04a2d6abec11.png',
 };
 
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || '00000000-0000-0000-0000-000000000001';
@@ -175,9 +176,12 @@ export default function SpecialOfferPage({ navigate }) {
       <section style={{ background: C.espresso }}>
         <div className="special-offer-shell special-offer-hero">
           <div>
-            <p style={{ alignItems: 'center', color: C.yellow, display: 'flex', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, gap: 8, letterSpacing: '.08em', margin: '0 0 18px', textTransform: 'uppercase' }}>
-              <Sparkles size={17} /> {SPECIAL_EVENT.name} special offer
-            </p>
+            <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: 14, margin: '0 0 18px' }}>
+              <img src={SPECIAL_EVENT.logo} alt="Hot Chili Cool Cars" style={{ background: C.white, borderRadius: 8, display: 'block', height: 46, objectFit: 'contain', padding: 5, width: 'auto' }} />
+              <p style={{ alignItems: 'center', color: C.yellow, display: 'flex', fontFamily: fonts.body, fontSize: 13, fontWeight: 800, gap: 8, letterSpacing: '.08em', margin: 0, textTransform: 'uppercase' }}>
+                <Sparkles size={17} /> {SPECIAL_EVENT.name} special offer
+              </p>
+            </div>
             <h1 style={{ color: C.white, fontFamily: fonts.display, fontSize: 'clamp(46px, 7vw, 76px)', fontWeight: 800, letterSpacing: '-.045em', lineHeight: '.96', margin: '0 0 24px', maxWidth: 720 }}>
               Make music your next big thing.
             </h1>
