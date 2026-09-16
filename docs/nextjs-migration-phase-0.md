@@ -62,7 +62,7 @@ Examples:
 - `/careers`
 - `/about/funding-support`
 - `/tiny-keys`
-- `/wonder-notes`
+- `/little-rockers`
 - `/programs/private-lessons`
 - `/programs/band`
 - service pages
@@ -199,7 +199,7 @@ Known current route set from the prerender process:
 - `/careers`
 - `/about/funding-support`
 - `/tiny-keys`
-- `/wonder-notes`
+- `/little-rockers`
 - `/programs/private-lessons`
 - `/programs/band`
 - `/services/recording-music-production`

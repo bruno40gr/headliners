@@ -12,7 +12,7 @@ export default function sitemap() {
     '/about/our-story',
     '/about/funding-support',
     '/tiny-keys',
-    '/wonder-notes',
+    '/little-rockers',
     '/programs/private-lessons',
     '/programs/band',
     '/services/birthday-parties',

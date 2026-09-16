@@ -25,6 +25,11 @@ const nextConfig = {
         destination: '/programs/band',
         permanent: true,
       },
+      {
+        source: '/wonder-notes',
+        destination: '/little-rockers',
+        permanent: true,
+      },
     ];
   },
   images: {

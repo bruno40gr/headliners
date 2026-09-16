@@ -15,7 +15,7 @@ const routes = [
   '/careers',
   '/about/funding-support',
   '/tiny-keys',
-  '/wonder-notes',
+  '/little-rockers',
   '/programs/private-lessons',
   '/programs/band',
   '/services/recording-music-production',
@@ -57,8 +57,8 @@ const SEO_META = {
     title: 'Tiny Keys — Piano for Ages 5–7 | Headliner Music Academy',
     description: 'Group piano classes for kids ages 5 to 7 in Rocklin, CA. A structured, three-level curriculum that builds real skills through songs, games, and time at the keys.',
   },
-  '/wonder-notes': {
-    title: 'Wonder Notes — Music for Ages 3–5 | Headliner Music Academy',
+  '/little-rockers': {
+    title: 'Little Rockers — Music for Ages 3–5 | Headliner Music Academy',
     description: 'A joyful, play-based music class for preschoolers ages 3 to 5 in Rocklin, CA. Sing, move, explore, and grow through music together.',
   },
   '/programs/private-lessons': {

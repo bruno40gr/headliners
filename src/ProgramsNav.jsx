@@ -20,7 +20,7 @@ export const PROGRAMS = [
   { label: "Private and Semi-private Lessons", sub: "All ages · One-on-one or shared with a sibling or friend.", href: "/programs/private-lessons", active: true },
   { label: "Band Program", sub: "All ages · Join a band & perform live.", href: "/programs/band", active: true },
   { label: "Tiny Keys", sub: "Ages 5–7 · Early piano & fundamentals.", href: "/tiny-keys", active: true },
-  { label: "Wonder Notes", sub: "Ages 3–5 · Intro to instruments & rhythm.", href: "/wonder-notes", active: true },
+  { label: "Little Rockers", sub: "Ages 3–5 · Intro to instruments & rhythm.", href: "/little-rockers", active: true },
   { label: "Music & Me", sub: "Ages 0–4 · Mommy & Me musical bonding.", href: null, active: false },
   { label: "Mini Beats", sub: "Ages 3–5 · Foundation in rhythm & beats.", href: null, active: false },
 ];

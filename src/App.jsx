@@ -5,7 +5,7 @@ import BandProgramPage from "./BandProgramPage";
 import TeachersPage from "./TeachersPage";
 import CareersPage from "./CareersPage";  
 import TinyKeys from "./TinyKeys";
-import WonderNotes from "./WonderNotes";
+import LittleRockers from "./LittleRockers";
 import InternalBandProgram from "./InternalBandProgram";
 import ServicesRecordingProductionPage from "./ServicesRecordingProductionPage";
 import ServicesPaRentalPage from "./ServicesPaRentalPage";
@@ -776,7 +776,7 @@ export default function App() {
        path === "/careers"              ? <CareersPage setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/about/funding-support" ? <FundingSupportPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/tiny-keys"            ? <TinyKeys navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
-       path === "/wonder-notes"         ? <WonderNotes navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
+       path === "/little-rockers"       ? <LittleRockers navigate={navigate} setPath={setPath} onRequestLessons={setBookingFor} /> :
        path === "/programs/private-lessons" ? <PrivateLessonsPage navigate={navigate} onRequestLessons={setBookingFor} /> :
        path === "/services/recording-music-production" ? <ServicesRecordingProductionPage navigate={navigate} onRequestLessons={setBookingFor} /> :
         path === "/services/pa-system-rental" ? <ServicesPaRentalPage navigate={navigate} onRequestLessons={setBookingFor} /> :

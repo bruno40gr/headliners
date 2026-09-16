@@ -32,7 +32,7 @@ const programs = [
   {
     name: 'Early Childhood Music',
     ages: 'Ages 3–7',
-    description: 'Wonder Notes and Tiny Keys build confidence through songs, rhythm, movement, and play.',
+    description: 'Little Rockers and Tiny Keys build confidence through songs, rhythm, movement, and play.',
     icon: Sparkles,
     accent: C.crimson,
     background: C.crimson06,

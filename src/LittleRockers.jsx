@@ -15,8 +15,8 @@ import BookingInterstitial from "./BookingInterstitial";
 
 const faqs = [
   {
-    q: "What ages is Wonder Notes for?",
-    a: "Wonder Notes is designed for ages 3 to 5. No experience needed, it's an introduction to instruments, rhythm, and making music together.",
+    q: "What ages is Little Rockers for?",
+    a: "Little Rockers is designed for ages 3 to 5. No experience needed, it's an introduction to instruments, rhythm, and making music together.",
   },
   {
     q: "What happens in a class?",
@@ -86,13 +86,13 @@ const InstrumentIllustration = () => (
 /* ═══════════════════════════════════════════════════════════════════════════
    PAGE
    ═══════════════════════════════════════════════════════════════════════════ */
-export default function WonderNotesPage({ navigate, setPath, onRequestLessons }) {
+export default function LittleRockersPage({ navigate, setPath, onRequestLessons }) {
   const [interstitialOpen, setInterstitialOpen] = useState(false);
   const [interstitialMode, setInterstitialMode] = useState("booking");
 
   const openModal = (mode = "booking") => {
     if (onRequestLessons) {
-      onRequestLessons("Wonder Notes");
+      onRequestLessons("Little Rockers");
     } else {
       setInterstitialMode(mode);
       setInterstitialOpen(true);
@@ -419,7 +419,7 @@ A joyful, play-based music class where preschoolers sing, move, explore, and gro
 }}>
   <img
     src="https://res.cloudinary.com/gozdpo8j/image/upload/v1783107188/Screenshot_2026-07-03_at_12.26.17_PM_xy5ozv.png"
-    alt="Real musical instruments used in Wonder Notes classes"
+    alt="Real musical instruments used in Little Rockers classes"
     style={{
       width: "100%",
       maxWidth: 980,
@@ -636,7 +636,7 @@ alignItems: "stretch",
       {/* Booking interstitial */}
       {interstitialOpen && !onRequestLessons && (
         <BookingInterstitial
-          programName="Wonder Notes"
+          programName="Little Rockers"
           programColor={C.crimson}
           opusL1="https://headlinermusicacademy.com"
           opusL2="https://headlinermusicacademy.com"
