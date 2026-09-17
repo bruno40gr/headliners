@@ -42,14 +42,6 @@ const TEACHERS = [
     highlights: ["Brass, Guitar & Piano", "Metal · Jazz · Classical", "Band Program"],
   },
   {
-    id: "4",
-    name: "Bridget",
-    instruments: "Piano, Voice, Kids-N-Keys, Rock City",
-    photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781563497/bridget_kok94i.jpg",
-    bio: "Bridget has been a singer since the moment she could talk. She started Piano at 5 and Voice at 12, and spent her middle and high school years immersed in Choir and Musical Theatre, earning several certificates of merit along the way. She went on to earn her Bachelor's in Music Education with a Choral Emphasis from San Jose State, where she focused on Baroque and Classical repertoire. Her current favorites: Beabadoobee and Bruno Mars.",
-    highlights: ["BA Music Education, San Jose State", "Choral & Classical Training", "Piano · Voice · Early Childhood"],
-  },
-  {
     id: "5",
     name: "Scott",
     instruments: "Guitar, Bass, Drums, Ukulele, Bands",
@@ -74,14 +66,6 @@ const TEACHERS = [
     highlights: ["Releases Music as Crescendo", "1st Place Percussion Competitions", "Drumline Specialist"],
   },
   {
-    id: "8",
-    name: "Briana",
-    instruments: "Clarinet, Voice, Early Childhood",
-    photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781563500/briana_rsizeh.jpg",
-    bio: "Briana has been singing since she was young, building experience across church choirs, school ensembles, and musical theatre. Classically trained in voice, she also has experience in multiple languages and styles. She's been playing Clarinet for eight years and held leadership roles in both choir and marching band in high school — co-president of choir and drum major of the band. She's currently involved with Sierra College Vocal Jazz and Chamber Singers. Her music taste is, in her own words, 'kinda everywhere.'",
-    highlights: ["Classical Voice & Clarinet", "Drum Major & Choir Co-President", "Sierra College Vocal Jazz"],
-  },
-  {
     id: "9",
     name: "Josh",
     instruments: "Bass, Brass, Drums, Guitar, Piano, Voice, Bands",
@@ -90,12 +74,12 @@ const TEACHERS = [
     highlights: ["Music, University of the Pacific", "Bass · Brass · Drums · Guitar · Piano · Voice", "Lessons since High School"],
   },
   {
-    id: "10",
-    name: "Julia",
-    instruments: "Piano, Flute, Voice, Early Childhood",
-    photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1781563499/julia_l7dbvb.jpg",
-    bio: "Julia has been playing flute since 4th grade, when she joined her school's concert band, and has been part of concert and marching bands ever since. In high school and college she added two choirs, then a third — an a cappella group — in college. She earned her BA in Music Education from Chapman University. Her listening tastes shift constantly, and she's always hunting for something new to learn and jam to.",
-    highlights: ["BA Music Education, Chapman University", "Flute · Piano · Voice · Early Childhood", "Concert & Marching Band"],
+    id: "13",
+    name: "Noah Campos",
+    instruments: "Multi-Instrumentalist, Audio Engineering",
+    photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789667700/fc93fb02-fedd-454d-a38b-b6e54afd5fec.png",
+    bio: "Noah is a self-taught multi-instrumentalist and audio engineer whose musical journey began at 12 years old. Starting with a love for punk, Noah began taking guitar lessons, which quickly fizzled out and were replaced with independent study. Over time, he sharpened his ear by dissecting his favorite music and developed a love for oldies. In his senior year of high school, he joined choir, which ignited a love of jazz and a deeper curiosity for understanding music. Today, he enjoys playing music that falls somewhere on a Venn diagram of jazz, psychedelic rock, and country, with a through-line of groove and improvisation.\n\nOver the years, Noah has performed in a plethora of touring bands, built and worked in many recording studios, and ran sound and lighting at venues in Northern California. Above all else, he is a proud father.\n\nNoah’s approach to teaching is informed by what would have grabbed and kept his interest when he stopped lessons as a defiant tween. He centers lessons on the music his students are interested in, with a particular focus on picking apart why music works the way it does and fostering each student’s unique voice.",
+    highlights: ["Multi-Instrumentalist & Audio Engineer", "Touring Bands · Studios · Live Sound", "Groove, Improvisation & Student-Led Lessons"],
   },
   {
     id: "11",
@@ -276,7 +260,7 @@ function TeacherModal({ teacher, onClose }) {
 
             <p style={{
               fontFamily: "'DM Sans', sans-serif", fontSize: 16,
-              lineHeight: 1.85, color: C.muted, margin: "0 0 36px",
+              lineHeight: 1.85, color: C.muted, margin: "0 0 36px", whiteSpace: "pre-line",
             }}>
               {teacher.bio}
             </p>
@@ -450,8 +434,15 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
           grid-template-columns: repeat(3, 1fr);
           gap: 48px 40px;
         }
+          .tp-hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+            gap: 56px;
+            align-items: center;
+          }
         @media (max-width: 900px) {
           .tp-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
+            .tp-hero-grid { grid-template-columns: 1fr; gap: 36px; }
           .tp-trust-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .tp-faq-grid { grid-template-columns: 1fr !important; }
         }
@@ -487,21 +478,26 @@ export default function TeachersPage({ setPath, onRequestLessons }) {
           background: "radial-gradient(ellipse at 80% 50%, rgba(255,0,68,0.08) 0%, transparent 60%)",
         }} />
 
-        <div style={{ maxWidth: 760, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <Eyebrow color={C.teal}>Our Faculty</Eyebrow>
-          <h1 style={{
-            fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
-            fontSize: "clamp(2.6rem, 6vw, 4.8rem)",
-            color: C.white, margin: "0 0 28px", lineHeight: 0.92, letterSpacing: -2,
-          }}>
-            Meet our teachers<br />
-          </h1>
-          <p style={{
-            fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.6)",
-            maxWidth: 560, margin: 0,
-          }}>
-            Our teachers are active musicians, trained instructors, and multi-instrumentalists who know how to work with kids, teens, and adults.
-          </p>
+        <div className="tp-hero-grid" style={{ maxWidth: 1160, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div>
+            <Eyebrow color={C.teal}>Our Faculty</Eyebrow>
+            <h1 style={{
+              fontFamily: "'Baloo 2', sans-serif", fontWeight: 800,
+              fontSize: "clamp(2.6rem, 6vw, 4.8rem)",
+              color: C.white, margin: "0 0 28px", lineHeight: 0.92, letterSpacing: -2,
+            }}>
+              Meet our teachers<br />
+            </h1>
+            <p style={{
+              fontSize: 18, lineHeight: 1.8, color: "rgba(255,255,255,0.6)",
+              maxWidth: 560, margin: 0,
+            }}>
+              Our teachers are active musicians, trained instructors, and multi-instrumentalists who know how to work with kids, teens, and adults.
+            </p>
+          </div>
+          <div style={{ border: `1px solid rgba(255,255,255,0.16)`, borderRadius: 24, boxShadow: "0 24px 60px rgba(0,0,0,0.22)", minHeight: 360, overflow: "hidden" }}>
+            <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789667545/8df583b9-6abb-45df-9dd7-2dee1112936a.png" alt="Headliner Music Academy teachers" style={{ display: "block", height: "100%", minHeight: 360, objectFit: "cover", objectPosition: "center", width: "100%" }} />
+          </div>
         </div>
       </section>
 

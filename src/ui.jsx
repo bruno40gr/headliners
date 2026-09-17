@@ -711,6 +711,7 @@ export function Card({
   image,
   imageAlt = "",
   imageHeight = 255,
+  imagePosition = "center center",
   imageBg = C.offWhite,
   accent = C.crimson,
   children,
@@ -744,6 +745,7 @@ export function Card({
               width: "100%",
               height: "100%",
               objectFit: "cover",
+              objectPosition: imagePosition,
               display: "block",
             }}
             onError={(e) => {

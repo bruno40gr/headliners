@@ -572,7 +572,8 @@ alignItems: "stretch",
                 key={title}
                 image={photo}
                 imageAlt={alt}
-                imageHeight={250}
+                imageHeight={360}
+                imagePosition="center 18%"
                 imageBg={photoBg}
                 accent={accent}
               >

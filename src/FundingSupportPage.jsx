@@ -51,7 +51,7 @@ export default function FundingSupportPage({ navigate, onRequestLessons }) {
                 letterSpacing: "-0.03em",
                 margin: "0 0 20px",
               }}>
-                Music though approved funding
+                Music lessons through approved funding
               </h1>
 
               <p style={{ fontSize: 18, lineHeight: 1.72, color: C.white70, maxWidth: 640, margin: 0 }}>

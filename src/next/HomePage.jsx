@@ -651,7 +651,7 @@ export default function HomePage() {
             <div>
               <p style={{ color: C.tealDark, fontFamily: fonts.body, fontSize: 13, fontWeight: 800, letterSpacing: '.08em', margin: '0 0 14px', textTransform: 'uppercase' }}>Funding support</p>
               <h2 style={{ fontFamily: fonts.display, fontWeight: 800, fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em', color: C.espresso, lineHeight: 1, margin: '0 0 16px' }}>
-                Music through approved funding
+                Music lessons through approved funding
               </h2>
               <p style={{ fontFamily: fonts.body, fontSize: 18, lineHeight: 1.8, color: C.text, margin: '0 0 28px', maxWidth: 600 }}>
                 Music instruction and experiences built around each student’s interests, comfort, and goals. We work with charter school and self-determination funding programs.
