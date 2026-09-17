@@ -167,8 +167,8 @@ export default function LittleRockersPage({ navigate, setPath, onRequestLessons 
                 fontSize: "clamp(48px, 7vw, 72px)",
                 margin: "0 0 24px", lineHeight: 1, letterSpacing: "-0.03em",
               }}>
-                <span style={{ color: C.espresso, display: "block" }}>Wonder</span>
-                <span style={{ color: C.crimson, display: "block" }}>Notes</span>
+                <span style={{ color: C.espresso, display: "block" }}>Little</span>
+                <span style={{ color: C.crimson, display: "block" }}>Rockers</span>
               </h1>
 
               <p style={{
