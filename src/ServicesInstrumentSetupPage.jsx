@@ -20,26 +20,26 @@ export default function ServicesInstrumentSetupPage(props) {
       galleryIntro="Instrument and gear services available at Headliner."
       gallery={[
         {
-          image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=1200&q=80",
-          alt: "Electric guitar and amplifier setup",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789612893/f972d9db-b491-4edf-8ef9-f2371a92157b.png",
+          alt: "Instrument setup service at Headliner Music Academy",
           title: "Instrument and gear services",
           caption: "Setup, repair, upgrade, and routing help for musicians and their gear.",
         },
         {
-          image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=1200&q=80",
-          alt: "Pedalboard and live performance equipment",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789613173/c5d5fa52-4099-40fe-be56-42d14ce153c0.png",
+          alt: "Guitar and bass setup work",
           title: "Guitar and bass work",
           caption: "Playability adjustments for guitars and basses, including truss rod, action, intonation, pickup height, and hardware checks.",
         },
         {
-          image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
-          alt: "Music workstation with synths and studio gear",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789613007/620bba36-a6da-41fa-a97a-6e399599a614.png",
+          alt: "Instrument electronics and shielding work",
           title: "Electronics and shielding",
           caption: "Light electronics work, basic wiring, connection issues, upgrades, shielding, and noise reduction.",
         },
         {
-          image: "https://images.unsplash.com/photo-1519508234439-4f23643125c1?w=1200&q=80",
-          alt: "Pedalboard with audio cables and effects pedals",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789613076/a7ad0776-8075-439d-92ab-c4d6420d594a.png",
+          alt: "Pedalboard setup and signal routing",
           title: "Pedalboards, signal flow, and MIDI",
           caption: "Pedal order, cable routing, power, MIDI routing, noise issues, and cleaner paths for practice, recording, and live use.",
         },

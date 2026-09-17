@@ -248,7 +248,7 @@ export default function BandProgramPage({ onRequestLessons, setPath }) {
           </div>
           <div style={{ position: "relative" }}>
             <div className="bp-img-wrap" style={{ borderRadius: 16, height: 440 }}>
-              <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789151064/33ce37c2-2012-412e-9854-6a0fbe96e4e3.png" alt="Band in rehearsal" />
+              <img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789612567/fcc499b9-9497-4728-8a7f-ac9d25fc9422.png" alt="Band in rehearsal" />
             </div>
             <div
               onClick={() => {

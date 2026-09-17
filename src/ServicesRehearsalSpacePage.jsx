@@ -37,7 +37,7 @@ export default function ServicesRehearsalSpacePage(props) {
           caption: "Use rehearsal time before a recital, school event, recording date, or live performance.",
         },
         {
-          image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
+          image: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789612671/9acd9715-1d3c-4853-9094-807c2fc0c2d0.png",
           alt: "Small group of musicians practicing together",
           title: "Small group practice",
           caption: "Sometimes you just need a space to make music together. A fit for duos or student groups.",
