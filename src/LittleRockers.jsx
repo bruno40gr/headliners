@@ -237,8 +237,7 @@ A joyful, play-based music class where preschoolers sing, move, explore, and gro
               }}>
                 <img
                   className="lr-hero-img"
-                  src="https://res.cloudinary.com/gozdpo8j/image/upload/v1782939927/ChatGPT_Image_Jul_1_2026_02_04_46_PM_fuwgb6.png
-                "
+                  src="https://res.cloudinary.com/diy08lj9x/image/upload/v1789665708/efdeee15-a266-45b6-af4a-9b1178971a9b.png"
                   alt="Young kids playing instruments"
                   style={{ width: "100%", height: 430, objectFit: "cover", objectPosition: "center 25%", display: "block" }}
                   onError={e => {
@@ -539,7 +538,7 @@ alignItems: "stretch",
               {
                 accent: C.crimson,
                 photoBg: C.blush,
-                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101990/ChatGPT_Image_Jul_3_2026_11_05_57_AM_ky6xao.png",
+                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789665580/adc77596-5c61-421d-bb7e-3ba12c4e868d.png",
                 alt: "Preschoolers singing with a teacher and having fun",
                 title: "Sing & Express",
                 body: "Songs, echo games, and playful repetition help children build confidence, communication, and listening skills.",
@@ -547,7 +546,7 @@ alignItems: "stretch",
               {
                 accent: C.yellow,
                 photoBg: C.yellowPastel,
-                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101948/ChatGPT_Image_Jul_3_2026_10_53_58_AM_clxc43.png",
+                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789665302/fce30081-8609-4aba-bfe7-e4dee61cd40b.png",
                 alt: "Variey of musical instruments for kids to explore",
                 title: "Explore & Discover",
                 body: "Children explore real instruments, exciting sounds, and musical textures through hands-on experiences that spark curiosity.",
@@ -555,7 +554,7 @@ alignItems: "stretch",
               {
                 accent: C.teal,
                 photoBg: C.tealPastel,
-                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101948/ChatGPT_Image_Jul_3_2026_10_59_35_AM_firmhg.png",
+                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789665461/3ab8149c-c789-430c-87f9-3dd9f5c2dcf1.png",
                 alt: "Preschoolers marching to music and playing percussion instrument",
                 title: "Rhythm & Movement",
                 body: "Through clapping, tapping, dancing, and rhythm games, children develop coordination, focus, balance, and a steady musical beat.",
@@ -563,7 +562,7 @@ alignItems: "stretch",
               {
                 accent: C.yellow,
                 photoBg: C.yellowPastel,
-                photo: "https://res.cloudinary.com/gozdpo8j/image/upload/v1783101990/ChatGPT_Image_Jul_3_2026_11_06_11_AM_v17owy.png",
+                photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1789665119/0845b607-75cb-4181-8a13-c9b026ec6f9a.png",
                 alt: "Teacher telling stories through music and handgestures to preschoolers",
                 title: "Stories & Imagination",
                 body: "Music and storytelling come together to teach emotions, social skills, and early preschool concepts while inspiring creativity and imaginative play.",
