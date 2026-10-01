@@ -1,11 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 
+const PULSE_INTAKE_BASE_URL = "/api/intake";
+
 function getFormDeliveryMode() {
-  return process.env.NEXT_PUBLIC_FORM_DELIVERY_MODE || "emailjs";
+  const mode = (process.env.NEXT_PUBLIC_FORM_DELIVERY_MODE || "pulse").trim().toLowerCase();
+
+  if (["pulse", "crm", "shadow", "emailjs", "supabase"].includes(mode)) {
+    return mode;
+  }
+
+  console.warn(`Unknown form delivery mode "${mode}". Falling back to Pulse.`);
+  return "pulse";
 }
 
 function getCrmApiBaseUrl() {
-  return process.env.NEXT_PUBLIC_CRM_API_BASE_URL || "http://localhost:3000";
+  return (process.env.NEXT_PUBLIC_CRM_API_BASE_URL || PULSE_INTAKE_BASE_URL).replace(/\/$/, "");
 }
 
 function getSupabaseUrl() {
@@ -66,7 +75,10 @@ export async function submitToEmailJS(templateParams, emailConfig) {
 }
 
 export async function submitToCrmIntake(payload) {
-  const res = await fetch(`${getCrmApiBaseUrl()}/api/intake`, {
+  const intakeUrl = getCrmApiBaseUrl().endsWith("/api/intake")
+    ? getCrmApiBaseUrl()
+    : `${getCrmApiBaseUrl()}/api/intake`;
+  const res = await fetch(intakeUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -98,6 +110,7 @@ export async function submitToSupabase(payload) {
 
 export async function submitLead({ leadPayload, emailPayload, emailConfig }) {
   switch (getFormDeliveryMode()) {
+    case "pulse":
     case "crm":
       return submitToCrmIntake(leadPayload);
 

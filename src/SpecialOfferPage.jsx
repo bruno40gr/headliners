@@ -30,6 +30,8 @@ export default function SpecialOfferPage() {
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
       intake_type: 'lesson_inquiry',
+      source: 'event',
+      source_system: 'headliner-website',
       source_form: 'hot_chili_cool_cars_offer_form',
       source_page: window.location.pathname,
       full_name: form.parentName.trim(),
