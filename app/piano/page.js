@@ -33,11 +33,19 @@ export const metadata = {
 
 const pianoPage = {
   instrument: 'piano',
+  instrumentLabel: 'piano',
   headline: 'Piano lessons that build confident musicians.',
   description:
     'Personalized piano instruction for kids, teens, and adults, guided by our proprietary curriculum and designed around each student.',
   heroImage,
   heroImageAlt: 'A young piano student learning with a teacher at Headliner Music Academy',
+  heroImagePosition: 'center 35%',
+  proofItems: [
+    { title: 'Private lessons', body: 'Focused one-to-one instruction' },
+    { title: 'Semi-private', body: 'Learn alongside a partner' },
+    { title: 'Ages 5 to 7', body: 'Early childhood group piano' },
+    { title: 'All levels', body: 'Beginner through advanced' },
+  ],
 };
 
 export default function PianoPage() {

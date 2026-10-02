@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Check, Globe, House, Mail, Music2 } from 'lucide-react';
 import AutoplayVideo from './AutoplayVideo';
+import MobileStickyCta from './MobileStickyCta';
+import ScrollReveal from './ScrollReveal';
 import TestimonialCarousel from './TestimonialCarousel';
 import styles from './instrument-landing.module.css';
 
@@ -49,11 +51,12 @@ const lessonPillars = [
 ];
 
 const fundingPrograms = [
-  'Alta California Regional Center',
+  'Alta',
   'South Sutter',
   'ACE FMS',
   "Mains'l",
   'Aveanna',
+  'And more',
 ];
 
 const testimonials = [
@@ -102,6 +105,15 @@ function Brand({ footer = false }) {
 }
 
 export default function InstrumentLandingPage({ config }) {
+  const lessonLabel = config.lessonLabel || config.instrumentLabel || config.instrument;
+  const proofItems = config.proofItems || [
+    { title: 'Private lessons', body: 'Focused one-to-one instruction' },
+    { title: 'Semi-private', body: 'Learn alongside a partner' },
+    { title: 'All ages', body: 'Kids, teens, and adults' },
+    { title: 'All levels', body: 'Beginner through advanced' },
+  ];
+  const pillars = config.lessonPillars || lessonPillars;
+
   return (
     <main className={styles.page}>
       <header className={styles.header}>
@@ -132,32 +144,36 @@ export default function InstrumentLandingPage({ config }) {
 
           <div className={styles.heroVisual}>
             <div className={styles.heroImage}>
-              <Image src={config.heroImage} alt={config.heroImageAlt} fill priority sizes="(max-width: 820px) 100vw, 48vw" />
+              <Image
+                src={config.heroImage}
+                alt={config.heroImageAlt}
+                fill
+                priority
+                sizes="(max-width: 820px) 100vw, 48vw"
+                style={{ objectPosition: config.heroImagePosition || 'center' }}
+              />
             </div>
             <div className={styles.heroNote}>
               <Music2 size={19} aria-hidden="true" />
-              <span>Music for every stage.</span>
+              <span>{config.heroNote || 'Music for every stage.'}</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.proof} aria-label="Piano lesson highlights">
+      <ScrollReveal className={styles.proof} aria-label={config.proofAriaLabel || `${lessonLabel} lesson highlights`}>
         <div className={`${styles.shell} ${styles.proofGrid}`}>
-          <div><strong>Private lessons</strong><span>Focused one-to-one instruction</span></div>
-          <div><strong>Semi-private</strong><span>Learn alongside a partner</span></div>
-          <div><strong>Ages 5 to 7</strong><span>Early childhood group piano</span></div>
-          <div><strong>All levels</strong><span>Beginner through advanced</span></div>
+          {proofItems.map((item) => <div key={item.title}><strong>{item.title}</strong><span>{item.body}</span></div>)}
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={`${styles.section} ${styles.reviewSection}`} aria-label="What Headliner music families say">
+      <ScrollReveal className={`${styles.section} ${styles.reviewSection}`} aria-label="What Headliner music families say">
         <div className={styles.shell}>
           <TestimonialCarousel testimonials={testimonials} />
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={`${styles.section} ${styles.darkSection}`}>
+      <ScrollReveal className={`${styles.section} ${styles.darkSection}`}>
         <div className={`${styles.shell} ${styles.experienceGrid}`}>
           <div className={styles.videoFrame}>
             <AutoplayVideo src={VIDEO_URL} poster={VIDEO_POSTER} />
@@ -172,15 +188,15 @@ export default function InstrumentLandingPage({ config }) {
             </ul>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={`${styles.section} ${styles.curriculumSection}`}>
+      <ScrollReveal className={`${styles.section} ${styles.curriculumSection}`}>
         <div className={styles.shell}>
           <div className={`${styles.sectionHeading} ${styles.centerHeading}`}>
-            <h2>A foundation for confident, expressive playing.</h2>
+            <h2>{config.curriculumHeading || 'A foundation for confident, expressive playing.'}</h2>
           </div>
           <div className={styles.pillarGrid}>
-            {lessonPillars.map((pillar) => (
+            {pillars.map((pillar) => (
               <article key={pillar.title}>
                 <span>{pillar.number}</span>
                 <h3>{pillar.title}</h3>
@@ -189,33 +205,33 @@ export default function InstrumentLandingPage({ config }) {
             ))}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={`${styles.section} ${styles.requestSection}`} id="claim-first-lesson">
+      <ScrollReveal className={`${styles.section} ${styles.requestSection}`}>
         <div className={`${styles.shell} ${styles.requestGrid}`}>
           <div className={styles.requestCopy}>
-            <h2>Ready to begin piano lessons?</h2>
+            <h2 id="claim-first-lesson">{config.requestHeading || `Ready to begin ${lessonLabel} lessons?`}</h2>
             <p>We’ll get in touch to get started.</p>
             <div className={styles.requestImage}>
               <Image src={REQUEST_IMAGE} alt="A Headliner student performing on stage" fill sizes="(max-width: 800px) 100vw, 38vw" />
             </div>
           </div>
 
-          <div className={styles.formCard} aria-label="$5 first piano lesson form preview">
+          <div className={styles.formCard} aria-label={config.formAriaLabel || `$5 first ${lessonLabel} lesson form preview`}>
             <div className={styles.formGrid}>
               <label className={styles.fullField}><span>Student name</span><input type="text" placeholder="Student name" /></label>
               <label className={styles.fullField}><span>Parent name</span><input type="text" placeholder="Parent name" /></label>
-              <label><span>Email</span><input type="email" placeholder="you@email.com" /></label>
-              <label><span>Phone</span><input type="tel" placeholder="(916) 555-0123" /></label>
-              <label><span>Student age</span><select defaultValue=""><option value="" disabled>Select age</option><option>5-7</option><option>8-10</option><option>11-13</option><option>14-17</option><option>18+</option></select></label>
+              <label className={styles.contactField}><span>Email</span><input type="email" placeholder="you@email.com" /></label>
+              <label className={styles.contactField}><span>Phone</span><input type="tel" placeholder="(916) 555-0123" /></label>
+              <label><span>Age</span><select defaultValue=""><option value="" disabled>Select age</option><option>5-7</option><option>8-10</option><option>11-13</option><option>14-17</option><option>18+</option></select></label>
               <label><span>Experience</span><select defaultValue=""><option value="" disabled>Select level</option><option>Brand new</option><option>Some experience</option><option>Experienced player</option></select></label>
             </div>
             <button className={styles.previewButton} type="button">Claim $5 first lesson</button>
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={`${styles.section} ${styles.fundingSection}`}>
+      <ScrollReveal className={`${styles.section} ${styles.fundingSection}`}>
         <div className={`${styles.shell} ${styles.fundingGrid}`}>
           <div className={styles.fundingCopy}>
             <h2>Funding may help cover music lessons.</h2>
@@ -227,23 +243,23 @@ export default function InstrumentLandingPage({ config }) {
             ))}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.closingCta}>
+      <ScrollReveal className={styles.closingCta}>
         <div className={`${styles.shell} ${styles.closingGrid}`}>
           <div>
-            <h2>Your first piano lesson starts here.</h2>
+            <h2>{config.closingHeading || `Your first ${lessonLabel} lesson starts here.`}</h2>
             <p>New students can begin with a $5 introductory lesson.</p>
           </div>
           <a className={styles.lightButton} href="#claim-first-lesson">Get started</a>
         </div>
-      </section>
+      </ScrollReveal>
 
-      <section className={styles.communitySection} aria-label="Headliner community connections">
+      <ScrollReveal className={styles.communitySection} aria-label="Headliner community connections">
         <div className={`${styles.shell} ${styles.communityLogos}`}>
           {communityLogos.map((logo) => <img key={logo.alt} src={logo.src} alt={logo.alt} />)}
         </div>
-      </section>
+      </ScrollReveal>
 
       <footer className={styles.footer}>
         <div className={`${styles.shell} ${styles.footerGrid}`}>
@@ -273,9 +289,7 @@ export default function InstrumentLandingPage({ config }) {
         </div>
       </footer>
 
-      <div className={styles.mobileCta}>
-        <a href="#claim-first-lesson">Get started</a>
-      </div>
+      <MobileStickyCta />
     </main>
   );
 }
