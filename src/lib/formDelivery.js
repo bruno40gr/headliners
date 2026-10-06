@@ -35,6 +35,23 @@ function getSupabaseLeadsTable() {
 
 let supabaseClient;
 
+// Keys identify one payload instance, never a family or email address. Callers can
+// retain the same object for a transport retry; a new submission gets a new key.
+const submissionKeys = new WeakMap();
+
+function submissionKey(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new Error("An intake object is required.");
+  }
+  const serialized = JSON.stringify(payload);
+  let saved = submissionKeys.get(payload);
+  if (!saved || saved.serialized !== serialized) {
+    saved = { serialized, key: crypto.randomUUID() };
+    submissionKeys.set(payload, saved);
+  }
+  return saved.key;
+}
+
 function getSupabaseClient() {
   const supabaseUrl = getSupabaseUrl();
   const supabaseAnonKey = getSupabaseAnonKey();
@@ -80,7 +97,7 @@ export async function submitToCrmIntake(payload) {
     : `${getCrmApiBaseUrl()}/api/intake`;
   const res = await fetch(intakeUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Idempotency-Key": submissionKey(payload) },
     body: JSON.stringify(payload),
   });
 

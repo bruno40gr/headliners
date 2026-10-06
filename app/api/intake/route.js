@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const PULSE_INTAKE_URL = 'https://pulse-pu6d6196p-bruno40grs-projects.vercel.app/api/intake';
+const PULSE_INTAKE_URL = 'https://app.headlinerma.com/api/intake';
 
 export async function POST(request) {
   let payload;
@@ -11,10 +11,16 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid lead payload.' }, { status: 400 });
   }
 
+  const submissionKey = request.headers.get('idempotency-key');
+  if (submissionKey !== null && !/^[A-Za-z0-9_-]{1,160}$/.test(submissionKey)) {
+    return NextResponse.json({ error: 'Invalid submission key.' }, { status: 400 });
+  }
+
   try {
     const response = await fetch(PULSE_INTAKE_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+        ...(submissionKey === null ? {} : { 'Idempotency-Key': submissionKey }) },
       body: JSON.stringify(payload),
       cache: 'no-store',
     });
