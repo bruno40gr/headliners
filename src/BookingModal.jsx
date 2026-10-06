@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { submitLead } from "./lib/formDelivery";
+import { lessonIdentity } from "./lib/lessonIdentity";
 import { C, fonts } from "./tokens";
 import { Button, FormField, Input, Modal, PillToggle, Select, Textarea } from "./ui";
 
@@ -36,6 +37,7 @@ function normalizeInstrument(instrument) {
 export default function BookingModal({ instrument, onClose }) {
   const [form, setForm] = useState({
     name: "",
+    parentName: "",
     age: "",
     email: "",
     phone: "",
@@ -65,7 +67,7 @@ export default function BookingModal({ instrument, onClose }) {
     }));
 
   const valid = useMemo(
-    () => form.name.trim() && form.email.trim() && form.instrument.trim() && form.level && status === "idle",
+    () => form.parentName.trim() && form.name.trim() && form.email.trim() && form.instrument.trim() && form.level && status === "idle",
     [form, status],
   );
 
@@ -73,17 +75,19 @@ export default function BookingModal({ instrument, onClose }) {
     if (!valid) return;
     setStatus("sending");
 
+    const identity = lessonIdentity(form.parentName, form.name);
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
       intake_type: "lesson_inquiry",
       source_form: "app_booking_modal",
       source_page: window.location.pathname,
-      full_name: form.name,
+      full_name: identity.contactName,
       email: form.email,
       phone: form.phone || null,
       program_label: form.instrument || "General",
       referrer: window.location.href,
       payload: {
+        ...identity.payload,
         age: form.age || null,
         instrument: form.instrument || "General",
         experience_level: form.level,
@@ -95,7 +99,7 @@ export default function BookingModal({ instrument, onClose }) {
 
     const emailPayload = {
       form_type: "Lesson Inquiry",
-      name: form.name,
+      ...identity.email,
       age: form.age || "Not provided",
       email: form.email,
       phone: form.phone || "Not provided",
@@ -177,6 +181,10 @@ export default function BookingModal({ instrument, onClose }) {
                   <Input type="number" placeholder="e.g. 14" min={4} max={99} value={form.age} onChange={(event) => setField("age", event.target.value)} style={{ ...fieldTextStyle, maxWidth: "100%" }} />
                 </FormField>
               </div>
+
+              <FormField label="Parent / contact name *">
+                <Input type="text" placeholder="Parent name, or your name if you are the student" value={form.parentName} onChange={(event) => setField("parentName", event.target.value)} style={fieldTextStyle} />
+              </FormField>
 
               <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Phone</span>}>
                 <Input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={(event) => setField("phone", event.target.value)} style={fieldTextStyle} />

@@ -16,6 +16,7 @@ import { X, ChevronDown } from "lucide-react";
 import { C, fonts } from "./tokens";
 import { PROGRAMS } from "./ProgramsNav";
 import { submitLead } from "./lib/formDelivery";
+import { lessonIdentity } from "./lib/lessonIdentity";
 
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
@@ -103,18 +104,19 @@ export default function BookingInterstitial({
     if (!form.name.trim() || !form.studentName.trim() || !form.date || !form.timeWindow) return;
     setStatus("sending");
 
+    const identity = lessonIdentity(form.name, form.studentName);
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
       intake_type: "tour_request",
       source_form: "booking_interstitial",
       source_page: window.location.pathname,
-      full_name: form.name,
+      full_name: identity.contactName,
       email: form.email || null,
       phone: form.phone || null,
       program_label: form.program || programName || null,
       referrer: window.location.href,
       payload: {
-        student_name: form.studentName,
+        ...identity.payload,
         age: form.age || null,
         preferred_date: form.date || null,
         time_window: form.timeWindow || null,
@@ -123,9 +125,10 @@ export default function BookingInterstitial({
 
     const emailPayload = {
       form_type: "Tour Request",
-      name: form.name,
+      ...identity.email,
       age: form.age || "Not provided",
       email: form.email || "Not provided",
+      phone: form.phone || "Not provided",
       instrument: form.program || "Not specified",
       experience_level: "N/A",
       time_of_day: "N/A",
@@ -307,7 +310,7 @@ export default function BookingInterstitial({
               </Field>
             </div>
 
-            <Field label="Parent name *">
+            <Field label="Parent / contact name *">
               <input
                 type="text"
                 placeholder="First and last name"

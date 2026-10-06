@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Check, MapPin, Phone, X } from 'lucide-react';
 import { submitLead } from './lib/formDelivery';
+import { lessonIdentity } from './lib/lessonIdentity';
 import { fonts } from './tokens';
 
 const SITE_URL = 'https://www.headlinermusicacademy.com';
@@ -27,6 +28,7 @@ export default function SpecialOfferPage() {
     if (!valid) return;
     setStatus('sending');
 
+    const identity = lessonIdentity(form.parentName, form.studentName);
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
       intake_type: 'lesson_inquiry',
@@ -34,7 +36,7 @@ export default function SpecialOfferPage() {
       source_system: 'headliner-website',
       source_form: 'hot_chili_cool_cars_offer_form',
       source_page: window.location.pathname,
-      full_name: form.parentName.trim(),
+      full_name: identity.contactName,
       email: form.email.trim(),
       phone: form.phone.trim(),
       program_label: form.instrument.trim(),
@@ -47,8 +49,7 @@ export default function SpecialOfferPage() {
         special_event_name: SPECIAL_EVENT.name,
         offer_code: SPECIAL_EVENT.offerCode,
         offer_description: '40% off the first month',
-        student_name: form.studentName.trim(),
-        parent_name: form.parentName.trim(),
+        ...identity.payload,
         instrument: form.instrument.trim(),
         requested_instrument: form.instrument.trim(),
         message: `${SPECIAL_EVENT.name}: 40% off the first month`,
@@ -56,7 +57,7 @@ export default function SpecialOfferPage() {
     };
     const emailPayload = {
       form_type: 'Hot Chili Cool Cars Offer Lead',
-      name: form.parentName.trim(), age: 'Not provided', email: form.email.trim(), phone: form.phone.trim(),
+      ...identity.email, age: 'Not provided', email: form.email.trim(), phone: form.phone.trim(),
       instrument: form.instrument.trim(), experience_level: 'N/A', days: 'N/A', time_of_day: 'N/A', preferred_date: 'N/A', time_window: 'N/A',
       message: `Event: ${SPECIAL_EVENT.name} (${SPECIAL_EVENT.source}) | Offer: 40% off first month | Student: ${form.studentName.trim()} | Parent: ${form.parentName.trim()} | Instrument: ${form.instrument.trim()}`,
     };

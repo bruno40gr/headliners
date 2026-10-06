@@ -79,7 +79,12 @@ export async function submitToEmailJS(templateParams, emailConfig) {
       service_id: serviceId,
       template_id: templateId,
       user_id: publicKey,
-      template_params: templateParams,
+      template_params: {
+        ...templateParams,
+        contact_name: templateParams.parent_name || templateParams.name || "Not provided",
+        parent_name: templateParams.parent_name || "Not applicable / not provided",
+        student_name: templateParams.student_name || "Not applicable / not provided",
+      },
     }),
   });
 

@@ -18,6 +18,7 @@ import PrivateLessonsPage from "./PrivateLessonsPage";
 import FundingSupportPage from "./FundingSupportPage";
 import { C, fonts } from "./tokens";
 import { submitLead } from "./lib/formDelivery";
+import { lessonIdentity } from "./lib/lessonIdentity";
 
 
 const offerings = [
@@ -107,7 +108,7 @@ function Button({ children, variant = "primary", href, disabled, style, classNam
 // ── BookingModal ─────────────────────────────────────────────────────────────
 function BookingModal({ instrument, onClose }) {
   const [form, setForm] = useState({
-    name:"", age:"", email:"", phone:"", instrument: instrument||"",
+    name:"", parentName:"", age:"", email:"", phone:"", instrument: instrument||"",
     level:"", days:[], times:[], notes:"",
   });
   const [status, setStatus] = useState("idle");
@@ -123,20 +124,22 @@ function BookingModal({ instrument, onClose }) {
   }));
 
   const handleSubmit = async () => {
-    if (!form.name.trim()||!form.instrument.trim()||!form.level||!form.email.trim()) return;
+    if (!form.parentName.trim()||!form.name.trim()||!form.instrument.trim()||!form.level||!form.email.trim()) return;
     setStatus("sending");
 
+    const identity = lessonIdentity(form.parentName, form.name);
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
       intake_type: "lesson_inquiry",
       source_form: "app_booking_modal",
       source_page: window.location.pathname,
-      full_name: form.name,
+      full_name: identity.contactName,
       email: form.email,
       phone: form.phone || null,
       program_label: form.instrument || "General",
       referrer: window.location.href,
       payload:{
+        ...identity.payload,
         age: form.age || null,
         instrument: form.instrument || "General",
         experience_level: form.level,
@@ -148,7 +151,7 @@ function BookingModal({ instrument, onClose }) {
 
     const emailPayload = {
       form_type: "Lesson Inquiry",
-      name: form.name,
+      ...identity.email,
       age: form.age || "Not provided",
       email: form.email,
       phone: form.phone || "Not provided",
@@ -178,7 +181,7 @@ function BookingModal({ instrument, onClose }) {
     }
   };
 
-  const valid = form.name.trim()&&form.email.trim()&&form.instrument.trim()&&form.level&&status==="idle";
+  const valid = form.parentName.trim()&&form.name.trim()&&form.email.trim()&&form.instrument.trim()&&form.level&&status==="idle";
 
   return (
     <div
@@ -237,6 +240,9 @@ function BookingModal({ instrument, onClose }) {
             <div style={{display:"flex",flexDirection:"column",gap:18}}>
               <Field label="Student name *">
                 <input type="text" placeholder="e.g. Jordan Smith" value={form.name} onChange={e=>set("name",e.target.value)}/>
+              </Field>
+              <Field label="Parent / contact name *">
+                <input type="text" placeholder="Parent name, or your name if you are the student" value={form.parentName} onChange={e=>set("parentName",e.target.value)}/>
               </Field>
               <Field label="Your email *">
                 <input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={e=>set("email",e.target.value)}/>
