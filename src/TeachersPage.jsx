@@ -97,6 +97,14 @@ const TEACHERS = [
     bio: "Vitto picked up guitar in 2022 and hasn't put it down. He loves all kinds of music but has a particular soft spot for pop-punk, and Paramore is his all-time favorite band. When he's not playing, he's out at shows and concerts or exploring new places on foot. He brings genuine enthusiasm and a student's curiosity to his teaching — because he remembers exactly what it's like to be just starting out.",
     highlights: ["Guitar & Piano", "Pop-Punk Specialist", "Active Concertgoer"],
   },
+  {
+    id: "13",
+    name: "Zais Pallib",
+    instruments: "Piano",
+    photo: "https://res.cloudinary.com/diy08lj9x/image/upload/v1791300259/02e7a8a4-d3d1-4156-b1eb-8b6bdd6e2fe2.png",
+    bio: "Zais has been playing the piano since his freshman year in high school, playing both classical and contemporary music.\n\nIn his free time he enjoys exercising, playing video games, and playing with his cats.\n\nZais is a collaborative pianist for Rocklin High School's choir department and is playing at Sierra College as a current music major. He loves to compose his own music and is looking to bring the joys of music to others.",
+    highlights: ["Classical & Contemporary Piano", "Collaborative Pianist, Rocklin High School", "Music Major, Sierra College"],
+  },
 ];
 
 const TRUST_POINTS = [
