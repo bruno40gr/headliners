@@ -1,20 +1,22 @@
 /* global process */
 
 import { useMemo, useState } from 'react';
-import { Check, MapPin, Phone, X } from 'lucide-react';
+import { Check, MapPin, PawPrint, X } from 'lucide-react';
 import { submitLead } from './lib/formDelivery';
 import { lessonIdentity } from './lib/lessonIdentity';
 import { fonts } from './tokens';
 
 const SITE_URL = 'https://www.headlinermusicacademy.com';
 const LOGO_URL = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png';
-const FOOTER_LOGO_URL = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1782845758/vertical_white_ma_xcvtvr.png';
-const SPECIAL_EVENT = { name: 'Hot Chili Cool Cars', source: 'hot_chili_cool_cars', offerCode: '40_percent_first_month' };
+const EVENT_ARTWORK_URL = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1791594003/c21a5d7e-db1a-45e7-a163-3df6587c7f3d.png';
+const SPECIAL_EVENT = { name: 'Wag & Walk', source: 'wag_and_walk', offerCode: 'wag_and_walk_40_percent_first_month' };
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || '00000000-0000-0000-0000-000000000001';
 const EMAILJS_SERVICE_ID = 'service_734y6qg';
 const EMAILJS_TEMPLATE_ID = 'template_czlclec';
 const EMAILJS_PUBLIC_KEY = 'FdW-lGbAyQuJZFy-y';
 const initialForm = { studentName: '', parentName: '', phone: '', email: '', instrument: '' };
+const instrumentOptions = ['Piano', 'Guitar', 'Bass', 'Voice', 'Drums', 'Ukulele', 'Violin', 'Cello', 'Brass', 'Woodwind', 'Music production', 'Songwriting'];
+const programOptions = ['Private and Semi-private Lessons', 'Band Program', 'Tiny Keys', 'Little Rockers'];
 
 export default function SpecialOfferPage() {
   const [form, setForm] = useState(initialForm);
@@ -34,7 +36,7 @@ export default function SpecialOfferPage() {
       intake_type: 'lesson_inquiry',
       source: 'event',
       source_system: 'headliner-website',
-      source_form: 'hot_chili_cool_cars_offer_form',
+      source_form: `${SPECIAL_EVENT.source}_offer_form`,
       source_page: window.location.pathname,
       full_name: identity.contactName,
       email: form.email.trim(),
@@ -42,7 +44,7 @@ export default function SpecialOfferPage() {
       program_label: form.instrument.trim(),
       utm_source: SPECIAL_EVENT.source,
       utm_medium: 'event_offer',
-      utm_campaign: `${SPECIAL_EVENT.source}_${SPECIAL_EVENT.offerCode}`,
+      utm_campaign: SPECIAL_EVENT.offerCode,
       referrer: window.location.href,
       payload: {
         special_event_source: SPECIAL_EVENT.source,
@@ -56,10 +58,10 @@ export default function SpecialOfferPage() {
       },
     };
     const emailPayload = {
-      form_type: 'Hot Chili Cool Cars Offer Lead',
+      form_type: `${SPECIAL_EVENT.name} Offer Lead`,
       ...identity.email, age: 'Not provided', email: form.email.trim(), phone: form.phone.trim(),
       instrument: form.instrument.trim(), experience_level: 'N/A', days: 'N/A', time_of_day: 'N/A', preferred_date: 'N/A', time_window: 'N/A',
-      message: `Event: ${SPECIAL_EVENT.name} (${SPECIAL_EVENT.source}) | Offer: 40% off first month | Student: ${form.studentName.trim()} | Parent: ${form.parentName.trim()} | Instrument: ${form.instrument.trim()}`,
+      message: `Event: ${SPECIAL_EVENT.name} (${SPECIAL_EVENT.source}) | Offer: 40% off first month (${SPECIAL_EVENT.offerCode}) | Student: ${form.studentName.trim()} | Parent: ${form.parentName.trim()} | Instrument: ${form.instrument.trim()}`,
     };
 
     try {
@@ -77,25 +79,68 @@ export default function SpecialOfferPage() {
   return (
     <main className="special-offer-page">
       <style>{`
-        .special-offer-page { --teal: #069da0; --teal-dark: #047d80; --red: #b5181b; --cream: #fffaf0; background: var(--teal); color: var(--cream); font-family: ${fonts.body}; min-height: 100vh; overflow: hidden; }
-        .offer-white-top { align-items: center; background: #fff; display: flex; height: 72px; justify-content: center; overflow: hidden; padding: 0 20px; }.offer-logo-link { display: block; flex: 0 0 auto; max-width: 198px; width: 100%; }.offer-logo { display: block; height: auto; width: 100%; }.offer-wave { display: block; height: 30px; margin: 0; position: relative; vertical-align: bottom; width: 100%; z-index: 1; }
-        .offer-teal { background-image: radial-gradient(circle at 10% 7%, rgba(255,255,255,.13) 0 2px, transparent 3px), radial-gradient(circle at 88% 22%, rgba(255,255,255,.1) 0 2px, transparent 3px), linear-gradient(125deg, rgba(3,99,101,.2), transparent 50%); background-size: 43px 43px, 61px 61px, auto; padding: 22px 20px 0; }.offer-shell { margin: 0 auto; max-width: 540px; }.offer-copy { text-align: center; }.offer-title { color: var(--cream); font-family: ${fonts.display}; font-size: clamp(44px, 12vw, 63px); font-weight: 800; letter-spacing: -.06em; line-height: .86; margin: 0; text-shadow: 3px 4px 0 rgba(4,84,84,.22); }.offer-title-emphasis { background: #111; color: #fffdf5; display: inline-block; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(21px, 5.6vw, 32px); font-style: italic; font-weight: 700; letter-spacing: -.05em; line-height: 1; margin-bottom: 6px; padding: 6px 11px 7px; }.offer-title strong { color: #ffd756; display: block; font-size: 1.17em; }.offer-description { color: #e7ffff; font-size: 16px; line-height: 1.55; margin: 19px auto 27px; max-width: 465px; }
-        .offer-form-frame { padding: 12px; position: relative; }.offer-form-frame::before { background-color: rgba(255,255,255,.1); background-image: conic-gradient(rgba(255,255,255,.22) 25%, transparent 0 50%, rgba(255,255,255,.22) 0 75%, transparent 0); background-size: 54px 54px; border-radius: 22px; content: ''; inset: 0; opacity: .55; position: absolute; transform: rotate(-2deg); }.offer-form-card { background: var(--cream); border: 4px solid white; border-radius: 18px; box-shadow: 10px 11px 0 rgba(4,85,83,.28); color: #1f3131; padding: 24px 18px 18px; position: relative; }.offer-form { display: grid; gap: 16px; }.offer-field { display: grid; gap: 8px; }.offer-field label { color: #254240; font-size: 15px; font-weight: 800; letter-spacing: .01em; }.offer-field input { background: #fff; border: 1.5px solid #b9d2cd; border-radius: 9px; color: #173b39; font: inherit; font-size: 16px; min-height: 50px; outline: none; padding: 11px 13px; width: 100%; }.offer-field input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(6,157,160,.18); }.offer-field input::placeholder { color: #8aa09c; }.offer-error { background: #fff0ed; border: 1px solid #f5b3a8; border-radius: 9px; color: #9d2720; font-size: 13px; line-height: 1.4; margin: 0; padding: 10px 12px; }.offer-submit { background: var(--red); border: 0; border-bottom: 4px solid #7e0d15; border-radius: 10px; color: white; cursor: pointer; font-family: ${fonts.display}; font-size: 22px; font-weight: 800; letter-spacing: -.02em; min-height: 57px; padding: 10px 18px; transition: transform .15s ease, background .15s ease; width: 100%; }.offer-submit:hover:not(:disabled) { background: #ca2023; transform: translateY(-2px); }.offer-submit:disabled { cursor: not-allowed; opacity: .55; }.offer-consent { border-top: 1px solid #d8e6e1; color: #627875; font-size: 11px; line-height: 1.5; margin: 16px 0 0; padding-top: 14px; text-align: center; }
-        .offer-billing-disclaimer { color: #e4ffff; font-size: 12px; line-height: 1.5; margin: 23px auto 0; max-width: 490px; text-align: center; }.offer-contact { align-items: center; border-top: 1px solid rgba(255,255,255,.31); display: grid; gap: 0; justify-items: center; margin-top: 30px; padding: 25px 0 29px; text-align: center; }.offer-phone-heading { color: white; font-family: ${fonts.display}; font-size: clamp(29px, 8vw, 39px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin: 0; }.offer-phone-heading a { color: inherit; text-decoration: none; }.offer-phone-heading a:hover { text-decoration: underline; }.offer-address { align-items: center; color: #ddffff; display: flex; font-size: 13px; font-weight: 700; gap: 7px; margin: 16px 0 0; }.offer-footer-logo-link { display: block; margin-top: 22px; }.offer-footer-logo { display: block; height: auto; max-width: 126px; width: 100%; }.offer-footer-checkers { background-color: var(--cream); background-image: conic-gradient(var(--red) 25%, transparent 0 50%, var(--red) 0 75%, transparent 0); background-size: 42px 42px; height: 42px; width: 100%; }
-        .offer-modal-backdrop { align-items: center; background: rgba(9,38,39,.72); display: flex; inset: 0; justify-content: center; padding: 20px; position: fixed; z-index: 20; }.offer-modal { background: var(--cream); border: 5px solid white; border-radius: 20px; box-shadow: 12px 14px 0 rgba(0,0,0,.2); color: #243e3d; max-width: 420px; padding: 34px 26px 28px; position: relative; text-align: center; width: 100%; }.offer-modal-close { align-items: center; background: transparent; border: 0; color: #4f6462; cursor: pointer; display: inline-flex; padding: 6px; position: absolute; right: 10px; top: 10px; }.offer-modal-check { align-items: center; background: var(--teal); border: 4px solid #9de2dc; border-radius: 50%; color: white; display: inline-flex; height: 66px; justify-content: center; width: 66px; }.offer-modal h2 { color: #173b3b; font-family: ${fonts.display}; font-size: 35px; font-weight: 800; letter-spacing: -.05em; line-height: .95; margin: 16px 0 10px; }.offer-modal p { color: #5d706e; font-size: 15px; line-height: 1.5; margin: 0; }.offer-modal button:last-child { background: var(--red); border: 0; border-bottom: 3px solid #7e0d15; border-radius: 9px; color: white; cursor: pointer; font-family: ${fonts.display}; font-size: 18px; font-weight: 800; margin-top: 23px; padding: 12px 25px; }
-        @media (min-width: 640px) { .offer-white-top { height: 80px; }.offer-logo-link { max-width: 220px; }.offer-wave { height: 34px; }.offer-teal { padding-top: 24px; }.offer-shell { max-width: 650px; }.offer-form { grid-template-columns: 1fr 1fr; }.offer-field--full, .offer-form-action { grid-column: 1 / -1; }.offer-form-card { padding: 29px; } }
+        .special-offer-page { --navy: #10213e; --orange: #ff7815; --cyan: #00b0ef; --cream: #fff4e9; background: var(--cream); color: var(--navy); font-family: ${fonts.body}; min-height: 100vh; }
+        .special-offer-page *, .special-offer-page *::before, .special-offer-page *::after { box-sizing: border-box; }
+        .offer-white-top { align-items: center; background: white; border-bottom: 1px solid #f0dfd0; display: flex; height: 72px; justify-content: center; padding: 0 20px; }
+        .offer-logo-link { display: block; max-width: 198px; width: 100%; }
+        .offer-logo { display: block; height: auto; width: 100%; }
+        .offer-event { background-image: radial-gradient(ellipse at 0 15%, #ff78150d, transparent 50%), radial-gradient(ellipse at 100% 65%, #00b0ef0d, transparent 45%); padding: 22px 20px 0; }
+        .offer-shell { margin: 0 auto; max-width: 650px; }
+        .offer-event-strip { background: var(--cyan); padding: 12px 20px; }
+        .offer-event-artwork { margin: 0 auto; max-width: 420px; width: 100%; }
+        .offer-event-artwork img { display: block; height: auto; width: 100%; }
+        .offer-copy { padding-top: 22px; text-align: center; }
+        .offer-title { color: var(--navy); font-family: ${fonts.display}; font-size: clamp(34px, 9vw, 54px); font-weight: 800; letter-spacing: -.045em; line-height: 1.06; margin: 0; }
+        .offer-title-emphasis { display: block; font-family: ${fonts.body}; font-size: clamp(17px, 4.5vw, 23px); font-weight: 700; letter-spacing: -.02em; line-height: 1.3; margin-bottom: 12px; }
+        .offer-title strong { color: #c64f00; display: block; font-size: 1.45em; letter-spacing: -.055em; line-height: 1; margin-bottom: 5px; }
+        .offer-description { color: #485366; font-size: 16px; line-height: 1.6; margin: 17px auto 24px; max-width: 490px; }
+        .offer-form-frame { position: relative; }
+        .offer-form-card { background: white; border: 1px solid #ead8c7; border-top: 5px solid var(--cyan); border-radius: 18px; box-shadow: 0 12px 35px #10213e0a; padding: 24px 20px 20px; }
+        .offer-form { display: grid; gap: 16px; }
+        .offer-field { display: grid; gap: 8px; min-width: 0; }
+        .offer-field label { color: var(--navy); font-size: 15px; font-weight: 800; }
+        .offer-field input, .offer-field select { background: #fffdfa; border: 1.5px solid #c4cad2; border-radius: 9px; color: var(--navy); font: inherit; font-size: 16px; min-height: 50px; padding: 11px 13px; width: 100%; }
+        .offer-field input:focus, .offer-field select:focus { border-color: #007eab; outline: 3px solid #00b0ef33; outline-offset: 1px; }
+        .offer-field input::placeholder { color: #6d7786; }
+        .offer-error { background: #fff0ed; border: 1px solid #f5b3a8; border-radius: 9px; color: #9d2720; font-size: 13px; line-height: 1.4; margin: 0; padding: 10px 12px; }
+        .offer-submit { background: var(--orange); border: 0; border-bottom: 4px solid #c25100; border-radius: 10px; color: var(--navy); cursor: pointer; font-family: ${fonts.display}; font-size: 22px; font-weight: 800; min-height: 57px; padding: 10px 18px; transition: background .15s ease; width: 100%; }
+        .offer-submit:hover:not(:disabled) { background: #ff8d32; }
+        .offer-submit:disabled { cursor: not-allowed; opacity: .55; }
+        .offer-consent { border-top: 1px solid #ede5dd; color: #606b7a; font-size: 11px; line-height: 1.5; margin: 16px 0 0; padding-top: 14px; text-align: center; }
+        .offer-billing-disclaimer { color: #606b7a; font-size: 12px; line-height: 1.5; margin: 23px auto 0; max-width: 490px; text-align: center; }
+        .offer-contact { align-items: center; border-top: 1px solid #ead8c7; display: grid; justify-items: center; margin-top: 28px; padding: 25px 0 29px; text-align: center; }
+        .offer-phone-heading { font-family: ${fonts.display}; font-size: clamp(29px, 8vw, 39px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin: 0; }
+        .offer-phone-heading a { color: inherit; text-decoration: none; }
+        .offer-phone-heading a:hover { text-decoration: underline; }
+        .offer-address { align-items: center; color: #485366; display: flex; font-size: 13px; font-weight: 700; gap: 7px; margin: 16px 0 0; }
+        .offer-address svg { flex-shrink: 0; }
+        .offer-footer-logo-link { display: block; margin-top: 22px; max-width: 170px; }
+        .offer-footer-logo { display: block; height: auto; width: 100%; }
+        .offer-footer-trail { align-items: center; background: var(--cyan); color: var(--navy); display: flex; gap: 36px; height: 52px; justify-content: center; }
+        .offer-footer-trail svg:nth-child(2) { transform: rotate(20deg); }
+        .offer-modal-backdrop { align-items: center; background: #10213ebd; display: flex; inset: 0; justify-content: center; padding: 20px; position: fixed; z-index: 20; }
+        .offer-modal { background: var(--cream); border: 3px solid white; border-radius: 20px; box-shadow: 0 20px 60px #0003; max-width: 420px; padding: 34px 26px 28px; position: relative; text-align: center; width: 100%; }
+        .offer-modal-close { align-items: center; background: transparent; border: 0; color: var(--navy); cursor: pointer; display: inline-flex; padding: 6px; position: absolute; right: 10px; top: 10px; }
+        .offer-modal-check { align-items: center; background: var(--cyan); border-radius: 50%; color: var(--navy); display: inline-flex; height: 66px; justify-content: center; width: 66px; }
+        .offer-modal h2 { font-family: ${fonts.display}; font-size: 35px; font-weight: 800; letter-spacing: -.05em; line-height: 1.1; margin: 16px 0 10px; }
+        .offer-modal p { color: #485366; font-size: 15px; line-height: 1.5; margin: 0; }
+        .offer-modal button:last-child { background: var(--orange); border: 0; border-bottom: 3px solid #c25100; border-radius: 9px; color: var(--navy); cursor: pointer; font-family: ${fonts.display}; font-size: 18px; font-weight: 800; margin-top: 23px; padding: 12px 25px; }
+        @media (min-width: 640px) { .offer-white-top { height: 80px; } .offer-logo-link { max-width: 220px; } .offer-event { padding-top: 28px; } .offer-form { grid-template-columns: 1fr 1fr; } .offer-field--full, .offer-form-action, .offer-error { grid-column: 1 / -1; } .offer-form-card { padding: 29px; } }
+        @media (min-width: 960px) { .offer-shell { max-width: 1100px; } .offer-layout { align-items: center; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); margin-top: 32px; } .offer-copy { padding-top: 0; text-align: right; } .offer-description { margin: 20px 0 0 auto; } .offer-title { font-size: 48px; } }
       `}</style>
 
       <header className="offer-white-top">
         <a aria-label="Headliner Music Academy home" className="offer-logo-link" href={SITE_URL}><img alt="Headliner Music Academy" className="offer-logo" src={LOGO_URL} /></a>
       </header>
-      <svg aria-hidden="true" className="offer-wave" preserveAspectRatio="none" viewBox="0 0 1440 60"><path d="M0 0h1440v20C1072 60 374 60 0 20V0Z" fill="#fff" /></svg>
-
-      <section className="offer-teal" aria-labelledby="offer-title">
+      <div className="offer-event-strip">
+        <div className="offer-event-artwork"><img alt="Wag & Walk 2026" src={EVENT_ARTWORK_URL} fetchPriority="high" /></div>
+      </div>
+      <section className="offer-event" aria-labelledby="offer-title">
         <div className="offer-shell">
+          <div className="offer-layout">
           <div className="offer-copy">
-            <h1 className="offer-title" id="offer-title"><span className="offer-title-emphasis">Cool cars. Hot deal.</span><strong>40% OFF</strong>your first month.</h1>
-            <p className="offer-description">Thank you for stopping by our booth. Fill out the form below to qualify for this limited-time offer.</p>
+            <h1 className="offer-title" id="offer-title"><span className="offer-title-emphasis">A little treat from Headliner</span><strong>40% OFF</strong>your first month.</h1>
+            <p className="offer-description">Thanks for stopping by our Wag & Walk booth! Fill out the form to claim 40% off your first month of music lessons, early childhood music, or our Band Program.</p>
           </div>
 
           <div className="offer-form-frame">
@@ -105,11 +150,23 @@ export default function SpecialOfferPage() {
               <div className="offer-field"><label htmlFor="parent-name">Parent name</label><input autoComplete="name" id="parent-name" onChange={(event) => setField('parentName', event.target.value)} placeholder="Parent's full name" required value={form.parentName} /></div>
               <div className="offer-field"><label htmlFor="phone">Phone number</label><input autoComplete="tel" id="phone" inputMode="tel" onChange={(event) => setField('phone', event.target.value)} placeholder="(916) 555-0123" required type="tel" value={form.phone} /></div>
               <div className="offer-field"><label htmlFor="email">Email</label><input autoComplete="email" id="email" onChange={(event) => setField('email', event.target.value)} placeholder="you@email.com" required type="email" value={form.email} /></div>
-              <div className="offer-field offer-field--full"><label htmlFor="instrument">Instrument</label><input id="instrument" onChange={(event) => setField('instrument', event.target.value)} placeholder="e.g. Piano, guitar, drums" required value={form.instrument} /></div>
+              <div className="offer-field offer-field--full">
+                <label htmlFor="instrument">Instrument or Program</label>
+                <select id="instrument" name="instrument" onChange={(event) => setField('instrument', event.target.value)} required value={form.instrument}>
+                  <option disabled value="">Select an instrument or program</option>
+                  <optgroup label="Instruments">
+                    {instrumentOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+                  </optgroup>
+                  <optgroup label="Programs">
+                    {programOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+                  </optgroup>
+                </select>
+              </div>
               {status === 'error' && <p className="offer-error" role="alert">Something went wrong. Please try again or call us at (916) 435-1300.</p>}
               <div className="offer-form-action"><button className="offer-submit" disabled={!valid} type="submit">{status === 'sending' ? 'Sending your offer…' : 'Claim 40% Off'}</button><p className="offer-consent">By submitting, you agree to be contacted by Headliner Music Academy about this offer.</p></div>
             </form>
           </section>
+          </div>
           </div>
 
           <p className="offer-billing-disclaimer">Lessons are scheduled weekly and billed monthly. Your monthly tuition is based on the number of weekly lessons scheduled in that month, so the monthly amount may vary.</p>
@@ -117,11 +174,11 @@ export default function SpecialOfferPage() {
           <footer className="offer-contact">
             <h2 className="offer-phone-heading"><a href="tel:9164351300">(916) 435-1300</a></h2>
             <p className="offer-address"><MapPin size={16} />2311 Sunset Blvd, Rocklin, CA 95765</p>
-            <a aria-label="Visit Headliner Music Academy" className="offer-footer-logo-link" href={SITE_URL}><img alt="Headliner Music Academy" className="offer-footer-logo" src={FOOTER_LOGO_URL} /></a>
+            <a aria-label="Visit Headliner Music Academy" className="offer-footer-logo-link" href={SITE_URL}><img alt="Headliner Music Academy" className="offer-footer-logo" src={LOGO_URL} /></a>
           </footer>
         </div>
       </section>
-      <div aria-hidden="true" className="offer-footer-checkers" />
+      <div aria-hidden="true" className="offer-footer-trail"><PawPrint size={24} /><PawPrint size={24} /><PawPrint size={24} /></div>
 
       {confirmationOpen && (
         <div aria-modal="true" className="offer-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setConfirmationOpen(false); }} role="dialog">
@@ -129,7 +186,7 @@ export default function SpecialOfferPage() {
             <button aria-label="Close confirmation" className="offer-modal-close" onClick={() => setConfirmationOpen(false)} type="button"><X size={21} /></button>
             <span className="offer-modal-check"><Check size={33} strokeWidth={3} /></span>
             <h2 id="confirmation-heading">You&apos;re on the list!</h2>
-            <p>Thanks for claiming your Hot Chili Cool Cars offer. Our team will reach out soon to confirm your 40% off first month.</p>
+            <p>Thanks for claiming your Wag & Walk offer. Our team will reach out soon to help you get started with 40% off your first month.</p>
             <button onClick={() => setConfirmationOpen(false)} type="button">Awesome, thanks!</button>
           </section>
         </div>
