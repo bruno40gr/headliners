@@ -1,0 +1,25 @@
+.learningCard { min-width: 0; overflow: hidden; border-radius: 12px; background: var(--program-white); }
+.vertical { display: flex; flex-direction: column; }
+.horizontal { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr); }
+.learningPhoto { position: relative; min-width: 0; min-height: 220px; background: var(--panel-pastel); }
+.vertical .learningPhoto { height: 330px; flex: 1 0 330px; }
+.learningPhoto img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.learningCopy { min-width: 0; padding: 32px; }
+.vertical .learningCopy { border-top: 5px solid var(--panel-pastel); }
+.horizontal .learningCopy { border-left: 5px solid var(--panel-pastel); align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+.learningCard .learningCopy h4 { font-family: var(--font-baloo), sans-serif; font-weight: 800 !important; font-size: 26px !important; line-height: 1.15 !important; color: var(--program-espresso); margin: 0 0 12px; }
+.learningCopy p { font-size: 17px; line-height: 1.7; color: var(--program-muted); margin: 0; }
+.learningCopy p + p { margin-top: 16px; }
+.review { padding: 88px 0; background: var(--program-white); text-align: center; }
+.review figure { width: min(780px, calc(100% - 80px)); margin: 0 auto; }
+.stars { color: #986b00; font-size: 24px; letter-spacing: .12em; margin-bottom: 24px; }
+.review blockquote { margin: 0; color: var(--program-espresso); font-size: clamp(22px, 2.4vw, 32px); line-height: 1.55; font-weight: 400; font-style: italic; }
+.review figcaption { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin-top: 32px; font-size: 15px; font-weight: 600; color: #006e84; }
+@media (max-width: 700px) {
+  .horizontal { display: flex; flex-direction: column; }
+  .learningPhoto, .vertical .learningPhoto { height: 270px; min-height: 270px; flex: 0 0 270px; }
+  .learningCopy { padding: 24px; }
+  .horizontal .learningCopy { border-left: 0; border-top: 5px solid var(--panel-pastel); }
+  .review { padding: 56px 0; }
+  .review figure { width: calc(100% - 36px); }
+}

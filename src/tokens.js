@@ -86,6 +86,13 @@ export const fonts = {
   body:    "'DM Sans', sans-serif",
 };
 
+// Opt-in component typography; does not change existing production pages.
+export const expressiveTypography = {
+  letterSpacing: '-0.025em',
+  fontKerning: 'normal',
+  heroLineHeight: 0.9,
+};
+
 export const radius = {
   sm: 8,
   md: 12,
