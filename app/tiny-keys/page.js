@@ -1,4 +1,4 @@
-import TinyKeysRoute from '../../src/next/TinyKeysRoute';
+import ProgramPreviewFrame from '../../src/next/ProgramPreviewFrame';
 
 export const metadata = {
   title: 'Tiny Keys — Piano for Ages 5–7',
@@ -16,5 +16,5 @@ export const metadata = {
 };
 
 export default function TinyKeysPage() {
-  return <TinyKeysRoute />;
+  return <ProgramPreviewFrame program="tiny-keys" />;
 }

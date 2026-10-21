@@ -1,8 +1,8 @@
 import ServicesPage from "./ServicesPage";
 
-export default function ServicesRecordingProductionPage(props) {
+export default function ServicesRecordingProductionPage({ PageComponent = ServicesPage, contentOverrides = {}, ...props }) {
   return (
-    <ServicesPage
+    <PageComponent
       {...props}
       pageName="Recording & Music Production"
       title="Recording studio, production, mixing, and mastering in Rocklin"
@@ -62,6 +62,7 @@ export default function ServicesRecordingProductionPage(props) {
       ]}
       ctaTitle="Book recording studio time."
       ctaBody="Tell us what you want to record, how many songs you are working on, what instruments or vocals are involved, and whether you need engineering, production, mixing, mastering, or room-only time."
+      {...contentOverrides}
     />
   );
 }

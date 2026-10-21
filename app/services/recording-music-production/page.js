@@ -1,4 +1,5 @@
-import ServicesRecordingProductionRoute from '../../../src/next/ServicesRecordingProductionRoute';
+import RecordingProductionPreview from '../../../src/next/RecordingProductionPreview';
+import { ServiceDesignFrame } from '../../../src/next/ReleaseFrames';
 
 const pageUrl = 'https://www.headlinermusicacademy.com/services/recording-music-production';
 const description =
@@ -45,7 +46,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <ServicesRecordingProductionRoute />
+      <ServiceDesignFrame><RecordingProductionPreview /></ServiceDesignFrame>
       <script
         id="headliner-recording-production-jsonld"
         type="application/ld+json"

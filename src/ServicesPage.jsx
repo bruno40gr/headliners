@@ -17,19 +17,24 @@ import {
   globalStyles,
 } from "./ui";
 import { submitLead } from "./lib/formDelivery";
+import RehearsalProductionFields from './RehearsalProductionFields';
+import { formatRehearsalMessage, rehearsalDocumentEmail } from './lib/rehearsalInquiry';
+import { validEmail } from './lib/inquiryValidation';
 
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
-export function ServiceInquiryModal({ serviceName, onClose }) {
+export function ServiceInquiryModal({ serviceName, onClose, rehearsalProduction = false }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", details: "" });
+  const [production, setProduction] = useState({ engineer: '', recording: '', setup: '' });
   const [status, setStatus] = useState("idle");
 
-  const valid = form.name.trim() && form.email.trim() && status !== "sending";
+  const valid = form.name.trim() && validEmail(form.email) && (status === "idle" || status === "error");
   const setField = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleSubmit = async () => {
     if (!valid) return;
     setStatus("sending");
+    const message = rehearsalProduction ? formatRehearsalMessage(form.details, production) : form.details;
 
     const leadPayload = {
       tenant_id: CRM_TENANT_ID,
@@ -42,7 +47,7 @@ export function ServiceInquiryModal({ serviceName, onClose }) {
       service_label: serviceName,
       referrer: window.location.href,
       payload: {
-        message: form.details || null,
+        message: message || null,
       },
     };
 
@@ -57,7 +62,7 @@ export function ServiceInquiryModal({ serviceName, onClose }) {
       time_of_day: "N/A",
       preferred_date: "N/A",
       time_window: "N/A",
-      message: form.details || "No additional details",
+      message: message || "No additional details",
     };
 
     try {
@@ -88,6 +93,11 @@ export function ServiceInquiryModal({ serviceName, onClose }) {
             Thanks for reaching out about {serviceName.toLowerCase()}. We will follow up by email or phone to talk through what you need.
           </TextBlock>
           <Button onClick={onClose}>Close</Button>
+          {rehearsalProduction && <div style={{ marginTop: 24, fontFamily: fonts.body, fontSize: 14, lineHeight: 1.6 }}>
+            <a href={rehearsalDocumentEmail(form.name, form.email)}>Email input list or stage plot</a>
+            <p>This opens your email app. Attach your documents before sending, using the same name and email as your inquiry. Documents are not attached automatically.</p>
+            <p>You can also email them later to admin@headlinermusicacademy.com. No documents prepared? We can help with your setup.</p>
+          </div>}
         </div>
       ) : (
         <>
@@ -110,13 +120,14 @@ export function ServiceInquiryModal({ serviceName, onClose }) {
             <FormField label="Details">
               <Textarea rows={4} value={form.details} onChange={(e) => setField("details", e.target.value)} placeholder="Project, event, room, gear, or timing." />
             </FormField>
+            {rehearsalProduction && <RehearsalProductionFields value={production} onChange={setProduction} />}
             {status === "error" && (
               <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.errorText, background: C.errorBg, border: `1px solid ${C.errorBorder}`, borderRadius: 10, padding: "10px 14px", margin: 0 }}>
                 Something went wrong. Please try again or email us at admin@headlinermusicacademy.com.
               </p>
             )}
             <Button onClick={handleSubmit} disabled={!valid} style={{ width: "100%" }}>
-              {status === "sending" ? "Sending..." : "Reach out"}
+              {status === "sending" ? "Sending..." : rehearsalProduction ? "Submit" : "Reach out"}
             </Button>
             <p style={{ textAlign: "center", fontFamily: fonts.body, fontSize: 12, color: C.muted, margin: 0 }}>
               Or call us at{" "}

@@ -10,6 +10,7 @@
 import { useState, useEffect, useRef } from "react";
 import { X, ArrowRight, ChevronDown } from "lucide-react";
 import { C, fonts } from "./tokens";
+import FormLabel from './FormLabel';
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BUTTON
@@ -383,18 +384,9 @@ export function TextBlock({ variant = "body", accent, children, style, as: Tag =
 export function FormField({ label, children, hint }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label
-        style={{
-          fontFamily: fonts.body,
-          fontSize: 10,
-          fontWeight: 700,
-          letterSpacing: "0.02em",
-          textTransform: "none",
-          color: C.muted,
-        }}
-      >
+      <FormLabel>
         {label}
-      </label>
+      </FormLabel>
       {children}
       {hint && (
         <p style={{ fontFamily: fonts.body, fontSize: 11, color: C.subtext, margin: "4px 0 0" }}>

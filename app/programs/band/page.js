@@ -1,4 +1,5 @@
-import BandProgramRoute from '../../../src/next/BandProgramRoute';
+import BandPreviewRoute from '../../../src/next/BandPreviewRoute';
+import { ServiceDesignFrame } from '../../../src/next/ReleaseFrames';
 
 export const metadata = {
   title: 'Band Performance Program',
@@ -16,5 +17,5 @@ export const metadata = {
 };
 
 export default function BandProgramPage() {
-  return <BandProgramRoute />;
+  return <ServiceDesignFrame><BandPreviewRoute /></ServiceDesignFrame>;
 }

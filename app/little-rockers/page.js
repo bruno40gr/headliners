@@ -1,4 +1,4 @@
-import LittleRockersRoute from '../../src/next/LittleRockersRoute';
+import ProgramPreviewFrame from '../../src/next/ProgramPreviewFrame';
 
 export const metadata = {
   title: 'Little Rockers — Music for Ages 3–5',
@@ -16,5 +16,5 @@ export const metadata = {
 };
 
 export default function LittleRockersPage() {
-  return <LittleRockersRoute />;
+  return <ProgramPreviewFrame program="little-rockers" />;
 }

@@ -20,48 +20,60 @@ export function publicationMetadata(item, label) {
   };
 }
 
-// Shell content only. These publications are not backed by the CRM.
+// Local CMS-shaped records. Replace this data source when the CMS is connected.
+// Dates and credits remain absent until explicitly supplied by an editor.
 export const previewPublications = [
   {
-    slug: 'friday-showcase',
-    mockPublishedAt: '2026-10-09', // Preview-only sample, not a real publication date.
+    id: 'shadys-coffee-performance',
+    slug: 'student-performances-at-shadys-coffee',
+    publishedAt: '2026-10-17',
     category: 'Performances',
-    title: 'A few photos from Friday’s showcase',
-    excerpt: 'First-time performers, a packed room, and one more song before everyone went home.',
-    image: `${cloud}/f_auto,q_auto,w_1000/v1781715554/20250628_153338_srnhk2.jpg`,
-    alt: 'A Headliner band performing live',
-    paragraphs: [
-      'The opening band had been working on their set for six weeks. At soundcheck, they were still sorting out how to start the second song. By showtime, they had it.',
-      'We heard piano solos, a first vocal performance, and a band that brought their own original song. Thanks to everyone who helped move chairs and stayed to listen to the last set.',
+    title: 'A sunny Saturday of music at Shady’s Coffee',
+    excerpt: 'Students shared their music over what might have been the last hot Saturday of the year. Thank you to everyone who performed and cheered them on.',
+    image: `${cloud}/v1792531539/97f36539-20a1-41b2-9f14-d78785c1835e.png`,
+    alt: 'A student singing and playing acoustic guitar outdoors at Shady’s Coffee',
+    focalPoint: 'center 35%',
+    body: [
+      { id: 'afternoon', type: 'paragraph', text: 'What might have been the last hot Saturday of the year turned into a wonderful afternoon of student performances at Shady’s Coffee. We had a great time sharing music together, and we’re grateful to everyone who came out to listen and support the performers.' },
+      { id: 'performers', type: 'paragraph', text: 'A big thank-you to Owen Thompson, Madi Thompson, Collin Tang, Tyler Daigle, Samme Fosse, Wyatt Young, and Londyn Morris for bringing their music to the stage.' },
+      { id: 'thanks', type: 'paragraph', text: 'Thank you to Shady’s Coffee for hosting us, and to Collin, our drum teacher, for providing setup and support throughout the afternoon. We loved getting to spend the day making music with this community.' },
     ],
-    cta: null,
   },
   {
-    slug: 'meet-maya',
-    mockPublishedAt: '2026-10-07',
-    category: 'Teachers',
-    title: 'Meet Maya, our new piano teacher',
-    excerpt: 'Her first question: what do you like listening to?',
-    image: `${cloud}/f_auto,q_auto,w_900/v1781715525/PXL_20260615_232703074.PORTRAIT_mqdiam.jpg`,
-    alt: 'Piano instruction at Headliner',
-    paragraphs: [
-      'Maya grew up playing classical piano and now spends most of her time accompanying singers. She likes starting with a song the student already knows, then using it to work on reading, rhythm, and technique.',
-      'She’ll be teaching on Tuesdays and Thursdays. Ask the front desk about a first lesson.',
-    ],
-    cta: { label: 'Explore music lessons', href: '/programs/private-lessons' },
-  },
-  {
-    slug: 'first-original',
-    mockPublishedAt: '2026-10-03',
+    id: 'jennifer-belle-live-session',
+    slug: 'jennifer-belle-live-studio-session',
+    publishedAt: '2026-10-15',
     category: 'In the studio',
-    title: 'Their first original, recorded',
-    excerpt: 'The Wednesday band took a song from rehearsal into the studio.',
-    image: `${cloud}/f_auto,q_auto,w_900/v1787854712/e7994742-e89a-4d31-873c-5fc55dc6a028.png`,
-    alt: 'Recording equipment in the Headliner studio',
-    paragraphs: [
-      'It started with a guitar riff at rehearsal. A month later, the band had verses, a chorus, and a drum part everyone agreed on.',
-      'For their first session, they recorded the rhythm section together, then added vocals. Listening back gave them a few ideas for the next rehearsal.',
+    title: 'Jennifer Belle brings her band to the studio for Reno fire relief',
+    excerpt: 'We welcomed Jennifer Belle and her musicians for a live session filmed in 4K, recorded for a telethon supporting people affected by the Reno fires.',
+    image: `${cloud}/v1792531716/41a7b5b6-91dd-4895-8ed2-1fe0be4765cd.png`,
+    alt: 'Jennifer Belle, her band, and the crew together at Headliner’s studio',
+    focalPoint: 'center 45%',
+    body: [
+      { id: 'session', type: 'paragraph', text: 'We were delighted to welcome Jennifer Belle and her band to Headliner for a live studio session filmed in 4K. The performance was recorded for a music telethon supporting people affected by the fires in Reno, Nevada.' },
+      { id: 'broadcast', type: 'paragraph', text: 'In her announcement, Jennifer shared that the telethon is set to air on Roku TV on October 30 at 5 PM, with a viewing link to follow. We’ll share more details when they’re available.' },
+      { id: 'musicians', type: 'paragraph', text: 'Joining Jennifer were Bobby Campbell on drums, Alan “Al” Harrison on bass, Bill McCoy on keyboard, and Craig Stegall and Trent Durst on guitar. Thank you to the musicians and everyone behind the scenes for bringing the session together.' },
+      { id: 'community', type: 'paragraph', text: 'Jennifer described the evening as a reminder of how music brings people together. We’re grateful to have played a part in a performance supporting the Reno community.' },
     ],
-    cta: null,
+    source: {
+      label: 'Read Jennifer’s announcement on Facebook',
+      url: 'https://www.facebook.com/groups/1389528004598964/permalink/4473770866174647/',
+    },
+  },
+  {
+    id: 'wag-and-walk-2026',
+    slug: 'wag-and-walk-with-placer-spca',
+    publishedAt: '2026-10-10',
+    category: 'In the community',
+    title: 'Music, dogs, and a Saturday morning with Placer SPCA',
+    excerpt: 'We joined Placer SPCA’s Wag & Walk with a booth and an early set from Sunkast, spending a wonderful Saturday morning supporting a great cause.',
+    image: `${cloud}/v1792532225/b997600c-d64c-46ec-bbd8-d91fd884d1b6.png`,
+    alt: 'Headliner at Placer SPCA’s Wag & Walk',
+    body: [
+      { id: 'morning', type: 'paragraph', text: 'We spent Saturday morning, October 10, at Wag & Walk, hosted by Placer SPCA. Between meeting visitors at our booth and spending time with the dogs, it was a wonderful way to come together for a great cause.' },
+      { id: 'sunkast', type: 'paragraph', text: 'The morning started early as we supported our band Sunkast for their 8 AM performance. Thank you to the musicians for bringing their energy and music to the event, and to everyone who stopped by to listen or say hello at the booth.' },
+      { id: 'relationship', type: 'paragraph', text: 'We’re grateful for our ongoing relationship with Placer SPCA and the opportunities to support their work through music. Thank you to their team for bringing the community together for such a lovely Saturday morning.' },
+      { id: 'event-artwork', type: 'image', src: `${cloud}/v1791594003/c21a5d7e-db1a-45e7-a163-3df6587c7f3d.png`, alt: 'Placer SPCA Wag & Walk 2026 event artwork' },
+    ],
   },
 ];

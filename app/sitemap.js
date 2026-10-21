@@ -1,3 +1,5 @@
+import { previewPublications } from '../src/next/preview-publications';
+
 export default function sitemap() {
   const baseUrl = 'https://www.headlinermusicacademy.com';
   const now = new Date();
@@ -22,6 +24,7 @@ export default function sitemap() {
     '/services/dj-and-events',
     '/services/instrument-setup',
     '/services/rehearsal-space',
+    ...previewPublications.map(({ slug }) => `/publications/${slug}`),
   ].map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: now,

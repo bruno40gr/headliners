@@ -1,4 +1,6 @@
+import FormLabel from './FormLabel';
 import { useState, useEffect } from "react";
+import { validEmail } from './lib/inquiryValidation';
 import { MapPin, Mail, Phone, X, ChevronDown, ArrowRight } from "lucide-react";
 import ProgramsNav from "./ProgramsNav";
 import BandProgramPage from "./BandProgramPage";
@@ -181,7 +183,7 @@ function BookingModal({ instrument, onClose }) {
     }
   };
 
-  const valid = form.parentName.trim()&&form.name.trim()&&form.email.trim()&&form.instrument.trim()&&form.level&&status==="idle";
+  const valid = form.parentName.trim()&&form.name.trim()&&validEmail(form.email)&&form.instrument.trim()&&form.level&&(status==="idle"||status==="error");
 
   return (
     <div
@@ -350,11 +352,7 @@ function BookingModal({ instrument, onClose }) {
 function Field({ label, children }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:6}}>
-      <label style={{
-        fontFamily:fonts.body,
-        fontSize:10,fontWeight:700,
-        letterSpacing:"0.14em",textTransform: "none",color:C.muted,
-      }}>{label}</label>
+      <FormLabel>{label}</FormLabel>
       {children}
     </div>
   );

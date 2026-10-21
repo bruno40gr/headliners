@@ -1,4 +1,5 @@
-import HomePage from '../src/next/HomePage';
+import HomePreview from '../src/next/HomePreview';
+import { HomeDesignFrame } from '../src/next/ReleaseFrames';
 
 export const metadata = {
   title: 'Headliner Music Academy | Rocklin, CA',
@@ -16,5 +17,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <HomePage />;
+  return <HomeDesignFrame><HomePreview /></HomeDesignFrame>;
 }

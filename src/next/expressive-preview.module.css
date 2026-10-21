@@ -1,0 +1,6 @@
+.frame.frame :is(h1, h2, h3, [style*="Baloo 2"]) {
+  font-family: var(--preview-heading-font), sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: var(--preview-heading-tracking) !important;
+  font-kerning: var(--preview-heading-kerning);
+}

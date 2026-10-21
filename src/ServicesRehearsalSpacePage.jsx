@@ -1,8 +1,8 @@
 import ServicesPage from "./ServicesPage";
 
-export default function ServicesRehearsalSpacePage(props) {
+export default function ServicesRehearsalSpacePage({ PageComponent = ServicesPage, contentOverrides = {}, ...props }) {
   return (
-    <ServicesPage
+    <PageComponent
       {...props}
       pageName="Rehearsal Space"
       title="Band rehearsal space in Rocklin"
@@ -59,6 +59,7 @@ export default function ServicesRehearsalSpacePage(props) {
       ]}
       ctaTitle="Book a rehearsal space."
       ctaBody="Ask about one-time rehearsal time, recurring availability, after-hours bookings, or Sunday rehearsals."
+      {...contentOverrides}
     />
   );
 }

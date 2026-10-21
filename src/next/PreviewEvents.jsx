@@ -22,21 +22,26 @@ export function EventDetails({ event, onClose }) {
     return () => { element.close(); document.body.style.overflow = previousOverflow; };
   }, []);
 
-  return <dialog ref={dialog} className={styles.eventDialog} aria-labelledby="event-dialog-title" onClose={onClose} onClick={(e) => {
+  // Cleanup also emits a native close event during Strict Mode's effect replay.
+  // Handle user dismissal explicitly so that event cannot clear a reopened dialog.
+  return <dialog ref={dialog} className={styles.eventDialog} aria-labelledby="event-dialog-title" onCancel={(e) => {
+    e.preventDefault();
+    onClose();
+  }} onClick={(e) => {
     if (e.target !== e.currentTarget) return;
     const rect = e.currentTarget.getBoundingClientRect();
     if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) onClose();
   }}>
     <button className={styles.dialogClose} onClick={onClose} aria-label="Close event details" autoFocus>Close</button>
-    {event.image && <img className={styles.dialogImage} src={event.image} alt="" />}
+    {event.flyerImage ? <a href={event.flyerImage} target="_blank" rel="noreferrer" aria-label={`Open full-size flyer: ${event.title}`}><img className={`${styles.dialogImage} ${styles.flyerImage}`} src={event.flyerImage} alt={event.flyerAlt || event.title} /></a> : event.image && <img className={styles.dialogImage} src={event.image} alt="" />}
     <h2 id="event-dialog-title">{event.title}</h2>
-    <dl className={styles.eventFacts}>
+    {event.startsAt && event.endsAt && <dl className={styles.eventFacts}>
       <div><dt>Date</dt><dd>{eventDate(event)}</dd></div>
       <div><dt>Time</dt><dd>{eventTime(event)}</dd></div>
       <div><dt>Place</dt><dd>Headliner Music Academy<br />2311 Sunset Blvd, Rocklin, CA</dd></div>
-    </dl>
+    </dl>}
     <p>{event.description}</p>
-    <p className={styles.sampleNote}>Fictional event for this preview. This is not a scheduled event.</p>
+    {event.action && <p><a href={event.action.href}>{event.action.label}</a></p>}
   </dialog>;
 }
 
@@ -81,6 +86,6 @@ export default function PreviewEvents({ events, onSelect }) {
         })}
       </div>
     </> : <div className={styles.agenda}>{upcomingEvents.map(event => <button key={event.title} onClick={() => onSelect(event)}><strong>{event.title}</strong><span>{eventDate(event)} · {eventTime(event)}</span></button>)}</div>}
-    {!visibleEvents.length && <p className={styles.emptyMonth}>No sample events this month.</p>}
+    {!visibleEvents.length && <p className={styles.emptyMonth}>No announced events this month.</p>}
   </div>;
 }

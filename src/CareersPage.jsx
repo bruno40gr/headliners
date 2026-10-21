@@ -1,7 +1,9 @@
+import FormLabel from './FormLabel';
 import { useState } from "react";
 import { ArrowRight, Music, Clock, Mic2, TrendingUp, Check } from "lucide-react";
 import ProgramsNav from "./ProgramsNav";
 import { submitLead } from "./lib/formDelivery";
+import { validEmail } from './lib/inquiryValidation';
 
 // ── Design tokens (kept local per-page, matching the rest of the site) ────────
 const C = {
@@ -113,10 +115,7 @@ function Button({ children, variant = "primary", href, disabled, style, onClick,
 function Field({ label, children }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label style={{
-        fontFamily: "'DM Sans',sans-serif", fontSize: 10, fontWeight: 700,
-        letterSpacing: "0.14em", textTransform: "none", color: C.muted,
-      }}>{label}</label>
+      <FormLabel>{label}</FormLabel>
       {children}
     </div>
   );
@@ -185,7 +184,7 @@ export default function CareersPage({ setPath, onRequestLessons }) {
   }));
 
   const valid =
-    form.name.trim() && form.email.trim() && form.position.length && form.message.trim() && status === "idle";
+    form.name.trim() && validEmail(form.email) && form.position.length && form.message.trim() && (status === "idle" || status === "error");
 
   const handleSubmit = async () => {
     if (!valid) return;

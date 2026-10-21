@@ -1,8 +1,5 @@
-import { Asap, DM_Sans } from 'next/font/google';
+import ExpressivePreviewFrame from '../../../src/next/ExpressivePreviewFrame';
 import BandPreviewRoute from '../../../src/next/BandPreviewRoute';
-
-const display = Asap({ subsets: ['latin'], weight: ['700', '800'], display: 'swap', variable: '--font-asap' });
-const body = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-dm-sans' });
 
 export const metadata = {
   title: 'Band Program · Design preview',
@@ -12,5 +9,5 @@ export const metadata = {
 };
 
 export default function BandPreviewPage() {
-  return <div className={`${display.variable} ${body.variable}`}><BandPreviewRoute /></div>;
+  return <ExpressivePreviewFrame><BandPreviewRoute /></ExpressivePreviewFrame>;
 }

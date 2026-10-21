@@ -1,3 +1,4 @@
+import FormLabel from '../FormLabel';
 import Link from 'next/link';
 
 const brandLogo = 'https://res.cloudinary.com/diy08lj9x/image/upload/v1780713493/Asset_1_2x_a5hm0v.png';
@@ -21,9 +22,9 @@ export default function SmsConsentPage() {
           This page reflects the opt-in language used at booking on headlinermusicacademy.com.
         </p>
 
-        <label htmlFor="phone" style={{ display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: "none", color: '#7A6A5A', marginBottom: 6 }}>
+        <FormLabel htmlFor="phone" style={{ display: 'block', marginBottom: 6 }}>
           Phone number
-        </label>
+        </FormLabel>
         <input id="phone" type="tel" placeholder="(916) 000-0000" style={{ width: '100%', padding: '10px 14px', border: '1px solid #E8E2DA', borderRadius: 10, fontSize: 14, color: '#1A130F', background: '#FAF9F7', outline: 'none', fontFamily: 'inherit' }} />
 
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginTop: 16 }}>

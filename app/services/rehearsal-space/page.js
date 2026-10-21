@@ -1,8 +1,9 @@
-import ServicesRehearsalSpaceRoute from '../../../src/next/ServicesRehearsalSpaceRoute';
+import RehearsalSpacePreview from '../../../src/next/RehearsalSpacePreview';
+import { ServiceDesignFrame } from '../../../src/next/ReleaseFrames';
 
 const pageUrl = 'https://www.headlinermusicacademy.com/services/rehearsal-space';
 const description =
-  'Band rehearsal space in Rocklin, CA for $50/hr with drum kit, guitar amps, bass amp, PA system, wedges, and performance lights included.';
+  'Band rehearsal space in Rocklin, CA with rates starting at $50/hr. Backline, digital PA, wedges, keys, mics, and stage lighting included. Production support available on request.';
 
 const rehearsalSpaceJsonLd = {
   '@context': 'https://schema.org',
@@ -37,13 +38,13 @@ const rehearsalSpaceJsonLd = {
 };
 
 export const metadata = {
-  title: 'Band Rehearsal Space in Rocklin, CA | $50/hr',
+  title: 'Band Rehearsal Space in Rocklin, CA | From $50/hr',
   description,
   alternates: {
     canonical: '/services/rehearsal-space',
   },
   openGraph: {
-    title: 'Band Rehearsal Space in Rocklin, CA | $50/hr | Headliner Music Academy',
+    title: 'Band Rehearsal Space in Rocklin, CA | From $50/hr | Headliner Music Academy',
     description,
     url: pageUrl,
   },
@@ -52,7 +53,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <ServicesRehearsalSpaceRoute />
+      <ServiceDesignFrame><RehearsalSpacePreview /></ServiceDesignFrame>
       <script
         id="headliner-rehearsal-space-jsonld"
         type="application/ld+json"

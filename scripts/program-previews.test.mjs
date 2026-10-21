@@ -75,7 +75,7 @@ test('Tiny Keys levels use bullets and remove the ornamental keyboard strip', ()
   assert.ok(preview.includes('className="tk-level-label"'));
 });
 
-test('preview routes are noindex and canonicalize to unchanged production routes', () => {
+test('preview routes remain noindex and canonicalize to the public routes', () => {
   for (const slug of slugs) {
     const route = readFileSync(new URL(`../app/home-preview/${slug}/page.js`, import.meta.url), 'utf8');
     assert.match(route, /index: false, follow: false/);

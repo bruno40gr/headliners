@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from 'react';
 import ProgramsNav from "../ProgramsNav";
 import styles from './band-preview.module.css';
@@ -43,7 +43,7 @@ function HeroVideo() {
         if (!video) return;
         if (video.paused) video.play().catch(() => setPlaying(false));
         else video.pause();
-      }}>{playing ? 'Pause background video' : 'Play background video'}</button>}
+      }} aria-label={playing ? 'Pause video' : 'Play video'}>{playing ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}</button>}
     </>
   );
 }
@@ -388,7 +388,6 @@ export default function BandProgramPreview({ onRequestLessons, setPath }) {
           <h2 id="upcoming-shows-title">Upcoming<br/><span style={{ color: C.crimson }}>shows.</span></h2>
           <div className={styles.showNotice}>
             <p>Watch this space for announced dates.</p>
-            <a href="mailto:admin@headlinermusicacademy.com">Ask about the next performance <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
         </div>
       </section>

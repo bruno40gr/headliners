@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { submitLead } from "./lib/formDelivery";
 import { lessonIdentity } from "./lib/lessonIdentity";
+import { validEmail } from './lib/inquiryValidation';
 import { C, fonts } from "./tokens";
 import { Button, FormField, Input, Modal, PillToggle, Select, Textarea } from "./ui";
 
@@ -67,7 +68,7 @@ export default function BookingModal({ instrument, onClose }) {
     }));
 
   const valid = useMemo(
-    () => form.parentName.trim() && form.name.trim() && form.email.trim() && form.instrument.trim() && form.level && status === "idle",
+    () => form.parentName.trim() && form.name.trim() && validEmail(form.email) && form.instrument.trim() && form.level && (status === "idle" || status === "error"),
     [form, status],
   );
 
@@ -173,11 +174,11 @@ export default function BookingModal({ instrument, onClose }) {
           <div className="booking-modal-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: 26, alignItems: "start" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 140px", gap: 14, alignItems: "end" }}>
-                <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Student name *</span>}>
+                <FormField label="Student name *">
                   <Input type="text" placeholder="e.g. Jordan Smith" value={form.name} onChange={(event) => setField("name", event.target.value)} style={fieldTextStyle} />
                 </FormField>
 
-                <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Age</span>}>
+                <FormField label="Age">
                   <Input type="number" placeholder="e.g. 14" min={4} max={99} value={form.age} onChange={(event) => setField("age", event.target.value)} style={{ ...fieldTextStyle, maxWidth: "100%" }} />
                 </FormField>
               </div>
@@ -186,15 +187,15 @@ export default function BookingModal({ instrument, onClose }) {
                 <Input type="text" placeholder="Parent name, or your name if you are the student" value={form.parentName} onChange={(event) => setField("parentName", event.target.value)} style={fieldTextStyle} />
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Phone</span>}>
+              <FormField label="Phone">
                 <Input type="tel" placeholder="e.g. (916) 555-0123" value={form.phone} onChange={(event) => setField("phone", event.target.value)} style={fieldTextStyle} />
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Your email *</span>} hint={<span style={{ fontSize: 13, color: C.muted }}>We'll only use this to confirm your inquiry. No spam, ever.</span>}>
+              <FormField label="Your email *" hint={<span style={{ fontSize: 13, color: C.muted }}>We'll only use this to confirm your inquiry. No spam, ever.</span>}>
                 <Input type="email" placeholder="e.g. parent@email.com" value={form.email} onChange={(event) => setField("email", event.target.value)} style={fieldTextStyle} />
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Instrument or program *</span>}>
+              <FormField label="Instrument or program *">
                 <Select value={form.instrument} onChange={(event) => setField("instrument", event.target.value)} style={{ width: "100%" }} selectStyle={fieldTextStyle}>
                   <option value="">Select one…</option>
                   {offerings.map((offering) => (
@@ -205,7 +206,7 @@ export default function BookingModal({ instrument, onClose }) {
                 </Select>
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Experience level *</span>}>
+              <FormField label="Experience level *">
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {["Beginner", "Intermediate", "Advanced"].map((level) => (
                     <PillToggle key={level} label={level} active={form.level === level} onClick={() => setField("level", level)} />
@@ -215,7 +216,7 @@ export default function BookingModal({ instrument, onClose }) {
             </div>
 
             <div className="booking-modal-divider" style={{ display: "flex", flexDirection: "column", gap: 16, borderLeft: `1px solid ${C.border}`, paddingLeft: 22 }}>
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Days that work best</span>}>
+              <FormField label="Days that work best">
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {DAYS.map((day) => (
                     <PillToggle key={day} label={day} active={form.days.includes(day)} onClick={() => toggleArrayField("days", day)} />
@@ -223,7 +224,7 @@ export default function BookingModal({ instrument, onClose }) {
                 </div>
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Preferred time of day</span>}>
+              <FormField label="Preferred time of day">
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {TIMES.map((time) => (
                     <PillToggle key={time} label={time} active={form.times.includes(time)} onClick={() => toggleArrayField("times", time)} />
@@ -231,7 +232,7 @@ export default function BookingModal({ instrument, onClose }) {
                 </div>
               </FormField>
 
-              <FormField label={<span style={{ fontSize: 16, fontWeight: 600, letterSpacing: 0, textTransform: "none", color: C.espresso }}>Anything else?</span>}>
+              <FormField label="Anything else?">
                 <Textarea rows={10} placeholder="Goals, questions, previous experience, scheduling notes..." value={form.notes} onChange={(event) => setField("notes", event.target.value)} style={{ ...fieldTextStyle, minHeight: 246 }} />
               </FormField>
             </div>

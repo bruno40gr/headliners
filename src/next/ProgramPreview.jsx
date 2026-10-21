@@ -5,6 +5,7 @@ import TinyKeysPreview from './TinyKeysPreview';
 import LittleRockersPreview from './LittleRockersPreview';
 import { C } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
+import { useSitePath } from './useSitePath';
 import styles from './program-preview.module.css';
 
 const littleRockersTestimonial = {
@@ -20,9 +21,10 @@ const tinyKeysTestimonial = {
 
 export default function ProgramPreview({ program }) {
   const navigate = useNextNavigate();
+  const sitePath = useSitePath();
   const Page = program === 'tiny-keys' ? TinyKeysPreview : LittleRockersPreview;
   function navigatePreview(path) {
-    navigate(path === '/' ? '/home-preview' : ['/little-rockers', '/tiny-keys'].includes(path) ? `/home-preview${path}` : path);
+    navigate(sitePath(path));
   }
 
   return <div className={`${styles.page} ${program === 'little-rockers' ? styles.littleRockers : styles.tinyKeys}`} style={{ '--espresso-surface': C.espressoLt, '--program-cream': C.cream, '--program-espresso': C.espresso, '--program-red': C.crimson, '--program-border': C.border, '--program-muted': C.muted, '--program-white': C.white, '--program-blue': C.tealPastel, '--program-yellow': C.yellowPastel }}>
@@ -30,10 +32,10 @@ export default function ProgramPreview({ program }) {
     <main id="program-main"><Page navigate={navigatePreview} setPath={navigatePreview} approvedTestimonial={program === 'little-rockers' ? littleRockersTestimonial : tinyKeysTestimonial} /></main>
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
-        <Link href="/home-preview"><img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" width="180" /></Link>
+        <Link href={sitePath('/')}><img src="https://res.cloudinary.com/diy08lj9x/image/upload/v1780714085/logo_white_2x_ypk002.png" alt="Headliner Music Academy" width="180" /></Link>
         <nav aria-label="Footer">
-          <Link href="/home-preview/little-rockers">Little Rockers</Link>
-          <Link href="/home-preview/tiny-keys">Tiny Keys</Link>
+          <Link href={sitePath('/little-rockers')}>Little Rockers</Link>
+          <Link href={sitePath('/tiny-keys')}>Tiny Keys</Link>
           <Link href="/about/funding-support">Funding support</Link>
           <a href="https://headlinerma.opus1.io/login" target="_blank" rel="noreferrer">Parent Portal</a>
         </nav>

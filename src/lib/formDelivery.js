@@ -133,8 +133,17 @@ export async function submitToSupabase(payload) {
 export async function submitLead({ leadPayload, emailPayload, emailConfig }) {
   switch (getFormDeliveryMode()) {
     case "pulse":
-    case "crm":
-      return submitToCrmIntake(leadPayload);
+    case "crm": {
+      const response = await submitToCrmIntake(leadPayload);
+      // Intake is the record of truth. An email failure must not invite a
+      // duplicate lead submission after intake has already accepted it.
+      try {
+        await submitToEmailJS(emailPayload, emailConfig);
+      } catch (error) {
+        console.error("Lead saved, but EmailJS notification failed:", error);
+      }
+      return response;
+    }
 
     case "supabase":
       return submitToSupabase(leadPayload);

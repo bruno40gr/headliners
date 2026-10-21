@@ -8,11 +8,14 @@ import BookingModal from '../BookingModal';
 import BookingInterstitial from '../BookingInterstitial';
 import { C } from '../tokens';
 import { useNextNavigate } from './useNextNavigate';
+import { useSitePath } from './useSitePath';
 import styles from './home-preview.module.css';
 import PreviewEvents, { EventDetails } from './PreviewEvents';
 import { previewPublications, publicationMetadata } from './preview-publications';
 import PreviewReviews from './PreviewReviews';
 import PreviewCommunityEmbeds from './PreviewCommunityEmbeds';
+import { bulletinPosters as posters, bulletinEvents } from './bulletin-posters';
+import PublicationBody from './PublicationBody';
 
 const cloud = 'https://res.cloudinary.com/diy08lj9x/image/upload';
 const photos = {
@@ -43,17 +46,10 @@ const offerings = [
   { title: 'Rehearsal space', body: 'Room for your band to practice and get ready for a show.', image: photos.room, alt: 'Rehearsal and performance space at Headliner', href: '/services/rehearsal-space' },
 ];
 
-const posters = [
-  { title: 'Student showcase', detail: 'Live at Headliner', style: 'showcase', image: photos.performance, startsAt: '2026-10-17T17:00:00-07:00', endsAt: '2026-10-17T19:00:00-07:00', description: 'Student bands and solo performers share what they have been working on. Families and friends are welcome. Admission is free. Doors open at 4:30 pm.' },
-  { title: 'Join a band', detail: 'Rehearse. Record. Perform.', style: 'bandPoster', startsAt: '2026-10-21T16:00:00-07:00', endsAt: '2026-10-21T17:00:00-07:00', description: 'Try a band rehearsal with a coach. Bring your instrument if you have one. We have drums and keyboards available. Ask the front desk about a spot.' },
-  { title: 'Open mic night', detail: 'Bring a song.', style: 'micPoster', startsAt: '2026-10-23T18:00:00-07:00', endsAt: '2026-10-23T20:00:00-07:00', description: 'Bring a song, a friend, or just come to listen. Each performer gets two songs. Sign up at the front desk when you arrive. All ages are welcome; admission is free.' },
-  { title: 'In the studio', detail: 'Recording & production', style: 'studioPoster', image: photos.studio, startsAt: '2026-11-07T13:00:00-08:00', endsAt: '2026-11-07T15:00:00-08:00', description: 'See how a recording session works, from setting up microphones to listening back. Students can try recording a short part. No recording experience needed. Ask the front desk to reserve a place.' },
-];
 
 // Shared optional metadata for stories and community media; no inferred dates.
 function renderMetadata(item, label, story = false) {
-  const sampleDate = !item.publishedAt && item.mockPublishedAt;
-  const metadata = publicationMetadata(sampleDate ? { ...item, publishedAt: sampleDate } : item, label);
+  const metadata = publicationMetadata(item, label);
   const { date, credit } = metadata;
   label = metadata.label;
   if (!label && !date && !credit) return null;
@@ -61,14 +57,16 @@ function renderMetadata(item, label, story = false) {
     {(label || date) && <div className={styles.metadataLine}>
       {label && <span className={story ? styles.storyCategory : undefined}>{label}</span>}
       {label && date && <span aria-hidden="true">·</span>}
-      {date && <time dateTime={sampleDate || item.publishedAt}>{date}{sampleDate && <span className={styles.sampleDate}> (sample)</span>}</time>}
+      {date && <time dateTime={item.publishedAt}>{date}</time>}
     </div>}
     {credit && <span className={styles.metadataCredit}>{credit}</span>}
   </div>;
 }
 
 export default function HomePreview({ publicationSlug = null }) {
-  const navigate = useNextNavigate();
+  const navigateTo = useNextNavigate();
+  const sitePath = useSitePath();
+  const navigate = path => navigateTo(sitePath(path));
   const [bookingFor, setBookingFor] = useState(null);
   const [tourOpen, setTourOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -105,18 +103,16 @@ export default function HomePreview({ publicationSlug = null }) {
       {tourOpen && <BookingInterstitial programName="Headliner Music Academy" programColor={C.teal} opusL1="https://headlinermusicacademy.com" opusL2="https://headlinermusicacademy.com" opusL3="https://headlinermusicacademy.com" initialScreen={2} onClose={() => setTourOpen(false)} emailjsServiceId="service_734y6qg" emailjsTemplateId="template_czlclec" emailjsPublicKey="FdW-lGbAyQuJZFy-y" />}
 
       <main id="preview-main">
-        <div className={styles.previewNote}>Homepage preview. Stories, posters, and events are fictional examples. Photos are from the existing site and do not identify the people in these stories. Inquiry forms are live.</div>
+        {sitePath('/') === '/home-preview' && <div className={styles.previewNote}>Homepage preview. Articles, bulletin board flyers, and social posts use content supplied by Headliner. Inquiry forms are live.</div>}
         {publication ? <article className={styles.publication}>
-          <Link className={styles.textLink} href="/home-preview#around-title"><ArrowLeft size={16} aria-hidden="true" />Back to Around Headliner</Link>
+          <Link className={styles.textLink} href={sitePath('/#around-title')}><ArrowLeft size={16} aria-hidden="true" />Back to Around Headliner</Link>
           <h1>{publication.title}</h1>
+          {renderMetadata(publication, publication.category)}
           <img className={styles.publicationImage} src={publication.image} alt={publication.alt} fetchPriority="high" />
-          <div className={styles.publicationContent}>
-            {publication.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-            {publication.cta && <a className={styles.primaryButton} href={publication.cta.href}>{publication.cta.label}<ArrowRight size={17} aria-hidden="true" /></a>}
-          </div>
+          <PublicationBody publication={publication} />
           <nav className={styles.publicationNavigation} aria-label="Publications">
-            <Link className={styles.textLink} href="/home-preview#around-title"><ArrowLeft size={16} aria-hidden="true" />Back to Around Headliner</Link>
-            <Link className={styles.textLink} href={`/home-preview/publications/${nextPublication.slug}`}>Next publication<ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link className={styles.textLink} href={sitePath('/#around-title')}><ArrowLeft size={16} aria-hidden="true" />Back to Around Headliner</Link>
+            <Link className={styles.textLink} href={sitePath(`/publications/${nextPublication.slug}`)}>Next publication<ArrowRight size={16} aria-hidden="true" /></Link>
           </nav>
         </article> : <>
         <section className={styles.hero} aria-labelledby="hero-title">
@@ -124,7 +120,7 @@ export default function HomePreview({ publicationSlug = null }) {
             <h1 id="hero-title"><img className={styles.heroLogo} src={logo} alt="Headliner Music Academy" /></h1>
             <p>A Rocklin music academy for kids, teens, and adults to learn instruments, join bands, record, perform, and grow with supportive teachers.</p>
             <div className={styles.actions}>
-              <button className={styles.primaryButton} onClick={() => setBookingFor('')}>Request a lesson <ArrowRight size={17} aria-hidden="true" /></button>
+              <button className={styles.primaryButton} onClick={() => setBookingFor('')}>Request a lesson <ArrowRight className={styles.heroButtonArrow} size={17} aria-hidden="true" /></button>
               <button className={styles.secondaryButton} onClick={() => setTourOpen(true)}>Request a Tour</button>
             </div>
             <a className={styles.heroPhone} href="tel:916-435-1300"><Phone size={14} aria-hidden="true" />Or call us <strong>(916) 435-1300</strong></a>
@@ -137,28 +133,33 @@ export default function HomePreview({ publicationSlug = null }) {
           </div>
         </section>
 
-        <div className={styles.shell}>
+        <div className={`${styles.shell} ${styles.homeSections}`}>
+          <section className={`${styles.section} ${styles.offerSection}`} aria-labelledby="offer-title">
+            <div className={styles.sectionHeading}><h2 id="offer-title" className={styles.homeSectionTitle}>What we offer</h2></div>
+            <div className={styles.offerGrid}>{offerings.map(offer => <a href={sitePath(offer.href)} className={styles.offer} key={offer.title}><img src={offer.image} alt={offer.alt} loading="lazy" /><h3>{offer.title}</h3><p>{offer.body}</p><span className={styles.inlineLink}>Learn more <ArrowRight size={16} aria-hidden="true" /></span></a>)}</div>
+          </section>
+
           <section className={styles.section} aria-labelledby="around-title">
-            <div className={`${styles.sectionHeading} ${styles.editorialHeading}`}><h2 id="around-title">Around Headliner</h2></div>
+            <div className={`${styles.sectionHeading} ${styles.editorialHeading}`}><h2 id="around-title" className={styles.homeSectionTitle}>Around Headliner</h2></div>
             <div className={styles.storyGrid}>
-              <Link href={`/home-preview/publications/${previewPublications[0].slug}`} className={styles.leadStory}>
+              <Link href={sitePath(`/publications/${previewPublications[0].slug}`)} className={styles.leadStory}>
                 <img src={previewPublications[0].image} alt={previewPublications[0].alt} loading="lazy" />
                 <div className={styles.leadStoryCopy}>{renderMetadata(previewPublications[0], previewPublications[0].category, true)}<h3>{previewPublications[0].title}</h3>
                 <p>{previewPublications[0].excerpt}</p></div>
               </Link>
               <div className={styles.sideStories}>
-                {previewPublications.slice(1).map(story => <Link key={story.slug} href={`/home-preview/publications/${story.slug}`} className={styles.smallStory}><img src={story.image} alt={story.alt} loading="lazy" /><div>{renderMetadata(story, story.category, true)}<h3>{story.title}</h3><p>{story.excerpt}</p></div></Link>)}
+                {previewPublications.slice(1).map(story => <Link key={story.slug} href={sitePath(`/publications/${story.slug}`)} className={styles.smallStory}><img src={story.image} alt={story.alt} loading="lazy" /><div>{renderMetadata(story, story.category, true)}<h3>{story.title}</h3><p>{story.excerpt}</p></div></Link>)}
               </div>
             </div>
           </section>
 
           <section className={styles.section} aria-labelledby="board-title">
-            <div className={`${styles.sectionHeading} ${styles.boardHeading}`}><h2 id="board-title">The bulletin board</h2><div className={styles.boardControls}>
+            <div className={`${styles.sectionHeading} ${styles.boardHeading}`}><h2 id="board-title" className={styles.homeSectionTitle}>The bulletin board</h2><div className={styles.boardControls}>
               <button type="button" aria-label="Browse previous posters" aria-controls="bulletin-posters" disabled={boardEdges.start} onClick={() => browsePosters(-1)}><ArrowLeft size={20} aria-hidden="true" /></button>
               <button type="button" aria-label="Browse next posters" aria-controls="bulletin-posters" disabled={boardEdges.end} onClick={() => browsePosters(1)}><ArrowRight size={20} aria-hidden="true" /></button>
             </div></div>
             <div id="bulletin-posters" ref={posterGrid} onScroll={updateBoardEdges} className={styles.posterGrid} role="region" aria-label="Bulletin board posters" tabIndex={0}>
-              {posters.map((poster) => <button key={poster.title} type="button" onClick={() => setSelectedEvent(poster)} aria-label={`View details: ${poster.title}`} className={`${styles.poster} ${styles[poster.style]} ${poster.flyerImage ? styles.uploadedPoster : ''}`}>
+              {posters.map((poster) => <button key={poster.title} type="button" onClick={() => setSelectedEvent(poster)} aria-label={`View details: ${poster.title}`} className={`${styles.poster} ${styles.uploadedPoster}`}>
                 {poster.flyerImage ? <img src={poster.flyerImage} alt={poster.flyerAlt || poster.title} loading="lazy" /> : <>
                 {poster.image && <img src={poster.image} alt="" loading="lazy" />}
                 <div className={styles.posterContent}><h3>{poster.title}</h3><p>{poster.detail}</p><span className={styles.posterBrand}><img src={logo} alt="Headliner Music Academy" loading="lazy" /></span></div>
@@ -168,12 +169,12 @@ export default function HomePreview({ publicationSlug = null }) {
           </section>
 
           <section id="events" className={`${styles.section} ${styles.events}`} aria-labelledby="events-title">
-            <div className={styles.eventsIntro}><h2 id="events-title">Upcoming<br /> events</h2></div>
-            <PreviewEvents events={posters} onSelect={setSelectedEvent} />
+            <div className={styles.eventsIntro}><h2 id="events-title" className={styles.homeSectionTitle}>Upcoming events</h2></div>
+            <PreviewEvents events={bulletinEvents} onSelect={setSelectedEvent} />
           </section>
 
           <section className={styles.section} aria-labelledby="community-title">
-            <div className={`${styles.sectionHeading} ${styles.editorialHeading}`}><h2 id="community-title">From our community</h2><nav className={styles.socialFollow} aria-label="Follow Headliner">
+            <div className={`${styles.sectionHeading} ${styles.editorialHeading}`}><h2 id="community-title" className={styles.homeSectionTitle}>Social media</h2><nav className={styles.socialFollow} aria-label="Follow Headliner">
               <a href={instagram} target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>Instagram</a>
               <a href={tiktok} target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M16.6 2h-3.4v13.6a2.8 2.8 0 1 1-2.4-2.8V9.4a6.2 6.2 0 1 0 5.8 6.2V8.8a8.2 8.2 0 0 0 4.8 1.5V6.9A4.8 4.8 0 0 1 16.6 2Z" /></svg>TikTok</a>
             </nav></div>
@@ -182,13 +183,8 @@ export default function HomePreview({ publicationSlug = null }) {
 
           <PreviewReviews />
 
-          <section className={`${styles.section} ${styles.offerSection}`} aria-labelledby="offer-title">
-            <div className={styles.sectionHeading}><h2 id="offer-title">What we offer</h2></div>
-            <div className={styles.offerGrid}>{offerings.map((offer) => <a href={offer.href} className={styles.offer} key={offer.title}><img src={offer.image} alt={offer.alt} loading="lazy" /><h3>{offer.title}</h3><p>{offer.body}</p><span className={styles.inlineLink}>Learn more <ArrowRight size={16} aria-hidden="true" /></span></a>)}</div>
-          </section>
-
           <section className={`${styles.section} ${styles.communityPartners}`} aria-labelledby="partners-title">
-            <h2 id="partners-title">Rooted in the community</h2>
+            <h2 id="partners-title" className={styles.homeSectionTitle}>Rooted in the community</h2>
             <p>Headliner shows up across the community through performances, partnerships, and local events.</p>
             <ul className={styles.partnerLogos}>
               {communityLogos.map(partner => <li key={partner.alt}><img src={partner.src} alt={partner.alt} loading="lazy" /></li>)}

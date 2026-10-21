@@ -17,7 +17,7 @@ export default function PreviewReviews() {
   const [index, setIndex] = useState(0);
   const review = reviews[index];
   return <section className={`${styles.section} ${styles.reviews}`} aria-labelledby="reviews-title">
-    <h2 id="reviews-title">What families say</h2>
+    <h2 id="reviews-title" className={styles.homeSectionTitle}>What families say</h2>
     <div id="family-review-stage" className={styles.reviewStage}>
       {reviews.map((item, itemIndex) => <figure key={item.name} className={styles.reviewQuote} style={{ visibility: itemIndex === index ? 'visible' : 'hidden' }} aria-hidden={itemIndex !== index}>
         <blockquote>{`“${item.quote}”`}</blockquote>

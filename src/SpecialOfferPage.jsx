@@ -1,3 +1,4 @@
+import FormLabel from './FormLabel';
 /* global process */
 
 import { useMemo, useState } from 'react';
@@ -98,7 +99,6 @@ export default function SpecialOfferPage() {
         .offer-form-card { background: white; border: 1px solid #ead8c7; border-top: 5px solid var(--cyan); border-radius: 18px; box-shadow: 0 12px 35px #10213e0a; padding: 24px 20px 20px; }
         .offer-form { display: grid; gap: 16px; }
         .offer-field { display: grid; gap: 8px; min-width: 0; }
-        .offer-field label { color: var(--navy); font-size: 15px; font-weight: 800; }
         .offer-field input, .offer-field select { background: #fffdfa; border: 1.5px solid #c4cad2; border-radius: 9px; color: var(--navy); font: inherit; font-size: 16px; min-height: 50px; padding: 11px 13px; width: 100%; }
         .offer-field input:focus, .offer-field select:focus { border-color: #007eab; outline: 3px solid #00b0ef33; outline-offset: 1px; }
         .offer-field input::placeholder { color: #6d7786; }
@@ -146,12 +146,12 @@ export default function SpecialOfferPage() {
           <div className="offer-form-frame">
           <section className="offer-form-card" aria-label="Special offer form">
             <form className="offer-form" onSubmit={handleSubmit}>
-              <div className="offer-field"><label htmlFor="student-name">Student name</label><input autoComplete="name" id="student-name" onChange={(event) => setField('studentName', event.target.value)} placeholder="Student's full name" required value={form.studentName} /></div>
-              <div className="offer-field"><label htmlFor="parent-name">Parent name</label><input autoComplete="name" id="parent-name" onChange={(event) => setField('parentName', event.target.value)} placeholder="Parent's full name" required value={form.parentName} /></div>
-              <div className="offer-field"><label htmlFor="phone">Phone number</label><input autoComplete="tel" id="phone" inputMode="tel" onChange={(event) => setField('phone', event.target.value)} placeholder="(916) 555-0123" required type="tel" value={form.phone} /></div>
-              <div className="offer-field"><label htmlFor="email">Email</label><input autoComplete="email" id="email" onChange={(event) => setField('email', event.target.value)} placeholder="you@email.com" required type="email" value={form.email} /></div>
+              <div className="offer-field"><FormLabel htmlFor="student-name">Student name</FormLabel><input autoComplete="name" id="student-name" onChange={(event) => setField('studentName', event.target.value)} placeholder="Student's full name" required value={form.studentName} /></div>
+              <div className="offer-field"><FormLabel htmlFor="parent-name">Parent name</FormLabel><input autoComplete="name" id="parent-name" onChange={(event) => setField('parentName', event.target.value)} placeholder="Parent's full name" required value={form.parentName} /></div>
+              <div className="offer-field"><FormLabel htmlFor="phone">Phone number</FormLabel><input autoComplete="tel" id="phone" inputMode="tel" onChange={(event) => setField('phone', event.target.value)} placeholder="(916) 555-0123" required type="tel" value={form.phone} /></div>
+              <div className="offer-field"><FormLabel htmlFor="email">Email</FormLabel><input autoComplete="email" id="email" onChange={(event) => setField('email', event.target.value)} placeholder="you@email.com" required type="email" value={form.email} /></div>
               <div className="offer-field offer-field--full">
-                <label htmlFor="instrument">Instrument or Program</label>
+                <FormLabel htmlFor="instrument">Instrument or Program</FormLabel>
                 <select id="instrument" name="instrument" onChange={(event) => setField('instrument', event.target.value)} required value={form.instrument}>
                   <option disabled value="">Select an instrument or program</option>
                   <optgroup label="Instruments">

@@ -1,3 +1,4 @@
+import FormLabel from './FormLabel';
 /*
   BookingInterstitial — shared component
   Used by all program pages that have a self-booking flow.
@@ -17,6 +18,7 @@ import { C, fonts } from "./tokens";
 import { PROGRAMS } from "./ProgramsNav";
 import { submitLead } from "./lib/formDelivery";
 import { lessonIdentity } from "./lib/lessonIdentity";
+import { canSubmitTour } from './lib/inquiryValidation';
 
 const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-0000-0000-000000000001";
 
@@ -24,11 +26,7 @@ const CRM_TENANT_ID = process.env.NEXT_PUBLIC_CRM_TENANT_ID || "00000000-0000-00
 function Field({ label, children }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label style={{
-        fontFamily: fonts.body,
-        fontSize: 16, fontWeight: 600,
-        letterSpacing: 0, textTransform: "none", color: C.espresso,
-      }}>{label}</label>
+      <FormLabel>{label}</FormLabel>
       {children}
     </div>
   );
@@ -101,7 +99,7 @@ export default function BookingInterstitial({
   };
 
   const handleSubmitTour = async () => {
-    if (!form.name.trim() || !form.studentName.trim() || !form.date || !form.timeWindow) return;
+    if (!canSubmitTour(form, status)) return;
     setStatus("sending");
 
     const identity = lessonIdentity(form.name, form.studentName);
@@ -160,7 +158,7 @@ export default function BookingInterstitial({
     ? ["Morning (8am to 12pm)", "Afternoon (12pm to 4pm)", "Evening (4pm to 8pm)"]
     : ["Afternoon (12pm to 4pm)", "Evening (4pm to 8pm)"];
 
-  const tourValid = form.name.trim() && form.studentName.trim() && form.date && form.timeWindow && status === "idle";
+  const tourValid = canSubmitTour(form, status);
 
   /* ─── Screen 1: Level selector ────────────────────────────────────────── */
   const renderScreen1 = () => {
@@ -339,6 +337,7 @@ export default function BookingInterstitial({
                 style={fieldTextStyle}
               />
             </Field>
+            <p style={{ fontFamily: fonts.body, fontSize: 13, color: C.muted, margin: 0 }}>Please provide an email or phone number so we can contact you.</p>
           </div>
 
           <div className="bi-tour-divider" style={{ display: "flex", flexDirection: "column", gap: 16, borderLeft: `1px solid ${C.border}`, paddingLeft: 22 }}>
