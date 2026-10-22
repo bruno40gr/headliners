@@ -51,6 +51,21 @@ try {
   await page.evaluate(() => window.scrollTo(0, 400));
   await page.waitForFunction(() => Math.abs(document.querySelector('header').getBoundingClientRect().top - 30) < 2);
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-anchored.png' });
+  const roofPosition = () => page.$eval('main img', image => {
+    const hero = image.parentElement;
+    const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
+    const cropX = (808 * scale - hero.clientWidth) / 2;
+    const cropY = (1442 * scale - hero.clientHeight) / 2;
+    return image.getBoundingClientRect().top + 480 * scale + .7 * cropX - cropY;
+  });
+  assert.ok(Math.abs(await roofPosition()) < 2, 'Photo stops when roof reaches top-left');
+  await page.evaluate(() => window.scrollTo(0, 480));
+  await page.waitForFunction(() => {
+    const image = document.querySelector('main img');
+    return Number.parseFloat(getComputedStyle(image).transform.split(',')[5]) > 150;
+  });
+  assert.ok(Math.abs(await roofPosition()) < 2, 'Photo remains anchored while details continue scrolling');
+  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-roof-stop.png' });
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
@@ -103,7 +118,7 @@ try {
     if (width > 600) assert.ok(layout.logoClearance >= 20, 'Storefront logo clears the headline');
     if (width > 600) assert.ok(Math.abs(layout.photoHeightRatio - (876.4 / 808)) < .01, 'Desktop photo crop is unchanged');
     assert.equal(layout.dateSize, 30);
-    assert.equal(layout.bandSize, 24);
+    assert.equal(layout.bandSize, 28.8);
     assert.equal(layout.logoHeight, 34);
     assert.ok(layout.footerLast);
     assert.ok(layout.addressBelowLogo, 'Address is below the Chamber logo');

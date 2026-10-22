@@ -37,12 +37,20 @@ export default function RsvpPage() {
       if (!media.matches) {
         poster.style.removeProperty('--details-reveal');
         poster.style.removeProperty('--headline-offset');
+        poster.style.removeProperty('--photo-offset');
         return;
       }
       const distance = window.innerHeight - panel.getBoundingClientRect().top;
       const progress = Math.max(0, Math.min(1, distance / 180));
       poster.style.setProperty('--details-reveal', progress.toFixed(3));
       const scroll = Math.max(0, -hero.getBoundingClientRect().top);
+      // Roof starts at (0, 480) in the 808 × 1442 source and slopes
+      // down about .7px per horizontal pixel. Account for centered cover crop.
+      const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
+      const cropX = (808 * scale - hero.clientWidth) / 2;
+      const cropY = (1442 * scale - hero.clientHeight) / 2;
+      const roofAtLeft = Math.max(0, 480 * scale + .7 * cropX - cropY);
+      poster.style.setProperty('--photo-offset', `${Math.max(0, scroll - roofAtLeft)}px`);
       const centeredOffset = hero.offsetHeight / 2 - header.offsetTop - heading.offsetTop - heading.offsetHeight / 2;
       const maxOffset = Math.max(0, hero.offsetHeight - header.offsetHeight - header.offsetTop);
       const offset = Math.min(maxOffset, Math.max(scroll, centeredOffset - scroll * .5));
@@ -65,6 +73,7 @@ export default function RsvpPage() {
       media.removeEventListener('change', updateReveal);
       poster.style.removeProperty('--details-reveal');
       poster.style.removeProperty('--headline-offset');
+      poster.style.removeProperty('--photo-offset');
     };
   }, []);
 

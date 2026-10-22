@@ -34,7 +34,7 @@
 .scheduleItem + .scheduleItem { border-left: 1px solid var(--border); }
 .time { font-family: var(--body); color: var(--accent); font-size: 22px; line-height: 1.2; font-weight: 700; margin: 0 0 7px; white-space: nowrap; }
 .scheduleLabel { font-size: 14px; line-height: 1.4; margin: 0; }
-.bands { font-family: var(--display); font-size: 24px; font-weight: 400; line-height: 1.2; text-transform: uppercase; margin: 26px 0 0; text-wrap: balance; }
+.bands { font-family: var(--display); font-size: 28.8px; font-weight: 400; line-height: 1.2; text-transform: uppercase; margin: 26px 0 0; text-wrap: balance; }
 .address { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; font-size: 16px; font-weight: 500; line-height: 1.5; }
 .address svg { flex-shrink: 0; color: var(--accent); }
 .rsvpAction { margin-top: 26px; }
@@ -81,6 +81,7 @@
   .detailsPanel { position: relative; background: white; padding-bottom: max(32px, env(safe-area-inset-bottom)); }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .eventPhoto { transform: translateY(var(--photo-offset, 0px)); }
   .header { transform: translateY(var(--headline-offset, calc(50svh - 130px))); }
   .detailsPanel > * { opacity: var(--details-reveal, 1); transform: translateY(calc((1 - var(--details-reveal, 1)) * 32px)); }
   .detailsPanel:focus-within > * { opacity: 1; transform: none; }
