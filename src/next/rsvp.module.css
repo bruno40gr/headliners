@@ -1,0 +1,85 @@
+.page {
+  --navy: #02023d;
+  --accent: #ff0046;
+  --ink: #0d0d2b;
+  --muted: #5d5d70;
+  --border: #e4e4ea;
+  --display: var(--font-rsvp-display), sans-serif;
+  --body: var(--font-rsvp-body), sans-serif;
+  min-height: 100vh;
+  padding: max(16px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background: #f4f4f5;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 14px;
+  letter-spacing: -.025em;
+  line-height: 1.5;
+}
+.page a { color: inherit; text-decoration: none; }
+.page :is(a, button, input):focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
+.poster { max-width: 440px; width: 100%; margin: auto; overflow: hidden; border-radius: 28px; background: white; box-shadow: 0 12px 40px #0d0d2b0d; }
+.header { position: absolute; top: 0; left: 0; right: 0; padding: 30px 16px 24px; text-align: center; color: white; }
+.invite { margin: 0 0 18px; font-size: 13px; font-weight: 500; }
+.header h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(64px, 19vw, 88px); line-height: .86; letter-spacing: -.05em; text-transform: uppercase; }
+.header h1 span { display: block; color: var(--accent); margin-top: 5px; }
+.photoPanel { position: relative; overflow: hidden; aspect-ratio: 808 / 876.4; }
+/* Reveal a little more sky without losing the storefront at the bottom. */
+.eventPhoto { display: block; width: 100%; height: auto; margin-top: -45%; filter: none; opacity: 1; }
+.photoCurve { position: absolute; z-index: 2; bottom: -1px; left: 0; width: 100%; height: 24px; }
+.detailsPanel { padding: 28px 22px 32px; text-align: center; }
+.eventDate { margin: 0; font-family: var(--body); font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -.045em; }
+.subtitle { color: var(--accent); font-size: 15px; font-weight: 700; margin: 12px 0 0; }
+.schedule { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+.scheduleItem { padding: 0 8px; }
+.scheduleItem + .scheduleItem { border-left: 1px solid var(--border); }
+.time { font-family: var(--body); color: var(--accent); font-size: 22px; line-height: 1.2; font-weight: 700; margin: 0 0 7px; white-space: nowrap; }
+.scheduleLabel { font-size: 14px; line-height: 1.4; margin: 0; }
+.bands { font-family: var(--display); font-size: 24px; font-weight: 400; line-height: 1.2; text-transform: uppercase; margin: 26px 0 0; text-wrap: balance; }
+.address { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; font-size: 16px; font-weight: 500; line-height: 1.5; }
+.address svg { flex-shrink: 0; color: var(--accent); }
+.rsvpAction { margin-top: 26px; }
+.rsvpButton { width: 100%; max-width: 280px; min-height: 50px; border: 0; border-radius: 999px; padding: 13px 24px; background: var(--accent); color: white; font-family: var(--body); font-size: 16px; font-weight: 700; cursor: pointer; }
+.rsvpButton:hover { background: #db003c; }
+.rsvpAction p { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+.chamber { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 26px; }
+.chamber p { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+.chamber img { display: block; height: 34px; width: auto; max-width: 100%; margin: auto; }
+.dialog { box-sizing: border-box; width: min(400px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--border); border-radius: 24px; background: white; color: var(--ink); font-family: var(--body); margin: auto; overflow-y: auto; box-shadow: 0 24px 80px #0003; }
+.dialog::backdrop { background: #02023d99; backdrop-filter: blur(4px); }
+.formCard { position: relative; padding: 48px 24px 26px; }
+.closeButton { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; }
+.closeButton:hover { background: #f4f4f5; }
+.formCard h2 { font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.2; margin: 0; }
+.formHeading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+.formEyebrow { color: var(--muted); font-size: 12px; margin: 0 0 6px; }
+.deadline { color: var(--muted); font-size: 12px; line-height: 1.5; text-align: right; margin: 0; }
+.deadline strong { display: block; color: var(--ink); font-weight: 700; }
+.fields { display: grid; gap: 16px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.field { display: grid; gap: 7px; min-width: 0; }
+.field label { font-size: 14px; font-weight: 500; }
+.field input { min-height: 48px; font-family: var(--body) !important; font-size: 16px !important; color: var(--ink) !important; border-color: var(--border) !important; background: white !important; border-radius: 9px !important; }
+.field input::placeholder { color: var(--muted); opacity: .8; }
+.partyInput { position: relative; }
+.partyInput > svg { position: absolute; top: 15px; left: 15px; color: var(--muted); pointer-events: none; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.error { border-left: 3px solid var(--accent); padding-left: 12px; font-size: 13px; margin: 0; }
+.privacy { color: var(--muted); text-align: center; font-size: 12px; margin: 16px 0 0; }
+.privacy a { text-decoration: underline; text-underline-offset: 3px; }
+.success { padding: 12px 0; text-align: center; }
+.successIcon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: #f4f4f5; margin: 0 auto 20px; }
+.success p { overflow-wrap: anywhere; }
+.confirmationDetails { display: grid; gap: 8px; margin-top: 24px; font-size: 13px; }
+.skip { position: fixed; top: -100px; left: 20px; background: white; padding: 14px; z-index: 50; }
+.skip:focus { top: 10px; }
+@media (prefers-color-scheme: dark) { .page { background: #14141b; } }
+@media (max-width: 600px) {
+  .photoPanel { height: calc(100svh - max(16px, env(safe-area-inset-top))); aspect-ratio: auto; }
+  .eventPhoto { width: 100%; height: 100%; margin-top: 0; object-fit: cover; object-position: center; }
+  .detailsPanel { position: relative; background: white; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .detailsPanel > * { opacity: var(--details-reveal, 1); transform: translateY(calc((1 - var(--details-reveal, 1)) * 32px)); }
+  .detailsPanel:focus-within > * { opacity: 1; transform: none; }
+  .photoCurve { opacity: var(--details-reveal, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .page *, .page *::before, .page *::after { transition: none !important; scroll-behavior: auto !important; } }
