@@ -36,6 +36,7 @@ export default function RsvpPage() {
       if (!media.matches) {
         poster.style.removeProperty('--roof-stop');
         poster.style.removeProperty('--headline-start');
+        poster.parentElement.style.removeProperty('--scroll-stop');
         return;
       }
       // Measure only on load/resize, never counter-scroll the hero in JS.
@@ -47,6 +48,11 @@ export default function RsvpPage() {
       const headlineStart = hero.clientHeight / 2 - heading.offsetTop - heading.offsetHeight / 2;
       poster.style.setProperty('--roof-stop', `${roofAtLeft}px`);
       poster.style.setProperty('--headline-start', `${Math.max(30, headlineStart)}px`);
+      // Inner beam/column corner is at source y=1245. The swoosh's
+      // right endpoint sits 17px above the white panel's top edge.
+      const cornerTop = 1245 * scale - cropY - roofAtLeft;
+      const scrollStop = Math.max(0, hero.clientHeight - cornerTop - 17);
+      poster.parentElement.style.setProperty('--scroll-stop', `${scrollStop}px`);
     }
     function updateReveal() {
       frame = 0;
@@ -85,6 +91,7 @@ export default function RsvpPage() {
       poster.style.removeProperty('--details-reveal');
       poster.style.removeProperty('--headline-start');
       poster.style.removeProperty('--roof-stop');
+      poster.parentElement.style.removeProperty('--scroll-stop');
     };
   }, []);
 

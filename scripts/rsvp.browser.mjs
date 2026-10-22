@@ -60,7 +60,7 @@ try {
   });
   assert.ok(Math.abs(await roofPosition()) < 2, 'Photo stops when roof reaches top-left');
   await page.evaluate(() => window.scrollTo(0, 480));
-  await page.waitForFunction(() => window.scrollY === 480);
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   assert.ok(Math.abs(await roofPosition()) < 2, 'Photo remains anchored while details continue scrolling');
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-roof-stop.png' });
   const anchoredStyles = await page.$eval('main', main => main.getAttribute('style'));
@@ -72,6 +72,25 @@ try {
     assert.equal(await page.$eval('main img', image => getComputedStyle(image).transform), 'none', 'No JS counter-scroll transform');
     assert.equal(await page.$eval('main', main => main.getAttribute('style')), anchoredStyles, 'No style updates after reveal completes');
   }
+  await page.evaluate(() => window.scrollTo(0, 10000));
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  const stop = await page.$eval('main', main => {
+    const hero = main.firstElementChild;
+    const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
+    const cropY = (1442 * scale - hero.clientHeight) / 2;
+    const roofStop = parseFloat(main.style.getPropertyValue('--roof-stop'));
+    return {
+      corner: 1245 * scale - cropY - roofStop,
+      swoosh: main.lastElementChild.getBoundingClientRect().top - 17,
+      scroll: window.scrollY,
+      limit: parseFloat(main.parentElement.style.getPropertyValue('--scroll-stop')),
+      buttonBottom: document.querySelector('#rsvp').getBoundingClientRect().bottom,
+    };
+  });
+  assert.ok(Math.abs(stop.corner - stop.swoosh) < 2, 'Swoosh stops at the inner beam/column corner');
+  assert.ok(Math.abs(stop.scroll - stop.limit) < 2, 'Document cannot scroll beyond the stop');
+  assert.ok(stop.buttonBottom <= 812, 'RSVP button remains reachable at the stop');
+  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-final-stop.png' });
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
