@@ -60,12 +60,18 @@ try {
   });
   assert.ok(Math.abs(await roofPosition()) < 2, 'Photo stops when roof reaches top-left');
   await page.evaluate(() => window.scrollTo(0, 480));
-  await page.waitForFunction(() => {
-    const image = document.querySelector('main img');
-    return Number.parseFloat(getComputedStyle(image).transform.split(',')[5]) > 150;
-  });
+  await page.waitForFunction(() => window.scrollY === 480);
   assert.ok(Math.abs(await roofPosition()) < 2, 'Photo remains anchored while details continue scrolling');
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-roof-stop.png' });
+  const anchoredStyles = await page.$eval('main', main => main.getAttribute('style'));
+  for (const y of [460, 420, 360, 320, 360, 420, 480]) {
+    await page.evaluate(y => window.scrollTo(0, y), y);
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    assert.ok(Math.abs(await roofPosition()) < 2, `Roof stays anchored at scroll ${y}`);
+    assert.ok(Math.abs(await page.$eval('header', header => header.getBoundingClientRect().top) - 30) < 2, `Headline stays anchored at scroll ${y}`);
+    assert.equal(await page.$eval('main img', image => getComputedStyle(image).transform), 'none', 'No JS counter-scroll transform');
+    assert.equal(await page.$eval('main', main => main.getAttribute('style')), anchoredStyles, 'No style updates after reveal completes');
+  }
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');

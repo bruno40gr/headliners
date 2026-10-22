@@ -25,8 +25,8 @@
 .photoPanel { position: relative; overflow: hidden; aspect-ratio: 808 / 876.4; }
 /* Reveal a little more sky without losing the storefront at the bottom. */
 .eventPhoto { display: block; width: 100%; height: auto; margin-top: -45%; filter: none; opacity: 1; }
-.photoCurve { position: absolute; z-index: 2; bottom: -1px; left: 0; width: 100%; height: 24px; }
-.detailsPanel { padding: 28px 22px 32px; text-align: center; }
+.photoCurve { position: absolute; z-index: 2; top: -23px; left: 0; width: 100%; height: 24px; }
+.detailsPanel { position: relative; padding: 28px 22px 32px; text-align: center; }
 .eventDate { margin: 0; font-family: var(--body); font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -.045em; }
 .subtitle { color: var(--accent); font-size: 15px; font-weight: 700; margin: 12px 0 0; }
 .schedule { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
@@ -81,10 +81,15 @@
   .detailsPanel { position: relative; background: white; padding-bottom: max(32px, env(safe-area-inset-bottom)); }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
-  .eventPhoto { transform: translateY(var(--photo-offset, 0px)); }
-  .header { transform: translateY(var(--headline-offset, calc(50svh - 130px))); }
+  /* Global overflow-x:hidden turns body into a non-scrolling sticky ancestor. */
+  :global(html):has(.page), :global(body):has(.page) { overflow-x: clip; }
+  .poster { overflow: clip; }
+  .photoPanel { position: sticky; top: calc(-1 * var(--roof-stop, 0px)); overflow: visible; display: flow-root; }
+  .eventPhoto { position: absolute; inset: 0; }
+  .header { position: sticky; margin-top: var(--headline-start, calc(50svh - 100px)); }
+  .detailsPanel { z-index: 2; }
   .detailsPanel > * { opacity: var(--details-reveal, 1); transform: translateY(calc((1 - var(--details-reveal, 1)) * 32px)); }
   .detailsPanel:focus-within > * { opacity: 1; transform: none; }
-  .photoCurve { opacity: var(--details-reveal, 1); }
+  .photoCurve { opacity: var(--details-reveal, 1); transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { .page *, .page *::before, .page *::after { transition: none !important; scroll-behavior: auto !important; } }

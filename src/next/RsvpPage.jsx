@@ -32,48 +32,59 @@ export default function RsvpPage() {
     const header = hero.querySelector('header');
     const heading = header.querySelector('h1');
     let frame = 0;
-    function updateReveal() {
-      frame = 0;
+    function updateGeometry() {
       if (!media.matches) {
-        poster.style.removeProperty('--details-reveal');
-        poster.style.removeProperty('--headline-offset');
-        poster.style.removeProperty('--photo-offset');
+        poster.style.removeProperty('--roof-stop');
+        poster.style.removeProperty('--headline-start');
         return;
       }
-      const distance = window.innerHeight - panel.getBoundingClientRect().top;
-      const progress = Math.max(0, Math.min(1, distance / 180));
-      poster.style.setProperty('--details-reveal', progress.toFixed(3));
-      const scroll = Math.max(0, -hero.getBoundingClientRect().top);
-      // Roof starts at (0, 480) in the 808 × 1442 source and slopes
-      // down about .7px per horizontal pixel. Account for centered cover crop.
+      // Measure only on load/resize, never counter-scroll the hero in JS.
+      // The source roof starts at (0, 480), with a roughly .7px/px slope.
       const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
       const cropX = (808 * scale - hero.clientWidth) / 2;
       const cropY = (1442 * scale - hero.clientHeight) / 2;
       const roofAtLeft = Math.max(0, 480 * scale + .7 * cropX - cropY);
-      poster.style.setProperty('--photo-offset', `${Math.max(0, scroll - roofAtLeft)}px`);
-      const centeredOffset = hero.offsetHeight / 2 - header.offsetTop - heading.offsetTop - heading.offsetHeight / 2;
-      const maxOffset = Math.max(0, hero.offsetHeight - header.offsetHeight - header.offsetTop);
-      const offset = Math.min(maxOffset, Math.max(scroll, centeredOffset - scroll * .5));
-      poster.style.setProperty('--headline-offset', `${Math.max(0, offset)}px`);
+      const headlineStart = hero.clientHeight / 2 - heading.offsetTop - heading.offsetHeight / 2;
+      poster.style.setProperty('--roof-stop', `${roofAtLeft}px`);
+      poster.style.setProperty('--headline-start', `${Math.max(30, headlineStart)}px`);
+    }
+    function updateReveal() {
+      frame = 0;
+      if (!media.matches) {
+        poster.style.removeProperty('--details-reveal');
+        return;
+      }
+      // Use the stable hero height, not innerHeight (mobile browser chrome
+      // changes it during scrolling). Read before writing any styles.
+      const distance = hero.clientHeight - panel.getBoundingClientRect().top;
+      const progress = Math.max(0, Math.min(1, distance / 180)).toFixed(3);
+      if (poster.style.getPropertyValue('--details-reveal') !== progress) {
+        poster.style.setProperty('--details-reveal', progress);
+      }
+    }
+    function updateLayout() {
+      updateGeometry();
+      scheduleReveal();
     }
     function scheduleReveal() {
       if (!frame) frame = requestAnimationFrame(updateReveal);
     }
+    updateGeometry();
     updateReveal();
     let active = true;
-    document.fonts.ready.then(() => { if (active) scheduleReveal(); });
+    document.fonts.ready.then(() => { if (active) updateLayout(); });
     window.addEventListener('scroll', scheduleReveal, { passive: true });
-    window.addEventListener('resize', scheduleReveal);
-    media.addEventListener('change', updateReveal);
+    window.addEventListener('resize', updateLayout);
+    media.addEventListener('change', updateLayout);
     return () => {
       active = false;
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', scheduleReveal);
-      window.removeEventListener('resize', scheduleReveal);
-      media.removeEventListener('change', updateReveal);
+      window.removeEventListener('resize', updateLayout);
+      media.removeEventListener('change', updateLayout);
       poster.style.removeProperty('--details-reveal');
-      poster.style.removeProperty('--headline-offset');
-      poster.style.removeProperty('--photo-offset');
+      poster.style.removeProperty('--headline-start');
+      poster.style.removeProperty('--roof-stop');
     };
   }, []);
 
@@ -137,9 +148,9 @@ export default function RsvpPage() {
           <p className={styles.invite}>Friends &amp; family, you’re invited</p>
           <h1 id="event-title">Grand<span>Opening</span></h1>
           </header>
-          <svg className={styles.photoCurve} viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10 Q500 48 1000 10 L1000 40 L0 40 Z" fill="white" /><path d="M0 10 Q500 48 1000 10" fill="none" stroke="#ff0046" strokeWidth="14" /></svg>
         </div>
         <div className={styles.detailsPanel} ref={detailsPanel}>
+          <svg className={styles.photoCurve} viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10 Q500 48 1000 10 L1000 40 L0 40 Z" fill="white" /><path d="M0 10 Q500 48 1000 10" fill="none" stroke="#ff0046" strokeWidth="14" /></svg>
           <section className={styles.eventInfo} aria-label="Event details">
             <h2 className={styles.eventDate}>Friday, November 6th</h2>
             <p className={styles.subtitle}>Ribbon cutting celebration</p>
