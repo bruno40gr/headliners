@@ -1,7 +1,5 @@
-/* global process */
 import { NextResponse } from 'next/server';
-import { POST as submitIntake } from '../intake/route';
-import { buildRsvpIntake, validateRsvp } from '../../../src/lib/rsvp';
+import { validateRsvp } from '../../../src/lib/rsvp';
 
 export async function POST(request) {
   let body;
@@ -13,18 +11,23 @@ export async function POST(request) {
   const result = validateRsvp(body);
   if (result.error) return NextResponse.json({ error: result.error }, { status: 400 });
 
-  const tenantId = process.env.NEXT_PUBLIC_CRM_TENANT_ID || '00000000-0000-0000-0000-000000000001';
   const headers = new Headers({ 'Content-Type': 'application/json' });
   const key = request.headers.get('idempotency-key');
-  if (key !== null) headers.set('Idempotency-Key', key);
-
-  // Reuse the site's intake transport and its idempotency validation. Guests
-  // cannot choose the event, source, or account receiving their RSVP.
-  const response = await submitIntake(new Request(request.url, {
-    method: 'POST', headers, body: JSON.stringify(buildRsvpIntake(result.data, tenantId)),
-  }));
-  if (!response.ok) {
-    return NextResponse.json({ error: 'We couldn’t save your RSVP. Please try again, or call (916) 435-1300.' }, { status: response.status });
+  if (!key || !/^[A-Za-z0-9_-]{1,160}$/.test(key)) {
+    return NextResponse.json({ error: 'A valid submission key is required.' }, { status: 400 });
   }
-  return NextResponse.json({ ok: true }, { status: 201 });
+  headers.set('Idempotency-Key', key);
+
+  // Dedicated RSVP storage. Never route guests through lead/contact intake.
+  try {
+    const response = await fetch('https://app.headlinerma.com/api/event-rsvps/public', {
+      method: 'POST', headers, body: JSON.stringify(result.data), cache: 'no-store',
+      signal: AbortSignal.timeout(10000),
+    });
+    const body = await response.json();
+    if (!response.ok || body.ok !== true) throw new Error('RSVP delivery failed');
+    return NextResponse.json({ ok: true }, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: 'We couldn’t save your RSVP. Please try again, or call (916) 435-1300.' }, { status: 503 });
+  }
 }

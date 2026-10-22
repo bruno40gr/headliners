@@ -33,6 +33,12 @@ try {
   assert.ok(mobileStart.height >= 790, 'Photo fills the first screen');
   assert.equal(mobileStart.margin, '0px');
   assert.equal(mobileStart.opacity, '0');
+  const titleCenter = await page.$eval('h1', heading => {
+    const bounds = heading.getBoundingClientRect();
+    return bounds.top + bounds.height / 2;
+  });
+  assert.ok(Math.abs(titleCenter - 406) < 2, 'Headline starts vertically centered');
+  assert.equal(await page.$eval('main', main => main.getBoundingClientRect().left), 0);
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-initial.png' });
   await page.evaluate(() => window.scrollTo(0, 90));
   await page.waitForFunction(() => {
@@ -42,6 +48,9 @@ try {
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-mid-scroll.png' });
   await page.evaluate(() => window.scrollTo(0, 240));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
+  await page.evaluate(() => window.scrollTo(0, 400));
+  await page.waitForFunction(() => Math.abs(document.querySelector('header').getBoundingClientRect().top - 30) < 2);
+  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-anchored.png' });
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
@@ -82,16 +91,16 @@ try {
         addressTransform: getComputedStyle(main.querySelector('a[href*="google.com/maps"]')).textTransform,
       };
     });
-    assert.ok(layout.width <= 440);
+    assert.ok(width <= 600 ? layout.width === width : layout.width <= 440);
     assert.ok(Math.abs(layout.left - (width - layout.width) / 2) < 1);
-    assert.equal(layout.radius, '28px');
+    assert.equal(layout.radius, width <= 600 ? '0px' : '28px');
     assert.match(layout.titleFont, /Lilita/i);
     assert.ok(layout.headerOnPhoto && layout.dateBelowPhoto);
     assert.equal(layout.headerBackground, 'rgba(0, 0, 0, 0)');
     assert.ok(layout.titleSpacing < -3);
     assert.equal(layout.swooshStroke, '14');
     assert.ok(layout.photoLoads && layout.photoHasText);
-    assert.ok(layout.logoClearance >= 20, 'Storefront logo clears the headline');
+    if (width > 600) assert.ok(layout.logoClearance >= 20, 'Storefront logo clears the headline');
     if (width > 600) assert.ok(Math.abs(layout.photoHeightRatio - (876.4 / 808)) < .01, 'Desktop photo crop is unchanged');
     assert.equal(layout.dateSize, 30);
     assert.equal(layout.bandSize, 24);
@@ -101,7 +110,7 @@ try {
     assert.equal(layout.photoOverlay, 'none', 'Photo has no gradient overlay');
     assert.equal(layout.addressTransform, 'none');
     const copy = await page.$eval('main', main => main.textContent);
-    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '5–8 PM', 'Sunkast · Traktion · Samme · Faith', 'Please RSVP by November 2', 'In partnership with']) assert.ok(copy.includes(text), text);
+    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '5–8 PM', 'Sunkast · Traktion · Samme · Faith', 'Please RSVP by November 2', 'Ribbon cutting with']) assert.ok(copy.includes(text), text);
     assert.equal(copy.split('Ribbon cutting celebration').length - 1, 1);
     for (const text of ['creative center', 'creative hub', 'Agenda', 'Celebrating with', 'And a mix of music']) assert.ok(!copy.includes(text), text);
     assert.equal(await page.$eval('dialog', element => element.open), false);

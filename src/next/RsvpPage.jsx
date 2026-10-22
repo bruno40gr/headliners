@@ -28,30 +28,43 @@ export default function RsvpPage() {
     const media = window.matchMedia('(max-width: 600px) and (prefers-reduced-motion: no-preference)');
     const panel = detailsPanel.current;
     const poster = panel.parentElement;
+    const hero = poster.firstElementChild;
+    const header = hero.querySelector('header');
+    const heading = header.querySelector('h1');
     let frame = 0;
     function updateReveal() {
       frame = 0;
       if (!media.matches) {
         poster.style.removeProperty('--details-reveal');
+        poster.style.removeProperty('--headline-offset');
         return;
       }
       const distance = window.innerHeight - panel.getBoundingClientRect().top;
       const progress = Math.max(0, Math.min(1, distance / 180));
       poster.style.setProperty('--details-reveal', progress.toFixed(3));
+      const scroll = Math.max(0, -hero.getBoundingClientRect().top);
+      const centeredOffset = hero.offsetHeight / 2 - header.offsetTop - heading.offsetTop - heading.offsetHeight / 2;
+      const maxOffset = Math.max(0, hero.offsetHeight - header.offsetHeight - header.offsetTop);
+      const offset = Math.min(maxOffset, Math.max(scroll, centeredOffset - scroll * .5));
+      poster.style.setProperty('--headline-offset', `${Math.max(0, offset)}px`);
     }
     function scheduleReveal() {
       if (!frame) frame = requestAnimationFrame(updateReveal);
     }
     updateReveal();
+    let active = true;
+    document.fonts.ready.then(() => { if (active) scheduleReveal(); });
     window.addEventListener('scroll', scheduleReveal, { passive: true });
     window.addEventListener('resize', scheduleReveal);
     media.addEventListener('change', updateReveal);
     return () => {
+      active = false;
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', scheduleReveal);
       window.removeEventListener('resize', scheduleReveal);
       media.removeEventListener('change', updateReveal);
       poster.style.removeProperty('--details-reveal');
+      poster.style.removeProperty('--headline-offset');
     };
   }, []);
 
@@ -131,7 +144,7 @@ export default function RsvpPage() {
             <p>Please RSVP by November 2</p>
           </div>
           <footer className={styles.chamber}>
-            <p>In partnership with</p>
+            <p>Ribbon cutting with</p>
             <a href="https://www.rocklinchamber.com/" target="_blank" rel="noopener noreferrer" aria-label="Rocklin Area Chamber of Commerce (opens in a new tab)"><img src="/images/rocklin-chamber-logo.png" width="228" height="57" alt="Rocklin Area Chamber of Commerce" /></a>
             <a className={styles.address} href="https://www.google.com/maps/search/?api=1&query=Headliner+Music+Academy+2311+Sunset+Blvd+Rocklin+CA" target="_blank" rel="noopener noreferrer"><MapPin size={20} aria-hidden="true" /><span>{GRAND_OPENING.address}</span></a>
           </footer>

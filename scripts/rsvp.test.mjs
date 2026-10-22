@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildRsvpIntake, validateRsvp } from '../src/lib/rsvp.js';
+import { validateRsvp } from '../src/lib/rsvp.js';
 
 test('normalizes RSVP details without losing party size', () => {
   assert.deepEqual(validateRsvp({ name: '  Guest Name  ', email: ' GUEST@EXAMPLE.COM ', partySize: '4' }), {
@@ -17,13 +17,6 @@ test('rejects missing, malformed, and oversized RSVP details', () => {
   }
 });
 
-test('accepts party-size bounds and creates a separate event RSVP intake', () => {
+test('accepts party-size bounds', () => {
   for (const partySize of [1, 99]) assert.ok(validateRsvp({ name: 'Guest', email: 'guest@example.com', partySize }).data);
-  const payload = buildRsvpIntake({ name: 'Guest', email: 'guest@example.com', partySize: 3 }, 'school-id');
-  assert.equal(payload.tenant_id, 'school-id');
-  assert.equal(payload.intake_type, 'event_rsvp');
-  assert.equal(payload.source_form, 'grand_opening_rsvp');
-  assert.equal(payload.payload.party_size, 3);
-  assert.equal(payload.payload.event_id, 'headliner-grand-opening');
-  assert.equal(payload.source_page, '/rsvp');
 });

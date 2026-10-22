@@ -23,23 +23,3 @@ export function validateRsvp(value) {
   }
   return { data: { name, email, partySize } };
 }
-
-export function buildRsvpIntake(data, tenantId) {
-  return {
-    tenant_id: tenantId,
-    intake_type: 'event_rsvp',
-    source: 'event',
-    source_system: 'headliner-website',
-    source_form: 'grand_opening_rsvp',
-    source_page: '/rsvp',
-    full_name: data.name,
-    email: data.email,
-    payload: {
-      event_id: GRAND_OPENING.id,
-      event_name: GRAND_OPENING.name,
-      event_date_label: GRAND_OPENING.dateLabel,
-      party_size: data.partySize,
-      message: `Grand opening RSVP: ${data.partySize} ${data.partySize === 1 ? 'guest' : 'guests'} (including the person submitting).`,
-    },
-  };
-}
