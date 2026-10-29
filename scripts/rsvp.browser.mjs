@@ -48,30 +48,20 @@ try {
   await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-mid-scroll.png' });
   await page.evaluate(() => window.scrollTo(0, 240));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
-  await page.evaluate(() => window.scrollTo(0, 400));
-  await page.waitForFunction(() => Math.abs(document.querySelector('header').getBoundingClientRect().top - 30) < 2);
-  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-anchored.png' });
-  const roofPosition = () => page.$eval('main img', image => {
-    const hero = image.parentElement;
-    const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
-    const cropX = (808 * scale - hero.clientWidth) / 2;
-    const cropY = (1442 * scale - hero.clientHeight) / 2;
-    return image.getBoundingClientRect().top + 480 * scale + .7 * cropX - cropY;
-  });
-  assert.ok(Math.abs(await roofPosition()) < 2, 'Photo stops when roof reaches top-left');
-  await page.evaluate(() => window.scrollTo(0, 480));
-  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  assert.ok(Math.abs(await roofPosition()) < 2, 'Photo remains anchored while details continue scrolling');
-  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-roof-stop.png' });
-  const anchoredStyles = await page.$eval('main', main => main.getAttribute('style'));
-  for (const y of [460, 420, 360, 320, 360, 420, 480]) {
+  const photoHeight = mobileStart.height;
+  for (const y of [320, 400, 480, 360, 420]) {
     await page.evaluate(y => window.scrollTo(0, y), y);
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-    assert.ok(Math.abs(await roofPosition()) < 2, `Roof stays anchored at scroll ${y}`);
-    assert.ok(Math.abs(await page.$eval('header', header => header.getBoundingClientRect().top) - 30) < 2, `Headline stays anchored at scroll ${y}`);
-    assert.equal(await page.$eval('main img', image => getComputedStyle(image).transform), 'none', 'No JS counter-scroll transform');
-    assert.equal(await page.$eval('main', main => main.getAttribute('style')), anchoredStyles, 'No style updates after reveal completes');
+    const geometry = await page.$eval('main', main => {
+      const photo = main.firstElementChild.getBoundingClientRect();
+      const details = main.lastElementChild.getBoundingClientRect();
+      return { photoTop: photo.top, photoBottom: photo.bottom, detailsTop: details.top };
+    });
+    assert.ok(Math.abs(geometry.photoTop + y) < 2, 'Photo scrolls normally with the document');
+    assert.ok(Math.abs(geometry.detailsTop - geometry.photoBottom) < 2, 'White section stays below the photo, never sliding over it');
+    assert.ok(Math.abs(geometry.photoBottom - (photoHeight - y)) < 2);
   }
+  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-normal-scroll.png' });
   await page.evaluate(() => window.scrollTo(0, 10000));
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   const footerBottom = await page.$eval('main footer', footer => footer.getBoundingClientRect().bottom);

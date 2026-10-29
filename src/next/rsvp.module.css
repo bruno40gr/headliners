@@ -81,13 +81,7 @@
   .detailsPanel { position: relative; background: white; padding-bottom: max(32px, env(safe-area-inset-bottom)); }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
-  /* Global overflow-x:hidden turns body into a non-scrolling sticky ancestor. */
-  :global(html):has(.page), :global(body):has(.page) { overflow-x: visible; }
-  .poster { overflow: clip; }
-  .photoPanel { position: sticky; top: calc(-1 * var(--roof-stop, 0px)); overflow: visible; display: flow-root; }
-  .eventPhoto { position: absolute; inset: 0; }
-  .header { position: sticky; margin-top: var(--headline-start, calc(50svh - 100px)); }
-  .detailsPanel { z-index: 2; }
+  .header { top: var(--headline-start, calc(50svh - 100px)); }
   .detailsPanel > * { opacity: var(--details-reveal, 1); transform: translateY(calc((1 - var(--details-reveal, 1)) * 32px)); }
   .detailsPanel:focus-within > * { opacity: 1; transform: none; }
   .photoCurve { opacity: var(--details-reveal, 1); transform: none; }

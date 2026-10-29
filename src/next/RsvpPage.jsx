@@ -34,18 +34,10 @@ export default function RsvpPage() {
     let frame = 0;
     function updateGeometry() {
       if (!media.matches) {
-        poster.style.removeProperty('--roof-stop');
         poster.style.removeProperty('--headline-start');
         return;
       }
-      // Measure only on load/resize, never counter-scroll the hero in JS.
-      // The source roof starts at (0, 480), with a roughly .7px/px slope.
-      const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
-      const cropX = (808 * scale - hero.clientWidth) / 2;
-      const cropY = (1442 * scale - hero.clientHeight) / 2;
-      const roofAtLeft = Math.max(0, 480 * scale + .7 * cropX - cropY);
       const headlineStart = hero.clientHeight / 2 - heading.offsetTop - heading.offsetHeight / 2;
-      poster.style.setProperty('--roof-stop', `${roofAtLeft}px`);
       poster.style.setProperty('--headline-start', `${Math.max(30, headlineStart)}px`);
     }
     function updateReveal() {
@@ -84,7 +76,6 @@ export default function RsvpPage() {
       media.removeEventListener('change', updateLayout);
       poster.style.removeProperty('--details-reveal');
       poster.style.removeProperty('--headline-start');
-      poster.style.removeProperty('--roof-stop');
     };
   }, []);
 

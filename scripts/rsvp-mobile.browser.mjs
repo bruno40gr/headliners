@@ -18,6 +18,8 @@ async function assertFooterReachable(height) {
   });
   assert.ok(bounds.top >= 0 && bounds.bottom <= height + 1, 'Entire footer can be scrolled into view');
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, 'No horizontal page overflow');
+  const photoGap = await page.$eval('main', main => main.lastElementChild.getBoundingClientRect().top - main.firstElementChild.getBoundingClientRect().bottom);
+  assert.ok(Math.abs(photoGap) < 2, 'White section remains below the photo at full scroll');
 }
 
 try {
