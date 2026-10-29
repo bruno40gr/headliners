@@ -10,7 +10,7 @@ export const metadata = {
   alternates: { canonical: '/rsvp' },
   openGraph: {
     title: 'Grand Opening | Headliner Music Academy',
-    description: 'November 6: 3 PM ribbon cutting, 4 PM cocktails & finger food, 5–8 PM live music with Sunkast, Traktion, Samme, and Faith. Friends & family. RSVP by November 2.',
+    description: 'November 6: 3 PM ribbon cutting, 4 PM cocktails & finger food, 5–8 PM live music with Sunkast, Traktion, and a few surprises. Friends & family. RSVP by November 2.',
     url: '/rsvp',
   },
 };

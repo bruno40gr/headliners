@@ -74,23 +74,9 @@ try {
   }
   await page.evaluate(() => window.scrollTo(0, 10000));
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  const stop = await page.$eval('main', main => {
-    const hero = main.firstElementChild;
-    const scale = Math.max(hero.clientWidth / 808, hero.clientHeight / 1442);
-    const cropY = (1442 * scale - hero.clientHeight) / 2;
-    const roofStop = parseFloat(main.style.getPropertyValue('--roof-stop'));
-    return {
-      corner: 1245 * scale - cropY - roofStop,
-      swoosh: main.lastElementChild.getBoundingClientRect().top - 17,
-      scroll: window.scrollY,
-      limit: parseFloat(main.parentElement.style.getPropertyValue('--scroll-stop')),
-      buttonBottom: document.querySelector('#rsvp').getBoundingClientRect().bottom,
-    };
-  });
-  assert.ok(Math.abs(stop.corner - stop.swoosh) < 2, 'Swoosh stops at the inner beam/column corner');
-  assert.ok(Math.abs(stop.scroll - stop.limit) < 2, 'Document cannot scroll beyond the stop');
-  assert.ok(stop.buttonBottom <= 812, 'RSVP button remains reachable at the stop');
-  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-final-stop.png' });
+  const footerBottom = await page.$eval('main footer', footer => footer.getBoundingClientRect().bottom);
+  assert.ok(footerBottom <= 812, 'Full footer is reachable without a hard scroll cutoff');
+  await page.screenshot({ path: '/tmp/headliner-rsvp-mobile-full-scroll.png' });
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForFunction(() => getComputedStyle(document.querySelector('main').lastElementChild.firstElementChild).opacity === '1');
@@ -150,9 +136,9 @@ try {
     assert.equal(layout.photoOverlay, 'none', 'Photo has no gradient overlay');
     assert.equal(layout.addressTransform, 'none');
     const copy = await page.$eval('main', main => main.textContent);
-    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '5–8 PM', 'Sunkast · Traktion · Samme · Faith', 'Please RSVP by November 2', 'Ribbon cutting with']) assert.ok(copy.includes(text), text);
+    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '5–8 PM', 'Sunkast · Traktion · and a few surprises', 'Please RSVP by November 2', 'Ribbon cutting with']) assert.ok(copy.includes(text), text);
     assert.equal(copy.split('Ribbon cutting celebration').length - 1, 1);
-    for (const text of ['creative center', 'creative hub', 'Agenda', 'Celebrating with', 'And a mix of music']) assert.ok(!copy.includes(text), text);
+    for (const text of ['creative center', 'creative hub', 'Agenda', 'Celebrating with', 'And a mix of music', 'Samme', 'Faith']) assert.ok(!copy.includes(text), text);
     assert.equal(await page.$eval('dialog', element => element.open), false);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
     assert.equal(await page.$$eval('form input', inputs => inputs.every(input => input.labels.length === 1)), true);

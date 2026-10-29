@@ -36,7 +36,6 @@ export default function RsvpPage() {
       if (!media.matches) {
         poster.style.removeProperty('--roof-stop');
         poster.style.removeProperty('--headline-start');
-        poster.parentElement.style.removeProperty('--scroll-stop');
         return;
       }
       // Measure only on load/resize, never counter-scroll the hero in JS.
@@ -48,11 +47,6 @@ export default function RsvpPage() {
       const headlineStart = hero.clientHeight / 2 - heading.offsetTop - heading.offsetHeight / 2;
       poster.style.setProperty('--roof-stop', `${roofAtLeft}px`);
       poster.style.setProperty('--headline-start', `${Math.max(30, headlineStart)}px`);
-      // Inner beam/column corner is at source y=1245. The swoosh's
-      // right endpoint sits 17px above the white panel's top edge.
-      const cornerTop = 1245 * scale - cropY - roofAtLeft;
-      const scrollStop = Math.max(0, hero.clientHeight - cornerTop - 17);
-      poster.parentElement.style.setProperty('--scroll-stop', `${scrollStop}px`);
     }
     function updateReveal() {
       frame = 0;
@@ -91,7 +85,6 @@ export default function RsvpPage() {
       poster.style.removeProperty('--details-reveal');
       poster.style.removeProperty('--headline-start');
       poster.style.removeProperty('--roof-stop');
-      poster.parentElement.style.removeProperty('--scroll-stop');
     };
   }, []);
 
@@ -164,7 +157,7 @@ export default function RsvpPage() {
             <div className={styles.schedule}>
               {schedule.map(({ time, title }) => <div className={styles.scheduleItem} key={title}><h3 className={styles.time}>{time}</h3><p className={styles.scheduleLabel}>{title}</p></div>)}
             </div>
-            <h2 className={styles.bands}>Sunkast · Traktion · Samme · Faith</h2>
+            <h2 className={styles.bands}>Sunkast · Traktion · and a few surprises</h2>
           </section>
           <div className={styles.rsvpAction}>
             <button id="rsvp" ref={rsvpButton} className={styles.rsvpButton} type="button" onClick={openRsvp} aria-haspopup="dialog">RSVP</button>
