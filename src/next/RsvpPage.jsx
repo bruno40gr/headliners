@@ -9,6 +9,7 @@ import styles from './rsvp.module.css';
 const schedule = [
   { time: '3 PM', title: 'Ribbon cutting' },
   { time: '4 PM', title: 'Cocktails & finger food' },
+  { time: '4–5 PM', title: 'Special Tiny Keys Piano lesson for guests' },
   { time: '5–8 PM', title: 'Live music' },
 ];
 
@@ -148,7 +149,7 @@ export default function RsvpPage() {
             <div className={styles.schedule}>
               {schedule.map(({ time, title }) => <div className={styles.scheduleItem} key={title}><h3 className={styles.time}>{time}</h3><p className={styles.scheduleLabel}>{title}</p></div>)}
             </div>
-            <h2 className={styles.bands}>Sunkast · Traktion · and a few surprises</h2>
+            <h2 className={styles.bands}>Sunkast · Traktion · Samme, Faith &amp; Breannah</h2>
           </section>
           <div className={styles.rsvpAction}>
             <button id="rsvp" ref={rsvpButton} className={styles.rsvpButton} type="button" onClick={openRsvp} aria-haspopup="dialog">RSVP</button>

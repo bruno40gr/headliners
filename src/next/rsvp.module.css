@@ -29,9 +29,9 @@
 .detailsPanel { position: relative; padding: 28px 22px 32px; text-align: center; }
 .eventDate { margin: 0; font-family: var(--body); font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -.045em; }
 .subtitle { color: var(--accent); font-size: 15px; font-weight: 700; margin: 12px 0 0; }
-.schedule { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
+.schedule { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; margin-top: 26px; }
 .scheduleItem { padding: 0 8px; }
-.scheduleItem + .scheduleItem { border-left: 1px solid var(--border); }
+.scheduleItem:nth-child(even) { border-left: 1px solid var(--border); }
 .time { font-family: var(--body); color: var(--accent); font-size: 22px; line-height: 1.2; font-weight: 700; margin: 0 0 7px; white-space: nowrap; }
 .scheduleLabel { font-size: 14px; line-height: 1.4; margin: 0; }
 .bands { font-family: var(--display); font-size: 28.8px; font-weight: 400; line-height: 1.2; text-transform: uppercase; margin: 26px 0 0; text-wrap: balance; }

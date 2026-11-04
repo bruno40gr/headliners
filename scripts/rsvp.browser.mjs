@@ -126,9 +126,9 @@ try {
     assert.equal(layout.photoOverlay, 'none', 'Photo has no gradient overlay');
     assert.equal(layout.addressTransform, 'none');
     const copy = await page.$eval('main', main => main.textContent);
-    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '5–8 PM', 'Sunkast · Traktion · and a few surprises', 'Please RSVP by November 2', 'Ribbon cutting with']) assert.ok(copy.includes(text), text);
+    for (const text of ['Friends & family, you’re invited', 'Friday, November 6th', '3 PM', '4 PM', '4–5 PM', 'Special Tiny Keys Piano lesson for guests', '5–8 PM', 'Sunkast · Traktion · Samme, Faith & Breannah', 'Please RSVP by November 2', 'Ribbon cutting with']) assert.ok(copy.includes(text), text);
     assert.equal(copy.split('Ribbon cutting celebration').length - 1, 1);
-    for (const text of ['creative center', 'creative hub', 'Agenda', 'Celebrating with', 'And a mix of music', 'Samme', 'Faith']) assert.ok(!copy.includes(text), text);
+    for (const text of ['creative center', 'creative hub', 'Agenda', 'Celebrating with', 'And a mix of music', 'and a few surprises']) assert.ok(!copy.includes(text), text);
     assert.equal(await page.$eval('dialog', element => element.open), false);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
     assert.equal(await page.$$eval('form input', inputs => inputs.every(input => input.labels.length === 1)), true);
